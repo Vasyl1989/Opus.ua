@@ -53,12 +53,13 @@ header {
 }
 
 #logo {
-	margin-left: 0;
+	margin-left: 20px;
 	display: inline-block;
 	float: left;
+	margin-top: 24px;
 }
 
-#logo img { margin-top: 24px; }
+
 
 
 /* Full-Width Header Styles */
@@ -260,7 +261,7 @@ header.transparent .menu ul ul li a:hover { color: #333; }
 /* Navigation
 ------------------------------------- */
 
-#navigation { float: left; margin-right: 0; }
+#navigation { float: right; margin-right: 40px; }
 
 #navigation ul.float-right {
 	right: 10px;
@@ -2646,6 +2647,9 @@ img.mfp-img {
 
 
 /* Footer Styles */
+#footer{
+	text-align: center;
+}
 .footer-bottom .social-icons {
 	display: inline-block;
 	margin-bottom: 25px;
@@ -5976,6 +5980,10 @@ label.upload-btn input[type="file"] { display: none; }
 	width: 100%;
 }
 
+.slidesStrong{
+	color: white;
+}
+
 
 /* ------------------------------------------------------------------- */
 /* Media Queries
@@ -6136,6 +6144,7 @@ label.upload-btn input[type="file"] { display: none; }
 		padding: 10px 15px;
 		top: 15px;
 	}
+
 
 	#footer a.button { margin-bottom: 30px;}
 
