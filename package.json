@@ -1,0 +1,11 @@
+{
+  "name": "opus.ua",
+  "version": "0.1.0",
+  "description": "",
+  "engines": {
+    "node": "7.0.0",
+    "npm": "3.10.8"
+  },
+  "author": "",
+  "license": "ISC"
+}
