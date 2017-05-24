@@ -4,11 +4,12 @@ import '../../styles/styles.css';
 const Header = () => {
   return (
     <div>
-      <header className="transparent sticky-header full-width">
+
+      <header className="sticky-header">
         <div className="container">
           <div className="sixteen columns">
 
-
+            {/*--------Logo-------*/}
 
             <div id="logo">
               <h1>
@@ -16,8 +17,9 @@ const Header = () => {
               </h1>
             </div>
 
+            {/*---------Menu-------*/}
 
-            <nav id="navigation" className="menu">
+            <nav id="navigation" className="menu sf-js-enabled sf-arrows">
               <ul id="responsive">
                 <li>
                   <a href="HomePage" id="current">Головна</a>
@@ -47,7 +49,7 @@ const Header = () => {
               </ul>
             </nav>
 
-
+            {/*-------Navigation-----*/}
 
             <div id="mobile-navigation">
               <a href="#menu" className="menu-trigger"><i className="fa fa-reorder"></i> Menu</a>
@@ -57,6 +59,7 @@ const Header = () => {
         </div>
       </header>
       <div className="clearfix"></div>
+
     </div>
 
   );
