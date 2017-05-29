@@ -1,12 +1,12 @@
 import React from 'react';
 import TitleBar from './TitleBar';
-import Header from '../common/Header';
+import HeaderForEmployer from './HeaderForEmployer';
 import Footer from '../common/Footer';
 
 const AddJob = () => {
   return (
     <div>
-      <Header />
+      <HeaderForEmployer />
       <TitleBar />
 
       <div className="container form-add-job">
@@ -77,7 +77,7 @@ const AddJob = () => {
             {/*------- Tags------*/}
             <div className="form">
               <h5>Слова теги <span>(необов'язково)</span></h5>
-              <input className="search-field" type="text" placeholder="e.g. PHP, Social Media, Management" value="" />
+              <input className="search-field" type="text" placeholder="e.g. PHP, Social Media, Management" />
               <p className="note"> Навички і технології необхіні для цієї роботи.</p>
             </div>
 
