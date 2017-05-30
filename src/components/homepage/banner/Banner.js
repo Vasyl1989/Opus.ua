@@ -1,6 +1,6 @@
 import React from 'react';
 
-import FormFoundVacansi from './FormFoundVacansi';
+// import FormFoundVacansi from './FormFoundVacansi';
 
 const Banner = () => {
   return (

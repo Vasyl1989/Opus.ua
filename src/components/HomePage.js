@@ -13,7 +13,7 @@ const HomePage = () => {
       <Categories />
       <ResentJob />
       <Footer />
-    </div>
+      </div>
   );
 };
 
