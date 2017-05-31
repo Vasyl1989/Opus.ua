@@ -3,6 +3,7 @@ import '../../styles/styles.css';
 
 const HeaderHomePage = () => {
  return (
+
   <div id="headerhomepage">
    <header className="transparent sticky-header full-width headerhomepage">
     <div className="container">
@@ -18,7 +19,7 @@ const HeaderHomePage = () => {
       <nav id="navigation" className="menu">
        <ul id="responsive">
         <li>
-         <a href="HomePage" id="current">Головна</a>
+         <a href="/" id="current">Головна</a>
         </li>
         <li>
          <a href="#">Працівнику</a>
@@ -46,7 +47,7 @@ const HeaderHomePage = () => {
       </nav>
 
 
-
+      {/*Navigation*/}
       <div id="mobile-navigation">
        <a href="#menu" className="menu-trigger"><i className="fa fa-reorder"></i> Menu</a>
       </div>
@@ -54,7 +55,10 @@ const HeaderHomePage = () => {
      </div>
     </div>
    </header>
-   <div className="clearfix"></div>
+   <div class="clearfix"></div>
+
+
+
   </div>
 
  );

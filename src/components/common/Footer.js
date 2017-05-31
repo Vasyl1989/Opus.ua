@@ -16,7 +16,7 @@ const Footer = () => {
        швидко і легко знайти необхідну роботу всього лише заповнивши резюме або пошукати в розділах
        вакансій. <strong className="slidesStrong">OPUS.ua</strong> створений
        для людей, які шукають тимчасову роботу, без посередників і не мають досвіду роботи.</p>
-            <a href="#" className="button">Почати</a>
+            <a href="/" className="button">Почати</a>
           </div>
         </div>
 
@@ -40,5 +40,5 @@ const Footer = () => {
       <div id="backtotop"><a href="#"></a></div>
     </div>
   );
-}
+};
 export default Footer;

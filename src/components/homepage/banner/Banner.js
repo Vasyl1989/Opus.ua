@@ -1,6 +1,5 @@
 import React from 'react';
 
-import FormFoundVacansi from './FormFoundVacansi';
 
 const Banner = () => {
   return (
@@ -15,8 +14,11 @@ const Banner = () => {
               <div className="search-container">
 
                 <h2>Пошук роботи</h2>
-                <input type="text" className="ico-01" placeholder="назва роботи, ключові слова чи ім'я компанії" value="" />
-                <input type="text" className="ico-02" placeholder="місто, область" value="" />
+                <div id="1">
+                  <input type="text" className="ico-01" placeholder="назва роботи, ключові слова чи ім'я компанії" value="" />
+                </div>
+                <div id="2">
+                  <input type="text" className="ico-02" placeholder="місто, область" value="" /></div>
                 <button><i className="fa fa-search"></i></button>
 
                 <div className="browse-jobs">

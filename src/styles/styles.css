@@ -48,7 +48,11 @@
 ---------------------------------------------------------------------- */
 
 
-/*1.HEADER*/
+/* ------------------------------------------------------------------- */
+
+
+/* Header
+---------------------------------------------------------------------- */
 
 header {
   height: 90px;
@@ -56,7 +60,7 @@ header {
 }
 
 #logo {
-  margin-left: 20px;
+  margin-left: 30px;
   display: inline-block;
   float: left;
   margin-top: 24px;
@@ -71,10 +75,10 @@ header {
 }
 
 
-/* 1.1.Full-Width Header Styles */
+/* Full-Width Header Styles */
 
-header .full-width .container,
-header .full-width .container .sixteen.columns {
+header.full-width .container,
+header.full-width .container .sixteen.columns {
   width: 100%;
   padding-left: 20px;
   box-sizing: border-box;
@@ -82,29 +86,40 @@ header .full-width .container .sixteen.columns {
   margin: 0;
 }
 
-header .full-width #navigation ul .float-right {
+header.full-width #navigation ul.float-right {
   right: 35px;
 }
 
-#headerhomepage .headerhomepage {
-  padding-left: 20px;
-  box-sizing: border-box;
-  float: left;
-  margin: 0;
-  position: absolute;
-  background: transparent;
-  z-index: 999;
-  top: 0;
-  left: 0;
+
+/* Alternative Header & Menu style*/
+
+.alternative #navigation {
   width: 100%;
-  box-shadow: inset 0px -1px 0px 0px rgba(255, 255, 255, 0.2);
+  border-top: 1px solid #e0e0e0;
+  margin: 27px 0 0 0;
+  padding: 24px 0 12px 0;
+}
+
+.alternative #navigation ul {
+  margin: 0;
+}
+
+.alternative .menu ul li {
+  margin: 0 10px 0 0;
+}
+
+.alternative #navigation ul.float-right {
+  top: 27px;
 }
 
 
-/* 1.2.Transparent Header
+/* ---------------------------------- */
+
+
+/* Transparent Header
 ------------------------------------- */
 
-header .transparent {
+header.transparent {
   position: absolute;
   background: transparent;
   z-index: 999;
@@ -118,88 +133,56 @@ body.boxed #wrapper {
   position: relative;
 }
 
-#wrapper {
-  position: relative;
-}
-
-#headerhomepage .headerhomepage {
-  padding-left: 20px;
-  box-sizing: border-box;
-  float: left;
-  margin: 0;
-  position: absolute;
-  background: transparent;
-  z-index: 999;
-  top: 0;
-  left: 0;
-  width: 100%;
-  box-shadow: inset 0px -1px 0px 0px rgba(255, 255, 255, 0.2);
-}
-
-#headerhomepage .headerhomepage .menu ul li a {
+header.transparent .menu ul li a {
   color: #fff;
   font-size: 13px;
   letter-spacing: 0.5px;
   line-height: 19px;
 }
 
-#headerhomepage .headerhomepage .menu ul li a:hover {
-  color: #959595;
-  font-size: 13px;
-  letter-spacing: 0.5px;
-  line-height: 19px;
-}
-
-header .transparent .menu ul li a {
-  color: #fff;
-  font-size: 13px;
-  letter-spacing: 0.5px;
-  line-height: 19px;
-}
-
-header .transparent .menu ul ul li a {
+header.transparent .menu ul ul li a {
   color: #959595;
   font-size: 14px;
   letter-spacing: 0px;
 }
 
-header .transparent ul.float-right li a {
+header.transparent ul.float-right li a {
   background-color: rgba(255, 255, 255, 0.1);
   color: #fff;
 }
 
-header .transparent ul.float-right li a:hover {
+header.transparent ul.float-right li a:hover {
   background-color: rgba(255, 255, 255, 0.2);
   color: #fff;
 }
 
-header .transparent .menu ul ul li a:hover {
+header.transparent .menu ul ul li a:hover {
   color: #fff;
 }
 
-header .transparent .sf-with-ul::after {
+header.transparent .sf-with-ul::after {
   color: rgba(255, 255, 255, 0.8);
 }
 
-#banner .with-transparent-header {
+#banner.with-transparent-header {
   max-height: 710px;
   background-attachment: fixed;
 }
 
-#banner .with-transparent-header .search-container {
+#banner.with-transparent-header .search-container {
   padding: 190px 0;
   margin-top: 45px;
 }
 
-#banner .with-transparent-header:before {
+#banner.with-transparent-header:before {
   background-color: rgba(42, 46, 50, 0.7);
 }
 
-header .transparent.alternative #navigation {
+header.transparent.alternative #navigation {
   border-top: none;
 }
 
-header .transparent #logo {
+header.transparent #logo {
   border-bottom: none;
 }
 
@@ -216,7 +199,7 @@ header .transparent #logo {
 /* Tablets */
 
 @media only screen and (max-width: 990px) {
-  header .transparent.alternative #navigation ul.float-right a {
+  header.transparent.alternative #navigation ul.float-right a {
     color: #fff;
     background: transparent;
   }
@@ -226,13 +209,13 @@ header .transparent #logo {
     position: absolute;
     text-align: right;
   }
-  header .transparent a.menu-trigger {
+  header.transparent a.menu-trigger {
     background: rgba(255, 255, 255, 0.2);
   }
-  header .transparent {
+  header.transparent {
     box-shadow: none;
   }
-  #banner .with-transparent-header .search-container {
+  #banner.with-transparent-header .search-container {
     margin-top: 65px;
   }
 }
@@ -241,20 +224,20 @@ header .transparent #logo {
 /* Mobiles */
 
 @media only screen and (max-width: 767px) {
-  header .transparent #logo {
+  header.transparent #logo {
     padding-bottom: 0;
   }
-  header .transparent #navigation ul.float-right {
+  header.transparent #navigation ul.float-right {
     right: -15px;
     top: 0;
     position: relative;
     text-align: center;
   }
-  #banner .with-transparent-header .search-container {
+  #banner.with-transparent-header .search-container {
     padding: 190px 0;
     margin-top: 35px;
   }
-  #banner .with-transparent-header {
+  #banner.with-transparent-header {
     max-height: 760px;
   }
   #logo img {
@@ -265,41 +248,36 @@ header .transparent #logo {
 
 /* White dropdown for transparent header */
 
-header .transparent .menu ul ul {
+header.transparent .menu ul ul {
   background-color: #fff;
 }
 
-header .transparent .menu ul ul:before {
+header.transparent .menu ul ul:before {
   color: #fff;
 }
 
-header .transparent .menu ul li.sfHover ul li a.sf-with-ul,
-header .transparent .menu ul ul li a {
+header.transparent .menu ul li.sfHover ul li a.sf-with-ul,
+header.transparent .menu ul ul li a {
   color: #808080;
   background-color: #fff;
 }
 
-header .transparent .menu ul ul li a:hover {
+header.transparent .menu ul ul li a:hover {
   color: #333;
 }
 
 
-/* 1.3.Sticky Header
+/* ---------------------------------- */
+
+
+/* Sticky Header
 ------------------------------------- */
 
 .sticky-header.headroom--pinned.cloned,
 .sticky-header.headroom--unpinned.cloned,
-.sticky-header.headroom--top .cloned {
+.sticky-header.headroom--top.cloned {
   transform: translateY(-100%);
   transition: all 0.25s ease-in-out;
-}
-
-.sticky-header {
-  position: fixed;
-  z-index: 99999;
-  border-bottom: none;
-  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.22);
-  width: 100%;
 }
 
 .sticky-header.cloned {
@@ -544,8 +522,8 @@ ul li ul a.sf-with-ul:after {
   color: #fff;
 }
 
-.menu ul li ul a.sf-with-ul:after {
-  color: #888 !important;
+.menu ul li ul a.sf-with-ul:after .search-container #inputseach {
+  width: 44.5%;
 }
 
 
@@ -633,7 +611,6 @@ ul li ul a.sf-with-ul:after {
   }
   ul.float-right li {
     display: inline-block;
-    /*widows:none;*/
   }
   #logo {
     width: 100%;
@@ -681,6 +658,9 @@ ul li ul a.sf-with-ul:after {
 }
 
 
+/* ------------------------------------------------------------------- */
+
+
 /* Homepage Banner
 ---------------------------------------------------------------------- */
 
@@ -694,6 +674,7 @@ ul li ul a.sf-with-ul:after {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
+  background-color: #202020;
   background-size: cover;
   margin-bottom: 35px;
 }
@@ -703,12 +684,12 @@ ul li ul a.sf-with-ul:after {
   width: 100%;
   height: 100%;
   display: inline-block;
-  background-color: rgba(42, 50, 50, 0.90);
+  background-color: rgba(42, 46, 50, 0.70);
   position: absolute;
 }
 
 .search-container {
-  display: inline-block;
+  display: block;
   width: 100%;
   position: relative;
   padding: 140px 0;
@@ -725,13 +706,10 @@ ul li ul a.sf-with-ul:after {
   font-size: 46px;
   color: #fff;
   margin-bottom: 30px;
-  margin-top: 80 px;
   letter-spacing: -1px;
 }
 
-.search-container .ico-01,
-.search-container .ico-02,
-{
+#banner .search-container input {
   font-weight: 500;
   font-size: 18px;
   float: left;
@@ -743,19 +721,14 @@ ul li ul a.sf-with-ul:after {
   float: left;
 }
 
-.with-transparent-header {
-  background-color: rgba(42, 50, 50, 0.90);
-  background-image: url ("./images/banner-home-02.jpg");
-}
-
 
 /* Form Icons */
 
-input.ico-01 {
-  background: #fff url("./images/ico-01.png") no-repeat scroll 97% 20px / 21px 21px;
+input .ico-01 {
+  background: #fff url("./images/ico-01.png") no-repeat scroll 97% 20px / 21px 21px
 }
 
-input.ico-02 {
+input .ico-02 {
   background: #fff url("./images/ico-02.png") no-repeat scroll 96% 20px / 14px 21px;
 }
 
@@ -856,8 +829,6 @@ input.ico-02 {
   position: relative;
   padding: 70px;
   margin-bottom: 50px;
-  z-index: -1;
-  margin-top: 90px;
 }
 
 #titlebar span a,
@@ -922,10 +893,6 @@ input.ico-02 {
 #titlebar span a:hover,
 #titlebar span.icons a:hover {
   color: #505050;
-}
-
-.form-add-job {
-  z-index: 0;
 }
 
 
@@ -1380,6 +1347,9 @@ table.manage-table td.action a:hover {
 .st-head-row.st-head-row-main {
   display: block;
 }
+
+
+/* ---------------------------------- */
 
 
 /* My Account
@@ -2185,6 +2155,9 @@ screen and (max-height: 300px) {
 }
 
 
+/* ---------------------------------- */
+
+
 /* Notification Boxes
 ------------------------------------- */
 
@@ -2253,19 +2226,19 @@ screen and (max-height: 300px) {
 
 
 /*.notification.success .close {
-    background: url(./images/alert_boxes_close_ico.png) 0 -8px no-repeat;
+  background: url(./images/alert_boxes_close_ico.png) 0 -8px no-repeat;
 }
 
 .notification.error .close {
-    background: url(./images/alert_boxes_close_ico.png) 0 0 no-repeat;
+  background: url(./images/alert_boxes_close_ico.png) 0 0 no-repeat;
 }
 
 .notification.warning .close {
-    background: url(./images/alert_boxes_close_ico.png) 0 -16px no-repeat;
+  background: url(./images/alert_boxes_close_ico.png) 0 -16px no-repeat;
 }
 
 .notification.notice .close {
-    background: url(./images/alert_boxes_close_ico.png) 0 -24px no-repeat;
+  background: url(./images/alert_boxes_close_ico.png) 0 -24px no-repeat;
 }*/
 
 .notification.notice p span i {
@@ -2413,6 +2386,9 @@ screen and (max-height: 300px) {
   font-size: 36px;
   margin-top: -2px;
 }
+
+
+/* ------------------------------------------------------------------- */
 
 
 /* Shortcodes
@@ -4011,6 +3987,9 @@ screen and (max-height: 300px) {
   border-color: #3f6f94;
 }
 
+
+/* Web Font */
+
 @font-face {
   font-family: 'fontello';
   src: url('./fonts/fontello.eot?31771571');
@@ -4257,6 +4236,9 @@ screen and (max-height: 300px) {
 
 
 /* '?' */
+
+
+/* ------------------------------------------------------------------- */
 
 
 /* Job List Styles
@@ -4577,6 +4559,9 @@ span.temporary {
 }
 
 
+/* ---------------------------------- */
+
+
 /* Job Spotlight
 ------------------------------------- */
 
@@ -4713,13 +4698,16 @@ li .job-spotlight p {
 }
 
 
+/* ---------------------------------- */
+
+
 /* Testimonials
 ------------------------------------- */
 
 #testimonials {
   position: relative;
   margin-top: 0;
-  /*background: url('../images/testimonials-bg.jpg') no-repeat 50%;*/
+  background: url('./images/testimonials-bg.jpg') no-repeat 50%;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -4788,7 +4776,7 @@ li .job-spotlight p {
   padding: 0;
   max-height: 640px !important;
   overflow: hidden;
-  /*background-image: url(../images/loader.gif);*/
+  /*background-image: url(./images/loader.gif);*/
   background-repeat: no-repeat;
   background-position: 50%;
   margin-bottom: 42px;
@@ -5010,7 +4998,7 @@ li .job-spotlight p {
 }
 
 .tp-transparentimg {
-  content: "url(../assets/transparent.png)"
+  content: "(../assets/transparent.png)"
 }
 
 .tp-3d {
@@ -5224,6 +5212,9 @@ html[xmlns] .flexslider .slides {
   background-color: #fff;
   color: #505050;
 }
+
+
+/* ---------------------------------- */
 
 
 /* Hover Icon / Hover Cover
@@ -6424,16 +6415,23 @@ a.post-img:hover:before {
 /* ------------------------------------------------------------------- */
 
 
-/* SCEditor*/
+/* SCEditor
+/* http://www.ssceditor.com/
 
+/* Copyright (C) 2011-12, Sam Clarke (samclarke.com)
 
-/*div.sceditor-grip,
-    .sceditor-button div {
-        background-image: url('../images/famfamfam.png');
-        background-repeat: no-repeat;
-        width: 16px;
-        height: 16px;
-    }*/
+/* SCEditor is licensed under the MIT license:
+/* http://www.opensource.org/licenses/mit-license.php
+
+---------------------------------------------------------------------- */
+
+div.sceditor-grip,
+.sceditor-button div {
+  background-image: url('./images/famfamfam.png');
+  background-repeat: no-repeat;
+  width: 16px;
+  height: 16px;
+}
 
 .sceditor-button-youtube div {
   background-position: 0px 0px;
@@ -7603,6 +7601,9 @@ ul.footer-links {
 }
 
 
+/* ------------------------------------------------------------------- */
+
+
 /* Jobs List Page
 ---------------------------------------------------------------------- */
 
@@ -8207,7 +8208,7 @@ label.upload-btn input[type="file"] {
 }
 
 #style-switcher h2 a {
-  /*background: url("../images/switcher.png") no-repeat 9px center transparent;*/
+  background: url("./images/switcher.png") no-repeat 9px center transparent;
   background-color: #282828;
   display: block;
   height: 43px;
@@ -8336,70 +8337,69 @@ div.layout-style {
   background: #e9e9e9;
 }
 
-
-/*.bg1 {
-    background-image: url("../images/bg/squared_metal.png");
+.bg1 {
+  background-image: ("./images/bg/squared_metal.png");
 }
 
 .bg2 {
-    background-image: url("../images/bg/retina_wood.png");
+  background-image: url("./images/bg/retina_wood.png");
 }
 
 .bg3 {
-    background-image: url("../images/bg/brushed_alu.png");
+  background-image: url("./images/bg/brushed_alu.png");
 }
 
 .bg4 {
-    background-image: url("../images/bg/crisp_paper_ruffles.png");
+  background-image: url("./images/bg/crisp_paper_ruffles.png");
 }
 
 .bg5 {
-    background-image: url("../images/bg/navy_blue.png");
+  background-image: url("./images/bg/navy_blue.png");
 }
 
 .bg6 {
-    background-image: url("../images/bg/bedge_grunge.png");
+  background-image: url("./images/bg/bedge_grunge.png");
 }
 
 .bg7 {
-    background-image: url("../images/bg/diamond_upholstery.png");
+  background-image: url("./images/bg/diamond_upholstery.png");
 }
 
 .bg8 {
-    background-image: url("../images/bg/shattered.png");
+  background-image: url("./images/bg/shattered.png");
 }
 
 .bg9 {
-    background-image: url("../images/bg/light_toast.png");
+  background-image: url("./images/bg/light_toast.png");
 }
 
 .bg10 {
-    background-image: url("../images/bg/noise_pattern_with_crosslines.png");
+  background-image: url("./images/bg/noise_pattern_with_crosslines.png");
 }
 
 .bg11 {
-    background-image: url("../images/bg/purty_wood.png");
+  background-image: url("./images/bg/purty_wood.png");
 }
 
 .bg12 {
-    background-image: url("../images/bg/subtle_stripes.png");
+  background-image: url("./images/bg/subtle_stripes.png");
 }
 
 .bg13 {
-    background-image: url("../images/bg/textured_stripes.png");
+  background-image: url("./images/bg/textured_stripes.png");
 }
 
 .bg14 {
-    background-image: url("../images/bg/tileable_wood_texture.png");
+  background-image: url("./images/bg/tileable_wood_texture.png");
 }
 
 .bg15 {
-    background-image: url("../images/bg/stardust.png");
+  background-image: url("./images/bg/stardust.png");
 }
 
 .bg16 {
-    background-image: url("../images/bg/vichy.png");
-}*/
+  background-image: url("./images/bg/vichy.png");
+}
 
 .colors li a.active {
   box-shadow: 0 0 0 2px #fff inset

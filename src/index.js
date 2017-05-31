@@ -14,6 +14,7 @@ import './styles/styles.css'; // Yep, that's right. You can import SASS/CSS file
 import './styles/yellow.css';
 import './styles/base.css';
 import './styles/font-awesome.css';
+import './styles/responsive.css';
 
 // import './styles/responsive.css';
 import { syncHistoryWithStore } from 'react-router-redux';
