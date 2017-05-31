@@ -1,3 +1,3 @@
-export function createVacancy(jobs) {
- return { type: 'CREATE_VACANCY', jobs };
+export function createVacancy(vacances) {
+ return { type: 'CREATE_VACANCY', vacances };
 }

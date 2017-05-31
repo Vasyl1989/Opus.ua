@@ -15,6 +15,7 @@ import './styles/base.css';
 import './styles/font-awesome.css';
 
 const store = configureStore();
+console.log(store);
 
 
 render(

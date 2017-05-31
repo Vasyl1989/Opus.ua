@@ -1,15 +1,15 @@
 import React from 'react';
 import TitleBar from './TitleBar';
-import HeaderForEmployer from './HeaderForEmployer';
+import HeaderForEmployer from '../common/HeaderForEmployer';
 import Footer from '../common/Footer';
-import AddJobForm from './AddJobForm';
+import AddVacancyForm from './AddJobForm';
 
 const AddJob = () => {
   return (
     <div>
       <HeaderForEmployer />
       <TitleBar />
-      <AddJobForm />
+      <AddVacancyForm />
       <Footer />
     </div>
   );

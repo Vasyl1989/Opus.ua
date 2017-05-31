@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import jobs from './jobReducer';
+import vacances from './jobReducer';
 
 const rootReducer = combineReducers({
-  jobs
+  vacances
 });
 
 export default rootReducer;
