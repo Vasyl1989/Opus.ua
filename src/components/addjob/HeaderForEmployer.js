@@ -22,7 +22,7 @@ const HeaderForEmployer = () => {
             <nav id="navigation" className="menu sf-js-enabled sf-arrows">
               <ul id="responsive">
                 <li>
-                  <a href="HomePage">Головна</a>
+                  <a href="/">Головна</a>
                 </li>
                 <li>
                   <a href="#">Працівнику</a>

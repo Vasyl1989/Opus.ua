@@ -22,7 +22,7 @@ const Header = () => {
             <nav id="navigation" className="menu sf-js-enabled sf-arrows">
               <ul id="responsive">
                 <li>
-                  <a href="HomePage" id="current">Головна</a>
+                  <a href="/" id="current">Головна</a>
                 </li>
                 <li>
                   <a href="#">Працівнику</a>
