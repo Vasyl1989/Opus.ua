@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
 import jobs from './jobReducer';
-// import {routerReducer} from 'react-router-redux';
+import { reducer as formReducer } from 'redux-form';
 
 const rootReducer = combineReducers({
-  jobs
+  jobs,
+  form: formReducer   
 });
 
 export default rootReducer;
