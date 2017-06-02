@@ -1,14 +1,22 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import * as Actions from '../../actions/jobActions';
+import {getAllVacancies} from '../../actions/jobActions';
 
 
  class ResentJob extends React.Component {
+   constructor(props){
+     super(props);
+     this.state={};
+   }
+   handleOpenVacancy(){
+     this.props.getAllVacancies();
+   }
    render(){
      return (
 
     <div className="container">
+     <a onClick={this.handleOpenVacancy.bind(this)}>Show</a>
       <div className="sixteen columns">
         <div className="padding-right">
           <h3 className="margin-bottom-25">Актуальні вакансії</h3>
@@ -42,14 +50,18 @@ import * as Actions from '../../actions/jobActions';
    }
   
 }
+ResentJob.PropTypes={
+   handleOpenVacancy: PropTypes.func.isRequired,
+   vacances:PropTypes.array.isRequired
+}
 function mapStateToProps(state) {
  return {
   vacances: state.vacances
  };
 }
-function mapDispatchToProps(dispatch) {
- return {
-  createVacancy: vacancy => dispatch(Actions.createVacancy(vacancy))
- };
-}
-export default connect(mapStateToProps,mapDispatchToProps)(ResentJob);
+// function mapDispatchToProps(dispatch) {
+//  return {
+//   createVacancy: vacancy => dispatch(Actions.createVacancy(vacancy))
+//  };
+// }
+export default connect(mapStateToProps,{getAllVacancies})(ResentJob);

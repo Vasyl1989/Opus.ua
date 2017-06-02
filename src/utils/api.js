@@ -14,3 +14,9 @@ var instance = axios.create({
        
         });
     } 
+    export function getRequest(method,url){
+        return instance({
+         method: method,
+         url: url
+        });
+    }

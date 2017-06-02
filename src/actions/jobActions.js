@@ -1,12 +1,26 @@
 
-import UPDATE_VACANCY from './actionTypes';
-import {sendRequest} from '../utils/api';
+import * as types from './actionTypes';
+import {sendRequest, getRequest} from '../utils/api';
 
 
 export function createVacancy(vacances) {
- return { type: 'CREATE_VACANCY', vacances };
+ return { type:types.CREATE_VACANCY, vacances };
 }
-
+ export function getAllVacancies(){
+        return dispatch=>{
+            const path='/vacancies';
+            getRequest('get',path)
+            .then(response=>{
+                dispatch({
+                    type:types.GET_ALL_VACANCIES,
+                    payload:response.data
+                });
+            })
+            .catch((error)=>{
+                console.log(error);
+            });
+        };
+ }
 
 
 const Actions={
