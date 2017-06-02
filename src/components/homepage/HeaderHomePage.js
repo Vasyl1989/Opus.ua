@@ -55,7 +55,7 @@ const HeaderHomePage = () => {
      </div>
     </div>
    </header>
-   <div class="clearfix"></div>
+   <div className="clearfix"></div>
 
 
 

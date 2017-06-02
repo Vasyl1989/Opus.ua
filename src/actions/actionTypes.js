@@ -1,0 +1,1 @@
+export const UPDATE_VACANCY='UPDATE_VACANCY';

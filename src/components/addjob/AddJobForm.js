@@ -1,9 +1,10 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
+// import axios  from 'axios';
 
 
-import * as jobActions from '../../actions/jobActions';
+import {Actions} from '../../actions/jobActions';
 
 
 class AddVacancyForm extends React.Component {
@@ -34,13 +35,22 @@ class AddVacancyForm extends React.Component {
   const vacancy = Object.assign({}, this.state.vacancy);
   vacancy[e.target.name] = e.target.value;
   this.setState({ vacancy: vacancy });
+
  }
 
 
  handleSubmit(event) {
 
-  console.log(this.state);
+  // console.log(this.state);
   event.preventDefault();
+  // axios.post('https://opus-ua-backend-dev.herokuapp.com/api/v1/vacancies',this.state.vacancy)
+  // .then(function (response) {
+  //   console.log(response);
+  // })
+  // .catch(function (error) {
+  //   console.log(error);
+  // });
+this.props.dispatch(Actions.sendVacancy(this.state.vacancy));
  }
 
 
@@ -217,9 +227,16 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
+ 
  return {
-  createVacancy: vacancy => dispatch(jobActions.createVacancy(vacancy))
+   
+  dispatch,
  };
 }
+// function mapDispatchToProps(dispatch) {
+//  return {
+//   createVacancy: vacancy => dispatch(jobActions.createVacancy(vacancy))
+//  };
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddVacancyForm);
+export default connect(mapStateToProps,mapDispatchToProps)(AddVacancyForm);
