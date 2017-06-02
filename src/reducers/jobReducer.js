@@ -1,4 +1,5 @@
-import * as  types from '../actions/actionTypes'; 
+import * as  types from '../actions/actionTypes';
+
 
 // export default function vacancyReducer(state = [], action) {
 //   switch (action.type) {
@@ -7,10 +8,23 @@ import * as  types from '../actions/actionTypes';
 //   }
 //   return state;
 // }
- export default function vacancyReducer(state = [], action) {
+
+const initialState = {
+  fething: false,
+  vacancies: null,
+}
+
+export default function vacancyReducer(state = initialState, action) {
   switch (action.type) {
     case types.GET_ALL_VACANCIES:
-      return [...state, Object.assign({},action.payload.vacancy)];
+      debugger
+      return {
+        ...state,
+        fething: false,
+        vacancies: action.payload,
+      };
+
   }
+  console.log(state);
   return state;
 }
