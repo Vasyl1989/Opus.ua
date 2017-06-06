@@ -1,8 +1,12 @@
 // Company Info 
 import React from 'react';
 import Widgets from './Widgets';
-const CompanyInfo = () => {
-  return (
+// import { PropTypes } from 'prop-types';
+import { connect } from 'react-redux';
+
+class  CompanyInfo extends React.Component{
+  render(){
+    return (
     <div className="container form-add-job">
       <div className="eleven columns">
         <div className="padding-right">
@@ -46,5 +50,13 @@ const CompanyInfo = () => {
       <Widgets />
     </div>
   );
+  }
+  
 }
-export default CompanyInfo;
+function mapStateToProps(state) {
+  return {
+    vacancy: state.vacancy
+  };
+}
+// export default connect(mapStateToProps)(CompanyInfo);
+ export default CompanyInfo;
