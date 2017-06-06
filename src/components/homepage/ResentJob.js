@@ -11,25 +11,25 @@ class ResentJob extends React.Component {
   }
 
   renderVacancies() {
-    const va
+    const vacancies = this.props.vacancy.vacancies;
     return vacancies.map((item, index) => {
-      retrun(
+      return (
         <li className="highlighted" key={index}>
           <a href="VacancyDetail">
             <img src="styles/images/job-list-logo-01.png" alt="" />
             <div className="job-list-content">
-              <h4>{item.name}<span className="full-time">Full-Time</span></h4>
+              <h4>{item.title}<span className="full-time">{item.job_type}</span></h4>
               <div className="job-icons">
-                <span><i className="fa fa-briefcase"></i> King</span>
-                <span><i className="fa fa-map-marker"></i> Sydney</span>
-                <span><i className="fa fa-money"></i> $100 / hour</span>
+                <span><i className="fa fa-briefcase"></i>{item.city}</span>
+                <span><i className="fa fa-map-marker"></i> {item.company}</span>
+                <span><i className="fa fa-money"></i> {item.price_per_hour}</span>
               </div>
             </div>
           </a>
           <div className="clearfix"></div>
         </li>
-      )
-    })
+      );
+    });
   }
 
   render() {
@@ -59,12 +59,12 @@ class ResentJob extends React.Component {
                 </a>
                 <div className="clearfix"></div>
               </li>
-
+              {this.props.vacancy.vacancies && this.renderVacancies()}
             </ul>
             <a href="browse-jobs.html" className="button centered"><i className="fa fa-plus-circle"></i> Показати більше вакансій</a>
             <div className="margin-bottom-55"></div>
           </div>
-          {this.props.vacancy.vacancies && this.renderVacancies()}
+
         </div>
       </div>
 
@@ -73,18 +73,16 @@ class ResentJob extends React.Component {
   }
 
 }
+
 ResentJob.PropTypes = {
   handleOpenVacancy: PropTypes.func.isRequired,
   vacances: PropTypes.array.isRequired
-}
+};
+
 function mapStateToProps(state) {
   return {
     vacancy: state.vacancy
   };
 }
-// function mapDispatchToProps(dispatch) {
-//  return {
-//   createVacancy: vacancy => dispatch(Actions.createVacancy(vacancy))
-//  };
-// }
+
 export default connect(mapStateToProps, { getAllVacancies })(ResentJob);

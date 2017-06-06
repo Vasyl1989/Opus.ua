@@ -12,12 +12,12 @@ import * as  types from '../actions/actionTypes';
 const initialState = {
   fething: false,
   vacancies: null,
-}
+};
 
 export default function vacancyReducer(state = initialState, action) {
   switch (action.type) {
     case types.GET_ALL_VACANCIES:
-      debugger
+      // debugger
       return {
         ...state,
         fething: false,
