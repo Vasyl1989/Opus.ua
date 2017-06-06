@@ -603,6 +603,7 @@ li p {
 
 .fake-input,
 input[type="text"],
+input[type='date'],
 input[type="password"],
 input[type="email"],
 input[type="number"],

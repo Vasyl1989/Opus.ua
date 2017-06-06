@@ -3,6 +3,9 @@ import {PropTypes} from 'prop-types';
 import {connect} from 'react-redux';
 
 import * as Actions from '../../actions/jobActions';
+import * as consts from '../../constants/const';
+import TextInput from '../common/TextInput';
+import SelectInput from '../common/SelectInput';
 
 class AddVacancyForm extends React.Component {
   constructor(props, context) {
@@ -35,7 +38,7 @@ class AddVacancyForm extends React.Component {
   handleInputChange(e) {
     const vacancy = Object.assign({}, this.state.vacancy);
     vacancy[e.target.name] = e.target.value;
-    this.setState({ vacancy});
+    this.setState({vacancy});
 
   }
 
@@ -59,108 +62,50 @@ class AddVacancyForm extends React.Component {
 
             <form onSubmit={this.handleSubmit}>
               {/*------- Emaile------*/}
-              <div className="form">
-                <h5>Електронна пошта</h5>
-                <input
-                  className="search-field"
-                  type="text"
-                  name="email"
-                  placeholder="mail@example.com"
-                  onChange={this.handleInputChange}/>
-              </div>
 
-              {/*------- Title------*/}
-              <div className="form">
-                <h5>Назва вакансії</h5>
-                <input
-                  className="search-field"
-                  type="text"
-                  placeholder=""
-                  name='title'
-                  onChange={this.handleInputChange}/>
-              </div>
+              <TextInput
+                type='text'
+                title='Електронна пошта'
+                name="email"
+                placeholder="mail@example.com"
+                onChange={this.handleInputChange}/> {/*------- Title------*/}
 
-              {/*------- Job Pair------*/}
-              <div className="form">
-                <h5>Заробітня плата</h5>
-                <input
-                  className="search-field"
-                  type="text"
-                  placeholder=""
-                  name='price_per_hour'
-                  onChange={this.handleInputChange}/>
-              </div>
+              <TextInput
+                title='Назва вакансії'
+                type="text"
+                name='title'
+                onChange={this.handleInputChange}/> {/*------- Job Pair------*/}
+              <TextInput
+                title='Заробітня плата'
+                type="text"
+                name='price_per_hour'
+                onChange={this.handleInputChange}/> {/*------- Location------*/}
 
-              {/*------- Location------*/}
-              <div className="form">
-                <h5>Місто
-                  <span>(необов'язково)</span>
-                </h5>
-                <input
-                  className="search-field"
-                  type="text"
-                  placeholder="Львів "
-                  name="city"
-                  onChange={this.handleInputChange}/>
-                <p className="note">Залишити пустим,якщо місце розташування не важливе.</p>
-              </div>
+              <TextInput
+                title="Місто"
+                type="text"
+                placeholder="Львів "
+                name="city"
+                onChange={this.handleInputChange}/> {/*------- Job Type------*/}
 
-              {/*------- Job Type------*/}
-              <div className="form">
-                <h5>Тип роботи</h5>
-                <select
-                  data-placeholder="Full-Time"
-                  className="chosen-select-no-single"
-                  onChange={this.handleInputChange}
-                  name='job_type'>
-                  <option value="Повна зайнятість">Повна зайнятість</option>
-                  <option value="Часткова зайнятість">Часткова зайнятість</option>
-                  <option value="Інтернатура">Інтернатура</option>
-                  <option value="Фріланс">Фріланс</option>
-                </select>
-              </div>
+              <SelectInput
+                title="Тип роботи"
+                onChange={this.handleInputChange}
+                name='job_type'
+                options={consts.JOB_TYPE}/> {/*------- Choose Category------*/}
 
-              {/*------- Choose Category------*/}
-              <div className="form">
-                <div className="select">
-                  <h5>Категорія</h5>
-                  <select
-                    data-placeholder="Full-Time"
-                    className="chosen-select-no-single"
-                    name='category'
-                    onChange={this.handleInputChange}>
-                    <option value="Автоперевезення">Автоперевезення / Логістика</option>
-                    <option value="Будівництво">Будівництво</option>
-                    <option value="Виробництво">Виробництво</option>
-                    <option value="ІТ">ІТ</option>
-                    <option value="Краса та здоров'я">Краса та здоров'я</option>
-                    <option value="Медицина">Медицина</option>
-                    <option value="Навчання та репетиторство">Навчання та репетиторство</option>
-                    <option value="Робочі спеціальності">Робочі спеціальності</option>
-                    <option value="Сільськогосподарські роботи">Сільськогосподарські роботи</option>
-                    <option value="Сфера обслуговування">Сфера обслуговування</option>
-                    <option value="Телекомунікація">Телекомунікація</option>
-                    <option value="Управління персоналом">Управління персоналом</option>
-                  </select>
-                </div>
-              </div>
+              <SelectInput
+                title='Категорія'
+                name='category'
+                onChange={this.handleInputChange}
+                options={consts.CATEGORY}/> {/*------- Tags------*/}
 
-              {/*------- Tags------*/}
-              <div className="form">
-                <h5>Слова теги
-                  <span>(необов'язково)</span>
-                </h5>
-                <input
-                  className="search-field"
-                  type="text"
-                  placeholder="e.g. PHP, Social Media, Management"
-                  name='tags'
-                  onChange={this.handleInputChange}/>
-                <p className="note">
-                  Навички і технології необхіні для цієї роботи.</p>
-              </div>
-
-              {/*------- Description------*/}
+              <TextInput
+                title='Слова теги'
+                type="text"
+                placeholder="e.g. PHP, Social Media, Management"
+                name='tags'
+                onChange={this.handleInputChange}/> {/*------- Description------*/}
               <div className="form">
                 <h5>Опис</h5>
                 <textarea
@@ -173,43 +118,32 @@ class AddVacancyForm extends React.Component {
               </div>
 
               {/*------- TClosing Date------*/}
-              <div className="form">
-                <h5>Оголошення активне до:
-                  <span>(необов'язково)</span>
-                </h5>
-                <input
-                  data-role="date"
-                  type="text"
-                  placeholder="yyyy-mm-dd"
-                  onChange={this.handleInputChange}
-                  name='active_to_date'/>
-              </div>
 
-              {/*------- Company Details------*/}
+              <TextInput
+                title='Оголошення активне до:'
+                type="date"
+                placeholder="yyyy-mm-dd"
+                onChange={this.handleInputChange}
+                name='active_to_date'/> {/*------- Company Details------*/}
               <div className="divider">
                 <h3>Додатково про компанію</h3>
               </div>
 
               {/*------- Company Name------*/}
-              <div className="form">
-                <h5>Компанія</h5>
-                <input
-                  type="text"
-                  placeholder="Назва компанії"
-                  onChange={this.handleInputChange}
-                  name="company"/>
-              </div>
 
-              {/*------- Website------*/}
-              <div className="form">
-                <h5>Вебсайт<span>(необов'язково)</span>
-                </h5>
-                <input
-                  type="text"
-                  placeholder="http://"
-                  onChange={this.handleInputChange}
-                  name="website"/>
-              </div>
+              <TextInput
+                title='Компанія'
+                type="text"
+                placeholder="Назва компанії"
+                onChange={this.handleInputChange}
+                name="company"/> {/*------- Website------*/}
+
+              <TextInput
+                title='Вебсайт'
+                type="text"
+                placeholder="http://"
+                onChange={this.handleInputChange}
+                name="website"/>
 
               <div className="divider margin-top-0"></div>
               <button className="button big margin-top-5" type="submit">Попереній перегляд.</button>

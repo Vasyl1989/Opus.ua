@@ -2,7 +2,7 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 import {connect} from 'react-redux';
 import {getAllVacancy} from '../../actions/jobActions';
-import liItem from './liItem';
+// import liItem from './liItem';
 
 class ResentJob extends React.Component {
 
@@ -17,6 +17,7 @@ class ResentJob extends React.Component {
     const vacancies = this.props.vacancy.vacancies;
     return vacancies.map((item, index) => {
       return (
+        // <liItem key={index} item={item}/>
         <li className="highlighted" key={index}>
           <a href="VacancyDetail">
             <img src="styles/images/job-list-logo-01.png" alt=""/>
