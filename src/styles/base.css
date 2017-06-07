@@ -603,9 +603,11 @@ li p {
 
 .fake-input,
 input[type="text"],
+input[type="date"],
 input[type="password"],
 input[type="email"],
 input[type="number"],
+input[type="url"],
 textarea,
 select {
   padding: 14px 18px;
@@ -622,6 +624,7 @@ select {
   border: 1px solid #e0e0e0;
   opacity: 1;
 }
+
 
 select {
   padding: 0;

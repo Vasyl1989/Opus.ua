@@ -3,20 +3,26 @@ import React from 'react';
 import Widgets from './Widgets';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
+import { getAllVacancies } from '../../actions/jobActions';
 
 class CompanyInfo extends React.Component {
 
-  render() {
+  handleOpenVacancy() {
+    this.props.getAllVacancies();
+  }
 
-
+render(){
+ 
     return (
       <div className="container form-add-job ">
         <div className="eleven columns">
           <div className="padding-right">
 
+        
+
             <div className="company-info">
               <img src="./styles/images/company-logo.png" alt="" />
-              <div className="content">
+              <div className="content" >
                 <h4>King LLC</h4>
                 <span><a href="#"><i className="fa fa-link"></i> Webcitea</a></span>
                 <span><a href="#"><i className="fa fa-twitter"></i> @kingrestaurants</a></span>
@@ -53,9 +59,10 @@ class CompanyInfo extends React.Component {
         <Widgets />
       </div>
     );
-  }
-}
 
+  }
+
+}
 
 
 CompanyInfo.PropTypes = {

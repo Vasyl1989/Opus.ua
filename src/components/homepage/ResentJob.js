@@ -6,23 +6,30 @@ import { getAllVacancies } from '../../actions/jobActions';
 
 class ResentJob extends React.Component {
 
+
+
   handleOpenVacancy() {
     this.props.getAllVacancies();
   }
 
   renderVacancies() {
     const vacancies = this.props.vacancy.vacancies;
+    
+    
+      
     return vacancies.map((item, index) => {
+      
       return (
-        <li className="highlighted" key={index}>
+        <li className="highlighted" key={index} onClick={() => this.handleSubmit({ active: index })}>
           <a href="VacancyDetail">
             <img src="styles/images/job-list-logo-01.png" alt="" />
             <div className="job-list-content">
               <h4>{item.title}<span className="full-time">{item.job_type}</span></h4>
-              <div className="job-icons">
+               <div className="job-icons">
                 <span><i className="fa fa-briefcase"></i>{item.city}</span>
                 <span><i className="fa fa-map-marker"></i> {item.company}</span>
-                <span><i className="fa fa-money"></i> {item.price_per_hour}</span>
+                <span><i className="fa fa-money"></i> {item.price_per_hour} грн/за годину</span>
+
               </div>
             </div>
           </a>

@@ -7172,7 +7172,11 @@ div.sceditor-group:first-child {
 }
 
 .submit-page .form {
-  margin-bottom: 34px;
+  margin-bottom: 4px;
+}
+
+.submit-page .clearfixform {
+  padding: 9px;
 }
 
 .submit-page .form .note {
