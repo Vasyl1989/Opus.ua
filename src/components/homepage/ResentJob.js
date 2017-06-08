@@ -2,25 +2,25 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 import {connect} from 'react-redux';
 import {getAllVacancy} from '../../actions/jobActions';
-// import liItem from './liItem';
+import {Link} from 'react-router';
+
 
 class ResentJob extends React.Component {
 
   handleOpenVacancy() {
-    this
-      .props
-      .getAllVacancy();
-
+    this.props.getAllVacancy();
   }
-
+   
   renderVacancies() {
+
     const vacancies = this.props.vacancy.vacancies;
-    return vacancies.map((item, index) => {
-      return (
-        // <liItem key={index} item={item}/>
-        <li className="highlighted" key={index}>
-          <a href="VacancyDetail">
-            <img src="styles/images/job-list-logo-01.png" alt=""/>
+
+    return  (
+        <ul className="job-list">
+           {
+             vacancies.map(item=>{
+               return(<li className="highlighted" key={item.id} ><Link to={"VacancyDetail/"+item.id}>
+               <img src="styles/images/job-list-logo-01.png" alt=""/>
             <div className="job-list-content">
               <h4>{item.title}
                 <span className="full-time">{item.job_type}</span>
@@ -38,55 +38,34 @@ class ResentJob extends React.Component {
                   / hour</span>
               </div>
             </div>
-          </a>
-          <div className="clearfix"></div>
-        </li>
-
-      )
-    })
+               </Link>
+                <div className="clearfix"></div>
+               </li>)
+               
+             })
+           }
+        </ul>
+          )
+    
   }
 
   render() {
-    console.log('----------------------------', this.props.vacancy);
+    // console.log('----------------------------', this.props.vacancy.vacancies.length);
     return (
 
       <div className="container">
-        <a onClick={this
-          .handleOpenVacancy
-          .bind(this)}>Show</a>
+        <a onClick={this.handleOpenVacancy.bind(this)}>Show</a>
 
         <div className="sixteen columns">
           <div className="padding-right">
             <h3 className="margin-bottom-25">Актуальні вакансії</h3>
-            <ul className="job-list">
-
-              <li className="highlighted">
-                <a href="VacancyDetail">
-                  <img src="styles/images/job-list-logo-01.png" alt=""/>
-                  <div className="job-list-content">
-                    <h4>Marketing Coordinator - SEO / SEM Experience
-                      <span className="full-time">Full-Time</span>
-                    </h4>
-                    <div className="job-icons">
-                      <span>
-                        <i className="fa fa-briefcase"></i>
-                        King</span>
-                      <span>
-                        <i className="fa fa-map-marker"></i>
-                        Sydney</span>
-                      <span>
-                        <i className="fa fa-money"></i>
-                        $100 / hour</span>
-                    </div>
-                  </div>
-                </a>
-                <div className="clearfix"></div>
-              </li>
+            
               {this.props.vacancy.vacancies && this.renderVacancies()}
-            </ul>
+            
             <a href="browse-jobs.html" className="button centered">
               <i className="fa fa-plus-circle"></i>
               Показати більше вакансій</a>
+              {this.props.children}
             <div className="margin-bottom-55"></div>
           </div>
 

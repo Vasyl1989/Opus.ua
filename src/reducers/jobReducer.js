@@ -2,7 +2,8 @@ import * as types from '../actions/actionTypes';
 
 const initialState = {
   fething: false,
-  vacancies: null
+  vacancies: null,
+  active: 0
 }
 
 export default function vacancyReduce(state = initialState, action) {
@@ -14,7 +15,6 @@ export default function vacancyReduce(state = initialState, action) {
         vacancies: action.payload
       };
   }
-  console.log(state);
   return state
 
 }

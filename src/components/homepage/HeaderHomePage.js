@@ -25,10 +25,10 @@ const HeaderHomePage = () => {
          <a href="#">Працівнику</a>
          <ul>
           <li>
-           <a href="browse-jobs.html">Пошук вакансії</a>
+           <a href="BrowseJob">Пошук вакансії</a>
           </li>
           <li>
-           <a href="browse-categories.html">Вакансії за категорями</a>
+           <a href="BrowseCategories">Вакансії за категорями</a>
           </li>
          </ul>
         </li>

@@ -5,4 +5,5 @@ const rootReducer = combineReducers({
   vacancy,
 });
 
+
 export default rootReducer;

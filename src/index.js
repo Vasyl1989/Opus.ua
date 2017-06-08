@@ -5,7 +5,7 @@ import configureStore from './store/configureStore';
 import { Router, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import routes from './routes';
-// import rootReducer from './reducers/index';
+import {rootReducer} from './reducers/index';
 
 
 require('./favicon.ico'); // Tell webpack to load favicon.ico
@@ -14,7 +14,7 @@ import './styles/yellow.css';
 import './styles/base.css';
 import './styles/font-awesome.css';
 
-const store = configureStore();
+const store = configureStore(rootReducer);
 
 console.log(store);
 
