@@ -7,7 +7,7 @@ export function getAllVacancy(dispatch) {
     return dispatch => {
 
         getRequest('get', consts.PATH).then(response => {
-            console.log(response);
+            // console.log(response);
             
             dispatch({type: types.GET_ALL_VACANCIES, payload: response.data});
         }).catch((error) => {

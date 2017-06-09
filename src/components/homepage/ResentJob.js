@@ -6,10 +6,23 @@ import {Link} from 'react-router';
 
 
 class ResentJob extends React.Component {
+constructor(props, context) {
+    super(props, context);
+    this.state={
+      active: 0
+    }
+    // this.setActive=this.setActive.bind(this);  
+}
 
-  handleOpenVacancy() {
+
+  componentDidMount() {
     this.props.getAllVacancy();
-  }
+  } 
+
+  //  setActive(id){
+  //  this.setState({active:id})
+  //  } 
+  
    
   renderVacancies() {
 
@@ -19,7 +32,8 @@ class ResentJob extends React.Component {
         <ul className="job-list">
            {
              vacancies.map(item=>{
-               return(<li className="highlighted" key={item.id} ><Link to={"VacancyDetail/"+item.id}>
+               return(<li className="highlighted" key={item.id} ><Link to={"VacancyDetail/"+item.id}  >
+               {/*{this.setActive(item.id)}*/}
                <img src="styles/images/job-list-logo-01.png" alt=""/>
             <div className="job-list-content">
               <h4>{item.title}
@@ -54,7 +68,7 @@ class ResentJob extends React.Component {
     return (
 
       <div className="container">
-        <a onClick={this.handleOpenVacancy.bind(this)}>Show</a>
+      
 
         <div className="sixteen columns">
           <div className="padding-right">
