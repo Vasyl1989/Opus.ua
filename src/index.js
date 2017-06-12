@@ -16,13 +16,13 @@ import './styles/base.css';
 import './styles/font-awesome.css';
 
 const store = configureStore();
-const history=syncHistoryWithStore(browserHistory,store);
+// const history=syncHistoryWithStore(browserHistory,store);
 console.log(store);
 
 
 render(
   <Provider store={store}>
-    <Router history={history} routes={routes} />
+    <Router history={browserHistory} routes={routes} />
   </Provider>,
   document.getElementById('app')
 );

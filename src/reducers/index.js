@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import vacancy, * as fromVacancy from './jobReducer';
+import vacancy, * as fromVacancy from './vacancyReducer';
 import { routerReducer } from 'react-router-redux';
 
 const rootReducer = combineReducers({

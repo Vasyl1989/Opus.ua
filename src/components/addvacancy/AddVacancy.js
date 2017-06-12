@@ -2,9 +2,9 @@ import React from 'react';
 import TitleBar from './TitleBar';
 import HeaderForEmployer from '../common/HeaderForEmployer';
 import Footer from '../common/Footer';
-import AddVacancyForm from './AddJobForm';
+import AddVacancyForm from './AddVacancyForm';
 
-const AddJob = () => {
+const AddVacancy = () => {
   return (
     <div>
       <HeaderForEmployer />
@@ -15,4 +15,4 @@ const AddJob = () => {
   );
 };
 
-export default AddJob;
+export default AddVacancy;

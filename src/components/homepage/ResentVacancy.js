@@ -1,11 +1,11 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 import {connect} from 'react-redux';
-import {getAllVacancy} from '../../actions/jobActions';
+import {getAllVacancy} from '../../actions/vacancyActions';
 import {Link,browserHistory } from 'react-router';
 
 
-class ResentJob extends React.Component {
+class ResentVacancy extends React.Component {
 
 
 
@@ -83,7 +83,7 @@ class ResentJob extends React.Component {
   }
 
 }
-ResentJob.PropTypes = {
+ResentVacancy.PropTypes = {
   handleOpenVacancy: PropTypes.func.isRequired,
   renderVacancies: PropTypes.func.isRequired,
   vacancies: PropTypes.array.isRequired
@@ -93,4 +93,4 @@ function mapStateToProps(state) {
 }
 // function mapDispatchToProps(dispatch) {  return {   createVacancy: vacancy =>
 // dispatch(Actions.createVacancy(vacancy))  }; }
-export default connect(mapStateToProps, {getAllVacancy})(ResentJob);
+export default connect(mapStateToProps, {getAllVacancy})(ResentVacancy);

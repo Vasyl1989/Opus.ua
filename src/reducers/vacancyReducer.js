@@ -14,21 +14,23 @@ export default function vacancyReduce(state = initialState, action) {
         fething: false,
         vacancies: action.payload
       };
+      case types.DELETE_VACANCY:
+      return{
+        
+      }
   }
+  
   return state
 }
 
 export const getVacancyById = (state, id) => {
-// debugger;
-console.log('getVacancyById:', state, id);
-  // TODO
+// console.log('getVacancyById:', state, id);
   let vacancy = null;
-// if 
   state.vacancies.forEach((item) => {
     if (item.id == id) {
       vacancy = item;
     }
   })
-console.log(vacancy);
+// console.log(vacancy);
   return vacancy;
 }

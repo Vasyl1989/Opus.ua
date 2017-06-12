@@ -2,7 +2,7 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 import {connect} from 'react-redux';
 
-import * as Actions from '../../actions/jobActions';
+import * as Actions from '../../actions/vacancyActions';
 import * as consts from '../../constants/const';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';

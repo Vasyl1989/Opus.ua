@@ -3,7 +3,7 @@ import HeaderForEmployer from '../common/HeaderForEmployer';
 import Footer from '../common/Footer';
 
 
-const BrowseJob = () => {
+const BrowseVacancy = () => {
   return (
     <div>
       <HeaderForEmployer />
@@ -13,4 +13,4 @@ const BrowseJob = () => {
   );
 };
 
-export default BrowseJob;
+export default BrowseVacancy;
