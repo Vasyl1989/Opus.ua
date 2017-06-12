@@ -3,9 +3,13 @@ import React from 'react';
 import Widgets from './Widgets';
 // import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
+import { Route, IndexRoute } from 'react-router';
 
 class  CompanyInfo extends React.Component{
   render(){
+    // const vacancies = this.props.vacancy.vacancies;
+    // const id=this.props.params.id;
+		// console.log(vacancies[id])
     return (
     <div className="container form-add-job">
       <div className="eleven columns">
@@ -59,4 +63,4 @@ function mapStateToProps(state) {
   };
 }
 // export default connect(mapStateToProps)(CompanyInfo);
- export default CompanyInfo;
+ export default connect(mapStateToProps)(CompanyInfo);

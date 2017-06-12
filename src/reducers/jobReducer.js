@@ -16,5 +16,19 @@ export default function vacancyReduce(state = initialState, action) {
       };
   }
   return state
+}
 
+export const getVacancyById = (state, id) => {
+// debugger;
+console.log('getVacancyById:', state, id);
+  // TODO
+  let vacancy = null;
+// if 
+  state.vacancies.forEach((item) => {
+    if (item.id == id) {
+      vacancy = item;
+    }
+  })
+console.log(vacancy);
+  return vacancy;
 }

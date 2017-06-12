@@ -2,26 +2,18 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 import {connect} from 'react-redux';
 import {getAllVacancy} from '../../actions/jobActions';
-import {Link} from 'react-router';
+import {Link,browserHistory } from 'react-router';
 
 
 class ResentJob extends React.Component {
-constructor(props, context) {
-    super(props, context);
-    this.state={
-      active: 0
-    }
-    // this.setActive=this.setActive.bind(this);  
-}
+
 
 
   componentDidMount() {
     this.props.getAllVacancy();
   } 
 
-  //  setActive(id){
-  //  this.setState({active:id})
-  //  } 
+ 
   
    
   renderVacancies() {
@@ -31,8 +23,9 @@ constructor(props, context) {
     return  (
         <ul className="job-list">
            {
-             vacancies.map(item=>{
-               return(<li className="highlighted" key={item.id} ><Link to={"VacancyDetail/"+item.id}  >
+             vacancies.map((item,index)=>{
+               return(<li className="highlighted" key={item.id} >
+                 <Link to={"VacancyDetail/"+item.id}  onClick={()=>{browserHistory.push(item.id)}}>
                {/*{this.setActive(item.id)}*/}
                <img src="styles/images/job-list-logo-01.png" alt=""/>
             <div className="job-list-content">

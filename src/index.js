@@ -2,10 +2,11 @@ import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 import configureStore from './store/configureStore';
-import { Router, browserHistory } from 'react-router';
+import {Router, Route, browserHistory } from 'react-router';
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import { Provider } from 'react-redux';
 import routes from './routes';
-import {rootReducer} from './reducers/index';
+// import {rootReducer} from './reducers/index';
 
 
 require('./favicon.ico'); // Tell webpack to load favicon.ico
@@ -14,15 +15,14 @@ import './styles/yellow.css';
 import './styles/base.css';
 import './styles/font-awesome.css';
 
-const store = configureStore(rootReducer);
-
+const store = configureStore();
+const history=syncHistoryWithStore(browserHistory,store);
 console.log(store);
 
 
 render(
   <Provider store={store}>
-    <Router history={browserHistory} routes={routes} />
-
+    <Router history={history} routes={routes} />
   </Provider>,
   document.getElementById('app')
 );
