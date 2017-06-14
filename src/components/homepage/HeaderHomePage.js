@@ -25,10 +25,10 @@ const HeaderHomePage = () => {
          <a href="#">Працівнику</a>
          <ul>
           <li>
-           <a href="browse-jobs.html">Пошук вакансії</a>
+           <a href="BrowseVacancy">Пошук вакансії</a>
           </li>
           <li>
-           <a href="browse-categories.html">Вакансії за категорями</a>
+           <a href="BrowseCategories">Вакансії за категорями</a>
           </li>
          </ul>
         </li>
@@ -36,10 +36,10 @@ const HeaderHomePage = () => {
          <a href="#">Роботодавцю</a>
          <ul>
           <li>
-           <a href="AddJob">Створити вакансію</a>
+           <a href="AddVacancy">Створити вакансію</a>
           </li>
           <li>
-           <a href="manage-jobs.html">Редагувати вакансію</a>
+           <a href="ManageVacancy">Редагувати вакансію</a>
           </li>
          </ul>
         </li>

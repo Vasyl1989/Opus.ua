@@ -7167,14 +7167,16 @@ div.sceditor-group:first-child {
 }
 
 .submit-page .form {
-  margin-bottom: 34px;
+  margin-bottom: 4px;
 }
 
 .submit-page .form .note {
   margin-top: 9px;
   color: #808080;
 }
-
+.submit-page .clearfixform{
+  padding: 9px;
+}
 textarea.WYSIWYG {
   min-height: 300px;
 }

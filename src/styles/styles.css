@@ -952,6 +952,24 @@ input .ico-02 {
   top: 0px;
 }
 
+.pagination {
+  text-align: center;
+  margin: 30px;
+}
+
+.pagination button {
+  margin: 2px;
+}
+
+.pagination ul {
+  margin-top: 20px;
+  list-style: none;
+}
+
+.pagination li {
+  float: left;
+}
+
 
 /* ---------------------------------- */
 
