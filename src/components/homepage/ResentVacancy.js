@@ -3,7 +3,7 @@ import {PropTypes} from 'prop-types';
 import {connect} from 'react-redux';
 import {getAllVacancy} from '../../actions/vacancyActions';
 import {Link,browserHistory } from 'react-router';
-// import Pagination from './../Pagination';
+
 
 class ResentVacancy extends React.Component {
 constructor(props, context){
@@ -72,17 +72,19 @@ handleClick(event) {
              })
            }
         </ul>
+        <div className="pagination">
         <ul>
           {pageNumbers.map(number=>{
             return(
+              <button>
               <li
               key={number}
               id={number}
               onClick={this.handleClick}
-              >{number}</li>
+              >{number}</li></button>
             )
           })}
-        </ul>
+        </ul></div>
         </div>
           )
     
@@ -101,9 +103,6 @@ handleClick(event) {
             
               {this.props.vacancy.vacancies && this.renderVacancies()}
             
-            <a href="browse-jobs.html" className="button centered">
-              <i className="fa fa-plus-circle"></i>
-              Показати більше вакансій</a>
 
             <div className="margin-bottom-55"></div>
           </div>

@@ -7205,7 +7205,23 @@ textarea.WYSIWYG {
 .form.with-line h5 {
   margin-bottom: 12px;
 }
+ .pagination {
+  text-align: center;
+  margin: 30px;
+}
 
+.pagination button {
+  margin: 2px;
+}
+
+.pagination ul {
+  margin-top: 20px;
+  list-style: none;
+}
+
+.pagination li {
+  float: left;
+}
 
 /* Forms for URL(s), Education and Skills */
 

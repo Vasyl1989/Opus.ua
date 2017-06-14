@@ -48,12 +48,12 @@ class AddVacancyForm extends React.Component {
            formIsValid = false;
            errors["title"] = "Це поле не може бути пустим";
     }
-    if(typeof vacancy["title"] !== "undefined"){
-             if(!vacancy["title"].match(/^[a-zA-Z]+$/&& /^[А-Яа-яЁё\s]+$/)){
-                 formIsValid = false;
-                 errors["title"] = "У назві вакансії допускаються лише літери";
-        }   
-    }
+    // if(typeof vacancy["title"] !== "undefined"){
+    //          if(!vacancy["title"].match(/^[a-zA-Z]+$/&& /^[А-Яа-яЁё\s]+$/)){
+    //              formIsValid = false;
+    //              errors["title"] = "У назві вакансії допускаються лише літери";
+    //     }   
+    // }
 
     {/*------- email validation------*/}
     if(!vacancy["email"]){

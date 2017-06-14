@@ -6,17 +6,26 @@ import { connect } from 'react-redux';
 
 
 class ContextManage extends React.Component {
+constructor(props, context){
+super(props, context);
+ this.deletVacancy=this.deletVacancy.bind(this);
+}
+deletVacancy(event){
+    this.props.deleteVacancy(this.props.vacancy)
+  } 
  componentDidMount() {
   this.props.getAllVacancy();
  
  }
-  //  deletVacancy(event){
-  //   this.props.deleteVacancy(this.props.vacancy.vacancies)
-  // } 
+
+   
 
  renderVacancies() {
 //  debugger;
+   function deletVacancy(event){
+    this.props.deleteVacancy(this.props.vacancy.vacancies)
    
+  } 
   const vacancies = this.props.vacancy.vacancies;
 
   return vacancies.map((item, index) => {
@@ -61,6 +70,7 @@ class ContextManage extends React.Component {
        <tbody>
          
       {this.props.vacancy.vacancies && this.renderVacancies()}
+
        </tbody>
 
 

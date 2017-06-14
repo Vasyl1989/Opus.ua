@@ -49,9 +49,9 @@ export function sendVacancy(vacancy) {
     };
 }
 export function deleteVacancy(vacancy){
-    debugger;
+    // debugger;
    return dispatch=>{
-       deleteRequest('delete',`/vacancies/${vacancy.id}`,vacancy)
+       deleteRequest('DELETE',`/vacancies/${vacancy.id}`,vacancy)
        .then(()=>{
            console.log(`deleted ${vacancy.id}`)
            dispatch({type:types.DELETE_VACANCY,vacancy})

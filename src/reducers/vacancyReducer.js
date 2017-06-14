@@ -3,7 +3,7 @@ import * as types from '../actions/actionTypes';
 const initialState = {
   fething: false,
   vacancies: null,
-  pager: {}
+
 }
 
 export default function vacancyReduce(state = initialState, action) {
