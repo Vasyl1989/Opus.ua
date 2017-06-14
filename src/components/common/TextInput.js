@@ -15,9 +15,17 @@ const TextInput = ({name, onChange, placeholder, title,type}) => {
         </div>
     )
 }
+<<<<<<< HEAD:src/components/common/TextInput.js
+=======
+
+>>>>>>> master:src/components/common/TextInput.js
 TextInput.PropTypes = {
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
     type:PropTypes.string.isRequired
 }
+<<<<<<< HEAD:src/components/common/TextInput.js
+=======
+
+>>>>>>> master:src/components/common/TextInput.js
 export default TextInput;

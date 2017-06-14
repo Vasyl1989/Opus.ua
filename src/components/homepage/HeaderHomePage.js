@@ -37,12 +37,19 @@ const HeaderHomePage = () => {
          <a href="#">Роботодавцю</a>
          <ul>
           <li>
+<<<<<<< HEAD
             <Link to={"/AddVacancy"}>Створити вакансію</Link>
             {/* < a href="/AddVacancy">Створити вакансію</a>*/}
           </li>
           <li>
             <Link to={"/ManageVacancy"}>Редагувати вакансію</Link>
             {/*<a href="ManageVacancy">Редагувати вакансію</a>*/}
+=======
+           <a href="AddVacancy">Створити вакансію</a>
+          </li>
+          <li>
+           <a href="ManageVacancy">Редагувати вакансію</a>
+>>>>>>> master
           </li>
          </ul>
         </li>
