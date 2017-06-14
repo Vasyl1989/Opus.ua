@@ -40,7 +40,6 @@ const HeaderForEmployer = () => {
                   <a href="#" id="current">Роботодавцю</a>
                   <ul>
                     <li>
-<<<<<<< HEAD
                       <Link to={"/AddVacancy"}>Створити вакансію</Link>
                         {/* < a href="/AddVacancy">Створити вакансію</a>*/}
                     </li>
@@ -48,13 +47,6 @@ const HeaderForEmployer = () => {
                      <Link to={"/ManageVacancy"}>Редагувати вакансію</Link>
                         {/*<a href="ManageVacancy">Редагувати вакансію</a>*/}
                       </li>
-=======
-                      <a href="AddVacancy">Створити вакансію</a>
-                    </li>
-                    <li>
-                      <a href="ManageVacancy">Редагувати вакансію</a>
-                    </li>
->>>>>>> master
                   </ul>
                 </li>
               </ul>

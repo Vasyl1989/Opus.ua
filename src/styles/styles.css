@@ -7192,9 +7192,11 @@ div.sceditor-group:first-child {
 .submit-page .form {
   margin-bottom: 4px;
 }
-.submit-page .clearfixform{
+
+.submit-page .clearfixform {
   padding: 9px;
 }
+
 .submit-page .form .note {
   margin-top: 9px;
   color: #808080;

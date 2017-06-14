@@ -22,11 +22,10 @@ export function getRequest(method, url) {
 
 
 
-export function deleteRequest(method, url,data) {
+export function deleteRequest(method, url) {
     return instance({
         method: method,
-        url: url,
-        data: data || {},
+        url: url
     });
 }
 
