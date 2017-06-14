@@ -6,13 +6,16 @@ import { Link, browserHistory } from 'react-router';
 
 class ResentVacancy extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props, context) {
+    super(props, context);
     this.state = {
       currentPage: 1,
       vacancyPerPage: 10
     };
     this.handleClick = this.handleClick.bind(this);
+  }
+  componentDidMount() {
+    this.props.getAllVacancy();
   }
 
   handleClick(event) {
@@ -21,9 +24,7 @@ class ResentVacancy extends React.Component {
     });
   }
 
-  componentDidMount() {
-    this.props.getAllVacancy();
-  }
+
 
   renderVacancies() {
 
@@ -48,7 +49,10 @@ class ResentVacancy extends React.Component {
           {
             currentVacancise.map((item, index) => {
               return (<li className="highlighted" key={item.id} >
-                <Link to={"VacancyDetail/" + item.id} onClick={() => { browserHistory.push(item.id) }}>
+                <Link to={"VacancyDetail/" + item.id}
+                  onClick={() => {
+                    browserHistory.push(item.id);
+                  }}>
                   {/*{this.setActive(item.id)}*/}
                   <img src="styles/images/job-list-logo-01.png" alt="" />
                   <div className="job-list-content">
@@ -57,7 +61,7 @@ class ResentVacancy extends React.Component {
                     </h4>
                     <div className="job-icons">
                       <span>
-                        <i className="fa fa-briefcase"></i>
+                        <i className="fa fa-briefcase"></i>Компанія:
                         {item.company}</span>
                       <span>
                         <i className="fa fa-map-marker"></i>
@@ -118,13 +122,14 @@ class ResentVacancy extends React.Component {
 
 }
 ResentVacancy.PropTypes = {
+  handleClick: PropTypes.func.isRequired,
   handleOpenVacancy: PropTypes.func.isRequired,
   renderVacancies: PropTypes.func.isRequired,
   vacancies: PropTypes.array.isRequired
-}
+};
+
 function mapStateToProps(state) {
   return { vacancy: state.vacancy };
 }
-// function mapDispatchToProps(dispatch) {  return {   createVacancy: vacancy =>
-// dispatch(Actions.createVacancy(vacancy))  }; }
+
 export default connect(mapStateToProps, { getAllVacancy })(ResentVacancy);

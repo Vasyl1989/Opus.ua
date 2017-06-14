@@ -1,5 +1,7 @@
 import React from 'react';
 import '../../styles/styles.css';
+import { Link } from 'react-router';
+
 
 const Header = () => {
   return (
@@ -13,7 +15,8 @@ const Header = () => {
 
             <div id="logo">
               <h1>
-                <a href="/">OPUS.ua</a>
+              <Link to={"/"}>OPUS.ua</Link>
+                
               </h1>
             </div>
 
@@ -22,7 +25,8 @@ const Header = () => {
             <nav id="navigation" className="menu sf-js-enabled sf-arrows">
               <ul id="responsive">
                 <li>
-                  <a href="/" id="current">Головна</a>
+                <Link to={"/"} id="current">Головна</Link>
+                  {/*<a href="/" id="current">Головна</a>*/}
                 </li>
                 <li>
                   <a href="#">Працівнику</a>
@@ -39,10 +43,12 @@ const Header = () => {
                   <a href="#">Роботодавцю</a>
                   <ul>
                     <li>
-                      <a href="AddJob">Створити вакансію</a>
+                      <Link to={"/AddVacancy"}>Створити вакансію</Link>
+                      {/* < a href="/AddVacancy">Створити вакансію</a>*/}
                     </li>
                     <li>
-                      <a href="manage-jobs.html">Редагувати вакансію</a>
+                      <Link to={"/ManageVacancy"}>Редагувати вакансію</Link>
+                      {/*<a href="ManageVacancy">Редагувати вакансію</a>*/}
                     </li>
                   </ul>
                 </li>
