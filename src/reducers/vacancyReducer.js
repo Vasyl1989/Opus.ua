@@ -3,7 +3,7 @@ import * as types from '../actions/actionTypes';
 const initialState = {
   fething: false,
   vacancies: null,
-  active: 0
+  pager: {}
 }
 
 export default function vacancyReduce(state = initialState, action) {
@@ -15,8 +15,13 @@ export default function vacancyReduce(state = initialState, action) {
         vacancies: action.payload
       };
       case types.DELETE_VACANCY:
+       const newState = Object.assign([], state);
+       const indexOfVacancyDelete=state.findIndex(vacancy=>{
+          return vacancy.id==action.vacancy.id
+        });
+        newState.splice(indexOfVacancyDelete,1);
       return{
-        
+         newState
       }
   }
   
@@ -24,13 +29,13 @@ export default function vacancyReduce(state = initialState, action) {
 }
 
 export const getVacancyById = (state, id) => {
-// console.log('getVacancyById:', state, id);
+//  console.log('getVacancyById:', state, id);
   let vacancy = null;
   state.vacancies.forEach((item) => {
     if (item.id == id) {
       vacancy = item;
     }
   })
-// console.log(vacancy);
+//  console.log(vacancy);
   return vacancy;
 }

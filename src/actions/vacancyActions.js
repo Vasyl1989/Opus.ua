@@ -1,6 +1,6 @@
 import * as types from './actionTypes';
 import * as consts from '../constants/const';
-import {sendRequest, getRequest} from '../utils/api';
+import {sendRequest, getRequest, deleteRequest} from '../utils/api';
 import axios from 'axios';
 
 export function getAllVacancy(dispatch) {
@@ -47,4 +47,16 @@ export function sendVacancy(vacancy) {
             });
 
     };
+}
+export function deleteVacancy(vacancy){
+    debugger;
+   return dispatch=>{
+       deleteRequest('delete',`/vacancies/${vacancy.id}`,vacancy)
+       .then(()=>{
+           console.log(`deleted ${vacancy.id}`)
+           dispatch({type:types.DELETE_VACANCY,vacancy})
+       }).catch((error) => {
+            console.log(error);
+        });
+   }
 }

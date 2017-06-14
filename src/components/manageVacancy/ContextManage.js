@@ -1,18 +1,22 @@
-import React, { PropTypes } from 'react';
-import { getAllVacancies } from '../../actions/jobActions';
+import React from 'react';
+import { getAllVacancy,deleteVacancy } from '../../actions/vacancyActions';
 import { connect } from 'react-redux';
-import { getVacancyById } from '../../reducers';
+
 
 
 
 class ContextManage extends React.Component {
-//  componentDidMount() {
-//   this.props.getAllVacancies();
-
-//  }
-
+ componentDidMount() {
+  this.props.getAllVacancy();
+ 
+ }
+  //  deletVacancy(event){
+  //   this.props.deleteVacancy(this.props.vacancy.vacancies)
+  // } 
 
  renderVacancies() {
+//  debugger;
+   
   const vacancies = this.props.vacancy.vacancies;
 
   return vacancies.map((item, index) => {
@@ -28,7 +32,7 @@ class ContextManage extends React.Component {
      <td className="action">
       <a href="#"><i className="fa fa-pencil"></i> Edit</a>
       <a href="#"><i className="fa  fa-check "></i> Mark Filled</a>
-      <a href="#" className="delete"><i className="fa fa-remove"></i> Delete</a>
+      <button className="delete" onClick={this.deletVacancy}><i className="fa fa-remove"></i> Delete</button>
      </td>
     </tr>
    );
@@ -46,18 +50,18 @@ class ContextManage extends React.Component {
 
 
      <table className="manage-table responsive-table">
-
+      <thead>
       <tr>
        <th><i className="fa fa-file-text"></i>Назва вакансії</th>
        <th><i className="fa fa-check-square-o"></i>Виконано?</th>
        <th><i className="fa fa-calendar"></i>Дата створення оголошення</th>
        <th><i className="fa fa-calendar"></i>Оголошення активне до</th>
-
-       <th></th>
       </tr>
-
-      {this.renderVacancies()}
-
+      </thead>
+       <tbody>
+         
+      {this.props.vacancy.vacancies && this.renderVacancies()}
+       </tbody>
 
 
 
@@ -82,4 +86,4 @@ function mapStateToProps(state) {
   vacancy: state.vacancy
  };
 }
-export default connect(mapStateToProps)(ContextManage);
+export default connect(mapStateToProps, { getAllVacancy,deleteVacancy })(ContextManage);

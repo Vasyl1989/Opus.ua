@@ -11,6 +11,5 @@ export default rootReducer;
 
 // selectors
 export const getVacancyById = (state, id) => {
-  // TODO
   return fromVacancy.getVacancyById(state.vacancy, id);
 }

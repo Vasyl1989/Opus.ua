@@ -29,7 +29,7 @@ class AddVacancyForm extends React.Component {
         website: ""
       },
       errors: {},
-      active: 0
+      
     };
 
     this.handleSubmit = this

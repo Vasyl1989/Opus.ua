@@ -3,11 +3,22 @@ import {PropTypes} from 'prop-types';
 import {connect} from 'react-redux';
 import {getAllVacancy} from '../../actions/vacancyActions';
 import {Link,browserHistory } from 'react-router';
-
+// import Pagination from './../Pagination';
 
 class ResentVacancy extends React.Component {
-
-
+constructor(props, context){
+super(props, context);
+ this.state={
+    currentPage: 1,
+    vacancyPerPage: 10
+ };
+ this.handleClick = this.handleClick.bind(this);
+}
+handleClick(event) {
+    this.setState({
+      currentPage: Number(event.target.id)
+    });
+  }
 
   componentDidMount() {
     this.props.getAllVacancy();
@@ -19,14 +30,23 @@ class ResentVacancy extends React.Component {
   renderVacancies() {
 
     const vacancies = this.props.vacancy.vacancies;
+    // for display curent vacancy on page
+    const indexOfLastVacancy = this.state.currentPage * this.state.vacancyPerPage;
+    const indexOfFirstVacancy = indexOfLastVacancy - this.state.vacancyPerPage;
+    const currentVacancies = vacancies.slice(indexOfFirstVacancy, indexOfLastVacancy);
+    // display page numberd
+     const pageNumbers = [];
+     for (let i = 1; i <= Math.ceil(vacancies.length / this.state.vacancyPerPage); i++) {
+          pageNumbers.push(i);
+        }
 
     return  (
+      <div>
         <ul className="job-list">
            {
-             vacancies.map((item,index)=>{
-               return(<li className="highlighted" key={item.id} >
+             currentVacancies.map((item,index)=>{
+               return(<li className="highlighted" key={index} >
                  <Link to={"VacancyDetail/"+item.id}  onClick={()=>{browserHistory.push(item.id)}}>
-               {/*{this.setActive(item.id)}*/}
                <img src="styles/images/job-list-logo-01.png" alt=""/>
             <div className="job-list-content">
               <h4>{item.title}
@@ -52,6 +72,18 @@ class ResentVacancy extends React.Component {
              })
            }
         </ul>
+        <ul>
+          {pageNumbers.map(number=>{
+            return(
+              <li
+              key={number}
+              id={number}
+              onClick={this.handleClick}
+              >{number}</li>
+            )
+          })}
+        </ul>
+        </div>
           )
     
   }
@@ -72,7 +104,7 @@ class ResentVacancy extends React.Component {
             <a href="browse-jobs.html" className="button centered">
               <i className="fa fa-plus-circle"></i>
               Показати більше вакансій</a>
-              {this.props.children}
+
             <div className="margin-bottom-55"></div>
           </div>
 
