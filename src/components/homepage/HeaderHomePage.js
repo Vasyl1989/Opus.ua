@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../styles/styles.css';
+import { Link } from 'react-router';
 
 const HeaderHomePage = () => {
  return (
@@ -11,7 +12,7 @@ const HeaderHomePage = () => {
 
       <div id="logo">
        <h1>
-        <a href="/">OPUS.ua</a>
+        <Link to={"/"}>OPUS.ua</Link>
        </h1>
       </div>
 
@@ -19,7 +20,7 @@ const HeaderHomePage = () => {
       <nav id="navigation" className="menu">
        <ul id="responsive">
         <li>
-         <a href="/" id="current">Головна</a>
+         <Link to={"/"} id="current">Головна</Link>
         </li>
         <li>
          <a href="#">Працівнику</a>
@@ -36,10 +37,12 @@ const HeaderHomePage = () => {
          <a href="#">Роботодавцю</a>
          <ul>
           <li>
-           <a href="AddVacancy">Створити вакансію</a>
+            <Link to={"/AddVacancy"}>Створити вакансію</Link>
+            {/* < a href="/AddVacancy">Створити вакансію</a>*/}
           </li>
           <li>
-           <a href="ManageVacancy">Редагувати вакансію</a>
+            <Link to={"/ManageVacancy"}>Редагувати вакансію</Link>
+            {/*<a href="ManageVacancy">Редагувати вакансію</a>*/}
           </li>
          </ul>
         </li>

@@ -15,11 +15,9 @@ const TextInput = ({name, onChange, placeholder, title,type}) => {
         </div>
     )
 }
-
 TextInput.PropTypes = {
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
     type:PropTypes.string.isRequired
 }
-
 export default TextInput;

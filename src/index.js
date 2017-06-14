@@ -15,8 +15,6 @@ import './styles/yellow.css';
 import './styles/base.css';
 import './styles/font-awesome.css';
 
-
-
 const store = configureStore();
 // const history=syncHistoryWithStore(browserHistory,store);
 console.log(store);

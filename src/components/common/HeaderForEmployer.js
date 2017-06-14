@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../styles/styles.css';
+import { Link} from 'react-router';
 
 const HeaderForEmployer = () => {
   return (
@@ -13,7 +14,7 @@ const HeaderForEmployer = () => {
 
             <div id="logo">
               <h1>
-                <a href="/">OPUS.ua</a>
+               <Link to={"/"}>OPUS.ua</Link>
               </h1>
             </div>
 
@@ -22,7 +23,7 @@ const HeaderForEmployer = () => {
             <nav id="navigation" className="menu sf-js-enabled sf-arrows">
               <ul id="responsive">
                 <li>
-                  <a href="/">Головна</a>
+                  <Link to={"/"} id="current">Головна</Link>
                 </li>
                 <li>
                   <a href="#">Працівнику</a>
@@ -39,30 +40,32 @@ const HeaderForEmployer = () => {
                   <a href="#" id="current">Роботодавцю</a>
                   <ul>
                     <li>
-                      <a href="AddVacancy">Створити вакансію</a>
+                      <Link to={"/AddVacancy"}>Створити вакансію</Link>
+                        {/* < a href="/AddVacancy">Створити вакансію</a>*/}
                     </li>
                     <li>
-                      <a href="ManageVacancy">Редагувати вакансію</a>
-                    </li>
+                     <Link to={"/ManageVacancy"}>Редагувати вакансію</Link>
+                        {/*<a href="ManageVacancy">Редагувати вакансію</a>*/}
+                      </li>
                   </ul>
                 </li>
               </ul>
             </nav>
 
-            {/*-------Navigation-----*/}
+              {/*-------Navigation-----*/}
 
-            <div id="mobile-navigation">
-              <a href="#menu" className="menu-trigger"><i className="fa fa-reorder"></i> Menu</a>
-            </div>
+              <div id="mobile-navigation">
+                <a href="#menu" className="menu-trigger"><i className="fa fa-reorder"></i> Menu</a>
+              </div>
 
           </div>
-        </div>
+          </div>
       </header>
-      <div className="clearfix"></div>
+        <div className="clearfix"></div>
 
     </div>
 
-  );
+      );
 };
 
 export default HeaderForEmployer;

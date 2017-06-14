@@ -238,23 +238,7 @@ a.menu-trigger,
 
 /* #Margin Styles
 ================================================== */
-.pagination {
-  text-align: center;
-  margin: 30px;
-}
 
-.pagination button {
-  margin: 2px;
-}
-
-.pagination ul {
-  margin-top: 20px;
-  list-style: none;
-}
-
-.pagination li {
-  float: left;
-}
 
 /* Margin Reset */
 
@@ -623,7 +607,6 @@ input[type='date'],
 input[type="password"],
 input[type="email"],
 input[type="number"],
-input[type="url"],
 textarea,
 select {
   padding: 14px 18px;
