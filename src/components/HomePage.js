@@ -1,7 +1,7 @@
 import React from 'react';
 import Banner from '././homepage/banner/Banner';
 import Categories from './homepage/Categories';
-import ResentJob from './homepage/ResentJob';
+import ResentVacancy from './homepage/ResentVacancy';
 import HeaderHomePage from './homepage/HeaderHomePage';
 import Footer from './common/Footer';
 
@@ -11,7 +11,7 @@ const HomePage = () => {
       <HeaderHomePage />
       <Banner />
       <Categories />
-      <ResentJob />
+      <ResentVacancy />
       <Footer />
     </div>
   );

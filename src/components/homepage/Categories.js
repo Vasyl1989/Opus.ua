@@ -36,7 +36,7 @@ const Categories = () => {
           <div className="clearfix"></div>
           <div className="margin-top-30"></div>
 
-          <a href="browse-categories.html" className="button centered">Показати усі категорії</a>
+          <a href="BrowseCategories" className="button centered">Показати усі категорії</a>
           <div className="margin-bottom-50"></div>
         </div>
       </div>
