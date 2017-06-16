@@ -84,7 +84,7 @@ class ResentVacancy extends React.Component {
           <ul >{
             pageNumbers.map(number => {
               return (
-                <button>
+                <button key={number}>
                   <li
                     key={number}
                     id={number}

@@ -25,8 +25,27 @@ class AddVacancyForm extends React.Component {
     this.handleInputChange = this
       .handleInputChange
       .bind(this);
+    // this.state = {
+    //   vacancy: {
+    //     email: "",
+    //     title: "",
+    //     price_per_hour: "",
+    //     city: "",
+    //     job_type: "",
+    //     category: "",
+    //     tags: "",
+    //     description: "",
+    //     active_to_date: "",
+    //     company: "",
+    //     website: ""
+    //   },
+    //   errors: {},
+    //   modalIsOpen: false,
+    //   modalIsOpenTwo: false
+    // };
+
     this.state = {
-      vacancy: {
+      vacancy: props.singleVacancy || {
         email: "",
         title: "",
         price_per_hour: "",
@@ -40,7 +59,6 @@ class AddVacancyForm extends React.Component {
         website: ""
       },
       errors: {},
-      active: 0,
       modalIsOpen: false,
       modalIsOpenTwo: false
     };
@@ -55,6 +73,8 @@ class AddVacancyForm extends React.Component {
   }
 
 
+  
+
   //validation
 
   handleValidation() {
@@ -67,51 +87,23 @@ class AddVacancyForm extends React.Component {
       formIsValid = false;
       errors["title"] = "Це поле не може бути пустим";
     }
-    // if (typeof vacancy["title"] !== "undefined") {
-    //   if (!vacancy["title"].match(/^[a-zA-Z]+$/ && /^[А-Яа-яЁё\s]+$/)) {
-    //     formIsValid = false;
-    //     errors["title"] = "У назві вакансії допускаються лише літери";
-    //   }
-    // }
+
 
     {/*------- email validation------*/ }
     if (!vacancy["email"]) {
       formIsValid = false;
       errors["email"] = "Це поле не може бути пустим";
     }
-    if (typeof vacancy["email"] !== "undefined") {
-      let lastAtPos = vacancy["email"].lastIndexOf('@');
-      let lastDotPos = vacancy["email"].lastIndexOf('.');
 
-      if (!(lastAtPos < lastDotPos && lastAtPos > 0 && vacancy["email"].indexOf('@@') == -1 && lastDotPos > 2 && (vacancy["email"].length - lastDotPos) > 2)) {
-        formIsValid = false;
-        errors["email"] = "Email написаний не вірно";
-      }
-    }
 
     {/*------- Job Pair validation------*/ }
     if (!vacancy["price_per_hour"]) {
       formIsValid = false;
       errors["price_per_hour"] = "Це поле не може бути пустим";
     }
-    if (typeof vacancy["price_per_hour"] !== "undefined") {
-      if (!vacancy["price_per_hour"].match(/^[ 0-9]+$/)) {
-        formIsValid = false;
-        errors["price_per_hour"] = "У цьому полі допускаються лише цифри";
-      }
-    }
 
-    //  {/*------- Job Type validation------*/}
-    //  if(!vacancy["job_type"]){
-    //        formIsValid = false;
-    //        errors["job_type"] = "Оберіть тип роботи";
-    //  }
 
-    //  {/*------- category validation------*/}
-    //  if(!vacancy["category"]){
-    //        formIsValid = false;
-    //        errors["category"] = "Оберіть сферу роботи";
-    //  }
+
 
     {/*------- description validation------*/ }
     if (!vacancy["description"]) {
@@ -159,10 +151,10 @@ class AddVacancyForm extends React.Component {
 
 
   handleInputChange(e) {
+    console.log('assss--')
     const vacancy = Object.assign({}, this.state.vacancy);
     vacancy[e.target.name] = e.target.value;
-    this.setState({ vacancy });
-
+    this.setState({ vacancy:vacancy });
   }
 
   handleSubmit(event) {
@@ -172,11 +164,14 @@ class AddVacancyForm extends React.Component {
     } else {
       this.setState({ modalIsOpen: true });
     }
+    if (this.props.shouldUpdate) {
+      return this.props.dispatch(Actions.editVacancy(this.state.vacancy));
+    }
     this.props.dispatch(Actions.sendVacancy(this.state.vacancy));
   }
 
   render() {
-
+    const vacancy=this.props.singleVacancy;
     return (
       <div className="container form-add-job">
 
@@ -188,9 +183,11 @@ class AddVacancyForm extends React.Component {
               {/*------- Emaile------*/}
 
               <TextInput
-                type='text'
+                type='email'
                 title='Електронна пошта'
                 name="email"
+                value1={this.props.vacancy.shouldUpdate ? vacancy.email : ''}
+                value={this.state.vacancy.email}
                 placeholder="mail@example.com"
                 onChange={this.handleInputChange} />
               <span className="errorMassage" style={{ color: "red" }}>{this.state.errors["email"]}</span>
@@ -202,6 +199,7 @@ class AddVacancyForm extends React.Component {
                 title='Назва вакансії'
                 type="text"
                 name='title'
+                value={this.props.vacancy.shouldUpdate ? vacancy.title : null}
                 onChange={this.handleInputChange} />
               <span className="errorMassage" style={{ color: "red" }}>{this.state.errors["title"]}</span>
 
@@ -209,8 +207,9 @@ class AddVacancyForm extends React.Component {
               {/*------- Job Pair------*/}
               <TextInput
                 title='Заробітня плата'
-                type="text"
+                type="number"
                 name='price_per_hour'
+                value={this.props.vacancy.shouldUpdate ? vacancy.price_per_hour : null}
                 onChange={this.handleInputChange} />
               <span style={{ color: "red" }}>{this.state.errors["price_per_hour"]}</span>
 
@@ -222,6 +221,7 @@ class AddVacancyForm extends React.Component {
                 type="text"
                 placeholder="Львів "
                 name="city"
+                value={this.props.vacancy.shouldUpdate ? vacancy.city : null}
                 onChange={this.handleInputChange} />
               <div className="clearfixform"></div>
               {/*------- Job Type------*/}
@@ -243,6 +243,7 @@ class AddVacancyForm extends React.Component {
                 type="text"
                 placeholder="e.g. PHP, Social Media, Management"
                 name='tags'
+                value={this.props.vacancy.shouldUpdate ? vacancy.tags : null}
                 onChange={this.handleInputChange} />
               <div className="clearfixform"></div>
               {/*------- Description------*/}
@@ -253,6 +254,7 @@ class AddVacancyForm extends React.Component {
                   cols="40"
                   rows="3"
                   id="summary"
+                  value={this.props.vacancy.shouldUpdate ? vacancy.description : ''}
                   onChange={this.handleInputChange}
                   name='description'></textarea>
 
@@ -265,6 +267,7 @@ class AddVacancyForm extends React.Component {
                 title='Оголошення активне до:'
                 type="date"
                 placeholder="yyyy-mm-dd"
+                value={this.props.vacancy.shouldUpdate ? vacancy.date : null}
                 onChange={this.handleInputChange}
                 name='active_to_date' />
               <span style={{ color: "red" }}>{this.state.errors["active_to_date"]}</span>
@@ -280,6 +283,7 @@ class AddVacancyForm extends React.Component {
                 title='Компанія'
                 type="text"
                 placeholder="Назва компанії"
+                value={this.props.vacancy.shouldUpdate ? vacancy.company : null}
                 onChange={this.handleInputChange}
                 name="company" />
               <span style={{ color: "red" }}>{this.state.errors["company"]}</span>
@@ -291,6 +295,7 @@ class AddVacancyForm extends React.Component {
                 type="text"
                 placeholder="http://"
                 onChange={this.handleInputChange}
+                value={this.props.vacancy.shouldUpdate ? vacancy.website : null}
                 name="website" />
               <div className="clearfixform"></div>
 
@@ -340,14 +345,16 @@ AddVacancyForm.PropTypes = {
 };
 
 function mapStateToProps(state) {
-  return { vacancies: state.vacancies };
+  return {
+    vacancy: state.vacancy,
+    singleVacancy: state.vacancy.singleVacancy,
+    shouldUpdate:state.vacancy.shouldUpdate
+  };
 }
 
 function mapDispatchToProps(dispatch) {
 
   return { dispatch };
 }
-// function mapDispatchToProps(dispatch) {  return {   createVacancy: vacancy =>
-// dispatch(jobActions.createVacancy(vacancy))  }; }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddVacancyForm);

@@ -1,10 +1,11 @@
 import * as types from '../actions/actionTypes';
 
 const initialState = {
-  singleVacancy: {},
   fething: false,
+  singleVacancy: {},
+  shouldUpdate: false,
   vacancies: [],
-  active: 0
+
 };
 
 export default function vacancyReduce(state = initialState, action) {
@@ -28,7 +29,14 @@ export default function vacancyReduce(state = initialState, action) {
       fething: false,
       vacancies: action.payload
     };
+  case types.EDIT_VACANCY:
+    return {
+      ...state,
+     singleVacancy:action.payload
+    };
+  case types.SHOULD_UPDATE: 
+    return { ...state, shouldUpdate: true };
   default:
     return state;
-  }
+  };
 }
