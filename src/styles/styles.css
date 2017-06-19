@@ -13,8 +13,8 @@
 
 /* Font Awesome Icons */
 
-@import url("http://fonts.googleapis.com/css?family=Montserrat:400,700");
-@import url("http://fonts.googleapis.com/css?family=Lato:400,700,300");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700,300");
 
 /* ------------------------------------------------------------------- */
 
@@ -707,6 +707,10 @@ ul li ul a.sf-with-ul:after {
   color: #fff;
   margin-bottom: 30px;
   letter-spacing: -1px;
+}
+
+.search-container h3 {
+  color: white;
 }
 
 #banner .search-container input {

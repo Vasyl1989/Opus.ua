@@ -3,6 +3,7 @@ import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { getAllVacancy } from '../../actions/vacancyActions';
 import { Link, browserHistory } from 'react-router';
+import picture from '../../styles/images/company-logo.png';
 
 class ResentVacancy extends React.Component {
 
@@ -53,27 +54,26 @@ class ResentVacancy extends React.Component {
                   onClick={() => {
                     browserHistory.push(item.id);
                   }}>
-                  {/*{this.setActive(item.id)}*/}
-                  <img src="styles/images/job-list-logo-01.png" alt="" />
+
+                  <img src={picture} />
                   <div className="job-list-content">
                     <h4>{item.title}
                       <span className="full-time">{item.job_type}</span>
                     </h4>
                     <div className="job-icons">
                       <span>
-                        <i className="fa fa-briefcase"></i>Компанія:
+                        <i className="fa fa-briefcase" />Компанія:
                         {item.company}</span>
                       <span>
-                        <i className="fa fa-map-marker"></i>
+                        <i className="fa fa-map-marker" />
                         {item.city}</span>
                       <span>
-                        <i className="fa fa-money"></i>
-                        {item.price_per_hour}
-                        / hour</span>
+                        <i className="fa fa-money" />
+                        {item.price_per_hour} грн/год</span>
                     </div>
                   </div>
                 </Link>
-                <div className="clearfix"></div>
+                <div className="clearfix" />
               </li>);
 
             })
@@ -84,7 +84,7 @@ class ResentVacancy extends React.Component {
           <ul >{
             pageNumbers.map(number => {
               return (
-                <button>
+                <button key={number}>
                   <li
                     key={number}
                     id={number}
