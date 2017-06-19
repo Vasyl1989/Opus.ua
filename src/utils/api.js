@@ -30,9 +30,10 @@ export function deleteRequest(method, url) {
 }
 
 
-export function editRequest(method, url) {
+export function editRequest(method, url,data) {
     return instance({
         method: method,
-        url: url
+        url: url,
+        data: data || {},
     });
 }

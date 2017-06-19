@@ -14,13 +14,23 @@ export function getVacancyById(id, vacancies, forUpdate) {
     const vacancy = _.find(vacancies, { id: Number(id) });
     if (vacancy) {
       dispatch({ type: types.GET_VACANCY_BY_ID, payload: vacancy });
-      browserHistory.push("/AddVacancy");
-      return;
+      if(forUpdate) {
+        browserHistory.push("/AddVacancy");
+        return;
+      }else{
+        browserHistory.push(`/VacancyDetail/${id}`)
+        return;
+      }
+      
     }
     getRequest('get', `${consts.PATH}/${id}`)
       .then(response => {
         dispatch({ type: types.GET_VACANCY_BY_ID, payload: response.data })
+        if(forUpdate) {
         browserHistory.push("/AddVacancy");
+      }else{
+        
+      }
       })
       .catch((error) => console.error(error));
 
@@ -52,6 +62,7 @@ export function sendVacancy(vacancy) {
 }
 
 export function deleteVacancy(id, vacancies) {
+  //debugger;
   return dispatch => {
     deleteRequest('delete', `${consts.PATH}/${id}`)
       .then(response => {
@@ -62,17 +73,18 @@ export function deleteVacancy(id, vacancies) {
   };
 }
 
-export function editVacancy(id, vacancies) {
+export function editVacancy(vacancy) {
+  debugger;
+  const data ={vacancy};
   return dispatch => {
-    // dispatch({ type: types.EDIT_VACANCY_REQUEST, payload: rest })
-    editRequest('put', `${consts.PATH}/${id}`)
+    
+    editRequest('put', `${consts.PATH}/${vacancy.id}`,data)
       .then(response => {
-        const rest = _.map(vacancies, vacancy => vacancy.id === id);
-        dispatch({ type: types.EDIT_VACANCY_SUCCESS, payload: rest })
+       //const rest = _.map(vacancies, vacancy => vacancy.id === editvacancy.id);
+       dispatch({ type: types.EDIT_VACANCY, payload: response.data });
       })
       .catch((error) => {
-        console.log(error);
-        // dispatch({ type: types.EDIT_VACANCY_FAILURE, payload: rest })
+        console.log(error); 
       });
   }
 }

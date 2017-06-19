@@ -25,24 +25,7 @@ class AddVacancyForm extends React.Component {
     this.handleInputChange = this
       .handleInputChange
       .bind(this);
-    // this.state = {
-    //   vacancy: {
-    //     email: "",
-    //     title: "",
-    //     price_per_hour: "",
-    //     city: "",
-    //     job_type: "",
-    //     category: "",
-    //     tags: "",
-    //     description: "",
-    //     active_to_date: "",
-    //     company: "",
-    //     website: ""
-    //   },
-    //   errors: {},
-    //   modalIsOpen: false,
-    //   modalIsOpenTwo: false
-    // };
+
 
     this.state = {
       vacancy: props.singleVacancy || {
@@ -151,7 +134,8 @@ class AddVacancyForm extends React.Component {
 
 
   handleInputChange(e) {
-    console.log('assss--')
+    console.log(this.props.vacancy)
+    console.log(this.state.vacancy.id)
     const vacancy = Object.assign({}, this.state.vacancy);
     vacancy[e.target.name] = e.target.value;
     this.setState({ vacancy:vacancy });
@@ -165,9 +149,10 @@ class AddVacancyForm extends React.Component {
       this.setState({ modalIsOpen: true });
     }
     if (this.props.shouldUpdate) {
-      return this.props.dispatch(Actions.editVacancy(this.state.vacancy));
+      this.props.dispatch(Actions.editVacancy(this.state.vacancy));
+      this.setState({shouldUpdate:!this.state.singleVacancy});
     }
-    this.props.dispatch(Actions.sendVacancy(this.state.vacancy));
+   // this.props.dispatch(Actions.sendVacancy(this.state.vacancy));
   }
 
   render() {
@@ -186,7 +171,7 @@ class AddVacancyForm extends React.Component {
                 type='email'
                 title='Електронна пошта'
                 name="email"
-                value1={this.props.vacancy.shouldUpdate ? vacancy.email : ''}
+
                 value={this.state.vacancy.email}
                 placeholder="mail@example.com"
                 onChange={this.handleInputChange} />
@@ -199,7 +184,8 @@ class AddVacancyForm extends React.Component {
                 title='Назва вакансії'
                 type="text"
                 name='title'
-                value={this.props.vacancy.shouldUpdate ? vacancy.title : null}
+                
+                value={this.state.vacancy.title}
                 onChange={this.handleInputChange} />
               <span className="errorMassage" style={{ color: "red" }}>{this.state.errors["title"]}</span>
 
@@ -209,7 +195,8 @@ class AddVacancyForm extends React.Component {
                 title='Заробітня плата'
                 type="number"
                 name='price_per_hour'
-                value={this.props.vacancy.shouldUpdate ? vacancy.price_per_hour : null}
+                
+                value={this.state.vacancy.price_per_hour}
                 onChange={this.handleInputChange} />
               <span style={{ color: "red" }}>{this.state.errors["price_per_hour"]}</span>
 
@@ -221,7 +208,7 @@ class AddVacancyForm extends React.Component {
                 type="text"
                 placeholder="Львів "
                 name="city"
-                value={this.props.vacancy.shouldUpdate ? vacancy.city : null}
+                value={this.state.vacancy.city}
                 onChange={this.handleInputChange} />
               <div className="clearfixform"></div>
               {/*------- Job Type------*/}
@@ -238,14 +225,7 @@ class AddVacancyForm extends React.Component {
                 onChange={this.handleInputChange}
                 options={consts.CATEGORY} /> {/*------- Tags------*/}
 
-              <TextInput
-                title='Слова теги'
-                type="text"
-                placeholder="e.g. PHP, Social Media, Management"
-                name='tags'
-                value={this.props.vacancy.shouldUpdate ? vacancy.tags : null}
-                onChange={this.handleInputChange} />
-              <div className="clearfixform"></div>
+              
               {/*------- Description------*/}
               <div className="form">
                 <h5>Опис</h5>
@@ -254,7 +234,7 @@ class AddVacancyForm extends React.Component {
                   cols="40"
                   rows="3"
                   id="summary"
-                  value={this.props.vacancy.shouldUpdate ? vacancy.description : ''}
+                  value={this.state.vacancy.description}
                   onChange={this.handleInputChange}
                   name='description'></textarea>
 
@@ -267,7 +247,7 @@ class AddVacancyForm extends React.Component {
                 title='Оголошення активне до:'
                 type="date"
                 placeholder="yyyy-mm-dd"
-                value={this.props.vacancy.shouldUpdate ? vacancy.date : null}
+                value={this.state.vacancy.date}
                 onChange={this.handleInputChange}
                 name='active_to_date' />
               <span style={{ color: "red" }}>{this.state.errors["active_to_date"]}</span>
@@ -283,7 +263,7 @@ class AddVacancyForm extends React.Component {
                 title='Компанія'
                 type="text"
                 placeholder="Назва компанії"
-                value={this.props.vacancy.shouldUpdate ? vacancy.company : null}
+                value={this.state.vacancy.company}
                 onChange={this.handleInputChange}
                 name="company" />
               <span style={{ color: "red" }}>{this.state.errors["company"]}</span>
@@ -295,12 +275,12 @@ class AddVacancyForm extends React.Component {
                 type="text"
                 placeholder="http://"
                 onChange={this.handleInputChange}
-                value={this.props.vacancy.shouldUpdate ? vacancy.website : null}
+                value={this.state.vacancy.website}
                 name="website" />
               <div className="clearfixform"></div>
 
               <div className="divider margin-top-0"></div>
-              <button className="button big margin-top-5" type="submit" >Попереній перегляд.</button>
+              <button className="button big margin-top-5" type="submit" id='vacancy'>Додати</button>
 
               <Modal
                 isOpen={this.state.modalIsOpen}
