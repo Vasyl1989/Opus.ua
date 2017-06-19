@@ -709,6 +709,10 @@ ul li ul a.sf-with-ul:after {
   letter-spacing: -1px;
 }
 
+.search-container h3 {
+  color: white;
+}
+
 #banner .search-container input {
   font-weight: 500;
   font-size: 18px;

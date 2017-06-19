@@ -53,7 +53,7 @@ class ResentVacancy extends React.Component {
                   onClick={() => {
                     browserHistory.push(item.id);
                   }}>
-                  {/*{this.setActive(item.id)}*/}
+
                   <img src="styles/images/job-list-logo-01.png" alt="" />
                   <div className="job-list-content">
                     <h4>{item.title}
@@ -84,7 +84,7 @@ class ResentVacancy extends React.Component {
           <ul >{
             pageNumbers.map(number => {
               return (
-                <button>
+                <button key={number}>
                   <li
                     key={number}
                     id={number}

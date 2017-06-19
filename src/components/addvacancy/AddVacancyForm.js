@@ -25,8 +25,9 @@ class AddVacancyForm extends React.Component {
     this.handleInputChange = this
       .handleInputChange
       .bind(this);
+
     this.state = {
-      vacancy: {
+      vacancy: props.singleVacancy || {
         email: "",
         title: "",
         price_per_hour: "",
@@ -40,7 +41,6 @@ class AddVacancyForm extends React.Component {
         website: ""
       },
       errors: {},
-      active: 0,
       modalIsOpen: false,
       modalIsOpenTwo: false
     };
@@ -54,9 +54,7 @@ class AddVacancyForm extends React.Component {
       .bind(this);
   }
 
-
   //validation
-
   handleValidation() {
     let vacancy = this.state.vacancy;
     let errors = {};
@@ -67,26 +65,11 @@ class AddVacancyForm extends React.Component {
       formIsValid = false;
       errors["title"] = "Це поле не може бути пустим";
     }
-    // if (typeof vacancy["title"] !== "undefined") {
-    //   if (!vacancy["title"].match(/^[a-zA-Z]+$/ && /^[А-Яа-яЁё\s]+$/)) {
-    //     formIsValid = false;
-    //     errors["title"] = "У назві вакансії допускаються лише літери";
-    //   }
-    // }
 
     {/*------- email validation------*/ }
     if (!vacancy["email"]) {
       formIsValid = false;
       errors["email"] = "Це поле не може бути пустим";
-    }
-    if (typeof vacancy["email"] !== "undefined") {
-      let lastAtPos = vacancy["email"].lastIndexOf('@');
-      let lastDotPos = vacancy["email"].lastIndexOf('.');
-
-      if (!(lastAtPos < lastDotPos && lastAtPos > 0 && vacancy["email"].indexOf('@@') == -1 && lastDotPos > 2 && (vacancy["email"].length - lastDotPos) > 2)) {
-        formIsValid = false;
-        errors["email"] = "Email написаний не вірно";
-      }
     }
 
     {/*------- Job Pair validation------*/ }
@@ -94,24 +77,6 @@ class AddVacancyForm extends React.Component {
       formIsValid = false;
       errors["price_per_hour"] = "Це поле не може бути пустим";
     }
-    if (typeof vacancy["price_per_hour"] !== "undefined") {
-      if (!vacancy["price_per_hour"].match(/^[ 0-9]+$/)) {
-        formIsValid = false;
-        errors["price_per_hour"] = "У цьому полі допускаються лише цифри";
-      }
-    }
-
-    //  {/*------- Job Type validation------*/}
-    //  if(!vacancy["job_type"]){
-    //        formIsValid = false;
-    //        errors["job_type"] = "Оберіть тип роботи";
-    //  }
-
-    //  {/*------- category validation------*/}
-    //  if(!vacancy["category"]){
-    //        formIsValid = false;
-    //        errors["category"] = "Оберіть сферу роботи";
-    //  }
 
     {/*------- description validation------*/ }
     if (!vacancy["description"]) {
@@ -131,11 +96,9 @@ class AddVacancyForm extends React.Component {
       errors["company"] = "Вкажіть назву компанії";
     }
 
-
     this.setState({ errors: errors });
     return formIsValid;
   }
-
 
   //modal window
   openModal() {
@@ -157,12 +120,10 @@ class AddVacancyForm extends React.Component {
     });
   }
 
-
   handleInputChange(e) {
     const vacancy = Object.assign({}, this.state.vacancy);
     vacancy[e.target.name] = e.target.value;
-    this.setState({ vacancy });
-
+    this.setState({ vacancy: vacancy });
   }
 
   handleSubmit(event) {
@@ -172,10 +133,16 @@ class AddVacancyForm extends React.Component {
     } else {
       this.setState({ modalIsOpen: true });
     }
-    this.props.dispatch(Actions.sendVacancy(this.state.vacancy));
+    if (this.props.shouldUpdate) {
+      this.props.dispatch(Actions.editVacancy(this.state.vacancy, this.props.vacancies));
+      this.setState({ shouldUpdate: !this.state.singleVacancy });
+    } else {
+      this.props.dispatch(Actions.sendVacancy(this.state.vacancy));
+    }
   }
 
   render() {
+    const vacancy = this.props.singleVacancy;
 
     return (
       <div className="container form-add-job">
@@ -188,87 +155,88 @@ class AddVacancyForm extends React.Component {
               {/*------- Emaile------*/}
 
               <TextInput
-                type='text'
-                title='Електронна пошта'
+                type="email"
+                title="Електронна пошта"
                 name="email"
+                value={this.state.vacancy.email}
                 placeholder="mail@example.com"
                 onChange={this.handleInputChange} />
               <span className="errorMassage" style={{ color: "red" }}>{this.state.errors["email"]}</span>
+              <div className="clearfixform" />
 
-              <div className="clearfixform"></div>
               {/*------- Title------*/}
-
               <TextInput
-                title='Назва вакансії'
+                title="Назва вакансії"
                 type="text"
-                name='title'
+                name="title"
+                value={this.state.vacancy.title}
                 onChange={this.handleInputChange} />
               <span className="errorMassage" style={{ color: "red" }}>{this.state.errors["title"]}</span>
+              <div className="clearfixform" />
 
-              <div className="clearfixform"></div>
               {/*------- Job Pair------*/}
               <TextInput
-                title='Заробітня плата'
-                type="text"
-                name='price_per_hour'
+                title="Заробітня плата"
+                type="number"
+                name="price_per_hour"
+                value={this.state.vacancy.price_per_hour}
                 onChange={this.handleInputChange} />
               <span style={{ color: "red" }}>{this.state.errors["price_per_hour"]}</span>
+              <div className="clearfixform" />
 
-              <div className="clearfixform"></div>
               {/*------- Location------*/}
-
               <TextInput
                 title="Місто"
                 type="text"
                 placeholder="Львів "
                 name="city"
+                value={this.state.vacancy.city}
                 onChange={this.handleInputChange} />
-              <div className="clearfixform"></div>
+              <div className="clearfixform" />
               {/*------- Job Type------*/}
 
               <SelectInput
                 title="Тип роботи"
                 onChange={this.handleInputChange}
-                name='job_type'
-                options={consts.JOB_TYPE} /> {/*------- Choose Category------*/}
+                name="job_type"
+                options={consts.JOB_TYPE} />
 
+              {/*------- Choose Category------*/}
               <SelectInput
-                title='Категорія'
-                name='category'
+                title="Категорія"
+                name="category"
                 onChange={this.handleInputChange}
-                options={consts.CATEGORY} /> {/*------- Tags------*/}
+                options={consts.CATEGORY} />
 
-              <TextInput
-                title='Слова теги'
-                type="text"
-                placeholder="e.g. PHP, Social Media, Management"
-                name='tags'
-                onChange={this.handleInputChange} />
-              <div className="clearfixform"></div>
               {/*------- Description------*/}
               <div className="form">
                 <h5>Опис</h5>
-                <textarea
-                  className="WYSIWYG"
-                  cols="40"
-                  rows="3"
-                  id="summary"
-                  onChange={this.handleInputChange}
-                  name='description'></textarea>
-
+                <fieldset>
+                  <textarea
+                    className="WYSIWYG"
+                    cols="40"
+                    rows="3"
+                    id="summary"
+                    value={this.state.vacancy.description}
+                    onChange={this.handleInputChange}
+                    name="description" />
+                </fieldset>
                 <span style={{ color: "red" }}>{this.state.errors["description"]}</span>
               </div>
-              <div className="clearfixform"></div>
-              {/*------- TClosing Date------*/}
+              <div className="clearfixform" />
 
+              {/*------- TClosing Date------*/}
               <TextInput
-                title='Оголошення активне до:'
+                title="Оголошення активне до:"
                 type="date"
                 placeholder="yyyy-mm-dd"
                 onChange={this.handleInputChange}
-                name='active_to_date' />
+                value={this.state.vacancy.active_to_date}
+                name="active_to_date"
+                required />
               <span style={{ color: "red" }}>{this.state.errors["active_to_date"]}</span>
-              <div className="clearfixform"></div>
+              <div className="clearfixform" />
+
               {/*------- Company Details------*/}
               <div className="divider">
                 <h3>Додатково про компанію</h3>
@@ -277,77 +245,70 @@ class AddVacancyForm extends React.Component {
               {/*------- Company Name------*/}
 
               <TextInput
-                title='Компанія'
+                title="Компанія"
                 type="text"
                 placeholder="Назва компанії"
+                value={this.state.vacancy.company}
                 onChange={this.handleInputChange}
                 name="company" />
               <span style={{ color: "red" }}>{this.state.errors["company"]}</span>
-              <div className="clearfixform"></div>
-              {/*------- Website------*/}
+              <div className="clearfixform" />
 
+              {/*------- Website------*/}
               <TextInput
-                title='Вебсайт'
+                title="Вебсайт"
                 type="text"
                 placeholder="http://"
                 onChange={this.handleInputChange}
+                value={this.state.vacancy.website}
                 name="website" />
-              <div className="clearfixform"></div>
-
-              <div className="divider margin-top-0"></div>
-              <button className="button big margin-top-5" type="submit" >Попереній перегляд.</button>
+              <div className="clearfixform" />
+              <div className="divider margin-top-0" />
+              <button className="button big margin-top-5" type="submit" id="vacancy">Додати</button>
 
               <Modal
                 isOpen={this.state.modalIsOpen}
                 onAfterOpen={this.afterOpenModal}
                 onRequestClose={this.closeModal}
                 style={customStyles}
-                contentLabel="Example Modal"
-              >
-
+                contentLabel="Example Modal">
                 <h2 ref={subtitle => this.subtitle = subtitle}>Форма заповнена не вірно</h2>
                 <button onClick={this.closeModal}>close</button>
-
               </Modal>
-
 
               <Modal
                 isOpen={this.state.modalIsOpenTwo}
                 onAfterOpen={this.afterOpenModal}
                 onRequestClose={this.closeModal}
                 style={customStyles}
-                contentLabel="Example Modal"
-              >
-
+                contentLabel="Example Modal">
                 <h2 ref={subtitle => this.subtitle = subtitle}>Вакансія надіслана успішно</h2>
                 <button onClick={this.closeModal}>close</button>
-
               </Modal>
-
             </form>
           </div>
         </div>
-
       </div>
     );
   }
-
 }
 
 AddVacancyForm.PropTypes = {
   createVacancy: PropTypes.func.isRequired,
-  vacancies: PropTypes.array.isRequired
+  vacancies: PropTypes.array.isRequired,
+  shouldUpdate: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
-  return { vacancies: state.vacancies };
+  return {
+    vacancy: state.vacancy,
+    singleVacancy: state.vacancy.singleVacancy,
+    shouldUpdate: state.vacancy.shouldUpdate
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-
   return { dispatch };
 }
-// function mapDispatchToProps(dispatch) {  return {   createVacancy: vacancy =>
-// dispatch(jobActions.createVacancy(vacancy))  }; }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddVacancyForm);
