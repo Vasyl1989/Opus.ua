@@ -4,6 +4,7 @@ import Header from '../common/Header';
 import Footer from '../common/Footer';
 import { PropTypes } from 'prop-types';
 import { getVacancyById } from '../../actions/vacancyActions';
+import picture from '../../styles/images/company-logo.png';
 
 class VacancyDetail extends React.Component {
   componentDidMount() {
@@ -32,14 +33,14 @@ class VacancyDetail extends React.Component {
             <div className="padding-right">
 
               <div className="company-info">
-                <img src="../styles/images/company-logo.png" alt="" />
+                <img src={picture} />
                 <div className="content">
                   <h4>Компанія:{vacancy.company}</h4>
                   <span><a href="#"><i className="fa fa-link" />{vacancy.website}</a></span>
                 </div>
                 <div className="clearfix" />
               </div>
-              <p className="margin-reset">  {vacancy.description.replace(/\n/g, "<br />")} </p>
+              <p className="margin-reset">  {vacancy.description} </p>
             </div>
           </div>
           <div className="five columns">
@@ -65,7 +66,7 @@ class VacancyDetail extends React.Component {
                     <i className="fa fa-money" />
                     <div>
                       <strong>Оплата праці</strong>
-                      <span>{vacancy.price_per_hour} / год</span>
+                      <span>{vacancy.price_per_hour} грн/год</span>
                     </div>
                   </li>
                 </ul>
