@@ -29,7 +29,7 @@ export function getVacancyById(id, vacancies, forUpdate) {
         if(forUpdate) {
         browserHistory.push("/AddVacancy");
       }else{
-        
+         browserHistory.push(`/VacancyDetail/${id}`)
       }
       })
       .catch((error) => console.error(error));
@@ -73,15 +73,15 @@ export function deleteVacancy(id, vacancies) {
   };
 }
 
-export function editVacancy(vacancy) {
-  debugger;
+export function editVacancy(vacancy,vacancies) {
+  //debugger;
   const data ={vacancy};
   return dispatch => {
     
     editRequest('put', `${consts.PATH}/${vacancy.id}`,data)
       .then(response => {
-       //const rest = _.map(vacancies, vacancy => vacancy.id === editvacancy.id);
-       dispatch({ type: types.EDIT_VACANCY, payload: response.data });
+       const rest = _.map(vacancies, vacancy => vacancy.id === vacancy.id);
+       dispatch({ type: types.EDIT_VACANCY, payload: rest });
       })
       .catch((error) => {
         console.log(error); 

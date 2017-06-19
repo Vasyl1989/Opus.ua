@@ -30,16 +30,10 @@ export default function vacancyReduce(state = initialState, action) {
       vacancies: action.payload
     };
   case types.EDIT_VACANCY:
-    //return {
-      //...state,
-     //vacancies:action.payload
-    //};
-    return state.vacancies.map(vacancy=>{
-      if(vacancy.id===action.payload.id){
-        return action.payload
-      }
-      return vacancy
-    })
+    return {
+      ...state,
+     vacancies:action.payload
+    };
     
   case types.SHOULD_UPDATE: 
     return { ...state, shouldUpdate: true };

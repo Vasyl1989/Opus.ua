@@ -149,10 +149,12 @@ class AddVacancyForm extends React.Component {
       this.setState({ modalIsOpen: true });
     }
     if (this.props.shouldUpdate) {
-      this.props.dispatch(Actions.editVacancy(this.state.vacancy));
+      this.props.dispatch(Actions.editVacancy(this.state.vacancy,this.props.vacancies));
       this.setState({shouldUpdate:!this.state.singleVacancy});
+    }else{
+     this.props.dispatch(Actions.sendVacancy(this.state.vacancy));
     }
-   // this.props.dispatch(Actions.sendVacancy(this.state.vacancy));
+     
   }
 
   render() {
