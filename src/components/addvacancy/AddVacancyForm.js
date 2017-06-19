@@ -56,7 +56,7 @@ class AddVacancyForm extends React.Component {
   }
 
 
-  
+
 
   //validation
 
@@ -138,7 +138,7 @@ class AddVacancyForm extends React.Component {
     console.log(this.state.vacancy.id)
     const vacancy = Object.assign({}, this.state.vacancy);
     vacancy[e.target.name] = e.target.value;
-    this.setState({ vacancy:vacancy });
+    this.setState({ vacancy: vacancy });
   }
 
   handleSubmit(event) {
@@ -149,16 +149,16 @@ class AddVacancyForm extends React.Component {
       this.setState({ modalIsOpen: true });
     }
     if (this.props.shouldUpdate) {
-      this.props.dispatch(Actions.editVacancy(this.state.vacancy,this.props.vacancies));
-      this.setState({shouldUpdate:!this.state.singleVacancy});
-    }else{
-     this.props.dispatch(Actions.sendVacancy(this.state.vacancy));
+      this.props.dispatch(Actions.editVacancy(this.state.vacancy, this.props.vacancies));
+      this.setState({ shouldUpdate: !this.state.singleVacancy });
+    } else {
+      this.props.dispatch(Actions.sendVacancy(this.state.vacancy));
     }
-     
+
   }
 
   render() {
-    const vacancy=this.props.singleVacancy;
+    const vacancy = this.props.singleVacancy;
     return (
       <div className="container form-add-job">
 
@@ -186,7 +186,7 @@ class AddVacancyForm extends React.Component {
                 title='Назва вакансії'
                 type="text"
                 name='title'
-                
+
                 value={this.state.vacancy.title}
                 onChange={this.handleInputChange} />
               <span className="errorMassage" style={{ color: "red" }}>{this.state.errors["title"]}</span>
@@ -197,7 +197,7 @@ class AddVacancyForm extends React.Component {
                 title='Заробітня плата'
                 type="number"
                 name='price_per_hour'
-                
+
                 value={this.state.vacancy.price_per_hour}
                 onChange={this.handleInputChange} />
               <span style={{ color: "red" }}>{this.state.errors["price_per_hour"]}</span>
@@ -219,15 +219,16 @@ class AddVacancyForm extends React.Component {
                 title="Тип роботи"
                 onChange={this.handleInputChange}
                 name='job_type'
-                options={consts.JOB_TYPE} /> {/*------- Choose Category------*/}
+                options={consts.JOB_TYPE} /> 
+                {/*------- Choose Category------*/}
 
               <SelectInput
                 title='Категорія'
                 name='category'
                 onChange={this.handleInputChange}
-                options={consts.CATEGORY} /> {/*------- Tags------*/}
+                options={consts.CATEGORY} />
 
-              
+
               {/*------- Description------*/}
               <div className="form">
                 <h5>Опис</h5>
@@ -249,7 +250,7 @@ class AddVacancyForm extends React.Component {
                 title='Оголошення активне до:'
                 type="date"
                 placeholder="yyyy-mm-dd"
-                value={this.state.vacancy.date}
+                value={this.state.vacancy.active_to_date}
                 onChange={this.handleInputChange}
                 name='active_to_date' />
               <span style={{ color: "red" }}>{this.state.errors["active_to_date"]}</span>
@@ -330,7 +331,7 @@ function mapStateToProps(state) {
   return {
     vacancy: state.vacancy,
     singleVacancy: state.vacancy.singleVacancy,
-    shouldUpdate:state.vacancy.shouldUpdate
+    shouldUpdate: state.vacancy.shouldUpdate
   };
 }
 

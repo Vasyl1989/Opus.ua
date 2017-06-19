@@ -12,7 +12,7 @@ const TitlebarBrowseJob = () => {
                 </div>
 
                 <div className="six columns">
-                    <a href="AddJob" className="button">Розмістити вакансію</a>
+                    <a href="AddVacancy" className="button">Розмістити вакансію</a>
                 </div>
 
             </div>

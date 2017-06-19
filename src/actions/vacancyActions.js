@@ -62,7 +62,7 @@ export function sendVacancy(vacancy) {
 }
 
 export function deleteVacancy(id, vacancies) {
-  //debugger;
+  
   return dispatch => {
     deleteRequest('delete', `${consts.PATH}/${id}`)
       .then(response => {
@@ -74,7 +74,7 @@ export function deleteVacancy(id, vacancies) {
 }
 
 export function editVacancy(vacancy,vacancies) {
-  //debugger;
+  
   const data ={vacancy};
   return dispatch => {
     

@@ -5,7 +5,8 @@ const initialState = {
   singleVacancy: {},
   shouldUpdate: false,
   vacancies: [],
-
+  searchWord: "",
+  searchCity: ""
 };
 
 export default function vacancyReduce(state = initialState, action) {
