@@ -76,7 +76,7 @@ searchSubmit(e,city){
 }
 
 Banner.PropTypes = {
-
+ searchVacancy:PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
