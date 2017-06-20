@@ -4,3 +4,5 @@ export const DELETE_VACANCY = 'DELETE_VACANCY';
 export const GET_VACANCY_BY_ID = 'GET_VACANCY_BY_ID';
 export const EDIT_VACANCY = 'EDIT_VACANCY';
 export const SHOULD_UPDATE = 'SHOULD_UPDATE';
+
+export const SEARCH = 'SEARCH';

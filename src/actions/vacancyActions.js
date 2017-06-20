@@ -23,6 +23,7 @@ export function getVacancyById(id, vacancies, forUpdate) {
       }
 
     }
+
     getRequest('get', `${consts.PATH}/${id}`)
       .then(response => {
         dispatch({ type: types.GET_VACANCY_BY_ID, payload: response.data })
@@ -62,7 +63,7 @@ export function sendVacancy(vacancy) {
 }
 
 export function deleteVacancy(id, vacancies) {
-  //debugger;
+
   return dispatch => {
     deleteRequest('delete', `${consts.PATH}/${id}`)
       .then(response => {
@@ -74,7 +75,7 @@ export function deleteVacancy(id, vacancies) {
 }
 
 export function editVacancy(vacancy, vacancies) {
-  //debugger;
+
   const data = { vacancy };
   return dispatch => {
 
@@ -86,5 +87,19 @@ export function editVacancy(vacancy, vacancies) {
       .catch((error) => {
         console.log(error);
       });
+  }
+}
+
+export function searchVacancy(city, title, category) {
+  return dispatch => {
+    getRequest('get', `${consts.PATH}?city=${city}`)
+      .then(response => {
+        dispatch({ type: types.SEARCH, payload: response.data });
+        browserHistory.push("/BrowseVacancy");
+      }).catch((error) => {
+        console.log(error);
+      });
+
+
   }
 }
