@@ -32,10 +32,10 @@ const Header = () => {
                   <a href="#">Працівнику</a>
                   <ul>
                     <li>
-                      <a href="browse-jobs.html">Пошук вакансії</a>
+                      <a href="BrowseVacancy">Пошук вакансії</a>
                     </li>
                     <li>
-                      <a href="browse-categories.html">Вакансії за категорями</a>
+                      <a href="BrowseCategories">Вакансії за категорями</a>
                     </li>
                   </ul>
                 </li>

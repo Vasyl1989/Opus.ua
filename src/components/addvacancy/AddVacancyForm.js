@@ -134,8 +134,7 @@ class AddVacancyForm extends React.Component {
 
 
   handleInputChange(e) {
-    console.log(this.props.vacancy)
-    console.log(this.state.vacancy.id)
+
     const vacancy = Object.assign({}, this.state.vacancy);
     vacancy[e.target.name] = e.target.value;
     this.setState({ vacancy: vacancy });

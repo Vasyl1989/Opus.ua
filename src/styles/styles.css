@@ -13,8 +13,8 @@
 
 /* Font Awesome Icons */
 
-@import url("http://fonts.googleapis.com/css?family=Montserrat:400,700");
-@import url("http://fonts.googleapis.com/css?family=Lato:400,700,300");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700,300");
 
 /* ------------------------------------------------------------------- */
 
@@ -702,13 +702,17 @@ ul li ul a.sf-with-ul:after {
   }
 }
 
-.search-container h2 {
+.search-container h2{
   font-size: 46px;
   color: #fff;
   margin-bottom: 30px;
   letter-spacing: -1px;
 }
-
+.search-container h3{
+  
+  color: #fff;
+ 
+}
 #banner .search-container input {
   font-weight: 500;
   font-size: 18px;

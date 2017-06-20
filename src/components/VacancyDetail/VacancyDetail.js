@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Header from '../common/Header';
 import Footer from '../common/Footer';
 import { getVacancyById } from '../../actions/vacancyActions';
+import picture from '../../styles/images/company-logo.png';
 
 class VacancyDetail extends React.Component {
 
@@ -34,7 +35,7 @@ class VacancyDetail extends React.Component {
             <div className="padding-right">
 
               <div className="company-info">
-                <img src="../styles/images/company-logo.png" alt="" />
+                <img src={picture} alt="" />
                 <div className="content">
                   <h4>Компанія:{vacancy.company}</h4>
                   <span><a href="#"><i className="fa fa-link"></i> {vacancy.website}</a></span>

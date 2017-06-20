@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { getAllVacancy, deleteVacancy, getVacancyById } from '../../actions/vacancyActions';
 import { connect } from 'react-redux';
-import { Link, browserHistory } from 'react-router';
+
 
 
 class ContextManage extends React.Component {
@@ -35,7 +35,7 @@ class ContextManage extends React.Component {
           <td>{item.active_to_date}</td>
 
           <td className="action">
-            {/*<Link to={'AddVacancy/'+item.id} ><i className="fa fa-pencil" onClick={() => this.handleGoToEditVacancy(item.id)}></i> Edit</Link>*/}
+            
             <a href='' onClick={(e) => this.handleGoToEditVacancy(e, item.id)}><i className="fa fa-pencil"></i> Edit</a>
             <a href="#"><i className="fa  fa-check "></i> Mark Filled</a>
             <a href="#" className="delete" onClick={() => this.onDelete(item.id)}><i className="fa fa-remove"></i> Delete</a>

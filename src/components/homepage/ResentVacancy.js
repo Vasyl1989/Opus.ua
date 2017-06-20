@@ -3,6 +3,7 @@ import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { getAllVacancy } from '../../actions/vacancyActions';
 import { Link, browserHistory } from 'react-router';
+import picture from '../../styles/images/job-list-logo-01.png';
 
 class ResentVacancy extends React.Component {
 
@@ -54,7 +55,7 @@ class ResentVacancy extends React.Component {
                     browserHistory.push(item.id);
                   }}>
                   
-                  <img src="styles/images/job-list-logo-01.png" alt="" />
+                  <img src={picture}  />
                   <div className="job-list-content">
                     <h4>{item.title}
                       <span className="full-time">{item.job_type}</span>

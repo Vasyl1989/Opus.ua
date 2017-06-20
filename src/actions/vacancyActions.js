@@ -14,23 +14,24 @@ export function getVacancyById(id, vacancies, forUpdate) {
     const vacancy = _.find(vacancies, { id: Number(id) });
     if (vacancy) {
       dispatch({ type: types.GET_VACANCY_BY_ID, payload: vacancy });
-      if(forUpdate) {
+      if (forUpdate) {
         browserHistory.push("/AddVacancy");
         return;
-      }else{
+      } else {
         browserHistory.push(`/VacancyDetail/${id}`)
         return;
       }
-      
+
     }
+
     getRequest('get', `${consts.PATH}/${id}`)
       .then(response => {
         dispatch({ type: types.GET_VACANCY_BY_ID, payload: response.data })
-        if(forUpdate) {
-        browserHistory.push("/AddVacancy");
-      }else{
-         browserHistory.push(`/VacancyDetail/${id}`)
-      }
+        if (forUpdate) {
+          browserHistory.push("/AddVacancy");
+        } else {
+          browserHistory.push(`/VacancyDetail/${id}`)
+        }
       })
       .catch((error) => console.error(error));
 
@@ -62,7 +63,7 @@ export function sendVacancy(vacancy) {
 }
 
 export function deleteVacancy(id, vacancies) {
-  
+
   return dispatch => {
     deleteRequest('delete', `${consts.PATH}/${id}`)
       .then(response => {
@@ -73,18 +74,32 @@ export function deleteVacancy(id, vacancies) {
   };
 }
 
-export function editVacancy(vacancy,vacancies) {
-  
-  const data ={vacancy};
+export function editVacancy(vacancy, vacancies) {
+
+  const data = { vacancy };
   return dispatch => {
-    
-    editRequest('put', `${consts.PATH}/${vacancy.id}`,data)
+
+    editRequest('put', `${consts.PATH}/${vacancy.id}`, data)
       .then(response => {
-       const rest = _.map(vacancies, vacancy => vacancy.id === vacancy.id);
-       dispatch({ type: types.EDIT_VACANCY, payload: rest });
+        const rest = _.map(vacancies, vacancy => vacancy.id === vacancy.id);
+        dispatch({ type: types.EDIT_VACANCY, payload: rest });
       })
       .catch((error) => {
-        console.log(error); 
+        console.log(error);
       });
+  }
+}
+
+export function searchVacancy(city,title,category) {
+  return dispatch => {
+    getRequest('get', `${consts.PATH}?city=${city}`)
+      .then(response => {
+        dispatch({ type: types.SEARCH, payload: response.data });
+        browserHistory.push("/BrowseVacancy");
+      }).catch((error) => {
+        console.log(error);
+      });
+    
+
   }
 }
