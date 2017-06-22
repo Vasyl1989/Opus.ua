@@ -15,9 +15,6 @@ class SearchResult extends React.Component {
     };
     this.handleClick = this.handleClick.bind(this);
   }
-  componentDidMount() {
-    this.props.getAllVacancy();
-  }
 
   handleClick(event) {
     this.setState({

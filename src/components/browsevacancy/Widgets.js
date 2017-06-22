@@ -1,6 +1,17 @@
 import React from 'react';
 
 class Widgets extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { isChecked: false };
+
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange() {
+    this.setState({ isChecked: !this.state.isChecked });
+  }
+
   render() {
     return (
       <div>
@@ -20,7 +31,7 @@ class Widgets extends React.Component {
               type="text"
               placeholder="Місто"
               value="" />
-            <button class="button">Пошук</button>
+            <button className="button">Пошук</button>
           </form>
         </div>
 
@@ -28,44 +39,60 @@ class Widgets extends React.Component {
           <h4>Тип роботи</h4>
           <ul className="checkboxes">
             <li>
-              <input
-                id="check-1"
-                type="checkbox"
-                name="check"
-                value="check-1" checked />
-              <label for="check-1">будь-який</label>
+              <label>
+                <input
+                  id="check-1"
+                  type="checkbox"
+                  name="check"
+                  checked={this.state.isChecked}
+                  onChange={this.onChange} />
+                {this.state.isChecked ? this.props.labelOn : this.props.labelOff}
+                будь-який</label>
             </li>
             <li>
-              <input
-                id="check-2"
-                type="checkbox"
-                name="check"
-                value="check-2" />
-              <label for="check-2">Повна занятість <span></span></label>
+              <label>
+                <input
+                  id="check-2"
+                  type="checkbox"
+                  name="check"
+                  checked={this.state.isChecked}
+                  onChange={this.onChange}
+                />
+                {this.state.isChecked ? this.props.labelOn : this.props.labelOff}
+                Повна занятість <span /></label>
             </li>
             <li>
-              <input
-                id="check-3"
-                type="checkbox"
-                name="check"
-                value="check-3" />
-              <label for="check-3">Часткова занятість <span></span></label>
+              <label htlmFor="check-3">
+                <input
+                  id="check-3"
+                  type="checkbox"
+                  name="check"
+                  checked={this.state.isChecked}
+                  onChange={this.onChange} />
+                {this.state.isChecked ? this.props.labelOn : this.props.labelOff}
+                Часткова занятість <span /></label>
             </li>
             <li>
-              <input
-                id="check-4"
-                type="checkbox"
-                name="check"
-                value="check-4" />
-              <label for="check-4">Інтернатура <span></span></label>
+              <label htlmFor="check-4">
+                <input
+                  id="check-4"
+                  type="checkbox"
+                  name="check"
+                  checked={this.state.isChecked}
+                  onChange={this.onChange} />
+                {this.state.isChecked ? this.props.labelOn : this.props.labelOff}
+                Інтернатура <span /></label>
             </li>
             <li>
-              <input
-                id="check-5"
-                type="checkbox"
-                name="check"
-                value="check-5" />
-              <label for="check-5">Фріланс <span></span></label>
+              <label htlmFor="check-5">
+                <input
+                  id="check-5"
+                  type="checkbox"
+                  name="check"
+                  checked={this.state.isChecked}
+                  onChange={this.onChange} />
+                {this.state.isChecked ? this.props.labelOn : this.props.labelOff}
+                Фріланс <span /></label>
             </li>
           </ul>
         </div>

@@ -17,13 +17,13 @@ class Banner extends React.Component {
     this.searchSubmit = this.searchSubmit.bind(this);
   }
   inputChange(e) {
-    const search = Object.assign({}, this.state.search)
+    const search = Object.assign({}, this.state.search);
     search[e.target.name] = e.target.value;
-    this.setState({ search })
+    this.setState({ search });
   }
-  searchSubmit(e, city) {
+  searchSubmit(e, city, title) {
     e.preventDefault();
-    this.props.searchVacancy(city);
+    this.props.searchVacancy(city, title);
   }
   render() {
     return (
@@ -41,25 +41,27 @@ class Banner extends React.Component {
                       name="title"
                       type="text"
                       className="ico-01"
-                      placeholder="назва роботи чи ім'я компанії"
+                      placeholder="вкажіть назву роботи"
                       value={this.state.title}
                       onChange={this.inputChange}
                     />
                   </div>
                   <div id="2">
                     <input
-                      name='city'
+                      name="city"
                       type="text"
                       className="ico-02"
-                      placeholder="місто, область"
+                      placeholder="вкажіть місто"
                       value={this.state.city}
                       onChange={this.inputChange} />
                   </div>
-                  <a href='' onClick={(e) => { this.searchSubmit(e, this.state.search.city) }}><button><i className="fa fa-search" /></button></a>
+                  <a href=""
+                    onClick={(e) => { this.searchSubmit(e, this.state.search.city, this.state.search.title); }}>
+                    <button><i className="fa fa-search" /></button></a>
 
                   <div className="browse-jobs">
                     <h3>Сортувати вакансії за
-                        <a href="BrowseCategories"> категорією</a> чи <a href="#">локацією</a></h3>
+                        <a href="BrowseCategories"> категорією</a> </h3>
                   </div>
 
                   <div className="announce">

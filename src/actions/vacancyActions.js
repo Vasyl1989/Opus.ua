@@ -87,12 +87,12 @@ export function editVacancy(vacancy, vacancies) {
       .catch((error) => {
         console.log(error);
       });
-  }
+  };
 }
 
-export function searchVacancy(city, title, category) {
+export function searchVacancy(city, title) {
   return dispatch => {
-    getRequest('get', `${consts.PATH}?city=${city}`)
+    getRequest('get', `${consts.PATH}?city=${city}&title=${title}`)
       .then(response => {
         dispatch({ type: types.SEARCH, payload: response.data });
         browserHistory.push("/BrowseVacancy");
