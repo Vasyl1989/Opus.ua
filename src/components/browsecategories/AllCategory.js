@@ -3,6 +3,7 @@ import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { searchVacancy } from '../../actions/vacancyActions';
 
+
 class AllCategory extends React.Component {
   constructor(props) {
     super(props);

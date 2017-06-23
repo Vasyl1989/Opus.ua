@@ -10,15 +10,20 @@ class Widgets extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-
+      city: '',
       isChecked: false
-
     };
-   this.toggleCheck=this.toggleCheck.bind(this);
+    this.inputChange = this.inputChange.bind(this);
+    this.onSearchInput = this.onSearchInput.bind(this);
   }
-   toggleCheck(){
-     this.setState({isCheck:!this.state.isCheck})
-   }
+  inputChange(e) {
+    this.setState({ city: e.target.value })
+  }
+  onSearchInput(e, city) {
+    e.preventDefault();
+    const query = { city };
+    this.props.searchVacancy(query, consts.PAGES.BROWSE_VACANCY);
+  }
   render() {
     return (
       <div>
@@ -38,8 +43,10 @@ class Widgets extends React.Component {
             placeholder="Місто"
             value={this.state.city}
             onChange={this.inputChange}
+            autoComplete="on" 
+            onKeyPress={(e) => { if (e.key == 'Enter') { this.onSearchInput(e, this.state.city); } }}
           />
-          <button className="button">Пошук</button>
+          <button className="button" onClick={(e)=>{this.onSearchInput(e,this.state.city)}}>Пошук</button>
 
         </div>
 
@@ -51,8 +58,7 @@ class Widgets extends React.Component {
                 id="check-1"
                 type="checkbox"
                 name="check"
-                onChange={this.toggleChange}
-                checked={this.state.isChecked}
+
                 value="check-1" />
               <label htmlFor="check-1">будь-який</label>
             </li>
@@ -61,8 +67,7 @@ class Widgets extends React.Component {
                 id="check-2"
                 type="checkbox"
                 name="check"
-                onChange={this.toggleChange}
-                checked={this.state.isChecked}
+
                 value="check-2" />
               <label htmlFor="check-2">Повна занятість <span></span></label>
             </li>
@@ -71,8 +76,7 @@ class Widgets extends React.Component {
                 id="check-3"
                 type="checkbox"
                 name="check"
-                checked={this.state.isChecked}
-                onChange={this.toggleChange}
+
                 value="check-3" />
               <label htmlFor="check-3">Часткова занятість <span></span></label>
             </li>
@@ -81,8 +85,7 @@ class Widgets extends React.Component {
                 id="check-4"
                 type="checkbox"
                 name="check"
-                checked={this.state.isChecked}
-                onChange={this.toggleChange}
+
                 value="check-4" />
               <label htmlFor="check-4">Інтернатура <span></span></label>
             </li>
@@ -90,8 +93,7 @@ class Widgets extends React.Component {
               <input
                 id="check-5"
                 type="checkbox"
-                checked={this.state.isChecked}
-                onChange={this.toggleChange}
+
                 name="check"
                 value="check-5" />
               <label htmlFor="check-5">Фріланс <span></span></label>
@@ -106,8 +108,7 @@ class Widgets extends React.Component {
               <input
                 id="check-6"
                 type="checkbox"
-                checked={this.state.isChecked}
-                onChange={this.toggleChange}
+
                 name="check"
                 value="check-6"
               />
@@ -117,8 +118,7 @@ class Widgets extends React.Component {
               <input
                 id="check-7"
                 type="checkbox"
-                checked={this.state.isChecked}
-                onChange={this.toggleChange}
+
                 name="check"
                 value="check-7" />
               <label htmlFor="check-7">0грн - 25грн <span></span></label>
@@ -127,8 +127,7 @@ class Widgets extends React.Component {
               <input
                 id="check-8"
                 type="checkbox"
-                checked={this.state.isChecked}
-                onChange={this.toggleChange}
+
                 name="check"
                 value="check-8" />
               <label htmlFor="check-8">25грн - 50грн <span></span></label>
@@ -136,8 +135,7 @@ class Widgets extends React.Component {
             <li>
               <input
                 id="check-9"
-                checked={this.state.isChecked}
-                onChange={this.toggleChange}
+
                 type="checkbox"
                 name="check"
                 value="check-9" />
@@ -147,8 +145,7 @@ class Widgets extends React.Component {
               <input
                 id="check-10"
                 type="checkbox"
-                checked={this.state.isChecked}
-                onChange={this.toggleChange}
+
                 name="check"
                 value="check-10" />
               <label htmlFor="check-10">100грн - 200грн <span /></label>
@@ -159,8 +156,16 @@ class Widgets extends React.Component {
     );
   }
 }
+Widgets.PropTypes = {
+  searchVacancy: PropTypes.func.isRequired,
+  inputChange: PropTypes.func.isRequired,
+  onSearchInput: PropTypes.func.isRequired,
+}
 function mapStateToProps(state) {
-  return { vacancy: state.vacancy };
+  return {
+    vacancy: state.vacancy,
+    SearchResults: state.vacancy.SearchResults,
+  };
 }
 
 export default connect(mapStateToProps, { searchVacancy })(Widgets);

@@ -3,6 +3,7 @@ import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import { searchVacancy } from '../../../actions/vacancyActions';
+import { PAGES } from '../../../constants/const';
 
 class Banner extends React.Component {
   constructor(props, context) {
@@ -19,12 +20,13 @@ class Banner extends React.Component {
   inputChange(e) {
     const search = Object.assign({}, this.state.search)
     search[e.target.name] = e.target.value;
-    this.setState({ search })
+    this.setState({ search });
   }
   searchSubmit(e, city, title) {
     e.preventDefault();
-    const query = { city, title };
-    this.props.searchVacancy(query);
+    // if (e.keyCode === 13)
+      const query = { city, title };
+    this.props.searchVacancy(query, PAGES.HOME_PAGE);
   }
   render() {
     return (
@@ -45,7 +47,9 @@ class Banner extends React.Component {
                       placeholder="назва роботи"
                       value={this.state.title}
                       onChange={this.inputChange}
-                    />
+                      autoComplete="on" 
+                      onKeyPress={(e) => { if (e.key == 'Enter') { this.searchSubmit(e, this.state.search.city, this.state.search.title); } }}                   
+                      />
                   </div>
                   <div id="2">
                     <input
@@ -54,13 +58,16 @@ class Banner extends React.Component {
                       className="ico-02"
                       placeholder="місто"
                       value={this.state.city}
-                      onChange={this.inputChange} />
+                      onChange={this.inputChange} 
+                      autoComplete="on"
+                      onKeyPress={(e) => { if (e.key == 'Enter') { this.searchSubmit(e, this.state.search.city, this.state.search.title); } }}
+                      />
                   </div>
                   <a href='' onClick={(e) => { this.searchSubmit(e, this.state.search.city, this.state.search.title) }}><button><i className="fa fa-search" /></button></a>
 
                   <div className="browse-jobs">
                     <h3>Сортувати вакансії за
-                        <a href="BrowseCategories"> категорією</a></h3>
+                        <a href="browse_categories"> категорією</a></h3>
                   </div>
 
                   <div className="announce">

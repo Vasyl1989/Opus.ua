@@ -24,7 +24,7 @@ export function getVacancyById(id, vacancies, forUpdate) {
 
     }
 
-    sendRequest('get', `/vacancies/${id}`,null,null)
+    sendRequest('get', `/vacancies/${id}`, null, null)
       .then(response => {
         dispatch({ type: types.GET_VACANCY_BY_ID, payload: response.data })
         if (forUpdate) {
@@ -40,7 +40,7 @@ export function getVacancyById(id, vacancies, forUpdate) {
 
 export function getAllVacancy() {
   return dispatch => {
-    sendRequest('get', '/vacancies',null,null)
+    sendRequest('get', '/vacancies', null, null)
       .then(response => dispatch({ type: types.GET_ALL_VACANCIES, payload: response.data }))
       .catch((error) => console.log(error));
 
@@ -65,9 +65,9 @@ export function sendVacancy(vacancy) {
 export function deleteVacancy(id, vacancies) {
 
   return dispatch => {
-    sendRequest('delete', `/vacancies/${id}`,null,null)
+    sendRequest('delete', `/vacancies/${id}`, null, null)
       .then(response => {
-        const rest = _.filter(vacancies, vacancy => vacancy.id !== id);
+        const rest = vacancies.filter(vacancy => vacancy.id !== id);
         dispatch({ type: types.DELETE_VACANCY, payload: rest });
       })
       .catch((error) => console.log(error));
@@ -81,7 +81,7 @@ export function editVacancy(vacancy, vacancies) {
 
     sendRequest('put', `/vacancies/${vacancy.id}`, data, null)
       .then(response => {
-        const rest = _.map(vacancies, vacancy => vacancy.id === vacancy.id);
+        const rest = vacancies.map(vacancy => vacancy.id === vacancy.id);
         dispatch({ type: types.EDIT_VACANCY, payload: rest });
       })
       .catch((error) => {
@@ -91,18 +91,18 @@ export function editVacancy(vacancy, vacancies) {
 }
 
 export function searchVacancy(query, fromPage) {
-  //debugger;
+//  debugger;
   return dispatch => {
     sendRequest('get', '/vacancies', null, query)
       .then(response => {
         dispatch({ type: types.SEARCH, payload: response.data });
-        // if (!fromPage === 'browseVacancy') {
-          browserHistory.push("/browse_vacancy");
-        // }
+         if (fromPage !== consts.PAGES.BROWSE_VACANCY) {
+        browserHistory.push("/browse_vacancy");
+         }
       }).catch((error) => {
         console.log(error);
       });
-    
+
 
   }
 }

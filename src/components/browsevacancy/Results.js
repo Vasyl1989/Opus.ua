@@ -3,17 +3,22 @@ import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import picture from '../../styles/images/job-list-logo-01.png';
-import { getAllVacancy } from '../../actions/vacancyActions';
+import { getAllVacancy,searchVacancy } from '../../actions/vacancyActions';
 import Widgets from './Widgets';
+import { PAGES } from '../../constants/const';
+
 
 class Results extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       currentPage: 1,
-      vacancyPerPage: 10
+      vacancyPerPage: 10,
+      title: "",
     };
     this.handleClick = this.handleClick.bind(this);
+    this.inputChange = this.inputChange.bind(this);
+    this.onSearchInput = this.onSearchInput.bind(this);
   }
 
   handleClick(event) {
@@ -21,9 +26,19 @@ class Results extends React.Component {
       currentPage: Number(event.target.id)
     });
   }
+  inputChange(e) {
+    this.setState({ title: e.target.value })
+  }
+  onSearchInput(e, title) {
+    e.preventDefault();
+    const query = { title };
+    this.props.searchVacancy(query, PAGES.BROWSE_VACANCY);
+  }
+
+
 
   renderVacancy() {
-    const vacancies = this.props.SearchResults ? this.props.SearchResults : this.props.vacancy.vacancies;
+    const vacancies = this.props.SearchResults;
     console.log(vacancies)
     console.log(this.props.vacancy.vacancies)
     //pagination
@@ -40,6 +55,7 @@ class Results extends React.Component {
 
     return (
       <div>
+
         <ul className="job-list full">
           {currentVacancise.map((item) => {
             return (<li className="highlighted" key={item.id} >
@@ -89,6 +105,18 @@ class Results extends React.Component {
       <div className="container">
         <div className="eleven columns">
           <div className="padding-right">
+            <form className='list-search'>
+              <button type="submit" onClick={(e) => { this.onSearchInput(e, this.state.title) }}><i className="fa fa-search" /></button>
+              <input
+                type="text"
+                placeholder="Вакансія..."
+                value={this.state.title}
+                onChange={this.inputChange}
+                autoComplete="on"
+                onKeyPress={(e) => { if (e.key == 'Enter') { this.onSearchInput(e, this.state.title); } }}
+              />
+              <div className="clearfix" />
+            </form>
             {this.props.SearchResults && this.renderVacancy()}
             <div className="margin-bottom-55" />
           </div>
@@ -104,14 +132,19 @@ class Results extends React.Component {
 
 Results.PropTypes = {
   renderVacancy: PropTypes.func.isRequired,
-  vacancies: PropTypes.array.isRequired
+  vacancies: PropTypes.array.isRequired,
+  searchVacancy: PropTypes.func.isRequired,
+  onSearchInput: PropTypes.func.isRequired,
+  handleClick : PropTypes.func.isRequired,
+  inputChange : PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     vacancy: state.vacancy,
-    SearchResults: state.vacancy.SearchResults
+    SearchResults: state.vacancy.SearchResults,
+
   };
 }
 
-export default connect(mapStateToProps, { getAllVacancy })(Results);
+export default connect(mapStateToProps, { getAllVacancy, searchVacancy })(Results);
