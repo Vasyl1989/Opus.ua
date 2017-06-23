@@ -2,15 +2,10 @@ import React, { PropTypes } from 'react';
 import { getAllVacancy, deleteVacancy, getVacancyById } from '../../actions/vacancyActions';
 import { connect } from 'react-redux';
 
-
-
 class ContextManage extends React.Component {
-
   componentDidMount() {
     this.props.getAllVacancy();
-
   }
-
 
   onDelete(id) {
     this.props.deleteVacancy(id, this.props.vacancy.vacancies);
@@ -21,13 +16,11 @@ class ContextManage extends React.Component {
     this.props.getVacancyById(id, this.props.vacancy.vacancies, true);
   }
 
-
   renderVacancies() {
     const vacancies = this.props.vacancy.vacancies;
 
     return vacancies.map((item, index) => {
       return (
-
         <tr key={index}>
           <td className="title"><a href="#">{item.title}</a></td>
           <td className="centered">-</td>
@@ -35,20 +28,16 @@ class ContextManage extends React.Component {
           <td>{item.active_to_date}</td>
 
           <td className="action">
-            
-            <a href='' onClick={(e) => this.handleGoToEditVacancy(e, item.id)}><i className="fa fa-pencil"></i> Edit</a>
-            <a href="#"><i className="fa  fa-check "></i> Mark Filled</a>
-            <a href="#" className="delete" onClick={() => this.onDelete(item.id)}><i className="fa fa-remove"></i> Delete</a>
+            <a href="" onClick={(e) => this.handleGoToEditVacancy(e, item.id)}><i className="fa fa-pencil" />Edit</a>
+            <a href="#"><i className="fa  fa-check " />Mark Filled</a>
+            <a href="#" className="delete" onClick={() => this.onDelete(item.id)}><i className="fa fa-remove" />Delete</a>
           </td>
         </tr>
-
-
       );
     });
   }
 
   render() {
-
     return (
       <div className="container">
 
@@ -60,20 +49,18 @@ class ContextManage extends React.Component {
             <thead>
               <tr>
                 <th><i className="fa fa-file-text" />Назва вакансії</th>
-                <th><i className="fa fa-check-square-o"></i>Виконано?</th>
-                <th><i className="fa fa-calendar"></i>Дата створення оголошення</th>
-                <th><i className="fa fa-calendar"></i>Оголошення активне до</th>
-                <th></th>
+                <th><i className="fa fa-check-square-o" />Виконано?</th>
+                <th><i className="fa fa-calendar" />Дата створення оголошення</th>
+                <th><i className="fa fa-calendar" />Оголошення активне до</th>
+                <th />
               </tr>
             </thead>
             <tbody>
               {this.renderVacancies()}
             </tbody>
           </table>
-
-          <div className="manage"></div>
+          <div className="manage" />
           <a href="AddVacancy" className="button">Додати нову вакансію</a>
-
         </div>
       </div>
     );
