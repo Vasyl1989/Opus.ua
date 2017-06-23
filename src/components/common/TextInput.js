@@ -24,6 +24,7 @@ const TextInput = ({ name, onChange, placeholder, title, type, value,className ,
 TextInput.PropTypes = {
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  onKeyPress:PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   title: PropTypes.string,

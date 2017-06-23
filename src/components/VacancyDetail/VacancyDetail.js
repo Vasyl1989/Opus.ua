@@ -1,17 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { PropTypes } from 'prop-types';
 import Header from '../common/Header';
 import Footer from '../common/Footer';
-import { getVacancyById } from '../../actions/vacancyActions';
+import { getVacancyById , searchVacancy} from '../../actions/vacancyActions';
 import picture from '../../styles/images/company-logo.png';
+import { PAGES } from '../../constants/const';
 
 class VacancyDetail extends React.Component {
-
+  constructor(props) {
+    super(props);
+    this.serchSubmit = this.serchSubmit.bind(this);
+  }
+  
   componentDidMount () {
     this.props.getVacancyById(this.props.params.id, this.props.vacancies);
     window.scrollTo(0, 0);
   }
-
+  serchSubmit(e) {
+    e.preventDefault();
+    const category=e.currentTarget.dataset.name;
+    const query = {category};
+    this.props.searchVacancy(query,PAGES.BROWSE_CATEGORIES);
+  }
   render() {
 
     const vacancy = this.props.singleVacancy;
@@ -23,7 +34,7 @@ class VacancyDetail extends React.Component {
         <div id="titlebar">
           <div className="container">
             <div className="ten columns">
-              <span><a href="browse-jobs.html">{vacancy.category}</a></span>
+              <span><a href="" data-name={vacancy.category} onClick={(e)=>{this.serchSubmit(e)}}>{vacancy.category}</a></span>
               <h2>{vacancy.title}<span className="full-time">{vacancy.job_type}</span></h2>
             </div>
           </div>
@@ -103,7 +114,9 @@ class VacancyDetail extends React.Component {
     )
   }
 }
-
+VacancyDetail.PropTypes = {
+  searchVacancy: PropTypes.func.isRequired
+};
 function mapStateToProps(state) {
   return {
     singleVacancy: state.vacancy.singleVacancy,
@@ -111,4 +124,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { getVacancyById })(VacancyDetail);
+export default connect(mapStateToProps, { getVacancyById , searchVacancy })(VacancyDetail);
