@@ -26,10 +26,7 @@ const HeaderHomePage = () => {
          <a href="#">Працівнику</a>
          <ul>
           <li>
-           <a href="BrowseVacancy">Пошук вакансії</a>
-          </li>
-          <li>
-           <a href="BrowseCategories">Вакансії за категорями</a>
+           <a href="browse_categories">Вакансії за категорями</a>
           </li>
          </ul>
         </li>
@@ -37,11 +34,11 @@ const HeaderHomePage = () => {
          <a href="#">Роботодавцю</a>
          <ul>
           <li>
-            <Link to={"/AddVacancy"}>Створити вакансію</Link>
+            <Link to={"/add_vacancy"}>Створити вакансію</Link>
             {/* < a href="/AddVacancy">Створити вакансію</a>*/}
           </li>
           <li>
-            <Link to={"/ManageVacancy"}>Редагувати вакансію</Link>
+            <Link to={"/manage_vacancy"}>Редагувати вакансію</Link>
             {/*<a href="ManageVacancy">Редагувати вакансію</a>*/}
           </li>
          </ul>

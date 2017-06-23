@@ -5,35 +5,14 @@ var instance = axios.create({
     baseURL: 'https://opus-ua-backend-dev.herokuapp.com/api/v1'
 });
 
-export function sendRequest(method, url, data) {
+export function sendRequest(method, url, data, params) {
     return instance({
         method: method,
         url: url,
         data: data || {},
-    });
-}
-
-export function getRequest(method, url) {
-    return instance({
-        method: method,
-        url: url
+        params: params || {},
     });
 }
 
 
 
-export function deleteRequest(method, url) {
-    return instance({
-        method: method,
-        url: url
-    });
-}
-
-
-export function editRequest(method, url, data) {
-    return instance({
-        method: method,
-        url: url,
-        data: data || {}
-    });
-}

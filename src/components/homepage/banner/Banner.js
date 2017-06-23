@@ -1,6 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
+import { searchVacancy } from '../../../actions/vacancyActions';
 
 class Banner extends React.Component {
   constructor(props, context) {
@@ -9,10 +10,32 @@ class Banner extends React.Component {
       search: {
         title: "",
         city: "",
-        company: "",
       },
     };
+    this.inputChange = this.inputChange.bind(this);
+    this.searchSubmit = this.searchSubmit.bind(this);
   }
+
+
+  inputChange(e) {
+
+    const search = Object.assign({}, this.state.search);
+    search[e.target.name] = e.target.value;
+    this.setState({ search });
+  }
+  searchSubmit(e, city, title) {
+    e.preventDefault();
+    const query = { city, title };
+    this.props.searchVacancy(query);
+  }
+
+
+  // handleKeyPress(event) {
+  //   if (event.key == 'Enter') {
+  //     console.log('enter press here! ');
+  //     this.searchSubmit(event, this.state.search.city, this.state.search.title);
+  //   }
+  // }
 
   render() {
     return (
@@ -23,29 +46,38 @@ class Banner extends React.Component {
               <div className="sixteen columns">
                 <div className="search-container">
 
-                  <form onSubmit={this.searchSubmit}>
-                    <h2>Пошук роботи</h2>
-                    <div id="1">
-                      <input
-                        type="text"
-                        className="ico-01"
-                        placeholder="назва роботи чи ім'я компанії"
-                        value="" />
-                    </div>
-                    <div id="2">
-                      <input
-                        type="text"
-                        className="ico-02"
-                        placeholder="місто, область"
-                        value="" />
-                    </div>
-                    <button><i className="fa fa-search" /></button>
+                  <h2>Пошук роботи</h2>
+                  <div id="1">
+                    <input
+                      name="title"
+                      type="text"
+                      className="ico-01"
+                      placeholder="назва роботи"
+                      value={this.state.title}
+                      onChange={this.inputChange}
+                      autoComplete="on"
+                      onKeyPress={(e) => { if (e.key == 'Enter') { this.searchSubmit(e, this.state.search.city, this.state.search.title); } }}
+                    />
+                  </div>
+                  <div id="2">
+                    <input
+                      name="city"
+                      type="text"
+                      className="ico-02"
+                      placeholder="місто"
+                      value={this.state.city}
+                      onChange={this.inputChange}
+                      autoComplete="on"
+                      onKeyPress={(e) => { if (e.key == 'Enter') { this.searchSubmit(e, this.state.search.city, this.state.search.title); } }}
+                    />
+                  </div>
+                  <a href="" onClick={(e) => { this.searchSubmit(e, this.state.search.city, this.state.search.title); }}><button><i className="fa fa-search" /></button></a>
 
-                    <div className="browse-jobs">
-                      <h3>Сортувати вакансії за
-                        <a href="browse-categories.html"> категорією</a> чи <a href="#">локацією</a></h3>
-                    </div>
-                  </form>
+                  <div className="browse-jobs">
+                    <h3>Сортувати вакансії за
+                        <a href="BrowseCategories"> категорією</a></h3>
+                  </div>
+
                   <div className="announce">
                     <p>Ми можемо знайти роботу для тебе!</p>
                   </div>
@@ -60,11 +92,11 @@ class Banner extends React.Component {
 }
 
 Banner.PropTypes = {
-
+  searchVacancy: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
   return { vacancy: state.vacancy };
 }
 
-export default connect(mapStateToProps)(Banner);
+export default connect(mapStateToProps, { searchVacancy })(Banner);

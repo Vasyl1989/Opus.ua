@@ -703,16 +703,28 @@ ul li ul a.sf-with-ul:after {
   letter-spacing: -1px;
 }
 
+.search-container input {
+  font-weight: 500;
+  font-size: 18px;
+  float: left;
+  box-sizing: border-box;
+  padding: 19px 20px;
+  border: none;
+  margin-right: 2%;
+  width: 44.5%;
+  float: left;
+}
+
 
 /* Form Icons */
 
-.search-container input.ico-01 {
-  background: #fff url("../images/ico-01.png") no-repeat scroll 97% 20px / 21px 21px;
+input.ico-01 {
+  background: #fff url("./images/ico-01.png") no-repeat scroll 97% 20px / 21px 21px;
   width: 44.5%;
 }
 
-.search-container input.ico-02 {
-  background: #fff url("../images/ico-02.png") no-repeat scroll 96% 20px / 14px 21px;
+input.ico-02 {
+  background: #fff url("./images/ico-02.png") no-repeat scroll 96% 20px / 14px 21px;
   width: 44.5%;
 }
 
@@ -766,10 +778,6 @@ ul li ul a.sf-with-ul:after {
 .browse-jobs {
   color: #fff;
   margin-top: 20px;
-}
-
-form .browse-jobs .brsj {
-  color: white;
 }
 
 .browse-jobs a {
@@ -7166,11 +7174,9 @@ div.sceditor-group:first-child {
   margin-top: 9px;
   color: #808080;
 }
-
-.submit-page .clearfixform {
+.submit-page .clearfixform{
   padding: 9px;
 }
-
 textarea.WYSIWYG {
   min-height: 300px;
 }

@@ -15,8 +15,8 @@ const Header = () => {
 
             <div id="logo">
               <h1>
-              <Link to={"/"}>OPUS.ua</Link>
-                
+                <Link to={"/"}>OPUS.ua</Link>
+
               </h1>
             </div>
 
@@ -25,17 +25,14 @@ const Header = () => {
             <nav id="navigation" className="menu sf-js-enabled sf-arrows">
               <ul id="responsive">
                 <li>
-                <Link to={"/"} id="current">Головна</Link>
-                  {/*<a href="/" id="current">Головна</a>*/}
+                  <Link to={"/"}>Головна</Link>
+
                 </li>
                 <li>
-                  <a href="#">Працівнику</a>
+                  <a href="#" id="current">Працівнику</a>
                   <ul>
                     <li>
-                      <a href="browse-jobs.html">Пошук вакансії</a>
-                    </li>
-                    <li>
-                      <a href="browse-categories.html">Вакансії за категорями</a>
+                      <Link to="/browse_categories">Вакансії за категорями</Link>
                     </li>
                   </ul>
                 </li>
@@ -43,12 +40,12 @@ const Header = () => {
                   <a href="#">Роботодавцю</a>
                   <ul>
                     <li>
-                      <Link to={"/AddVacancy"}>Створити вакансію</Link>
-                      {/* < a href="/AddVacancy">Створити вакансію</a>*/}
+                      <Link to={"/add_vacancy"}>Створити вакансію</Link>
+
                     </li>
                     <li>
-                      <Link to={"/ManageVacancy"}>Редагувати вакансію</Link>
-                      {/*<a href="ManageVacancy">Редагувати вакансію</a>*/}
+                      <Link to={"/manage_vacancy"}>Редагувати вакансію</Link>
+
                     </li>
                   </ul>
                 </li>

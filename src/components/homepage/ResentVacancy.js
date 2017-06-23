@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { getAllVacancy } from '../../actions/vacancyActions';
 import { Link, browserHistory } from 'react-router';
-import picture from '../../styles/images/company-logo.png';
+import picture from '../../styles/images/job-list-logo-01.png';
 
 class ResentVacancy extends React.Component {
 
@@ -50,30 +50,31 @@ class ResentVacancy extends React.Component {
           {
             currentVacancise.map((item, index) => {
               return (<li className="highlighted" key={item.id} >
-                <Link to={"VacancyDetail/" + item.id}
+                <Link to={"vacancy_detail/" + item.id}
                   onClick={() => {
                     browserHistory.push(item.id);
                   }}>
-
-                  <img src={picture} />
+                  
+                  <img src={picture}  />
                   <div className="job-list-content">
                     <h4>{item.title}
                       <span className="full-time">{item.job_type}</span>
                     </h4>
                     <div className="job-icons">
                       <span>
-                        <i className="fa fa-briefcase" />Компанія:
+                        <i className="fa fa-briefcase"></i>Компанія:
                         {item.company}</span>
                       <span>
-                        <i className="fa fa-map-marker" />
+                        <i className="fa fa-map-marker"></i>
                         {item.city}</span>
                       <span>
-                        <i className="fa fa-money" />
-                        {item.price_per_hour} грн/год</span>
+                        <i className="fa fa-money"></i>
+                        {item.price_per_hour}
+                        / hour</span>
                     </div>
                   </div>
                 </Link>
-                <div className="clearfix" />
+                <div className="clearfix"></div>
               </li>);
 
             })

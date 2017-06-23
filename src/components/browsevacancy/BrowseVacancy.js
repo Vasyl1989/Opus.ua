@@ -1,13 +1,20 @@
 import React from 'react';
-import HeaderForEmployer from '../common/HeaderForEmployer';
+import Header from '../common/Header';
 import Footer from '../common/Footer';
+import Results from './Results';
+import FormBrowseVacancy from './FormBrowseVacancy';
+import TitlebarBrowseVacancy from './TitlebarBrowseVacancy';
 
 
 const BrowseVacancy = () => {
   return (
     <div>
-      <HeaderForEmployer />
-    
+      <Header />
+      <TitlebarBrowseVacancy/>
+      
+      <FormBrowseVacancy />
+      <Results />
+
       <Footer />
     </div>
   );

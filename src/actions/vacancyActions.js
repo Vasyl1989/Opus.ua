@@ -1,7 +1,7 @@
 import * as types from './actionTypes';
 import * as consts from '../constants/const';
 import * as _ from 'lodash';
-import { sendRequest, getRequest, deleteRequest, editRequest } from '../utils/api';
+import { sendRequest } from '../utils/api';
 import { browserHistory } from 'react-router';
 
 export function getVacancyById(id, vacancies, forUpdate) {
@@ -15,21 +15,22 @@ export function getVacancyById(id, vacancies, forUpdate) {
     if (vacancy) {
       dispatch({ type: types.GET_VACANCY_BY_ID, payload: vacancy });
       if (forUpdate) {
-        browserHistory.push("/AddVacancy");
+        browserHistory.push("/add_vacancy");
         return;
       } else {
-        browserHistory.push(`/VacancyDetail/${id}`)
+        browserHistory.push(`/vacancy_detail/${id}`);
         return;
       }
 
     }
-    getRequest('get', `${consts.PATH}/${id}`)
+
+    sendRequest('get', `/vacancies/${id}`, null, null)
       .then(response => {
         dispatch({ type: types.GET_VACANCY_BY_ID, payload: response.data })
         if (forUpdate) {
-          browserHistory.push("/AddVacancy");
+          browserHistory.push("/add_vacancy");
         } else {
-          browserHistory.push(`/VacancyDetail/${id}`)
+          browserHistory.push(`/vacancy_detail/${id}`);
         }
       })
       .catch((error) => console.error(error));
@@ -39,7 +40,7 @@ export function getVacancyById(id, vacancies, forUpdate) {
 
 export function getAllVacancy() {
   return dispatch => {
-    getRequest('get', consts.PATH)
+    sendRequest('get', '/vacancies', null, null)
       .then(response => dispatch({ type: types.GET_ALL_VACANCIES, payload: response.data }))
       .catch((error) => console.log(error));
 
@@ -62,9 +63,9 @@ export function sendVacancy(vacancy) {
 }
 
 export function deleteVacancy(id, vacancies) {
-  //debugger;
+
   return dispatch => {
-    deleteRequest('delete', `${consts.PATH}/${id}`)
+    sendRequest('delete', `/vacancies/${id}`, null, null)
       .then(response => {
         const rest = _.filter(vacancies, vacancy => vacancy.id !== id);
         dispatch({ type: types.DELETE_VACANCY, payload: rest });
@@ -74,11 +75,11 @@ export function deleteVacancy(id, vacancies) {
 }
 
 export function editVacancy(vacancy, vacancies) {
-  //debugger;
+
   const data = { vacancy };
   return dispatch => {
 
-    editRequest('put', `${consts.PATH}/${vacancy.id}`, data)
+    sendRequest('put', `/vacancies/${vacancy.id}`, data, null)
       .then(response => {
         const rest = _.map(vacancies, vacancy => vacancy.id === vacancy.id);
         dispatch({ type: types.EDIT_VACANCY, payload: rest });
@@ -86,5 +87,22 @@ export function editVacancy(vacancy, vacancies) {
       .catch((error) => {
         console.log(error);
       });
+  }
+}
+
+export function searchVacancy(query, fromPage) {
+  //debugger;
+  return dispatch => {
+    sendRequest('get', '/vacancies', null, query)
+      .then(response => {
+        dispatch({ type: types.SEARCH, payload: response.data });
+        // if (fromPage !=== 'browseVacancy') {
+        browserHistory.push("/browse_vacancy");
+        // }
+      }).catch((error) => {
+        console.log(error);
+      });
+
+
   }
 }

@@ -5,7 +5,7 @@ const initialState = {
   singleVacancy: {},
   shouldUpdate: false,
   vacancies: [],
-
+  SearchResults: []
 };
 
 export default function vacancyReduce(state = initialState, action) {
@@ -16,6 +16,7 @@ export default function vacancyReduce(state = initialState, action) {
         fething: false,
         vacancies: action.payload
       };
+
     case types.GET_VACANCY_BY_ID:
       return {
         ...state,
@@ -31,11 +32,25 @@ export default function vacancyReduce(state = initialState, action) {
     case types.EDIT_VACANCY:
       return {
         ...state,
+        fething: false,
         vacancies: action.payload
       };
+
     case types.SHOULD_UPDATE:
-      return { ...state, shouldUpdate: true };
+      return {
+        ...state,
+        fething: false,
+        shouldUpdate: true
+      };
+
+    case types.SEARCH:
+      return {
+        ...state,
+        fething: false,
+        SearchResults: action.payload
+      }
+
     default:
       return state;
-  }
+  };
 }
