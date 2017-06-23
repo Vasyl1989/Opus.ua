@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 
 
 
-const TextInput = ({ name, onChange, placeholder, title, type, value,className }) => {
+const TextInput = ({ name, onChange, placeholder, title, type, value,className ,id}) => {
 
   return (
     <div className="form">
@@ -15,7 +15,7 @@ const TextInput = ({ name, onChange, placeholder, title, type, value,className }
         className={"search-field"||className}
         value={value || ''}
         onChange={onChange}
-
+        id={id} 
         name={name} />
     </div>
   )

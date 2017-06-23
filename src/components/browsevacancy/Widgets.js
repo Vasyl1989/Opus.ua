@@ -1,91 +1,166 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import { Link, browserHistory } from 'react-router';
-import picture from '../../styles/images/job-list-logo-01.png';
-
+import * as consts from '../../constants/const';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
-import * as consts from '../../constants/const';
+import { searchVacancy } from '../../actions/vacancyActions';
 
 class Widgets extends React.Component {
-    render() {
-        return (
-            <div className="five columns">
-                <div className="widget">
-                    <h4>Сортувати по </h4>
-                    <SelectInput
-                        options={consts.SORTING}
-                        className='chosen-select-no-single'
-                        data-placeholder="Choose Category"
-                    />
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
 
-                </div>
-                <div className="widget">
-                    <TextInput
-                     type="text"
-                     placeholder="Місто"
-                    />
-                   
-                    <button className="button">Пошук</button>
-                </div>
-                <div className="widget">
-                    <h4>Тип роботи</h4>
+      isChecked: false
 
-                    <ul className="checkboxes">
-                        <li>
-                            <input id="check-1" type="checkbox" name="check" value="check-1" checked />
-                            <label for="check-1">будь-який</label>
-                        </li>
-                        <li>
-                            <input id="check-2" type="checkbox" name="check" value="check-2" />
-                            <label for="check-2">Повна занятість <span></span></label>
-                        </li>
-                        <li>
-                            <input id="check-3" type="checkbox" name="check" value="check-3" />
-                            <label for="check-3">Часткова занятість <span></span></label>
-                        </li>
-                        <li>
-                            <input id="check-4" type="checkbox" name="check" value="check-4" />
-                            <label for="check-4">Інтернатура <span></span></label>
-                        </li>
-                        <li>
-                            <input id="check-5" type="checkbox" name="check" value="check-5" />
-                            <label for="check-5">Фріланс <span></span></label>
-                        </li>
-                    </ul>
+    };
+   this.toggleCheck=this.toggleCheck.bind(this);
+  }
+   toggleCheck(){
+     this.setState({isCheck:!this.state.isCheck})
+   }
+  render() {
+    return (
+      <div>
+        <div className="widget">
+          <h4>Сортувати за </h4>
+          <SelectInput
+            data-placeholder="Choose Category"
+            className="chosen-select-no-single"
+            options={consts.SORTING}
+          />
+        </div>
 
-                </div>
-                <div className="widget">
-                    <h4>Погодинна оплата</h4>
+        <div className="widget">
 
-                    <ul className="checkboxes">
-                        <li>
-                            <input id="check-6" type="checkbox" name="check" value="check-6" checked />
-                            <label for="check-6">Будь-яка</label>
-                        </li>
-                        <li>
-                            <input id="check-7" type="checkbox" name="check" value="check-7" />
-                            <label for="check-7">0грн - 25грн <span></span></label>
-                        </li>
-                        <li>
-                            <input id="check-8" type="checkbox" name="check" value="check-8" />
-                            <label for="check-8">25грн - 50грн <span></span></label>
-                        </li>
-                        <li>
-                            <input id="check-9" type="checkbox" name="check" value="check-9" />
-                            <label for="check-9">50грн - 100грн <span></span></label>
-                        </li>
-                        <li>
-                            <input id="check-10" type="checkbox" name="check" value="check-10" />
-                            <label for="check-10">100грн - 200грн <span></span></label>
-                        </li>
+          <TextInput
+            type="text"
+            placeholder="Місто"
+            value={this.state.city}
+            onChange={this.inputChange}
+          />
+          <button className="button">Пошук</button>
 
-                    </ul>
+        </div>
 
-                </div>
-            </div>
-        )
-    }
+        <div className="widget">
+          <h4>Тип роботи</h4>
+          <ul className="checkboxes">
+            <li>
+              <input
+                id="check-1"
+                type="checkbox"
+                name="check"
+                onChange={this.toggleChange}
+                checked={this.state.isChecked}
+                value="check-1" />
+              <label htmlFor="check-1">будь-який</label>
+            </li>
+            <li>
+              <input
+                id="check-2"
+                type="checkbox"
+                name="check"
+                onChange={this.toggleChange}
+                checked={this.state.isChecked}
+                value="check-2" />
+              <label htmlFor="check-2">Повна занятість <span></span></label>
+            </li>
+            <li>
+              <input
+                id="check-3"
+                type="checkbox"
+                name="check"
+                checked={this.state.isChecked}
+                onChange={this.toggleChange}
+                value="check-3" />
+              <label htmlFor="check-3">Часткова занятість <span></span></label>
+            </li>
+            <li>
+              <input
+                id="check-4"
+                type="checkbox"
+                name="check"
+                checked={this.state.isChecked}
+                onChange={this.toggleChange}
+                value="check-4" />
+              <label htmlFor="check-4">Інтернатура <span></span></label>
+            </li>
+            <li>
+              <input
+                id="check-5"
+                type="checkbox"
+                checked={this.state.isChecked}
+                onChange={this.toggleChange}
+                name="check"
+                value="check-5" />
+              <label htmlFor="check-5">Фріланс <span></span></label>
+            </li>
+          </ul>
+        </div>
+
+        <div className="widget">
+          <h4>Погодинна оплата</h4>
+          <ul className="checkboxes">
+            <li>
+              <input
+                id="check-6"
+                type="checkbox"
+                checked={this.state.isChecked}
+                onChange={this.toggleChange}
+                name="check"
+                value="check-6"
+              />
+              <label htmlFor="check-6">Будь-яка</label>
+            </li>
+            <li>
+              <input
+                id="check-7"
+                type="checkbox"
+                checked={this.state.isChecked}
+                onChange={this.toggleChange}
+                name="check"
+                value="check-7" />
+              <label htmlFor="check-7">0грн - 25грн <span></span></label>
+            </li>
+            <li>
+              <input
+                id="check-8"
+                type="checkbox"
+                checked={this.state.isChecked}
+                onChange={this.toggleChange}
+                name="check"
+                value="check-8" />
+              <label htmlFor="check-8">25грн - 50грн <span></span></label>
+            </li>
+            <li>
+              <input
+                id="check-9"
+                checked={this.state.isChecked}
+                onChange={this.toggleChange}
+                type="checkbox"
+                name="check"
+                value="check-9" />
+              <label htmlFor="check-9">50грн - 100грн <span /></label>
+            </li>
+            <li>
+              <input
+                id="check-10"
+                type="checkbox"
+                checked={this.state.isChecked}
+                onChange={this.toggleChange}
+                name="check"
+                value="check-10" />
+              <label htmlFor="check-10">100грн - 200грн <span /></label>
+            </li>
+          </ul>
+        </div>
+      </div>
+    );
+  }
 }
-export default Widgets;
+function mapStateToProps(state) {
+  return { vacancy: state.vacancy };
+}
+
+export default connect(mapStateToProps, { searchVacancy })(Widgets);

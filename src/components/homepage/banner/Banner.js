@@ -2,7 +2,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
-import {searchVacancy} from '../../../actions/vacancyActions';
+import { searchVacancy } from '../../../actions/vacancyActions';
 
 class Banner extends React.Component {
   constructor(props, context) {
@@ -13,18 +13,19 @@ class Banner extends React.Component {
         city: "",
       },
     };
-    this.inputChange=this.inputChange.bind(this);
-    this.searchSubmit=this.searchSubmit.bind(this);
+    this.inputChange = this.inputChange.bind(this);
+    this.searchSubmit = this.searchSubmit.bind(this);
   }
-inputChange(e){
-  const search=Object.assign({},this.state.search)
-  search[e.target.name]=e.target.value;
- this.setState({search})
-}
-searchSubmit(e,city){
-  e.preventDefault();
-  this.props.searchVacancy(city);
-}
+  inputChange(e) {
+    const search = Object.assign({}, this.state.search)
+    search[e.target.name] = e.target.value;
+    this.setState({ search })
+  }
+  searchSubmit(e, city, title) {
+    e.preventDefault();
+    const query = { city, title };
+    this.props.searchVacancy(query);
+  }
   render() {
     return (
       <div>
@@ -34,32 +35,32 @@ searchSubmit(e,city){
               <div className="sixteen columns">
                 <div className="search-container">
 
-                  
-                    <h2>Пошук роботи</h2>
-                    <div id="1">
-                      <input
-                        name="title"
-                        type="text"
-                        className="ico-01"
-                        placeholder="назва роботи чи ім'я компанії"
-                        value={this.state.title}
-                        onChange={this.inputChange}
-                      />
-                    </div>
-                    <div id="2">
-                      <input
-                        name='city'
-                        type="text"
-                        className="ico-02"
-                        placeholder="місто, область"
-                        value={this.state.city}
-                        onChange={this.inputChange} />
-                    </div>
-                    <a href='' onClick={(e) => {this.searchSubmit(e,this.state.search.city) }}><button><i className="fa fa-search" /></button></a>
-                 
+
+                  <h2>Пошук роботи</h2>
+                  <div id="1">
+                    <input
+                      name="title"
+                      type="text"
+                      className="ico-01"
+                      placeholder="назва роботи"
+                      value={this.state.title}
+                      onChange={this.inputChange}
+                    />
+                  </div>
+                  <div id="2">
+                    <input
+                      name='city'
+                      type="text"
+                      className="ico-02"
+                      placeholder="місто"
+                      value={this.state.city}
+                      onChange={this.inputChange} />
+                  </div>
+                  <a href='' onClick={(e) => { this.searchSubmit(e, this.state.search.city, this.state.search.title) }}><button><i className="fa fa-search" /></button></a>
+
                   <div className="browse-jobs">
                     <h3>Сортувати вакансії за
-                        <a href="BrowseCategories"> категорією</a> чи <a href="#">локацією</a></h3>
+                        <a href="BrowseCategories"> категорією</a></h3>
                   </div>
 
                   <div className="announce">
@@ -76,11 +77,11 @@ searchSubmit(e,city){
 }
 
 Banner.PropTypes = {
- searchVacancy:PropTypes.func.isRequired
+  searchVacancy: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
   return { vacancy: state.vacancy };
 }
 
-export default connect(mapStateToProps,{searchVacancy})(Banner);
+export default connect(mapStateToProps, { searchVacancy })(Banner);

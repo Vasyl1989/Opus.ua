@@ -13,12 +13,11 @@ import ManageVacancy from './components/manageVacancy/ManageVacancy';
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={HomePage} />
-    <Route path="VacancyDetail/:id" component={VacancyDetail} />
-    <Route path="AddVacancy" component={AddVacancy} />
-    <Route path="BrowseVacancy" component={BrowseVacancy} />
-    <Route path="ManageVacancy" component={ManageVacancy} />
-    <Route path="BrowseCategories" component={BrowseCategories} />
-
+    <Route path="vacancy_detail/:id" component={VacancyDetail} />
+    <Route path="add_vacancy" component={AddVacancy} />
+    <Route path="browse_vacancy" component={BrowseVacancy} />
+    <Route path="manage_vacancy" component={ManageVacancy} />
+    <Route path="browse_categories" component={BrowseCategories} />
   </Route>
 );
 

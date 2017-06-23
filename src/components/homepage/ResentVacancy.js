@@ -50,7 +50,7 @@ class ResentVacancy extends React.Component {
           {
             currentVacancise.map((item, index) => {
               return (<li className="highlighted" key={item.id} >
-                <Link to={"VacancyDetail/" + item.id}
+                <Link to={"vacancy_detail/" + item.id}
                   onClick={() => {
                     browserHistory.push(item.id);
                   }}>

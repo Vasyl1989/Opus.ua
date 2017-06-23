@@ -1,33 +1,23 @@
 import React from 'react';
-import HeaderForEmployer from '../common/HeaderForEmployer';
+import Header from '../common/Header';
 import Footer from '../common/Footer';
-import SearchResult from "./SearchResults";
+import Results from './Results';
+import FormBrowseVacancy from './FormBrowseVacancy';
+import TitlebarBrowseVacancy from './TitlebarBrowseVacancy';
 
 
-class BrowseVacancy extends React.Component {
-  render() {
-    return (
-      <div>
-        <HeaderForEmployer />
-        <div id="titlebar">
-                    <div className="container">
-                        <div className="ten columns">
-                            <span>We found 1,412 jobs matching:</span>
-                            
-                        </div>
+const BrowseVacancy = () => {
+  return (
+    <div>
+      <Header />
+      <TitlebarBrowseVacancy/>
+      
+      <FormBrowseVacancy />
+      <Results />
 
-                        <div className="six columns">
-                            <a href="add-job.html" className="button">Запропонувати роботу</a>
-                        </div>
-
-                    </div>
-                </div>
-        <SearchResult/>
-        <Footer />
-      </div>
-    );
-  }
-
+      <Footer />
+    </div>
+  );
 };
 
 export default BrowseVacancy;
