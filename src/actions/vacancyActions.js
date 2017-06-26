@@ -81,7 +81,7 @@ export function editVacancy(vacancy, vacancies) {
 
     sendRequest('put', `/vacancies/${vacancy.id}`, data, null)
       .then(response => {
-        const rest = vacancies.map(vacancy => vacancy.id === vacancy.id);
+        const rest = _.map(vacancy => vacancy.id === vacancy.id);
         dispatch({ type: types.EDIT_VACANCY, payload: rest });
       })
       .catch((error) => {

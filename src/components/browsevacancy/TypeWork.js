@@ -10,20 +10,11 @@ class TypeWork extends React.Component {
         <ul className="checkboxes">
           <li>
             <input
-              id="check-1"
-              type="checkbox"
-              name="check"
-
-              value="check-1" />
-            <label htmlFor="check-1">будь-який</label>
-          </li>
-          <li>
-            <input
               id="check-2"
               type="checkbox"
               name="check"
 
-              value="Повна занятість" />
+              value="full-time" />
             <label htmlFor="check-2">Повна занятість <span></span></label>
           </li>
           <li>
@@ -32,7 +23,7 @@ class TypeWork extends React.Component {
               type="checkbox"
               name="check"
 
-              value="Часткова занятість" />
+              value="part-time" />
             <label htmlFor="check-3">Часткова занятість <span></span></label>
           </li>
           <li>
@@ -41,7 +32,7 @@ class TypeWork extends React.Component {
               type="checkbox"
               name="check"
 
-              value="Інтернатура" />
+              value="internship" />
             <label htmlFor="check-4">Інтернатура <span></span></label>
           </li>
           <li>
@@ -50,7 +41,7 @@ class TypeWork extends React.Component {
               type="checkbox"
 
               name="check"
-              value="Фріланс" />
+              value="freelance" />
             <label htmlFor="check-5">Фріланс <span></span></label>
           </li>
         </ul>
