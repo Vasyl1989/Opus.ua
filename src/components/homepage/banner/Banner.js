@@ -16,9 +16,7 @@ class Banner extends React.Component {
     this.searchSubmit = this.searchSubmit.bind(this);
   }
 
-
   inputChange(e) {
-
     const search = Object.assign({}, this.state.search);
     search[e.target.name] = e.target.value;
     this.setState({ search });
@@ -28,7 +26,6 @@ class Banner extends React.Component {
     const query = { city, title };
     this.props.searchVacancy(query);
   }
-
 
   // handleKeyPress(event) {
   //   if (event.key == 'Enter') {
@@ -96,7 +93,9 @@ Banner.PropTypes = {
 };
 
 function mapStateToProps(state) {
-  return { vacancy: state.vacancy };
+  return {
+    vacancy: state.vacancy,
+  };
 }
 
 export default connect(mapStateToProps, { searchVacancy })(Banner);
