@@ -21,7 +21,6 @@ export function getVacancyById(id, vacancies, forUpdate) {
         browserHistory.push(`/vacancy_detail/${id}`);
         return;
       }
-
     }
 
     sendRequest('get', `/vacancies/${id}`, null, null)
@@ -78,7 +77,6 @@ export function editVacancy(vacancy, vacancies) {
 
   const data = { vacancy };
   return dispatch => {
-
     sendRequest('put', `/vacancies/${vacancy.id}`, data, null)
       .then(response => {
         const rest = _.map(vacancies, vacancy => vacancy.id === vacancy.id);
@@ -87,7 +85,7 @@ export function editVacancy(vacancy, vacancies) {
       .catch((error) => {
         console.log(error);
       });
-  }
+  };
 }
 
 export function searchVacancy(query, fromPage) {
@@ -102,7 +100,16 @@ export function searchVacancy(query, fromPage) {
       }).catch((error) => {
         console.log(error);
       });
+  };
+}
 
-
-  }
+export function pagination(query) {
+  return dispatch => {
+    sendRequest('get', '/vacancies', null, query)
+      .then(response => {
+        dispatch({ type: types.PAGINATION, payload: response.data });
+      }).catch((error) => {
+        console.log(error);
+      });
+  };
 }

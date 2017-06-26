@@ -5,7 +5,8 @@ const initialState = {
   singleVacancy: {},
   shouldUpdate: false,
   vacancies: [],
-  SearchResults: []
+  SearchResults: [],
+  paginationData: []
 };
 
 export default function vacancyReduce(state = initialState, action) {
@@ -48,9 +49,14 @@ export default function vacancyReduce(state = initialState, action) {
         ...state,
         fething: false,
         SearchResults: action.payload
-      }
+      };
 
+    case types.PAGINATION:
+      return {
+        ...state,
+        paginationData: state.paginationData.concat(action.payload),
+      };
     default:
       return state;
-  };
+  }
 }

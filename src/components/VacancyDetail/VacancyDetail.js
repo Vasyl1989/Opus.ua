@@ -66,6 +66,7 @@ class VacancyDetail extends React.Component {
               <h2>{vacancy.title}<span className={this.spanColor({ job_type })}>{job_type}</span></h2>
             </div>
           </div>
+          <div className="margin-bottom-55" />
         </div>
 
         {/*companyInfo*/}
