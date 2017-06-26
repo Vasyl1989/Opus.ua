@@ -4597,6 +4597,10 @@ span.temporary {
   padding: 35px 38px 31px 38px;
 }
 
+.arr {
+  margin: 100px;
+}
+
 li .job-spotlight {
   line-height: 27px;
 }
