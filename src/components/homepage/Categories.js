@@ -108,6 +108,7 @@ class Categories extends React.Component {
 Categories.PropTypes = {
   searchVacancy: PropTypes.func.isRequired
 };
+
 function mapStateToProps(state) {
   return { vacancy: state.vacancy };
 }
