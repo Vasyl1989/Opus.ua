@@ -7,3 +7,4 @@ export const EDIT_VACANCY='EDIT_VACANCY';
 export const SHOULD_UPDATE='SHOULD_UPDATE';
 
 export const SEARCH='SEARCH';
+export const PAGINATION='PAGINATION';

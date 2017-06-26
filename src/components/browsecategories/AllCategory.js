@@ -14,7 +14,7 @@ class AllCategory extends React.Component {
     e.preventDefault();
     const category=e.currentTarget.dataset.name;
     const query = {category};
-    this.props.searchVacancy(query,PAGES.BROWSE_CATEGORIES);
+    this.props.searchVacancy(query,PAGES.BROWSE_CATEGORIES,true);
   }
   render() {
     return (

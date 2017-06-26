@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import Header from '../common/Header';
 import Footer from '../common/Footer';
-import { getVacancyById , searchVacancy} from '../../actions/vacancyActions';
+import { getVacancyById, searchVacancy } from '../../actions/vacancyActions';
 import picture from '../../styles/images/company-logo.png';
 import { PAGES } from '../../constants/const';
 
@@ -12,21 +12,34 @@ class VacancyDetail extends React.Component {
     super(props);
     this.serchSubmit = this.serchSubmit.bind(this);
   }
-  
-  componentDidMount () {
+
+  componentDidMount() {
     this.props.getVacancyById(this.props.params.id, this.props.vacancies);
     window.scrollTo(0, 0);
   }
   serchSubmit(e) {
     e.preventDefault();
-    const category=e.currentTarget.dataset.name;
-    const query = {category};
-    this.props.searchVacancy(query,PAGES.BROWSE_CATEGORIES);
+    const category = e.currentTarget.dataset.name;
+    const query = { category };
+    this.props.searchVacancy(query, PAGES.BROWSE_CATEGORIES);
   }
+  spanColor({ job_type }) {
+    //debugger;
+    if (job_type === "Повна зайнятість") {
+      return ("full-time");
+    } else if (job_type === "Часткова зайнятість") {
+      return ("part-time");
+    } else if (job_type === "Фріланс") {
+      return ("freelance");
+    } else if (job_type === "Інтернатура") {
+      return ("internship");
+    }
+  }
+
   render() {
 
     const vacancy = this.props.singleVacancy;
-
+    const job_type = vacancy.job_type;
     return (
       <div>
         <Header />
@@ -34,8 +47,8 @@ class VacancyDetail extends React.Component {
         <div id="titlebar">
           <div className="container">
             <div className="ten columns">
-              <span><a href="" data-name={vacancy.category} onClick={(e)=>{this.serchSubmit(e)}}>{vacancy.category}</a></span>
-              <h2>{vacancy.title}<span className="full-time">{vacancy.job_type}</span></h2>
+              <span><a href="" data-name={vacancy.category} onClick={(e) => { this.serchSubmit(e) }}>{vacancy.category}</a></span>
+              <h2>{vacancy.title}<span className={this.spanColor({ job_type })}>{vacancy.job_type}</span></h2>
             </div>
           </div>
         </div>
@@ -124,4 +137,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { getVacancyById , searchVacancy })(VacancyDetail);
+export default connect(mapStateToProps, { getVacancyById, searchVacancy })(VacancyDetail);

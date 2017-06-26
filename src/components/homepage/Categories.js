@@ -13,7 +13,7 @@ class Categories extends React.Component{
     e.preventDefault();
     const category=e.currentTarget.dataset.name;
     const query = {category};
-    this.props.searchVacancy(query,PAGES.HOME_PAGE);
+    this.props.searchVacancy(query,PAGES.HOME_PAGE,true);
   }
   render(){
    return (
@@ -51,7 +51,7 @@ class Categories extends React.Component{
           <div className="clearfix"></div>
           <div className="margin-top-30"></div>
 
-          <a href="BrowseCategories" className="button centered">Показати усі категорії</a>
+          <a href="browse_categories" className="button centered">Показати усі категорії</a>
           <div className="margin-bottom-50"></div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import { getAllVacancy } from '../../actions/vacancyActions';
+import { getAllVacancy, pagination } from '../../actions/vacancyActions';
 import { Link, browserHistory } from 'react-router';
 import picture from '../../styles/images/job-list-logo-01.png';
 
@@ -10,55 +10,60 @@ class ResentVacancy extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      currentPage: 1,
-      vacancyPerPage: 10
-    };
+      page: 1,
+      per: 3
+    }
     this.handleClick = this.handleClick.bind(this);
   }
   componentDidMount() {
-    this.props.getAllVacancy();
+    const page = this.state.page;
+    const per = this.state.per;
+    const query = { page, per };
+    this.props.pagination(query);
+    this.setState({ page: this.state.page + 1 });
   }
 
   handleClick(event) {
-    this.setState({
-      currentPage: Number(event.target.id)
-    });
+    const page = this.state.page;
+    const per = 3;
+    const query = { page, per };
+    this.props.pagination(query);
+    this.setState({ page: this.state.page + 1 });
   }
-
+  spanColor({ job_type }) {
+    //debugger;
+    if (job_type === "Повна зайнятість") {
+      return ("full-time");
+    } else if (job_type === "Часткова зайнятість") {
+      return ("part-time");
+    } else if (job_type === "Фріланс") {
+      return ("freelance");
+    } else if (job_type === "Інтернатура") {
+      return ("internship");
+    }
+  }
 
 
   renderVacancies() {
 
-    const vacancies = this.props.vacancy.vacancies;
-
-    //pagination
-
-    // Logic for displaying vacancies
-    const indexOfLastVacancy = this.state.currentPage * this.state.vacancyPerPage;
-    const indexOfFirstVacancy = indexOfLastVacancy - this.state.vacancyPerPage;
-    const currentVacancise = vacancies.slice(indexOfFirstVacancy, indexOfLastVacancy);
-
-    // Logic for displaying page numbers
-    const pageNumbers = [];
-    for (let i = 1; i <= Math.ceil(vacancies.length / this.state.vacancyPerPage); i++) {
-      pageNumbers.push(i);
-    }
+    const vacancies = this.props.paginationData;
 
     return (
       <div>
         <ul className="job-list">
           {
-            currentVacancise.map((item, index) => {
-              return (<li className="highlighted" key={item.id} >
+            vacancies.map((item, index) => {
+              const job_type = item.job_type;
+              return (<li className="highlighted" key={index} >
                 <Link to={"vacancy_detail/" + item.id}
                   onClick={() => {
                     browserHistory.push(item.id);
                   }}>
-                  
-                  <img src={picture}  />
+
+                  <img src={picture} />
                   <div className="job-list-content">
                     <h4>{item.title}
-                      <span className="full-time">{item.job_type}</span>
+                      <span className={this.spanColor({ job_type })}>{item.job_type}</span>
                     </h4>
                     <div className="job-icons">
                       <span>
@@ -81,18 +86,6 @@ class ResentVacancy extends React.Component {
           }
 
         </ul>
-        <div className="pagination">
-          <ul >{
-            pageNumbers.map(number => {
-              return (
-                <button key={number}>
-                  <li
-                    key={number}
-                    id={number}
-                    onClick={this.handleClick}>{number}</li></button>
-              );
-            })
-          }</ul></div>
       </div>
 
     );
@@ -111,7 +104,11 @@ class ResentVacancy extends React.Component {
             <h3 className="margin-bottom-25">Актуальні вакансії</h3>
 
             {this.props.vacancy.vacancies && this.renderVacancies()}
-
+            <button onClick={this.handleClick}>
+              <ul>
+                <li>Показати ще</li>
+              </ul>
+            </button>
             <div className="margin-bottom-55"></div>
           </div>
 
@@ -130,7 +127,10 @@ ResentVacancy.PropTypes = {
 };
 
 function mapStateToProps(state) {
-  return { vacancy: state.vacancy };
+  return {
+    vacancy: state.vacancy,
+    paginationData: state.vacancy.paginationData
+  };
 }
 
-export default connect(mapStateToProps, { getAllVacancy })(ResentVacancy);
+export default connect(mapStateToProps, { getAllVacancy, pagination })(ResentVacancy);

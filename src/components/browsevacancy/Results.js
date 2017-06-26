@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import picture from '../../styles/images/job-list-logo-01.png';
-import { getAllVacancy,searchVacancy } from '../../actions/vacancyActions';
+import { getAllVacancy, searchVacancy } from '../../actions/vacancyActions';
 import Widgets from './Widgets';
 import { PAGES } from '../../constants/const';
 
@@ -35,7 +35,18 @@ class Results extends React.Component {
     this.props.searchVacancy(query, PAGES.BROWSE_VACANCY);
   }
 
-
+  spanColor({ job_type }) {
+    //debugger;
+    if (job_type === "Повна зайнятість") {
+      return ("full-time");
+    } else if (job_type === "Часткова зайнятість") {
+      return ("part-time");
+    } else if (job_type === "Фріланс") {
+      return ("freelance");
+    } else if (job_type === "Інтернатура") {
+      return ("internship");
+    }
+  }
 
   renderVacancy() {
     const vacancies = this.props.SearchResults;
@@ -58,13 +69,14 @@ class Results extends React.Component {
 
         <ul className="job-list full">
           {currentVacancise.map((item) => {
+            const job_type = item.job_type;
             return (<li className="highlighted" key={item.id} >
               <Link to={"vacancy_detail/" + item.id}
                 onClick={() => { browserHistory.push(item.id); }}>
                 <img src={picture} />
                 <div className="job-list-content">
                   <h4>{item.title}
-                    <span className="full-time">{item.job_type}</span>
+                    <span className={this.spanColor({ job_type })}>{item.job_type}</span>
                   </h4>
                   <div className="job-icons">
                     <span>
@@ -135,8 +147,8 @@ Results.PropTypes = {
   vacancies: PropTypes.array.isRequired,
   searchVacancy: PropTypes.func.isRequired,
   onSearchInput: PropTypes.func.isRequired,
-  handleClick : PropTypes.func.isRequired,
-  inputChange : PropTypes.func.isRequired,
+  handleClick: PropTypes.func.isRequired,
+  inputChange: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
