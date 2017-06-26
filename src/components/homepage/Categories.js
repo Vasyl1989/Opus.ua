@@ -1,47 +1,115 @@
 import React from 'react';
+import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { PropTypes } from 'prop-types';
+import * as consts from '../../constants/const';
+import { searchVacancy } from '../../actions/vacancyActions';
 
-const Categories = () => {
-  return (
-    <div>
-      <div className="container">
-        <div className="sixteen columns">
-          <h3 className="margin-bottom-25">Актуальні категорії</h3>
-          <ul id="popular-categories">
-            <li><a href="browse-jobs.html">
-              <i className="ln ln-icon-People-onCloud"></i> Управління персоналом
-         </a></li>
-            <li><a href="#">
-              <i className="ln ln-icon-Computer-2"></i> ІТ
-         </a></li>
-            <li><a href="browse-jobs.html">
-              <i className="ln ln-icon-Worker"></i> Будівництво
-         </a></li>
-            <li><a href="browse-jobs.html">
-              <i className="ln ln-icon-Student-Female"></i> Навчання та репетиторство
-         </a></li>
-            <li><a href="browse-jobs.html">
-              <i className="ln  ln-icon-Medical-Sign"></i> Медиціина
-         </a></li>
-            <li><a href="browse-jobs.html">
-              <i className="ln  ln-icon-Plates"></i> Сфера обслуговування
-         </a></li>
-            <li><a href="browse-jobs.html">
-              <i className="ln  ln-icon-Globe"></i> Автоперевезення / Логістика
-         </a></li>
-            <li><a href="browse-jobs.html">
-              <i className="ln  ln-icon-Laptop-3"></i> Телекомунікація
-         </a></li>
-          </ul>
+class Categories extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      category: ""
+    };
+    this.inputChange = this.
+      inputChange
+      .bind(this);
+    this.onSearchInput = this
+      .onSearchInput
+      .bind(this);
+  }
 
-          <div className="clearfix"></div>
-          <div className="margin-top-30"></div>
+  inputChange(e) {
+    this.setState({ category: e.target.value });
+  }
 
-          <a href="BrowseCategories" className="button centered">Показати усі категорії</a>
-          <div className="margin-bottom-50"></div>
+  onSearchInput(e) {
+    e.preventDefault();
+    const category = e.currentTarget.dataset.name;
+    const query = { category };
+    this.props.searchVacancy(query, consts.PAGES.BROWSE_VACANCY);
+  }
+
+  render() {
+    return (
+      <div>
+        <div className="container">
+          <div className="sixteen columns">
+            <h3 className="margin-bottom-25">Актуальні категорії</h3>
+            <ul id="popular-categories">
+              <li>
+                <a href=""
+                  data-name="Управління персоналом"
+                  onClick={(e) => { this.onSearchInput(e, this.state.city); }}>
+                  <i className="ln ln-icon-People-onCloud" />Управління персоналом
+                </a>
+              </li>
+              <li>
+                <a href=""
+                  data-name="ІТ"
+                  onClick={(e) => { this.onSearchInput(e, this.state.city); }}>
+                  <i className="ln ln-icon-Computer-2" />ІТ
+                </a>
+              </li>
+              <li>
+                <a href=""
+                  data-name="Будівництво"
+                  onClick={(e) => { this.onSearchInput(e, this.state.city); }}>
+                  <i className="ln ln-icon-Worker" />Будівництво
+                </a>
+              </li>
+              <li>
+                <a href=""
+                  data-name="Навчання та репетиторство"
+                  onClick={(e) => { this.onSearchInput(e, this.state.city); }}>
+                  <i className="ln ln-icon-Student-Female" /> Навчання та репетиторство
+                </a>
+              </li>
+              <li>
+                <a href=""
+                  data-name="Медицина"
+                  onClick={(e) => { this.onSearchInput(e, this.state.city); }}>
+                  <i className="ln  ln-icon-Medical-Sign" />Медицина
+                </a>
+              </li>
+              <li>
+                <a href=""
+                  data-name="Сфера обслуговування"
+                  onClick={(e) => { this.onSearchInput(e, this.state.city); }}>
+                  <i className="ln  ln-icon-Plates" />Сфера обслуговування
+                </a>
+              </li>
+              <li>
+                <a href=""
+                  data-name="Автоперевезення / Логістика"
+                  onClick={(e) => { this.onSearchInput(e, this.state.city); }}>
+                  <i className="ln  ln-icon-Globe" />Автоперевезення / Логістика
+                </a>
+              </li>
+              <li>
+                <a href=""
+                  data-name="Автоперевезення / Логістика"
+                  onClick={(e) => { this.onSearchInput(e, this.state.city); }}>
+                  <i className="ln  ln-icon-Laptop-3" />Телекомунікація
+                </a>
+              </li>
+            </ul>
+            <div className="clearfix" />
+            <div className="margin-top-30" />
+            <Link className="button centered" to={"/browse_categories"}>Показати усі категорії</Link>
+            <div className="margin-bottom-50" />
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
-export default Categories;
+Categories.PropTypes = {
+  searchVacancy: PropTypes.func.isRequired
+};
+function mapStateToProps(state) {
+  return { vacancy: state.vacancy };
+}
+
+export default connect(mapStateToProps, { searchVacancy })(Categories);

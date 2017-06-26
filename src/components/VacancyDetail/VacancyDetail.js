@@ -29,8 +29,27 @@ class VacancyDetail extends React.Component {
     this.props.searchVacancy(query, consts.PAGES.BROWSE_VACANCY);
   }
 
+  spanColor({ job_type }) {
+    //debugger;
+    console.log(job_type);
+    if (job_type === "Повна зайнятість") {
+      console.log("full-time");
+      return ("full-time");
+    } else if (job_type === "Часткова зайнятість") {
+      console.log("part-time");
+      return ("part-time");
+    } else if (job_type === "Фріланс") {
+      console.log("freelance");
+      return ("freelance");
+    } else if (job_type === "Інтернатура") {
+      console.log("internship");
+      return ("internship");
+    }
+  }
+
   render() {
     const vacancy = this.props.singleVacancy;
+    const job_type = vacancy.job_type;
     return (
       <div>
         <Header />
@@ -44,7 +63,7 @@ class VacancyDetail extends React.Component {
                   onClick={(e) => { this.serchSubmit(e); }}>
                   {vacancy.category}</a>
               </span>
-              <h2>{vacancy.title}<span className="full-time">{vacancy.job_type}</span></h2>
+              <h2>{vacancy.title}<span className={this.spanColor({ job_type })}>{job_type}</span></h2>
             </div>
           </div>
         </div>

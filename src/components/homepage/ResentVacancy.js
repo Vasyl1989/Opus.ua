@@ -25,7 +25,23 @@ class ResentVacancy extends React.Component {
     });
   }
 
-
+  spanColor({ job_type }) {
+    //debugger;
+    console.log(job_type);
+    if (job_type === "Повна зайнятість") {
+      console.log("full-time");
+      return ("full-time");
+    } else if (job_type === "Часткова зайнятість") {
+      console.log("part-time");
+      return ("part-time");
+    } else if (job_type === "Фріланс") {
+      console.log("freelance");
+      return ("freelance");
+    } else if (job_type === "Інтернатура") {
+      console.log("internship");
+      return ("internship");
+    }
+  }
 
   renderVacancies() {
 
@@ -49,16 +65,17 @@ class ResentVacancy extends React.Component {
         <ul className="job-list">
           {
             currentVacancise.map((item, index) => {
+              const job_type = item.job_type;
               return (<li className="highlighted" key={item.id} >
-                <Link to={"vacancy_detail/" + item.id}
+                <Link to={"/vacancy_detail/" + item.id}
                   onClick={() => {
                     browserHistory.push(item.id);
                   }}>
-                  
-                  <img src={picture}  />
+
+                  <img src={picture} />
                   <div className="job-list-content">
                     <h4>{item.title}
-                      <span className="full-time">{item.job_type}</span>
+                      <span className={this.spanColor({ job_type })}>{job_type}</span>
                     </h4>
                     <div className="job-icons">
                       <span>
