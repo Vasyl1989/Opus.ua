@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import { searchVacancy } from '../../../actions/vacancyActions';
 import { PAGES } from '../../../constants/const';
+import * as types from '../../../actions/actionTypes';
 
 class Banner extends React.Component {
   constructor(props, context) {
@@ -24,9 +25,10 @@ class Banner extends React.Component {
   }
   searchSubmit(e, city, title) {
     e.preventDefault();
-    // if (e.keyCode === 13)
       const query = { city, title };
-    this.props.searchVacancy(query, PAGES.HOME_PAGE);
+      this.props.dispatch({ type:types.ABOUT_SEARCH.SET_CITY, payload:city });
+      this.props.dispatch({ type:types.ABOUT_SEARCH.SET_TITLE, payload:title });
+      this.props.dispatch(searchVacancy(query, PAGES.HOME_PAGE));
   }
   render() {
     return (
@@ -84,11 +86,14 @@ class Banner extends React.Component {
 }
 
 Banner.PropTypes = {
-  searchVacancy: PropTypes.func.isRequired
+  searchVacancy: PropTypes.func.isRequired,
+  inputChange: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
   return { vacancy: state.vacancy };
 }
-
-export default connect(mapStateToProps, { searchVacancy })(Banner);
+function mapDispatchToProps(dispatch){
+  return { dispatch }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Banner);

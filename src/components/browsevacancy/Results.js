@@ -3,18 +3,18 @@ import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import picture from '../../styles/images/job-list-logo-01.png';
-import { getAllVacancy, searchVacancy } from '../../actions/vacancyActions';
+import { searchVacancy } from '../../actions/vacancyActions';
 import Widgets from './Widgets';
 import { PAGES } from '../../constants/const';
-
+import * as types from '../../actions/actionTypes';
 
 class Results extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       currentPage: 1,
-      vacancyPerPage: 10,
-      title: "",
+      vacancyPerPage: 3,
+      title: this.props.filter.title,
     };
     this.handleClick = this.handleClick.bind(this);
     this.inputChange = this.inputChange.bind(this);
@@ -32,11 +32,11 @@ class Results extends React.Component {
   onSearchInput(e, title) {
     e.preventDefault();
     const query = { title };
-    this.props.searchVacancy(query, PAGES.BROWSE_VACANCY);
+    this.props.dispatch({ type:types.ABOUT_SEARCH.SET_TITLE, payload:title });
+    this.props.dispatch(searchVacancy(query, PAGES.BROWSE_VACANCY));
   }
 
   spanColor({ job_type }) {
-    //debugger;
     if (job_type === "Повна зайнятість") {
       return ("full-time");
     } else if (job_type === "Часткова зайнятість") {
@@ -149,14 +149,17 @@ Results.PropTypes = {
   onSearchInput: PropTypes.func.isRequired,
   handleClick: PropTypes.func.isRequired,
   inputChange: PropTypes.func.isRequired,
+  spanColor: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     vacancy: state.vacancy,
     SearchResults: state.vacancy.SearchResults,
-
+    filter:state.filter,
   };
 }
-
-export default connect(mapStateToProps, { getAllVacancy, searchVacancy })(Results);
+function mapDispatchToProps(dispatch){
+  return { dispatch }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Results);

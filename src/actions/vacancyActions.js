@@ -90,35 +90,30 @@ export function editVacancy(vacancy, vacancies) {
   }
 }
 
-export function searchVacancy(query, fromPage,isSearchCategory) {
-//  debugger;
+export function searchVacancy(query, fromPage) {
+  // debugger;
   return dispatch => {
     sendRequest('get', '/vacancies', null, query)
       .then(response => {
         dispatch({ type: types.SEARCH, payload: response.data });
-         if (fromPage !== consts.PAGES.BROWSE_VACANCY) {
-          //  if(isSearchCategory){
-          //     browserHistory.push(`/browse_vacancy/${query.category}`);
-          //  }else{
-             browserHistory.push("/browse_vacancy");
-          //  }
-        
-         }
-         
+        if (fromPage !== consts.PAGES.BROWSE_VACANCY) {
+          browserHistory.push("/browse_vacancy");
+        }
       }).catch((error) => {
         console.log(error);
       });
   }
 }
-  //дописати
-export function pagination(query){
-    
-  return dispatch=>{
-     sendRequest('get', '/vacancies',null,query)
-     .then(response => {
+
+export function pagination(query) {
+  return dispatch => {
+    sendRequest('get', '/vacancies', null, query)
+      .then(response => {
         dispatch({ type: types.PAGINATION, payload: response.data });
       }).catch((error) => {
         console.log(error);
       });
   }
 }
+
+

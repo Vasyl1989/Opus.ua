@@ -9,6 +9,7 @@ import * as types from '../actions/actionTypes';
   paginationData:[]
 };
 
+
 export default function vacancyReduce(state = initialState, action) {
   switch (action.type) {
     case types.GET_ALL_VACANCIES:
@@ -22,26 +23,26 @@ export default function vacancyReduce(state = initialState, action) {
       return {
         ...state,
         fething: false,
-        singleVacancy: action.payload
+        singleVacancy: action.payload,
       };
     case types.DELETE_VACANCY:
       return {
         ...state,
         fething: false,
-        vacancies: action.payload
+        vacancies: action.payload,
       };
     case types.EDIT_VACANCY:
       return {
         ...state,
         fething: false,
-        vacancies: action.payload
+        vacancies: action.payload,
       };
 
     case types.SHOULD_UPDATE:
       return {
         ...state,
         fething: false,
-        shouldUpdate: true
+        shouldUpdate: true,
       };
 
     case types.SEARCH:
