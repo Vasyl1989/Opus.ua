@@ -52,8 +52,8 @@ class Slider extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="rangeValues">Оплата: {this.state.firstValue} - {this.state.secondValue} грн.год</div>
+      <div className="widgetSlider">
+        <div className="rangeValues"><h4>Оплата: {this.state.firstValue} - {this.state.secondValue} грн.год</h4></div>
         <section className="range-slider">
           <input type="range" value={this.state.firstValue} min={this.state.minValue} max={this.state.maxValue} step={this.state.step} onChange={this.handleChange.bind(this, "first")} />
           <input type="range" value={this.state.secondValue} min={this.state.minValue} max={this.state.maxValue} step={this.state.step} onChange={this.handleChange.bind(this, "second")} />

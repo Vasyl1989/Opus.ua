@@ -1,6 +1,7 @@
 import React from 'react';
-import { PropTypes } from 'prop-types';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import { PropTypes } from 'prop-types';
 import { searchVacancy } from '../../../actions/vacancyActions';
 
 class Banner extends React.Component {
@@ -72,7 +73,8 @@ class Banner extends React.Component {
 
                   <div className="browse-jobs">
                     <h3>Сортувати вакансії за
-                        <a href="BrowseCategories"> категорією</a></h3>
+                      <Link to={"/browse_categories"}>категорією</Link>
+                    </h3>
                   </div>
 
                   <div className="announce">

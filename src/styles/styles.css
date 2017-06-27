@@ -1162,6 +1162,7 @@ table.manage-table {
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
+  margin-bottom: 40px;
 }
 
 table.manage-table th {
@@ -1187,6 +1188,7 @@ table.manage-table th i {
 table.manage-table a.button {
   padding: 7px 14px;
   line-height: 26px;
+  margin-bottom: 40px;
 }
 
 table.manage-table tr:nth-child(2n+1) {
@@ -5975,6 +5977,22 @@ a.post-img:hover:before {
 
 /* Need support widget */
 
+.rangeValues {
+  margin-bottom: 20px;
+}
+
+.minValue {
+  margin-bottom: 20px;
+}
+
+.widgetSlider button {
+  margin-bottom: 20px;
+}
+
+.widget {
+  margin-top: 5px;
+}
+
 .widget .button.widget-btn {
   width: 100%;
   box-sizing: border-box;
@@ -7772,6 +7790,7 @@ ul.footer-links {
 
 /* Apply Popup
 ------------------------------------- */
+
 
 .small-dialog-headline {
   background-color: #fafafa;

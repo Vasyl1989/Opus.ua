@@ -16,20 +16,20 @@ class ContextManage extends React.Component {
     this.props.getVacancyById(id, this.props.vacancy.vacancies, true);
   }
 
+
   renderVacancies() {
     const vacancies = this.props.vacancy.vacancies;
 
     return vacancies.map((item, index) => {
+      var d = item.active_to_date;
       return (
         <tr key={index}>
           <td className="title"><a href="#">{item.title}</a></td>
-          <td className="centered">-</td>
           <td>{item.created_at}</td>
-          <td>{item.active_to_date}</td>
+          <td>{d}</td>
 
           <td className="action">
             <a href="" onClick={(e) => this.handleGoToEditVacancy(e, item.id)}><i className="fa fa-pencil" />Edit</a>
-            <a href="#"><i className="fa  fa-check " />Mark Filled</a>
             <a href="#" className="delete" onClick={() => this.onDelete(item.id)}><i className="fa fa-remove" />Delete</a>
           </td>
         </tr>
@@ -49,7 +49,6 @@ class ContextManage extends React.Component {
             <thead>
               <tr>
                 <th><i className="fa fa-file-text" />Назва вакансії</th>
-                <th><i className="fa fa-check-square-o" />Виконано?</th>
                 <th><i className="fa fa-calendar" />Дата створення оголошення</th>
                 <th><i className="fa fa-calendar" />Оголошення активне до</th>
                 <th />

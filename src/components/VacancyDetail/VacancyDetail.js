@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Header from '../common/Header';
 import Footer from '../common/Footer';
+import ApplyPopup from './ApplyPopup';
 import * as consts from '../../constants/const';
 import { getVacancyById, searchVacancy } from '../../actions/vacancyActions';
 import picture from '../../styles/images/company-logo.png';
@@ -113,28 +114,11 @@ class VacancyDetail extends React.Component {
                     </div>
                   </li>
                 </ul>
-
-                <a href="#small-dialog" className="popup-with-zoom-anim button">Погодитись на цю роботу</a>
-                <div id="small-dialog" className="zoom-anim-dialog mfp-hide apply-popup">
-                  <div className="small-dialog-headline">
-                    <h2>Погодитись на цю роботу</h2>
-                  </div>
-
-                  <div className="small-dialog-content">
-                    <form action="#" method="get">
-                      <input type="text" placeholder="Повне ім'я" value="" />
-                      <input type="text" placeholder="Електронна адреса" value="" />
-                      <textarea placeholder="Ваше повідомлення / лист, який ви хочете надіслати роботодівцю" />
-                      <div className="divider" />
-                      <button className="send">Надіслати заявку</button>
-                    </form>
-                  </div>
-                </div>
+                <ApplyPopup />
               </div>
             </div>
           </div>
         </div>
-
         <Footer />
       </div>
     );

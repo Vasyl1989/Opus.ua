@@ -45,9 +45,15 @@ class AddVacancyForm extends React.Component {
       modalIsOpenTwo: false
     };
 
-    this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
+    this.openModal = this
+      .openModal
+      .bind(this);
+    this.afterOpenModal = this
+      .afterOpenModal
+      .bind(this);
+    this.closeModal = this
+      .closeModal
+      .bind(this);
 
     this.handleSubmit = this
       .handleSubmit

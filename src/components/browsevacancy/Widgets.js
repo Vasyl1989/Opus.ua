@@ -45,15 +45,7 @@ class Widgets extends React.Component {
 
     return (
       <div>
-        <div className="widget">
-          <h4>Сортувати за </h4>
-          <SelectInput
-            data-placeholder="Choose Category"
-            className="chosen-select-no-single"
-            options={consts.SORTING}
-          />
-        </div>
-
+        <h4>Сортувати за </h4>
         <div className="widget">
           <TextInput
             type="text"
