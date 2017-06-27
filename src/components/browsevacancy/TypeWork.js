@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { searchVacancy } from '../../actions/vacancyActions';
 import { filtration } from '../../actions/filterAction';
 import * as consts from '../../constants/const';
-import { bindActionCreators } from 'redux';
 import * as types from '../../actions/actionTypes';
 
 class TypeWork extends React.Component {
@@ -12,30 +11,13 @@ class TypeWork extends React.Component {
     super(props, context);
     this.onCheck = this.onCheck.bind(this);
   }
-
+//work from second click
   onCheck(e) {
-
     const job_type = e.target.value;
-    const query =  job_type;
-    // this.props.filtration(query);
-    if(query==='Повна'){
-      this.props.dispatch({ type: types.JOB_TYPE.SET_FULL_TIME, payload: query });
-    }else if(query==='Фріланс'){
-      this.props.dispatch({ type: types.JOB_TYPE.SET_FREELANCE, payload: query });
-    }else if(query==='Часткова'){
-      this.props.dispatch({ type: types.JOB_TYPE.SET_PART_TIME, payload: query });
-    }else if(query==='Інтернатура'){
-      this.props.dispatch({ type: types.JOB_TYPE.SET_INTERNSHIP, payload: query });
-    }
-    
-    // this.props.dispatch(filtration(query));
+    const query = job_type;
+    this.props.dispatch(filtration(query));
     console.log('--=--------',this.props.filter);
-    // TODO select and make query
-   //передається пустим
     this.props.dispatch(searchVacancy(this.props.filter, consts.PAGES.BROWSE_VACANCY));
-
-
-
   }
   render() {
     return (
@@ -89,7 +71,8 @@ class TypeWork extends React.Component {
 
 TypeWork.PropTypes = {
   onCheck: PropTypes.func.isRequired,
-
+  searchVacancy:PropTypes.func.isRequired,
+  filtration:PropTypes.func.isRequired,
 }
 
 function mapStateToProps(state) {

@@ -14,7 +14,6 @@ export default function filterReducer(state = initialState, action) {
 
   switch (action.type) {
     case types.JOB_TYPE.SET_FULL_TIME:
-      // debugger;
       return {
         ...state,
         job_type: action.payload,
