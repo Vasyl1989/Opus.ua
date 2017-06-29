@@ -1,6 +1,7 @@
 import React from 'react';
-import { PropTypes } from 'prop-types';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import { PropTypes } from 'prop-types';
 import { searchVacancy } from '../../../actions/vacancyActions';
 
 class Banner extends React.Component {
@@ -16,9 +17,7 @@ class Banner extends React.Component {
     this.searchSubmit = this.searchSubmit.bind(this);
   }
 
-
   inputChange(e) {
-
     const search = Object.assign({}, this.state.search);
     search[e.target.name] = e.target.value;
     this.setState({ search });
@@ -28,7 +27,6 @@ class Banner extends React.Component {
     const query = { city, title };
     this.props.searchVacancy(query);
   }
-
 
   // handleKeyPress(event) {
   //   if (event.key == 'Enter') {
@@ -75,7 +73,8 @@ class Banner extends React.Component {
 
                   <div className="browse-jobs">
                     <h3>Сортувати вакансії за
-                        <a href="BrowseCategories"> категорією</a></h3>
+                      <Link to={"/browse_categories"}>категорією</Link>
+                    </h3>
                   </div>
 
                   <div className="announce">
@@ -96,7 +95,9 @@ Banner.PropTypes = {
 };
 
 function mapStateToProps(state) {
-  return { vacancy: state.vacancy };
+  return {
+    vacancy: state.vacancy,
+  };
 }
 
 export default connect(mapStateToProps, { searchVacancy })(Banner);

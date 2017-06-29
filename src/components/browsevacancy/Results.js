@@ -44,6 +44,24 @@ class Results extends React.Component {
     this.props.searchVacancy(query, PAGES.BROWSE_VACANCY);
   }
 
+  spanColor({ job_type }) {
+    //debugger;
+    console.log(job_type);
+    if (job_type === "Повна зайнятість") {
+      console.log("full-time");
+      return ("full-time");
+    } else if (job_type === "Часткова зайнятість") {
+      console.log("part-time");
+      return ("part-time");
+    } else if (job_type === "Фріланс") {
+      console.log("freelance");
+      return ("freelance");
+    } else if (job_type === "Інтернатура") {
+      console.log("internship");
+      return ("internship");
+    }
+  }
+
   renderVacancy() {
     const vacancies = this.props.SearchResults;
     console.log(vacancies);
@@ -64,13 +82,14 @@ class Results extends React.Component {
       <div>
         <ul className="job-list full">
           {currentVacancise.map((item) => {
+            const job_type = item.job_type;
             return (<li className="highlighted" key={item.id} >
               <Link to={"vacancy_detail/" + item.id}
                 onClick={() => { browserHistory.push(item.id); }}>
                 <img src={picture} />
                 <div className="job-list-content">
                   <h4>{item.title}
-                    <span className="full-time">{item.job_type}</span>
+                    <span className={this.spanColor({ job_type })}>{job_type}</span>
                   </h4>
                   <div className="job-icons">
                     <span>
@@ -90,18 +109,19 @@ class Results extends React.Component {
             );
           })}
         </ul>
-        <div className="pagination">
-          <ul >{
-            pageNumbers.map(number => {
-              return (
-                <button key={number}>
-                  <li
-                    key={number}
-                    id={number}
-                    onClick={this.handleClick}>{number}</li></button>
-              );
-            })
-          }</ul></div>
+        {/*
+        // <div className="pagination">
+        //   <ul >{
+        //     pageNumbers.map(number => {
+        //       return (
+        //         <button key={number}>
+        //           <li
+        //             key={number}
+        //             id={number}
+        //             onClick={this.handleClick}>{number}</li></button>
+        //       );
+        //     })
+        //   }</ul></div>*/}
       </div>
     );
   }

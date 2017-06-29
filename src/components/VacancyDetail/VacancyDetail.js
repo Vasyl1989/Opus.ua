@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Header from '../common/Header';
 import Footer from '../common/Footer';
+import ApplyPopup from './ApplyPopup';
 import * as consts from '../../constants/const';
 import { getVacancyById, searchVacancy } from '../../actions/vacancyActions';
 import picture from '../../styles/images/company-logo.png';
@@ -29,8 +30,27 @@ class VacancyDetail extends React.Component {
     this.props.searchVacancy(query, consts.PAGES.BROWSE_VACANCY);
   }
 
+  spanColor({ job_type }) {
+    //debugger;
+    console.log(job_type);
+    if (job_type === "Повна зайнятість") {
+      console.log("full-time");
+      return ("full-time");
+    } else if (job_type === "Часткова зайнятість") {
+      console.log("part-time");
+      return ("part-time");
+    } else if (job_type === "Фріланс") {
+      console.log("freelance");
+      return ("freelance");
+    } else if (job_type === "Інтернатура") {
+      console.log("internship");
+      return ("internship");
+    }
+  }
+
   render() {
     const vacancy = this.props.singleVacancy;
+    const job_type = vacancy.job_type;
     return (
       <div>
         <Header />
@@ -44,9 +64,10 @@ class VacancyDetail extends React.Component {
                   onClick={(e) => { this.serchSubmit(e); }}>
                   {vacancy.category}</a>
               </span>
-              <h2>{vacancy.title}<span className="full-time">{vacancy.job_type}</span></h2>
+              <h2>{vacancy.title}<span className={this.spanColor({ job_type })}>{job_type}</span></h2>
             </div>
           </div>
+          <div className="margin-bottom-55" />
         </div>
 
         {/*companyInfo*/}
@@ -93,28 +114,11 @@ class VacancyDetail extends React.Component {
                     </div>
                   </li>
                 </ul>
-
-                <a href="#small-dialog" className="popup-with-zoom-anim button">Погодитись на цю роботу</a>
-                <div id="small-dialog" className="zoom-anim-dialog mfp-hide apply-popup">
-                  <div className="small-dialog-headline">
-                    <h2>Погодитись на цю роботу</h2>
-                  </div>
-
-                  <div className="small-dialog-content">
-                    <form action="#" method="get">
-                      <input type="text" placeholder="Повне ім'я" value="" />
-                      <input type="text" placeholder="Електронна адреса" value="" />
-                      <textarea placeholder="Ваше повідомлення / лист, який ви хочете надіслати роботодівцю" />
-                      <div className="divider" />
-                      <button className="send">Надіслати заявку</button>
-                    </form>
-                  </div>
-                </div>
+                <ApplyPopup />
               </div>
             </div>
           </div>
         </div>
-
         <Footer />
       </div>
     );
