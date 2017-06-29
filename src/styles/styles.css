@@ -974,10 +974,7 @@ input .ico-02 {
   float: left;
 }
 
-#startbutton,
-#agreebutton{
-  z-index: 0;
-}
+
 /* ---------------------------------- */
 
 
@@ -1107,6 +1104,7 @@ a.button.white {
 .button.big {
   font-size: 16px;
   padding: 12px 22px;
+  z-index: 0;
 }
 
 .button.big i {
@@ -4602,6 +4600,10 @@ span.temporary {
   padding: 35px 38px 31px 38px;
 }
 
+.job-overview button {
+  z-index: 0;
+}
+
 .arr {
   margin: 100px;
 }
@@ -7345,6 +7347,7 @@ a.close-form i {
 
 #footer a.button {
   margin-top: 12px;
+  z-index: 0;
 }
 
 #footer a.button:hover {
@@ -7794,7 +7797,6 @@ ul.footer-links {
 /* Apply Popup
 ------------------------------------- */
 
-
 .small-dialog-headline {
   background-color: #fafafa;
   padding: 25px 40px;
@@ -7821,6 +7823,8 @@ label.upload-btn input[type="file"] {
   float: left;
   padding: 11px 18px;
   margin-right: 18px;
+  height: 34px;
+  top: 1px;
 }
 
 .small-dialog-content textarea {

@@ -72,7 +72,7 @@ class ApplyPopup extends React.Component {
             <div className="small-dialog-headline">
               <h2 >Погодитись на цю роботу</h2>
             </div>
-            <button onClick={this.closeModal}>close</button>
+            <button onClick={this.closeModal} className="mfp-close"></button>
             <div className="small-dialog-content">
               <form onSubmit={this.agreeSubmit}>
                 <TextInput
