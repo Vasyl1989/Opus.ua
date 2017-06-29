@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import * as consts from '../../constants/const';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
+import TypeWork from './TypeWork';
 import { searchVacancy } from '../../actions/vacancyActions';
 
 class Widgets extends React.Component {
@@ -57,60 +58,7 @@ class Widgets extends React.Component {
           />
           <button className="button" onClick={(e) => { this.onSearchInput(e, this.state.city); }}>Пошук</button>
         </div>
-
-        <div className="widget">
-          <h4>Тип роботи</h4>
-          <ul className="checkboxes">
-            <li >
-              <input
-                id="check-1"
-                type="checkbox"
-                name="check"
-                value="Будь-який" />
-              <label htmlFor="check-1">
-                Будь-який
-              </label>
-            </li>
-            <li>
-              <input
-                id="check-2"
-                type="checkbox"
-                name="check"
-                value="Повна занятість" />
-              <label htmlFor="check-2">
-                Повна занятість <span />
-              </label>
-            </li>
-            <li>
-              <input
-                id="check-3"
-                type="checkbox"
-                name="check"
-                value="Часткова занятість" />
-              <label htmlFor="check-3">
-                Часткова занятість <span />
-              </label>
-            </li>
-            <li>
-              <input
-                id="check-4"
-                type="checkbox"
-                name="check"
-                value="Інтернатура " />
-              <label htmlFor="check-4">Інтернатура <span /></label>
-            </li>
-            <li>
-              <input
-                id="check-5"
-                type="checkbox"
-                name="check"
-                value="Фріланс" />
-              <label htmlFor="check-5">Фріланс <span /></label>
-            </li>
-          </ul>
-        </div>
-
-
+        <TypeWork />
         <Slider />
       </div >
     );

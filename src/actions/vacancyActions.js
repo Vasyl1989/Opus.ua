@@ -113,3 +113,9 @@ export function pagination(query) {
       });
   };
 }
+
+export function agreeToVacancy(query) {
+  return dispatch => {
+
+  };
+}

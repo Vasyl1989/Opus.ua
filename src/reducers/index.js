@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import vacancy, * as fromVacancy from './vacancyReducer';
 import { routerReducer } from 'react-router-redux';
+import filter, * as fromFilter from './filterReducer';
 
 const rootReducer = combineReducers({
   vacancy,
-  routing: routerReducer
+  filter,
+  routing: routerReducer,
 });
 
 export default rootReducer;
@@ -13,4 +15,4 @@ export default rootReducer;
 export const getVacancyById = (state, id) => {
   // TODO
   return fromVacancy.getVacancyById(state.vacancy, id);
-}
+};

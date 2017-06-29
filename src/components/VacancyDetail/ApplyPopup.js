@@ -1,6 +1,9 @@
 import React from 'react';
 import Modal from 'react-modal';
 import TextInput from '../common/TextInput';
+import { PropTypes } from 'prop-types';
+import { connect } from 'react-redux';
+import { agreeToVacancy } from '../../actions/vacancyActions';
 
 const customStyles = {
   content: {
@@ -19,7 +22,7 @@ class ApplyPopup extends React.Component {
     super();
     this.state = {
       modalIsOpen: false,
-      apply: {
+      applyForm: {
         name: "",
         email: "",
         description: "",
@@ -30,6 +33,8 @@ class ApplyPopup extends React.Component {
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.agreeSubmit = this.agreeSubmit.bind(this);
   }
 
   openModal() {
@@ -38,43 +43,52 @@ class ApplyPopup extends React.Component {
 
   afterOpenModal() {
     // references are now sync'd and can be accessed. 
-    this.subtitle.style.color = '#f00';
   }
 
   closeModal() {
     this.setState({ modalIsOpen: false });
   }
 
+  handleInputChange(e) {
+    const applyForm = Object.assign({}, this.state.applyForm);
+    applyForm[e.target.name] = e.target.value;
+    this.setState({ applyForm: applyForm });
+  }
+
+  agreeSubmit(e) {
+    e.preventDefault();
+  }
+
   render() {
     return (
       <div>
-        <button onClick={this.openModal}>Погодитись на цю роботу</button>
+        <button onClick={this.openModal} id="agreebutton">Погодитись на цю роботу</button>
         <Modal
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal}
           style={customStyles}
-          contentLabel="Example Modal"
+          contentLabel="Applay Modal"
         >
-          <div className="applypopup">
+          <div>
             <div className="small-dialog-headline">
               <h2 >Погодитись на цю роботу</h2>
             </div>
-            <button onClick={this.closeModal} className="mfp-close"></button>
+            <button onClick={this.closeModal} className="mfp-close" />
             <div className="small-dialog-content">
-              <form>
+              <form onSubmit={this.agreeSubmit}>
                 <TextInput
                   type="text"
                   placeholder="Повне ім'я"
                   name="name"
-                  value={this.state.apply.name}
+                  value={this.state.applyForm.name}
                   onChange={this.handleInputChange} />
                 <div className="clearfixform" />
 
                 <TextInput
                   type="email"
                   name="email"
-                  value={this.state.apply.email}
+                  value={this.state.applyForm.email}
                   placeholder="Електронна адреса"
                   onChange={this.handleInputChange} />
                 <div className="clearfixform" />
@@ -82,7 +96,7 @@ class ApplyPopup extends React.Component {
                 <textarea
                   className="WYSIWYG"
                   id="summary"
-                  value={this.state.apply.description}
+                  value={this.state.applyForm.description}
                   onChange={this.handleInputChange}
                   name="description"
                   placeholder="Ваше повідомлення / лист, який ви хочете надіслати роботодівцю" />
@@ -94,12 +108,12 @@ class ApplyPopup extends React.Component {
                 </div>
 
                 <div className="clearfix" />
-                <label className="upload-btn aaar">
+                <label className="upload-btn">
                   <TextInput
                     type="file"
                     name="file"
                     multiple
-                    value={this.state.apply.file}
+                    value={this.state.applyForm.file}
                     onChange={this.handleInputChange} />
                   <i className="fa fa-upload" />Завантажити
               </label>
@@ -115,6 +129,18 @@ class ApplyPopup extends React.Component {
   }
 }
 
+ApplyPopup.PropTypes = {
+  handleInputChange: PropTypes.func.isRequired,
+  openModal: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  afterOpenModal: PropTypes.func.isRequired,
+  agreeSubmit: PropTypes.func.isRequired,
+};
 
+function mapStateToProps(state) {
+  return {
+    vacancy: state.vacancy,
+  };
+}
 
-export default (ApplyPopup);
+export default connect(mapStateToProps, { agreeToVacancy })(ApplyPopup);
