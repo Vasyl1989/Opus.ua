@@ -323,7 +323,10 @@ class AddVacancyForm extends React.Component {
 
 AddVacancyForm.PropTypes = {
   createVacancy: PropTypes.func.isRequired,
-  vacancies: PropTypes.array.isRequired
+  vacancies: PropTypes.array.isRequired,
+  openModal:PropTypes.func.isRequired,
+  closeModal:PropTypes.func.isRequired,
+  afterOpenModal:PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {

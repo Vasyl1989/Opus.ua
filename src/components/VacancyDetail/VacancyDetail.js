@@ -6,13 +6,13 @@ import Footer from '../common/Footer';
 import { getVacancyById, searchVacancy } from '../../actions/vacancyActions';
 import picture from '../../styles/images/company-logo.png';
 import { PAGES } from '../../constants/const';
+import ApplyPopup from './ApplyPopup';
 
 class VacancyDetail extends React.Component {
   constructor(props) {
     super(props);
     this.serchSubmit = this.serchSubmit.bind(this);
   }
-
   componentDidMount() {
     this.props.getVacancyById(this.props.params.id, this.props.vacancies);
     window.scrollTo(0, 0);
@@ -24,7 +24,6 @@ class VacancyDetail extends React.Component {
     this.props.searchVacancy(query, PAGES.BROWSE_CATEGORIES);
   }
   spanColor({ job_type }) {
-    //debugger;
     if (job_type === "Повна зайнятість") {
       return ("full-time");
     } else if (job_type === "Часткова зайнятість") {
@@ -35,7 +34,6 @@ class VacancyDetail extends React.Component {
       return ("internship");
     }
   }
-
   render() {
 
     const vacancy = this.props.singleVacancy;
@@ -98,30 +96,11 @@ class VacancyDetail extends React.Component {
                     </div>
                   </li>
                 </ul>
-
-                <a href="#small-dialog" className="popup-with-zoom-anim button">Погодитись на цю роботу</a>
-
-                <div id="small-dialog" className="zoom-anim-dialog mfp-hide apply-popup">
-                  <div className="small-dialog-headline">
-                    <h2>Погодитись на цю роботу</h2>
-                  </div>
-
-                  <div className="small-dialog-content">
-                    <form action="#" method="get">
-                      <input type="text" placeholder="Повне ім'я" value="" />
-                      <input type="text" placeholder="Електронна адреса" value="" />
-                      <textarea placeholder="Ваше повідомлення / лист, який ви хочете надіслати роботодівцю"></textarea>
-                      <div className="divider"></div>
-
-                      <button className="send">Надіслати заявку</button>
-                    </form>
-                  </div>
-                </div>
+                <ApplyPopup />
               </div>
             </div>
           </div>
         </div>
-
         <Footer />
       </div>
     )

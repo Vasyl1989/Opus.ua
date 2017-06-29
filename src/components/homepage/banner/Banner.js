@@ -91,7 +91,10 @@ Banner.PropTypes = {
 };
 
 function mapStateToProps(state) {
-  return { vacancy: state.vacancy };
+  return {
+     vacancy: state.vacancy, 
+     filter: state.filter,
+};
 }
 function mapDispatchToProps(dispatch){
   return { dispatch }

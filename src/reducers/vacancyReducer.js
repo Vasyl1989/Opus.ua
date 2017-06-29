@@ -6,7 +6,8 @@ import * as types from '../actions/actionTypes';
   shouldUpdate: false,
   vacancies: [],
   SearchResults: [],
-  paginationData:[]
+  paginationData:[],
+  applyForm:{},
 };
 
 
@@ -50,12 +51,20 @@ export default function vacancyReduce(state = initialState, action) {
         ...state,
         fething: false,
         SearchResults: action.payload,
-      }
+      };
+
     case types.PAGINATION:
     return{
       ...state,
       paginationData: state.paginationData.concat(action.payload),
-    }
+    };
+
+     case types.AGREE_TO_VACANCY:
+     return{
+      ...state,
+      applyForm: saction.payload,
+    };
+
     default:
       return state;
   };

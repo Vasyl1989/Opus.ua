@@ -1,12 +1,11 @@
 export const CREATE_VACANCY = 'CREATE_VACANCY';
 export const GET_ALL_VACANCIES = 'GET_ALL_VACANCIES';
 export const DELETE_VACANCY = 'DELETE_VACANCY';
-
-export const GET_VACANCY_BY_ID = 'GET_VACANCY_BY_ID';
+export const SEARCH = 'SEARCH';
 export const EDIT_VACANCY = 'EDIT_VACANCY';
 export const SHOULD_UPDATE = 'SHOULD_UPDATE';
 
-export const SEARCH = 'SEARCH';
+export const GET_VACANCY_BY_ID = 'GET_VACANCY_BY_ID';
 export const PAGINATION = 'PAGINATION';
 
 export const JOB_TYPE = {
@@ -21,3 +20,5 @@ export const ABOUT_SEARCH = {
   SET_TITLE: "SET_TITLE",
   SET_CATEGORY: "SET_CATEGORY",
 }
+
+export const AGREE_TO_VACANCY='AGREE_TO_VACANCY';
