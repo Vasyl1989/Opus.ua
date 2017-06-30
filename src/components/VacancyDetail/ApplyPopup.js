@@ -26,12 +26,11 @@ class ApplyPopup extends React.Component {
         name: "",
         email: "",
         description: "",
-        file: "",
+        files:[] ,
       }
     };
 
     this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.handleInputChange=this.handleInputChange.bind(this);
     this.agreeSubmit=this.agreeSubmit.bind(this);
@@ -39,11 +38,6 @@ class ApplyPopup extends React.Component {
 
   openModal() {
     this.setState({ modalIsOpen: true });
-  }
-
-  afterOpenModal() {
-    // references are now sync'd and can be accessed. 
-    this.subtitle.style.color = '#f00';
   }
 
   closeModal() {
@@ -112,7 +106,7 @@ class ApplyPopup extends React.Component {
                     name="file"
                     multiple
                     value={this.state.applyForm.file}
-                    onChange={this.handleInputChange} />
+                    onChange={(e)=>{onChangeFiles({ files: e.target.files, index });}} />
                   <i className="fa fa-upload" />Завантажити
               </label>
                 <span className="fake-input">Жодний файл не є вибраним</span>
@@ -130,7 +124,6 @@ ApplyPopup.PropTypes={
   handleInputChange:PropTypes.func.isRequired,
   openModal:PropTypes.func.isRequired,
   closeModal:PropTypes.func.isRequired,
-  afterOpenModal:PropTypes.func.isRequired,
   agreeSubmit:PropTypes.func.isRequired,
 }
 function mapStateToProps(state) {

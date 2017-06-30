@@ -2,35 +2,75 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { searchVacancy } from '../../actions/vacancyActions';
-import { filtration } from '../../actions/filterAction';
+import { filtration, withoutFilter } from '../../actions/filterAction';
 import * as consts from '../../constants/const';
-import * as types from '../../actions/actionTypes';
+
+
+function serializeArrayToQueryString(objectOfQueries) {
+  const source = { ...objectOfQueries };
+  for (let value in source) {
+    if (Array.isArray(source[value])) {
+      const target = source[value].join('|');
+      source[value] = target;
+    }
+  }
+  console.log('serializeArrayToQueryString', source);
+  return source;
+}
+
+function addJobType(filter, type, isChecked) {
+  const myFilter = { ...filter, job_type: [...filter.job_type] };
+  
+  if (isChecked === true) {
+    myFilter.job_type.push(type);
+  } else if(isChecked === false) {
+    for (let value in myFilter) {
+      if (Array.isArray(myFilter[value])) {
+        const target = myFilter[value].filter(jobtype => jobtype !== type);
+        myFilter[value] = target;
+      }
+    }
+  }
+  console.log('myFilter', myFilter)
+  return myFilter;
+}
 
 class TypeWork extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.onCheck = this.onCheck.bind(this);
   }
-//work from second click
+  //work from second click
   onCheck(e) {
     const job_type = e.target.value;
-    const query = job_type;
+    const checkedElement = e.target.checked;
+    console.log('checked', e.target.checked);
+    const query = {
+      job_type,
+      checkedElement,
+    }
+    console.log('query', query);
+
+    //  this.props.dispatch(filtration(query));
+
+    this.props.dispatch(searchVacancy(serializeArrayToQueryString(addJobType(this.props.filter, job_type, checkedElement)), consts.PAGES.BROWSE_VACANCY));
+    console.log('this.props.filter',this.props.filter)
     this.props.dispatch(filtration(query));
-    console.log('--=--------',this.props.filter);
-    this.props.dispatch(searchVacancy(this.props.filter, consts.PAGES.BROWSE_VACANCY));
   }
+
   render() {
     return (
       <div className="widget">
         <h4>Тип роботи</h4>
         <ul className="checkboxes">
           <li>
-            <input
-              id="check-1"
-              type="checkbox"
-              name="check"
-              onClick={this.onCheck}
-              value="Повна" />
+            <input 
+            id='check-1'
+            type='checkbox'
+            value='Повна'
+            name='check'
+            onChange={this.onCheck}
+            />
             <label htmlFor="check-1">Повна занятість <span></span></label>
           </li>
           <li>
@@ -38,7 +78,7 @@ class TypeWork extends React.Component {
               id="check-2"
               type="checkbox"
               name="check"
-              onClick={this.onCheck}
+              onChange={this.onCheck}
               value="Часткова" />
             <label htmlFor="check-2">Часткова занятість <span></span></label>
           </li>
@@ -47,8 +87,7 @@ class TypeWork extends React.Component {
               id="check-3"
               type="checkbox"
               name="check"
-              onClick={this.onCheck}
-
+              onChange={this.onCheck}
               value="Інтернатура" />
             <label htmlFor="check-3">Інтернатура <span></span></label>
           </li>
@@ -57,7 +96,6 @@ class TypeWork extends React.Component {
               id="check-4"
               type="checkbox"
               onClick={this.onCheck}
-
               name="check"
               value="Фріланс" />
             <label htmlFor="check-4">Фріланс <span></span></label>
@@ -71,8 +109,10 @@ class TypeWork extends React.Component {
 
 TypeWork.PropTypes = {
   onCheck: PropTypes.func.isRequired,
-  searchVacancy:PropTypes.func.isRequired,
-  filtration:PropTypes.func.isRequired,
+  searchVacancy: PropTypes.func.isRequired,
+  filtration: PropTypes.func.isRequired,
+  serializeArrayToQueryString: PropTypes.func.isRequired,
+  addJobType: PropTypes.func.isRequired,
 }
 
 function mapStateToProps(state) {
@@ -83,7 +123,7 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
   return { dispatch }
 }
 

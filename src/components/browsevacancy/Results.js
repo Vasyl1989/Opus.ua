@@ -13,7 +13,7 @@ class Results extends React.Component {
     super(props, context);
     this.state = {
       currentPage: 1,
-      vacancyPerPage: 3,
+      vacancyPerPage: 6,
       title: this.props.filter.title,
     };
     this.handleClick = this.handleClick.bind(this);
@@ -50,8 +50,8 @@ class Results extends React.Component {
 
   renderVacancy() {
     const vacancies = this.props.SearchResults;
-    console.log(vacancies)
-    console.log(this.props.vacancy.vacancies)
+    console.log('vacancies',vacancies)
+    console.log('vacancy.vacancies',this.props.vacancy.vacancies)
     //pagination
     // Logic for displaying vacancies
     const indexOfLastVacancy = this.state.currentPage * this.state.vacancyPerPage;

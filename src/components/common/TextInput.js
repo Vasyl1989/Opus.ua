@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 
 
 
-const TextInput = ({ name, onChange, placeholder, title, type, value,className ,id,onKeyPress}) => {
+const TextInput = ({ name, onChange, placeholder, title, type, value,className ,id,onKeyPress,ref}) => {
 
   return (
     <div className="form">
@@ -17,7 +17,8 @@ const TextInput = ({ name, onChange, placeholder, title, type, value,className ,
         onChange={onChange}
         onKeyPress={onKeyPress}
         id={id} 
-        name={name} />
+        name={name} 
+        ref={ref}/>
     </div>
   )
 }
