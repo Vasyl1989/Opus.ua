@@ -59,12 +59,6 @@ export default function vacancyReduce(state = initialState, action) {
       paginationData: state.paginationData.concat(action.payload),
     };
 
-     case types.AGREE_TO_VACANCY:
-     return{
-      ...state,
-      applyForm: saction.payload,
-    };
-
     default:
       return state;
   };

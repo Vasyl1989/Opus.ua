@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import * as consts from '../../constants/const';
 import * as types from '../../actions/actionTypes';
 import TextInput from '../common/TextInput';
-import SelectInput from '../common/SelectInput';
 import { searchVacancy } from '../../actions/vacancyActions';
 import TypeWork from './TypeWork';
 import PricePerHour from './PricePerHour';

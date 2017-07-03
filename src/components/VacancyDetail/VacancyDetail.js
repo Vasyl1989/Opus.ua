@@ -60,9 +60,9 @@ class VacancyDetail extends React.Component {
                 <img src={picture} alt="" />
                 <div className="content">
                   <h4>Компанія:{vacancy.company}</h4>
-                  <span><a href="#"><i className="fa fa-link"></i> {vacancy.website}</a></span>
+                  <span><a href="#"><i className="fa fa-link"/> {vacancy.website}</a></span>
                 </div>
-                <div className="clearfix"></div>
+                <div className="clearfix"/>
               </div>
               <p className="margin-reset">  {vacancy.description} </p>
             </div>
@@ -75,21 +75,21 @@ class VacancyDetail extends React.Component {
 
                 <ul>
                   <li>
-                    <i className="fa fa-map-marker"></i>
+                    <i className="fa fa-map-marker"/>
                     <div>
                       <strong>Локація</strong>
                       <span>{vacancy.city}</span>
                     </div>
                   </li>
                   <li>
-                    <i className="fa fa-user"></i>
+                    <i className="fa fa-user"/>
                     <div>
                       <strong>Назва роботи</strong>
                       <span>{vacancy.title}</span>
                     </div>
                   </li>
                   <li>
-                    <i className="fa fa-money"></i>
+                    <i className="fa fa-money"/>
                     <div>
                       <strong>Оплата праці</strong>
                       <span>{vacancy.price_per_hour} / год</span>
@@ -107,12 +107,12 @@ class VacancyDetail extends React.Component {
   }
 }
 VacancyDetail.PropTypes = {
-  searchVacancy: PropTypes.func.isRequired
+  searchVacancy: PropTypes.func.isRequired,
 };
 function mapStateToProps(state) {
   return {
     singleVacancy: state.vacancy.singleVacancy,
-    vacancies: state.vacancy.vacancies
+    vacancies: state.vacancy.vacancies,
   };
 }
 

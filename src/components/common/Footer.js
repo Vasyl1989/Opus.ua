@@ -1,17 +1,10 @@
 import React from 'react';
-import { browserHistory } from 'react-router';
+import { Link } from 'react-router';
 import { PropTypes } from 'prop-types';
 
 class Footer extends React.Component {
-   constructor(props) {
-    super(props);
-    this.transition = this.transition.bind(this);
-  }
 
-  transition(e) {
-    e.preventDefault();
-    browserHistory.push('/');
-  }
+
   render() {
     return (
       <div>
@@ -28,7 +21,7 @@ class Footer extends React.Component {
        швидко і легко знайти необхідну роботу всього лише заповнивши резюме або пошукати в розділах
        вакансій. <strong className="slidesStrong">OPUS.ua</strong> створений
        для людей, які шукають тимчасову роботу, без посередників і не мають досвіду роботи.</p>
-              <a href=" " className="button" id='startbutton' onClick={(e) => { this.transition(e) }}>Почати</a>
+              <Link to="/" className="button" id='startbutton' >Почати</Link>
             </div>
           </div>
 
@@ -38,10 +31,10 @@ class Footer extends React.Component {
               <div className="sixteen columns">
                 <h4>Follow Us</h4>
                 <ul className="social-icons">
-                  <li><a className="facebook" href="#"><i className="icon-facebook"></i></a></li>
-                  <li><a className="twitter" href="#"><i className="icon-twitter"></i></a></li>
-                  <li><a className="gplus" href="#"><i className="icon-gplus"></i></a></li>
-                  <li><a className="linkedin" href="#"><i className="icon-linkedin"></i></a></li>
+                  <li><a className="facebook" href="#"><i className="icon-facebook"/></a></li>
+                  <li><a className="twitter" href="#"><i className="icon-twitter"/></a></li>
+                  <li><a className="gplus" href="#"><i className="icon-gplus"/></a></li>
+                  <li><a className="linkedin" href="#"><i className="icon-linkedin"/></a></li>
                 </ul>
 
               </div>
@@ -55,7 +48,5 @@ class Footer extends React.Component {
   }
 
 };
-Footer.PropTypes = {
-  transition: PropTypes.func.isRequired,
-}
+
 export default Footer;

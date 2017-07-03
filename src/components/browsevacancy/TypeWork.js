@@ -2,7 +2,6 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { searchVacancy } from '../../actions/vacancyActions';
-import { filtration, withoutFilter } from '../../actions/filterAction';
 import * as consts from '../../constants/const';
 
 
@@ -43,14 +42,11 @@ class TypeWork extends React.Component {
   onCheck(e) {
     const job_type = e.target.value;
     const checkedElement = e.target.checked;
-    console.log('checked', e.target.checked);
     const query = {
       job_type,
       checkedElement,
-    }
-    console.log('query', query);
+    };
     this.props.dispatch(searchVacancy(serializeArrayToQueryString(addJobType(this.props.filter, job_type, checkedElement)), consts.PAGES.BROWSE_VACANCY, query));
-    console.log('this.props.filter', this.props.filter)
   }
 
   render() {
@@ -106,7 +102,6 @@ class TypeWork extends React.Component {
 TypeWork.PropTypes = {
   onCheck: PropTypes.func.isRequired,
   searchVacancy: PropTypes.func.isRequired,
-  filtration: PropTypes.func.isRequired,
   serializeArrayToQueryString: PropTypes.func.isRequired,
   addJobType: PropTypes.func.isRequired,
 }

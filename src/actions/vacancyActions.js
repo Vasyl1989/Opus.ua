@@ -3,8 +3,7 @@ import * as consts from '../constants/const';
 import * as _ from 'lodash';
 import { sendRequest } from '../utils/api';
 import { browserHistory } from 'react-router';
-
-import { filtration } from './filterAction';
+import { filtration } from './filterActions';
 
 export function getVacancyById(id, vacancies, forUpdate) {
 
@@ -93,12 +92,10 @@ export function editVacancy(vacancy, vacancies) {
 }
 
 export function searchVacancy(query, fromPage, parametr) {
-  // debugger;
+
   return dispatch => {
     sendRequest('get', '/vacancies', null, query)
       .then(response => {
-        parametr;
-        console.log('parametr',parametr)
         dispatch({ type: types.SEARCH, payload: response.data });
         if (fromPage !== consts.PAGES.BROWSE_VACANCY) {
           browserHistory.push("/browse_vacancy");
@@ -119,6 +116,27 @@ export function pagination(query) {
         console.log(error);
       });
   }
+}
+
+
+
+export function agreeToVacancy(users_vacancy) {
+  return dispatch => {
+    const formData = new FormData();
+    for (const k in users_vacancy) {
+      formData.append(`users_vacancy[${k}]`, users_vacancy[k]);
+    }
+
+    sendRequest('post', '/users_vacancies', formData)
+      .then((response) => {
+        if (response && response.status === 200 || response.status === 201) {
+          console.log('data send on server success');
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 }
 
 

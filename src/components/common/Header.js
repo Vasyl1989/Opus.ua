@@ -55,13 +55,13 @@ const Header = () => {
             {/*-------Navigation-----*/}
 
             <div id="mobile-navigation">
-              <a href="#menu" className="menu-trigger"><i className="fa fa-reorder"></i> Menu</a>
+              <a href="#menu" className="menu-trigger"><i className="fa fa-reorder"/> Menu</a>
             </div>
 
           </div>
         </div>
       </header>
-      <div className="clearfix"></div>
+      <div className="clearfix"/>
 
     </div>
 

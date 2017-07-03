@@ -36,8 +36,8 @@ class ContextManage extends React.Component {
 
           <td className="action">
             
-            <a href='' onClick={(e) => this.handleGoToEditVacancy(e, item.id)}><i className="fa fa-pencil"></i> Edit</a>
-            <a href="#" className="delete" onClick={() => this.onDelete(item.id)}><i className="fa fa-remove"></i> Delete</a>
+            <a href='' onClick={(e) => this.handleGoToEditVacancy(e, item.id)}><i className="fa fa-pencil"/> Edit</a>
+            <a href="#" className="delete" onClick={() => this.onDelete(item.id)}><i className="fa fa-remove"/> Delete</a>
           </td>
         </tr>
 
@@ -59,8 +59,8 @@ class ContextManage extends React.Component {
             <thead>
               <tr>
                 <th><i className="fa fa-file-text" />Назва вакансії</th>
-                <th><i className="fa fa-calendar"></i>Дата створення оголошення</th>
-                <th><i className="fa fa-calendar"></i>Оголошення активне до</th>
+                <th><i className="fa fa-calendar"/>Дата створення оголошення</th>
+                <th><i className="fa fa-calendar"/>Оголошення активне до</th>
                 <th></th>
               </tr>
             </thead>

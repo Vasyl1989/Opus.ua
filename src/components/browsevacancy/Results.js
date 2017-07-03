@@ -8,6 +8,7 @@ import Widgets from './Widgets';
 import { PAGES } from '../../constants/const';
 import * as types from '../../actions/actionTypes';
 
+
 class Results extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -27,12 +28,12 @@ class Results extends React.Component {
     });
   }
   inputChange(e) {
-    this.setState({ title: e.target.value })
+    this.setState({ title: e.target.value });
   }
   onSearchInput(e, title) {
     e.preventDefault();
     const query = { title };
-    this.props.dispatch({ type:types.ABOUT_SEARCH.SET_TITLE, payload:title });
+    this.props.dispatch({ type: types.ABOUT_SEARCH.SET_TITLE, payload: title });
     this.props.dispatch(searchVacancy(query, PAGES.BROWSE_VACANCY));
   }
 
@@ -49,9 +50,8 @@ class Results extends React.Component {
   }
 
   renderVacancy() {
+    window.scrollTo(0, 0);
     const vacancies = this.props.SearchResults;
-    console.log('vacancies',vacancies)
-    console.log('vacancy.vacancies',this.props.vacancy.vacancies)
     //pagination
     // Logic for displaying vacancies
     const indexOfLastVacancy = this.state.currentPage * this.state.vacancyPerPage;
@@ -63,53 +63,60 @@ class Results extends React.Component {
     for (let i = 1; i <= Math.ceil(vacancies.length / this.state.vacancyPerPage); i++) {
       pageNumbers.push(i);
     }
+    if (vacancies.length > 0) {
+      return (
+        <div>
 
-    return (
-      <div>
-
-        <ul className="job-list full">
-          {currentVacancise.map((item) => {
-            const job_type = item.job_type;
-            return (<li className="highlighted" key={item.id} >
-              <Link to={"vacancy_detail/" + item.id}
-                onClick={() => { browserHistory.push(item.id); }}>
-                <img src={picture} />
-                <div className="job-list-content">
-                  <h4>{item.title}
-                    <span className={this.spanColor({ job_type })}>{item.job_type}</span>
-                  </h4>
-                  <div className="job-icons">
-                    <span>
-                      <i className="fa fa-briefcase" />Компанія:{item.company}
-                    </span>
-                    <span>
-                      <i className="fa fa-map-marker" />{item.city}
-                    </span>
-                    <span>
-                      <i className="fa fa-money" />{item.price_per_hour} грн/год
+          <ul className="job-list full">
+            {currentVacancise.map((item) => {
+              const job_type = item.job_type;
+              return (<li className="highlighted" key={item.id} >
+                <Link to={"vacancy_detail/" + item.id}
+                  onClick={() => { browserHistory.push(item.id); }}>
+                  <img src={picture} />
+                  <div className="job-list-content">
+                    <h4>{item.title}
+                      <span className={this.spanColor({ job_type })}>{item.job_type}</span>
+                    </h4>
+                    <div className="job-icons">
+                      <span>
+                        <i className="fa fa-briefcase" />Компанія:{item.company}
                       </span>
+                      <span>
+                        <i className="fa fa-map-marker" />{item.city}
+                      </span>
+                      <span>
+                        <i className="fa fa-money" />{item.price_per_hour} грн/год
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </Link>
-              <div className="clearfix" />
-            </li>
-            );
-          })}
-        </ul>
-        <div className="pagination">
-          <ul >{
-            pageNumbers.map(number => {
-              return (
-                <button key={number}>
-                  <li
-                    key={number}
-                    id={number}
-                    onClick={this.handleClick}>{number}</li></button>
+                </Link>
+                <div className="clearfix" />
+              </li>
               );
-            })
-          }</ul></div>
-      </div>
-    );
+            })}
+          </ul>
+          <div className="pagination">
+            <ul >{
+              pageNumbers.map(number => {
+                return (
+                  <button key={number}>
+                    <li
+                      key={number}
+                      id={number}
+                      onClick={this.handleClick}>{number}</li></button>
+                );
+              })
+            }</ul></div>
+        </div>
+      );
+    } else {
+      return (
+        <p>Вакансій не знайдено.</p>
+      )
+
+    }
+
   }
 
   render() {
@@ -150,16 +157,17 @@ Results.PropTypes = {
   handleClick: PropTypes.func.isRequired,
   inputChange: PropTypes.func.isRequired,
   spanColor: PropTypes.func.isRequired,
+  isEmpty: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     vacancy: state.vacancy,
     SearchResults: state.vacancy.SearchResults,
-    filter:state.filter,
+    filter: state.filter,
   };
 }
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
   return { dispatch }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Results);

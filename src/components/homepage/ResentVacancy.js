@@ -67,19 +67,19 @@ class ResentVacancy extends React.Component {
                     </h4>
                     <div className="job-icons">
                       <span>
-                        <i className="fa fa-briefcase"></i>Компанія:
+                        <i className="fa fa-briefcase"/>Компанія:
                         {item.company}</span>
                       <span>
-                        <i className="fa fa-map-marker"></i>
+                        <i className="fa fa-map-marker"/>
                         {item.city}</span>
                       <span>
-                        <i className="fa fa-money"></i>
+                        <i className="fa fa-money"/>
                         {item.price_per_hour}
                         / hour</span>
                     </div>
                   </div>
                 </Link>
-                <div className="clearfix"></div>
+                <div className="clearfix"/>
               </li>);
 
             })

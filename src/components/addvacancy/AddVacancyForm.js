@@ -178,7 +178,7 @@ class AddVacancyForm extends React.Component {
                 onChange={this.handleInputChange} />
               <span className="errorMassage" style={{ color: "red" }}>{this.state.errors["email"]}</span>
 
-              <div className="clearfixform"></div>
+              <div className="clearfixform" />
               {/*------- Title------*/}
 
               <TextInput
@@ -190,7 +190,7 @@ class AddVacancyForm extends React.Component {
                 onChange={this.handleInputChange} />
               <span className="errorMassage" style={{ color: "red" }}>{this.state.errors["title"]}</span>
 
-              <div className="clearfixform"></div>
+              <div className="clearfixform" />
               {/*------- Job Pair------*/}
               <TextInput
                 title='Заробітня плата'
@@ -201,7 +201,7 @@ class AddVacancyForm extends React.Component {
                 onChange={this.handleInputChange} />
               <span style={{ color: "red" }}>{this.state.errors["price_per_hour"]}</span>
 
-              <div className="clearfixform"></div>
+              <div className="clearfixform" />
               {/*------- Location------*/}
 
               <TextInput
@@ -211,7 +211,7 @@ class AddVacancyForm extends React.Component {
                 name="city"
                 value={this.state.vacancy.city}
                 onChange={this.handleInputChange} />
-              <div className="clearfixform"></div>
+              <div className="clearfixform" />
               {/*------- Job Type------*/}
 
               <SelectInput
@@ -242,7 +242,7 @@ class AddVacancyForm extends React.Component {
 
                 <span style={{ color: "red" }}>{this.state.errors["description"]}</span>
               </div>
-              <div className="clearfixform"></div>
+              <div className="clearfixform" />
               {/*------- TClosing Date------*/}
 
               <TextInput
@@ -253,7 +253,7 @@ class AddVacancyForm extends React.Component {
                 onChange={this.handleInputChange}
                 name='active_to_date' />
               <span style={{ color: "red" }}>{this.state.errors["active_to_date"]}</span>
-              <div className="clearfixform"></div>
+              <div className="clearfixform" />
               {/*------- Company Details------*/}
               <div className="divider">
                 <h3>Додатково про компанію</h3>
@@ -269,7 +269,7 @@ class AddVacancyForm extends React.Component {
                 onChange={this.handleInputChange}
                 name="company" />
               <span style={{ color: "red" }}>{this.state.errors["company"]}</span>
-              <div className="clearfixform"></div>
+              <div className="clearfixform" />
               {/*------- Website------*/}
 
               <TextInput
@@ -279,7 +279,7 @@ class AddVacancyForm extends React.Component {
                 onChange={this.handleInputChange}
                 value={this.state.vacancy.website}
                 name="website" />
-              <div className="clearfixform"></div>
+              <div className="clearfixform" />
 
               <div className="divider margin-top-0"></div>
               <button className="button big margin-top-5" type="submit" id='vacancy'>Додати</button>
@@ -333,7 +333,7 @@ function mapStateToProps(state) {
   return {
     vacancy: state.vacancy,
     singleVacancy: state.vacancy.singleVacancy,
-    shouldUpdate: state.vacancy.shouldUpdate
+    shouldUpdate: state.vacancy.shouldUpdate,
   };
 }
 

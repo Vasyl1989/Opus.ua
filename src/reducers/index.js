@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import vacancy, * as fromVacancy from './vacancyReducer';
-import filter,* as fromFilter  from './filterReducer';
+import filter from './filterReducer';
 import { routerReducer } from 'react-router-redux';
 
 const rootReducer = combineReducers({

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const TitlebarBrowseVacancy=()=>{
     return(
@@ -8,7 +9,7 @@ const TitlebarBrowseVacancy=()=>{
                 <h2>Ми знайшли для вас такі пропозиції:</h2>
               </div>
               <div className="six columns">
-                <a href="add_vacancy" className="button">Запропонувати роботу</a>
+                <Link to="/add_vacancy" className="button">Запропонувати роботу</Link>
               </div>
             </div>
           </div>

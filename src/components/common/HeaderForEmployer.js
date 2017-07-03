@@ -29,7 +29,7 @@ const HeaderForEmployer = () => {
                   <a href="#">Працівнику</a>
                   <ul>
                     <li>
-                      <a href="browse_categories">Вакансії за категорями</a>
+                      <Link to="/browse_categories">Вакансії за категорями</Link>
                     </li>
                   </ul>
                 </li>
@@ -38,11 +38,9 @@ const HeaderForEmployer = () => {
                   <ul>
                     <li>
                       <Link to={"/add_vacancy"}>Створити вакансію</Link>
-                        {/* < a href="/AddVacancy">Створити вакансію</a>*/}
                     </li>
                     <li>
                      <Link to={"/manage_vacancy"}>Редагувати вакансію</Link>
-                        {/*<a href="ManageVacancy">Редагувати вакансію</a>*/}
                       </li>
                   </ul>
                 </li>
@@ -52,13 +50,13 @@ const HeaderForEmployer = () => {
               {/*-------Navigation-----*/}
 
               <div id="mobile-navigation">
-                <a href="#menu" className="menu-trigger"><i className="fa fa-reorder"></i> Menu</a>
+                <a href="#menu" className="menu-trigger"><i className="fa fa-reorder"/> Menu</a>
               </div>
 
           </div>
           </div>
       </header>
-        <div className="clearfix"></div>
+        <div className="clearfix"/>
 
     </div>
 

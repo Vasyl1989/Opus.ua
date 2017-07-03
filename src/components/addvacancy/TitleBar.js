@@ -7,7 +7,7 @@ const TitleBar = () => {
       <div id="titlebar" className="single submit-page">
         <div className="container">
           <div className="sixteen columns">
-            <h2><i className="fa fa-plus-circle"></i>Додати вакансію</h2>
+            <h2><i className="fa fa-plus-circle"/>Додати вакансію</h2>
           </div>
         </div>
       </div>
