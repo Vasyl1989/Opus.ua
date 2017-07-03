@@ -1,6 +1,8 @@
 import React from 'react';
 import Modal from 'react-modal';
+import { connect } from 'react-redux';
 import TextInput from '../common/TextInput';
+import * as Actions from '../../actions/vacancyActions';
 
 const customStyles = {
   content: {
@@ -19,17 +21,21 @@ class ApplyPopup extends React.Component {
     super();
     this.state = {
       modalIsOpen: false,
-      apply: {
-        name: "",
+      users_vacancy: {
+        full_name: "",
         email: "",
         description: "",
-        file: "",
-      }
+        vacancy_id: "",
+        file: []
+      },
     };
 
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+
+    this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   openModal() {
@@ -38,14 +44,30 @@ class ApplyPopup extends React.Component {
 
   afterOpenModal() {
     // references are now sync'd and can be accessed. 
-    this.subtitle.style.color = '#f00';
   }
 
   closeModal() {
     this.setState({ modalIsOpen: false });
   }
 
+  onChange(e) {
+    const users_vacancy = Object.assign({}, this.state.users_vacancy);
+    users_vacancy[e.target.name] = e.target.value;
+    users_vacancy.file = this.fileUpload.files[0];
+    this.setState({ users_vacancy: users_vacancy });
+    const vacancy = this.props.singleVacancy;
+    const aaa = vacancy.id;
+    users_vacancy.vacancy_id = aaa;
+  }
+
+  onFormSubmit(e) {
+    e.preventDefault();
+    this.props.dispatch(Actions.sendVacancy2(this.state.users_vacancy));
+  }
+
   render() {
+    const vacancy = this.props.singleVacancy;
+
     return (
       <div>
         <button onClick={this.openModal}>Погодитись на цю роботу</button>
@@ -60,30 +82,30 @@ class ApplyPopup extends React.Component {
             <div className="small-dialog-headline">
               <h2 >Погодитись на цю роботу</h2>
             </div>
-            <button onClick={this.closeModal} className="mfp-close"></button>
+            <button onClick={this.closeModal} className="mfp-close" />
             <div className="small-dialog-content">
-              <form>
+              <form onSubmit={this.onFormSubmit} encType="multipart/form-data">
                 <TextInput
                   type="text"
                   placeholder="Повне ім'я"
-                  name="name"
-                  value={this.state.apply.name}
-                  onChange={this.handleInputChange} />
+                  name="full_name"
+                  value={this.state.users_vacancy.full_name}
+                  onChange={this.onChange} />
                 <div className="clearfixform" />
 
                 <TextInput
                   type="email"
                   name="email"
-                  value={this.state.apply.email}
+                  value={this.state.users_vacancy.email}
                   placeholder="Електронна адреса"
-                  onChange={this.handleInputChange} />
+                  onChange={this.onChange} />
                 <div className="clearfixform" />
 
                 <textarea
                   className="WYSIWYG"
                   id="summary"
-                  value={this.state.apply.description}
-                  onChange={this.handleInputChange}
+                  value={this.state.users_vacancy.description}
+                  onChange={this.onChange}
                   name="description"
                   placeholder="Ваше повідомлення / лист, який ви хочете надіслати роботодівцю" />
                 <div className="clearfixform" />
@@ -92,18 +114,12 @@ class ApplyPopup extends React.Component {
                   <strong>Завантажити ваше резюме</strong>
                   <span>Максимальний розмір файлу: 5MB</span>
                 </div>
-
                 <div className="clearfix" />
-                <label className="upload-btn aaar">
-                  <TextInput
-                    type="file"
-                    name="file"
-                    multiple
-                    value={this.state.apply.file}
-                    onChange={this.handleInputChange} />
-                  <i className="fa fa-upload" />Завантажити
-              </label>
-                <span className="fake-input">Жодний файл не є вибраним</span>
+                <input
+                  ref={(ref) => this.fileUpload = ref}
+                  type="file"
+                  onChange={this.onChange}
+                  name="file" />
                 <div className="divider" />
                 <button className="send" type="submit">Надіслати заявку</button>
               </form>
@@ -116,5 +132,15 @@ class ApplyPopup extends React.Component {
 }
 
 
+function mapStateToProps(state) {
+  return {
+    users_vacancy: state.users_vacancy,
+    singleVacancy: state.vacancy.singleVacancy,
+  };
+}
 
-export default (ApplyPopup);
+function mapDispatchToProps(dispatch) {
+  return { dispatch };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ApplyPopup);

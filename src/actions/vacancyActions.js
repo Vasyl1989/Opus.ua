@@ -33,7 +33,6 @@ export function getVacancyById(id, vacancies, forUpdate) {
         }
       })
       .catch((error) => console.error(error));
-
   };
 }
 
@@ -45,6 +44,26 @@ export function getAllVacancy() {
 
   };
 }
+
+export function sendVacancy2(users_vacancy) {
+  return dispatch => {
+    const formData = new FormData();
+    for (const k in users_vacancy) {
+      formData.append(`users_vacancy[${k}]`, users_vacancy[k]);
+    }
+
+    sendRequest('post', '/users_vacancies', formData)
+      .then((response) => {
+        if (response && response.status === 200 || response.status === 201) {
+          console.log('data send on server success');
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+}
+
 export function sendVacancy(vacancy) {
   return dispatch => {
     const data = { vacancy };
