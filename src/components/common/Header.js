@@ -2,17 +2,14 @@ import React from 'react';
 import '../../styles/styles.css';
 import { Link } from 'react-router';
 
-
 const Header = () => {
   return (
     <div>
-
       <header className="sticky-header">
         <div className="container">
           <div className="sixteen columns">
 
             {/*--------Logo-------*/}
-
             <div id="logo">
               <h1>
                 <Link to={"/"}>OPUS.ua</Link>
@@ -21,12 +18,10 @@ const Header = () => {
             </div>
 
             {/*---------Menu-------*/}
-
             <nav id="navigation" className="menu sf-js-enabled sf-arrows">
               <ul id="responsive">
                 <li>
                   <Link to={"/"}>Головна</Link>
-
                 </li>
                 <li>
                   <a href="#" id="current">Працівнику</a>
@@ -45,7 +40,6 @@ const Header = () => {
                     </li>
                     <li>
                       <Link to={"/manage_vacancy"}>Редагувати вакансію</Link>
-
                     </li>
                   </ul>
                 </li>
@@ -53,18 +47,14 @@ const Header = () => {
             </nav>
 
             {/*-------Navigation-----*/}
-
             <div id="mobile-navigation">
-              <a href="#menu" className="menu-trigger"><i className="fa fa-reorder"></i> Menu</a>
+              <a href="#menu" className="menu-trigger"><i className="fa fa-reorder" />Menu</a>
             </div>
-
           </div>
         </div>
       </header>
-      <div className="clearfix"></div>
-
+      <div className="clearfix" />
     </div>
-
   );
 };
 

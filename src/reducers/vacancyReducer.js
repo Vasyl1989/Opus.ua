@@ -1,14 +1,14 @@
 import * as types from '../actions/actionTypes';
 
-const initialState = {
+ export  const initialState = {
   fething: false,
   singleVacancy: {},
   shouldUpdate: false,
   vacancies: [],
   SearchResults: [],
-  paginationData: []
+  paginationData:[],
+ };
 
-};
 
 export default function vacancyReduce(state = initialState, action) {
   switch (action.type) {
@@ -16,48 +16,56 @@ export default function vacancyReduce(state = initialState, action) {
       return {
         ...state,
         fething: false,
-        vacancies: action.payload
+        vacancies: action.payload,
       };
 
     case types.GET_VACANCY_BY_ID:
       return {
         ...state,
         fething: false,
-        singleVacancy: action.payload
+        singleVacancy: action.payload,
       };
     case types.DELETE_VACANCY:
       return {
         ...state,
         fething: false,
-        vacancies: action.payload
+        vacancies: action.payload,
       };
     case types.EDIT_VACANCY:
       return {
         ...state,
         fething: false,
-        vacancies: action.payload
+        vacancies: action.payload,
       };
 
     case types.SHOULD_UPDATE:
       return {
         ...state,
         fething: false,
-        shouldUpdate: true
+        shouldUpdate: true,
       };
 
     case types.SEARCH:
       return {
         ...state,
         fething: false,
-        SearchResults: action.payload
+        SearchResults: action.payload,
       };
 
+ 
     case types.PAGINATION:
-      return {
-        ...state,
-        paginationData: state.paginationData.concat(action.payload),
-      };
+    return{
+      ...state,
+      paginationData: state.paginationData.concat(action.payload),
+    };
+
+     case types.AGREE_TO_VACANCY:
+     return{
+      ...state,
+      applyForm: saction.payload,
+    };
+
     default:
       return state;
-  }
+  };
 }

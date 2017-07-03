@@ -1,11 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
-import * as consts from '../../constants/const';
+import { connect } from 'react-redux';
 import { searchVacancy } from '../../actions/vacancyActions';
+import * as consts from '../../constants/const';
 
-class Slider extends React.Component {
-
+class PricePerHour extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,12 +18,11 @@ class Slider extends React.Component {
       .handleChange
       .bind(this);
   }
-
   componentWillMount() {
     this.setState({ firstValue: this.state.minValue, secondValue: this.state.maxValue });
   }
 
-  handleChange(name, event, e) {
+  handleChange(name, event) {
     let value = event.target.value;
     if (name === "second") {
       if (parseInt(this.state.firstValue) < parseInt(value)) {
@@ -36,14 +34,10 @@ class Slider extends React.Component {
         this.setState({ firstValue: value });
       }
     }
-    this.setState({
-      firstValue: e.target.value,
-      secondValue: e.target.value
-    });
   }
 
-  filterSubmit(e, firstValue, secondValue) {
-    e.preventDefault();
+  filterSubmit(event, firstValue, secondValue) {
+    event.preventDefault();
     const prMn = firstValue;
     const prMx = secondValue;
     const query = { prMn, prMx };
@@ -51,25 +45,31 @@ class Slider extends React.Component {
   }
 
   render() {
+
     return (
-      <div className="widgetSlider">
-        <div className="rangeValues"><h4>Оплата: {this.state.firstValue} - {this.state.secondValue} грн.год</h4></div>
+      <div className="widget">
+        <div className="rangeValues">Оплата: {this.state.firstValue} - {this.state.secondValue} грн.год</div>
         <section className="range-slider">
           <input type="range" value={this.state.firstValue} min={this.state.minValue} max={this.state.maxValue} step={this.state.step} onChange={this.handleChange.bind(this, "first")} />
           <input type="range" value={this.state.secondValue} min={this.state.minValue} max={this.state.maxValue} step={this.state.step} onChange={this.handleChange.bind(this, "second")} />
           <div className="minValue"><span>від: {this.state.minValue}</span><span className="arr" />до: {this.state.maxValue}</div>
         </section>
-        <button className="button" onClick={(e) => { this.filterSubmit(e, this.state.firstValue, this.state.secondValue); }}>фільтрувати</button>
+        <button type='submit' onClick={(event) => { this.filterSubmit(event, this.state.firstValue, this.state.secondValue) }}>Відфільтрувати</button>
       </div>
     );
   }
 }
 
+PricePerHour.PropTypes = {
+  handleChange: PropTypes.func.isRequired,
+  filterSubmit: PropTypes.func.isRequired,
+};
+
 function mapStateToProps(state) {
   return {
     vacancy: state.vacancy,
-    SearchResults: state.vacancy.SearchResults
+    SearchResults: state.vacancy.SearchResults,
   };
 }
 
-export default connect(mapStateToProps, { searchVacancy })(Slider);
+export default connect(mapStateToProps, { searchVacancy })(PricePerHour);

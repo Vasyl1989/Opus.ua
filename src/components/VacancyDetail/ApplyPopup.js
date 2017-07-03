@@ -30,9 +30,15 @@ class ApplyPopup extends React.Component {
       },
     };
 
-    this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
+    this.openModal = this
+      .openModal
+      .bind(this);
+    this.afterOpenModal = this
+      .afterOpenModal
+      .bind(this);
+    this.closeModal = this
+      .closeModal
+      .bind(this);
 
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -67,7 +73,6 @@ class ApplyPopup extends React.Component {
 
   render() {
     const vacancy = this.props.singleVacancy;
-
     return (
       <div>
         <button onClick={this.openModal}>Погодитись на цю роботу</button>

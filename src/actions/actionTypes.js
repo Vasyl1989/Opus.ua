@@ -1,8 +1,24 @@
 export const CREATE_VACANCY = 'CREATE_VACANCY';
 export const GET_ALL_VACANCIES = 'GET_ALL_VACANCIES';
 export const DELETE_VACANCY = 'DELETE_VACANCY';
-export const GET_VACANCY_BY_ID = 'GET_VACANCY_BY_ID';
+export const SEARCH = 'SEARCH';
 export const EDIT_VACANCY = 'EDIT_VACANCY';
 export const SHOULD_UPDATE = 'SHOULD_UPDATE';
-export const SEARCH = 'SEARCH';
+
+export const GET_VACANCY_BY_ID = 'GET_VACANCY_BY_ID';
 export const PAGINATION = 'PAGINATION';
+export const CHECK = 'CHECK';
+export const CHECK_OUT = 'CHECK_OUT';
+
+export const JOB_TYPE = {
+  SET_FULL_TIME: "SET_FULL_TIME",
+  SET_PART_TIME: "SET_PART_TIME",
+  SET_INTERNSHIP: "SET_INTERNSHIP",
+  SET_FREELANCE: "SET_FREELANCE",
+};
+
+export const ABOUT_SEARCH = {
+  SET_CITY: "SET_CITY",
+  SET_TITLE: "SET_TITLE",
+  SET_CATEGORY: "SET_CATEGORY",
+};
