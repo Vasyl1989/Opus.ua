@@ -7,6 +7,7 @@ const initialState = {
   vacancies: [],
   SearchResults: [],
   paginationData: []
+
 };
 
 export default function vacancyReduce(state = initialState, action) {
