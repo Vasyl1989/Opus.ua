@@ -7,8 +7,7 @@ import * as types from '../actions/actionTypes';
   vacancies: [],
   SearchResults: [],
   paginationData:[],
-  applyForm:{},
-};
+ };
 
 
 export default function vacancyReduce(state = initialState, action) {
@@ -53,6 +52,7 @@ export default function vacancyReduce(state = initialState, action) {
         SearchResults: action.payload,
       };
 
+ 
     case types.PAGINATION:
     return{
       ...state,

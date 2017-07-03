@@ -9,6 +9,7 @@ export const SORTING = ['Найновіша','Найстаріша','Погод�
 
 export const PAGES = {
   BROWSE_VACANCY: 'BROWSE_VACANCY',
+  BROWSE_VACANCY_CHECK: 'BROWSE_VACANCY_CHECK',
   BROWSE_CATEGORIES:'BROWSE_CATEGORIES',
   MANAGE_VACANCY:'MANAGE_VACANCY',
   ADD_VACANCY:'ADD_VACANCY',

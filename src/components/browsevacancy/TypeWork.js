@@ -20,10 +20,9 @@ function serializeArrayToQueryString(objectOfQueries) {
 
 function addJobType(filter, type, isChecked) {
   const myFilter = { ...filter, job_type: [...filter.job_type] };
-  
   if (isChecked === true) {
     myFilter.job_type.push(type);
-  } else if(isChecked === false) {
+  } else if (isChecked === false) {
     for (let value in myFilter) {
       if (Array.isArray(myFilter[value])) {
         const target = myFilter[value].filter(jobtype => jobtype !== type);
@@ -40,7 +39,7 @@ class TypeWork extends React.Component {
     super(props, context);
     this.onCheck = this.onCheck.bind(this);
   }
-  //work from second click
+
   onCheck(e) {
     const job_type = e.target.value;
     const checkedElement = e.target.checked;
@@ -50,12 +49,8 @@ class TypeWork extends React.Component {
       checkedElement,
     }
     console.log('query', query);
-
-    //  this.props.dispatch(filtration(query));
-
-    this.props.dispatch(searchVacancy(serializeArrayToQueryString(addJobType(this.props.filter, job_type, checkedElement)), consts.PAGES.BROWSE_VACANCY));
-    console.log('this.props.filter',this.props.filter)
-    this.props.dispatch(filtration(query));
+    this.props.dispatch(searchVacancy(serializeArrayToQueryString(addJobType(this.props.filter, job_type, checkedElement)), consts.PAGES.BROWSE_VACANCY, query));
+    console.log('this.props.filter', this.props.filter)
   }
 
   render() {
@@ -64,12 +59,13 @@ class TypeWork extends React.Component {
         <h4>Тип роботи</h4>
         <ul className="checkboxes">
           <li>
-            <input 
-            id='check-1'
-            type='checkbox'
-            value='Повна'
-            name='check'
-            onChange={this.onCheck}
+            <input
+              id='check-1'
+              type='checkbox'
+              value='Повна'
+              name='check'
+              onChange={this.onCheck}
+              value='Повна'
             />
             <label htmlFor="check-1">Повна занятість <span></span></label>
           </li>
@@ -100,7 +96,7 @@ class TypeWork extends React.Component {
               value="Фріланс" />
             <label htmlFor="check-4">Фріланс <span></span></label>
           </li>
-
+        
         </ul>
       </div>
     )

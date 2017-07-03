@@ -7,6 +7,8 @@ export const SHOULD_UPDATE = 'SHOULD_UPDATE';
 
 export const GET_VACANCY_BY_ID = 'GET_VACANCY_BY_ID';
 export const PAGINATION = 'PAGINATION';
+export const CHECK='CHECK';
+export const CHECK_OUT='CHECK_OUT';
 
 export const JOB_TYPE = {
   SET_FULL_TIME: "SET_FULL_TIME",
@@ -19,7 +21,4 @@ export const ABOUT_SEARCH = {
   SET_CITY: "SET_CITY",
   SET_TITLE: "SET_TITLE",
   SET_CATEGORY: "SET_CATEGORY",
- 
 }
-
-export const AGREE_TO_VACANCY = 'AGREE_TO_VACANCY';

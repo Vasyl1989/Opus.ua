@@ -4,15 +4,13 @@ import * as consts from '../constants/const';
 
 export function filtration(query) {
   return dispatch => {
-    if (query.job_type === consts.VACANCY_TYPE.FULL) {
-      dispatch({ type: types.JOB_TYPE.SET_FULL_TIME, payload: query });
-    } else if (query.job_type === consts.VACANCY_TYPE.PART) {
-      dispatch({ type: types.JOB_TYPE.SET_PART_TIME, payload: query });
-    } else if (query.job_type === consts.VACANCY_TYPE.INTERNSHIP) {
-      dispatch({ type: types.JOB_TYPE.SET_INTERNSHIP, payload: query });
-    } else if (query.job_type === consts.VACANCY_TYPE.FREELANCE) {
-      dispatch({ type: types.JOB_TYPE.SET_FREELANCE, payload: query });
+
+    if (query.checkedElement === true) {
+      dispatch({ type: types.CHECK, payload: query.job_type })
+    } else if (query.checkedElement === false) {
+      dispatch({ type: types.CHECK_OUT, payload: query.job_type })
     }
+
   };
 }
 

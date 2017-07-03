@@ -3,65 +3,72 @@ import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { searchVacancy } from '../../actions/vacancyActions';
 import { PAGES } from '../../constants/const';
+import { browserHistory } from 'react-router';
 
-class Categories extends React.Component{
+class Categories extends React.Component {
   constructor(props) {
     super(props);
     this.serchSubmit = this.serchSubmit.bind(this);
+    this.transition = this.transition.bind(this);
   }
   serchSubmit(e) {
     e.preventDefault();
-    const category=e.currentTarget.dataset.name;
-    const query = {category};
-    this.props.searchVacancy(query,PAGES.HOME_PAGE,true);
+    const category = e.currentTarget.dataset.name;
+    const query = { category };
+    this.props.searchVacancy(query, PAGES.HOME_PAGE, true);
   }
-  render(){
-   return (
-    <div>
-      <div className="container">
-        <div className="sixteen columns">
-          <h3 className="margin-bottom-25">Актуальні категорії</h3>
-          <ul id="popular-categories">
-            <li><a href="" data-name='Управління персоналом' onClick={(e)=>{this.serchSubmit(e)}}>
-              <i className="ln ln-icon-People-onCloud"></i> Управління персоналом
+  transition(e) {
+    e.preventDefault();
+    browserHistory.push('/browse_categories');
+  }
+  render() {
+    return (
+      <div>
+        <div className="container">
+          <div className="sixteen columns">
+            <h3 className="margin-bottom-25">Актуальні категорії</h3>
+            <ul id="popular-categories">
+              <li><a href="" data-name='Управління персоналом' onClick={(e) => { this.serchSubmit(e) }}>
+                <i className="ln ln-icon-People-onCloud"></i> Управління персоналом
          </a></li>
-            <li><a href="" data-name='ІТ' onClick={(e)=>{this.serchSubmit(e)}}>
-              <i className="ln ln-icon-Computer-2"></i> ІТ
+              <li><a href="" data-name='ІТ' onClick={(e) => { this.serchSubmit(e) }}>
+                <i className="ln ln-icon-Computer-2"></i> ІТ
          </a></li>
-            <li><a href="" data-name='Будівництво' onClick={(e)=>{this.serchSubmit(e)}}>
-              <i className="ln ln-icon-Worker"></i> Будівництво
+              <li><a href="" data-name='Будівництво' onClick={(e) => { this.serchSubmit(e) }}>
+                <i className="ln ln-icon-Worker"></i> Будівництво
          </a></li>
-            <li><a href="" data-name='Навчання та репетиторство' onClick={(e)=>{this.serchSubmit(e)}}>
-              <i className="ln ln-icon-Student-Female"></i> Навчання та репетиторство
+              <li><a href="" data-name='Навчання та репетиторство' onClick={(e) => { this.serchSubmit(e) }}>
+                <i className="ln ln-icon-Student-Female"></i> Навчання та репетиторство
          </a></li>
-            <li><a href="" data-name='Медицина' onClick={(e)=>{this.serchSubmit(e)}}>
-              <i className="ln  ln-icon-Medical-Sign"></i> Медицина
+              <li><a href="" data-name='Медицина' onClick={(e) => { this.serchSubmit(e) }}>
+                <i className="ln  ln-icon-Medical-Sign"></i> Медицина
          </a></li>
-            <li><a href="" data-name='Сфера обслуговування' onClick={(e)=>{this.serchSubmit(e)}}>
-              <i className="ln  ln-icon-Plates"></i> Сфера обслуговування
+              <li><a href="" data-name='Сфера обслуговування' onClick={(e) => { this.serchSubmit(e) }}>
+                <i className="ln  ln-icon-Plates"></i> Сфера обслуговування
          </a></li>
-            <li><a href="" data-name='Автоперевезення / Логістика' onClick={(e)=>{this.serchSubmit(e)}}>
-              <i className="ln  ln-icon-Globe"></i> Автоперевезення / Логістика
+              <li><a href="" data-name='Автоперевезення / Логістика' onClick={(e) => { this.serchSubmit(e) }}>
+                <i className="ln  ln-icon-Globe"></i> Автоперевезення / Логістика
          </a></li>
-            <li><a href="" data-name='Телекомунікація' onClick={(e)=>{this.serchSubmit(e)}}>
-              <i className="ln  ln-icon-Laptop-3"></i> Телекомунікація
+              <li><a href="" data-name='Телекомунікація' onClick={(e) => { this.serchSubmit(e) }}>
+                <i className="ln  ln-icon-Laptop-3"></i> Телекомунікація
          </a></li>
-          </ul>
+            </ul>
 
-          <div className="clearfix"></div>
-          <div className="margin-top-30"></div>
+            <div className="clearfix"></div>
+            <div className="margin-top-30"></div>
 
-          <a href="browse_categories" className="button centered">Показати усі категорії</a>
-          <div className="margin-bottom-50"></div>
+            <a href="" className="button centered" onClick={(e) => { this.transition(e) }}>Показати усі категорії</a>
+            <div className="margin-bottom-50"></div>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
   }
-  
+
 };
 Categories.PropTypes = {
-  searchVacancy: PropTypes.func.isRequired
+  searchVacancy: PropTypes.func.isRequired,
+  transition: PropTypes.func.isRequired,
 };
 function mapStateToProps(state) {
   return { vacancy: state.vacancy };

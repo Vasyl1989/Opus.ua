@@ -17,6 +17,7 @@ class Banner extends React.Component {
     };
     this.inputChange = this.inputChange.bind(this);
     this.searchSubmit = this.searchSubmit.bind(this);
+    this.transition=this.transition.bind(this);
   }
   inputChange(e) {
     const search = Object.assign({}, this.state.search)
@@ -25,10 +26,14 @@ class Banner extends React.Component {
   }
   searchSubmit(e, city, title) {
     e.preventDefault();
-      const query = { city, title };
-      this.props.dispatch({ type:types.ABOUT_SEARCH.SET_CITY, payload:city });
-      this.props.dispatch({ type:types.ABOUT_SEARCH.SET_TITLE, payload:title });
-      this.props.dispatch(searchVacancy(query, PAGES.HOME_PAGE));
+    const query = { city, title };
+    this.props.dispatch({ type: types.ABOUT_SEARCH.SET_CITY, payload: city });
+    this.props.dispatch({ type: types.ABOUT_SEARCH.SET_TITLE, payload: title });
+    this.props.dispatch(searchVacancy(query, PAGES.HOME_PAGE));
+  }
+  transition(e){
+      e.preventDefault();
+      browserHistory.push('/browse_categories');
   }
   render() {
     return (
@@ -49,9 +54,9 @@ class Banner extends React.Component {
                       placeholder="назва роботи"
                       value={this.state.title}
                       onChange={this.inputChange}
-                      autoComplete="on" 
-                      onKeyPress={(e) => { if (e.key == 'Enter') { this.searchSubmit(e, this.state.search.city, this.state.search.title); } }}                   
-                      />
+                      autoComplete="on"
+                      onKeyPress={(e) => { if (e.key == 'Enter') { this.searchSubmit(e, this.state.search.city, this.state.search.title); } }}
+                    />
                   </div>
                   <div id="2">
                     <input
@@ -60,16 +65,16 @@ class Banner extends React.Component {
                       className="ico-02"
                       placeholder="місто"
                       value={this.state.city}
-                      onChange={this.inputChange} 
+                      onChange={this.inputChange}
                       autoComplete="on"
                       onKeyPress={(e) => { if (e.key == 'Enter') { this.searchSubmit(e, this.state.search.city, this.state.search.title); } }}
-                      />
+                    />
                   </div>
                   <a href='' onClick={(e) => { this.searchSubmit(e, this.state.search.city, this.state.search.title) }}><button><i className="fa fa-search" /></button></a>
 
                   <div className="browse-jobs">
                     <h3>Сортувати вакансії за
-                        <a href="browse_categories"> категорією</a></h3>
+                        <a href=" " onClick={(e) => {this.transition(e) }}> категорією</a></h3>
                   </div>
 
                   <div className="announce">
@@ -88,15 +93,16 @@ class Banner extends React.Component {
 Banner.PropTypes = {
   searchVacancy: PropTypes.func.isRequired,
   inputChange: PropTypes.func.isRequired,
+  transition: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-     vacancy: state.vacancy, 
-     filter: state.filter,
-};
+    vacancy: state.vacancy,
+    filter: state.filter,
+  };
 }
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
   return { dispatch }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Banner);

@@ -4,6 +4,8 @@ import * as _ from 'lodash';
 import { sendRequest } from '../utils/api';
 import { browserHistory } from 'react-router';
 
+import { filtration } from './filterAction';
+
 export function getVacancyById(id, vacancies, forUpdate) {
 
   return dispatch => {
@@ -90,15 +92,18 @@ export function editVacancy(vacancy, vacancies) {
   }
 }
 
-export function searchVacancy(query, fromPage) {
+export function searchVacancy(query, fromPage, parametr) {
   // debugger;
   return dispatch => {
     sendRequest('get', '/vacancies', null, query)
       .then(response => {
+        parametr;
+        console.log('parametr',parametr)
         dispatch({ type: types.SEARCH, payload: response.data });
         if (fromPage !== consts.PAGES.BROWSE_VACANCY) {
           browserHistory.push("/browse_vacancy");
         }
+        dispatch(filtration(parametr))
       }).catch((error) => {
         console.log(error);
       });
@@ -116,9 +121,15 @@ export function pagination(query) {
   }
 }
 
-export function agreeToVacancy(query){
-  return dispatch=>{
-  }
-}
+
+
+
+
+
+
+
+
+
+
 
 
