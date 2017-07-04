@@ -262,7 +262,7 @@ class AddVacancyForm extends React.Component {
                 name="website" />
               <div className="clearfixform" />
               <div className="divider margin-top-0" />
-              <button className="button big margin-top-5" type="submit" id='vacancy'>Додати</button>
+              <button className="button big margin-top-5" type="submit" id="vacancy">Додати</button>
 
               <Modal
                 isOpen={this.state.modalIsOpen}

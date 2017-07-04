@@ -70,51 +70,57 @@ class Results extends React.Component {
       pageNumbers.push(i);
     }
 
-    return (
-      <div>
-        <ul className="job-list full">
-          {currentVacancise.map((item) => {
-            const job_type = item.job_type;
-            return (<li className="highlighted" key={item.id} >
-              <Link to={"vacancy_detail/" + item.id}
-                onClick={() => { browserHistory.push(item.id); }}>
-                <img src={picture} />
-                <div className="job-list-content">
-                  <h4>{item.title}
-                    <span className={this.spanColor({ job_type })}>{item.job_type}</span>
-                  </h4>
-                  <div className="job-icons">
-                    <span>
-                      <i className="fa fa-briefcase" />Компанія:{item.company}
-                    </span>
-                    <span>
-                      <i className="fa fa-map-marker" />{item.city}
-                    </span>
-                    <span>
-                      <i className="fa fa-money" />{item.price_per_hour} грн/год
+    if (vacancies.length > 0) {
+      return (
+        <div>
+          <ul className="job-list full">
+            {currentVacancise.map((item) => {
+              const job_type = item.job_type;
+              return (<li className="highlighted" key={item.id} >
+                <Link to={"vacancy_detail/" + item.id}
+                  onClick={() => { browserHistory.push(item.id); }}>
+                  <img src={picture} />
+                  <div className="job-list-content">
+                    <h4>{item.title}
+                      <span className={this.spanColor({ job_type })}>{item.job_type}</span>
+                    </h4>
+                    <div className="job-icons">
+                      <span>
+                        <i className="fa fa-briefcase" />Компанія:{item.company}
                       </span>
+                      <span>
+                        <i className="fa fa-map-marker" />{item.city}
+                      </span>
+                      <span>
+                        <i className="fa fa-money" />{item.price_per_hour} грн/год
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </Link>
-              <div className="clearfix" />
-            </li>
-            );
-          })}
-        </ul>
-        <div className="pagination">
-          <ul >{
-            pageNumbers.map(number => {
-              return (
-                <button key={number}>
-                  <li
-                    key={number}
-                    id={number}
-                    onClick={this.handleClick}>{number}</li></button>
+                </Link>
+                <div className="clearfix" />
+              </li>
               );
-            })
-          }</ul></div>
-      </div>
-    );
+            })}
+          </ul>
+          <div className="pagination">
+            <ul >{
+              pageNumbers.map(number => {
+                return (
+                  <button key={number}>
+                    <li
+                      key={number}
+                      id={number}
+                      onClick={this.handleClick}>{number}</li></button>
+                );
+              })
+            }</ul></div>
+        </div>
+      );
+    } else {
+      return (
+        <p>За вашими критеріями не було знайдено жoдної вакансії</p>
+      );
+    }
   }
 
   render() {
@@ -165,7 +171,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return { dispatch }
+  return { dispatch };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Results);

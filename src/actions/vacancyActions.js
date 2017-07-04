@@ -4,6 +4,18 @@ import * as _ from 'lodash';
 import { sendRequest } from '../utils/api';
 import { browserHistory } from 'react-router';
 import { filtration } from './filterAction';
+import Modal from 'react-modal';
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
+  }
+};
 
 export function getVacancyById(id, vacancies, forUpdate) {
 
@@ -72,11 +84,11 @@ export function sendVacancy2(users_vacancy) {
     sendRequest('post', '/users_vacancies', formData)
       .then((response) => {
         if (response && response.status === 200 || response.status === 201) {
-          console.log('data send on server success');
+          alert('Ваша заявка успішно надіслана');
         }
       })
       .catch(function (error) {
-        console.log(error);
+        alert('Спробуйте надіслати заявку ще раз');
       });
   };
 }

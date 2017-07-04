@@ -45,15 +45,22 @@ class ApplyPopup extends React.Component {
   }
 
   openModal() {
-    this.setState({ modalIsOpen: true });
+    this.setState({
+      modalIsOpen: true,
+    });
   }
 
   afterOpenModal() {
     // references are now sync'd and can be accessed. 
+    this.subtitle.style.color = '#f00';
   }
 
   closeModal() {
-    this.setState({ modalIsOpen: false });
+    this.setState({
+      modalIsOpen: false,
+      modalIsOpenTwo: false,
+      modalIsOpenThree: false,
+    });
   }
 
   onChange(e) {
