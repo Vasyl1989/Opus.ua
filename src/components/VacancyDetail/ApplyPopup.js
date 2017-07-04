@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
+import { PropTypes } from 'prop-types';
 import TextInput from '../common/TextInput';
 import * as Actions from '../../actions/vacancyActions';
 
@@ -21,6 +22,8 @@ class ApplyPopup extends React.Component {
     super();
     this.state = {
       modalIsOpen: false,
+      modalIsOpenTwo: false,
+      modalIsOpenThree: false,
       users_vacancy: {
         full_name: "",
         email: "",
@@ -28,6 +31,7 @@ class ApplyPopup extends React.Component {
         vacancy_id: "",
         file: []
       },
+      errors: {},
     };
 
     this.openModal = this
@@ -46,7 +50,7 @@ class ApplyPopup extends React.Component {
 
   openModal() {
     this.setState({
-      modalIsOpen: true,
+      modalIsOpen: true
     });
   }
 
@@ -63,6 +67,38 @@ class ApplyPopup extends React.Component {
     });
   }
 
+  handleValidation() {
+    let users_vacancy = this.state.users_vacancy;
+    let errors = {};
+    let formIsValid = true;
+
+    {/*------- full_name validation------*/ }
+    if (!users_vacancy["full_name"]) {
+      formIsValid = false;
+      errors["title"] = "Це поле не може бути пустим";
+    }
+
+    {/*------- email validation------*/ }
+    if (!users_vacancy["email"]) {
+      formIsValid = false;
+      errors["email"] = "Це поле не може бути пустим";
+    }
+
+    {/*------- description validation------*/ }
+    if (!users_vacancy["description"]) {
+      formIsValid = false;
+      errors["description"] = "Це поле не може бути пустим";
+    }
+
+    {/*------- email validation------*/ }
+    if (!users_vacancy["file"]) {
+      formIsValid = false;
+      errors["file"] = "Ви повинні додати файл";
+    }
+    this.setState({ errors: errors });
+    return formIsValid;
+  }
+
   onChange(e) {
     const users_vacancy = Object.assign({}, this.state.users_vacancy);
     users_vacancy[e.target.name] = e.target.value;
@@ -76,10 +112,14 @@ class ApplyPopup extends React.Component {
   onFormSubmit(e) {
     e.preventDefault();
     this.props.dispatch(Actions.sendVacancy2(this.state.users_vacancy));
+    if (this.handleValidation()) {
+      this.setState({ modalIsOpenTwo: true });
+    } else {
+      this.setState({ modalIsOpenThree: true });
+    }
   }
 
   render() {
-    const vacancy = this.props.singleVacancy;
     return (
       <div>
         <button onClick={this.openModal}>Погодитись на цю роботу</button>
@@ -103,6 +143,7 @@ class ApplyPopup extends React.Component {
                   name="full_name"
                   value={this.state.users_vacancy.full_name}
                   onChange={this.onChange} />
+                <span className="errorMassage" style={{ color: "red" }}>{this.state.errors["full_name"]}</span>
                 <div className="clearfixform" />
 
                 <TextInput
@@ -111,6 +152,7 @@ class ApplyPopup extends React.Component {
                   value={this.state.users_vacancy.email}
                   placeholder="Електронна адреса"
                   onChange={this.onChange} />
+                <span className="errorMassage" style={{ color: "red" }}>{this.state.errors["email"]}</span>
                 <div className="clearfixform" />
 
                 <textarea
@@ -120,6 +162,7 @@ class ApplyPopup extends React.Component {
                   onChange={this.onChange}
                   name="description"
                   placeholder="Ваше повідомлення / лист, який ви хочете надіслати роботодівцю" />
+                <span className="errorMassage" style={{ color: "red" }}>{this.state.errors["description"]}</span>
                 <div className="clearfixform" />
 
                 <div className="upload-info">
@@ -132,8 +175,32 @@ class ApplyPopup extends React.Component {
                   type="file"
                   onChange={this.onChange}
                   name="file" />
+                <span className="errorMassage" style={{ color: "red" }}>{this.state.errors["file"]}</span>
                 <div className="divider" />
                 <button className="send" type="submit">Надіслати заявку</button>
+
+
+                <Modal
+                  isOpen={this.state.modalIsOpenThree}
+                  onAfterOpen={this.afterOpenModal}
+                  onRequestClose={this.closeModal}
+                  style={customStyles}
+                  contentLabel="Example Modal"
+                >
+                  <h2 ref={subtitle => this.subtitle = subtitle}>Спробуйте надіслати заявку ще раз</h2>
+                  <button onClick={this.closeModal}>close</button>
+                </Modal>
+
+                <Modal
+                  isOpen={this.state.modalIsOpenTwo}
+                  onAfterOpen={this.afterOpenModal}
+                  onRequestClose={this.closeModal}
+                  style={customStyles}
+                  contentLabel="Example Modal"
+                >
+                  <h2 ref={subtitle => this.subtitle = subtitle}>Заявка надіслана успішно</h2>
+                  <button onClick={this.closeModal}>close</button>
+                </Modal>
               </form>
             </div>
           </div>
@@ -154,5 +221,11 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return { dispatch };
 }
+
+ApplyPopup.PropTypes = {
+  dispatch: PropTypes.func.isRequired,
+  singleVacancy: PropTypes.Object.isRequired,
+};
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApplyPopup);

@@ -145,7 +145,6 @@ class AddVacancyForm extends React.Component {
   }
 
   render() {
-    const vacancy = this.props.singleVacancy;
     return (
       <div className="container form-add-job">
 
@@ -297,6 +296,7 @@ AddVacancyForm.PropTypes = {
   createVacancy: PropTypes.func.isRequired,
   vacancies: PropTypes.array.isRequired,
   openModal: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
   afterOpenModal: PropTypes.func.isRequired,
 };
