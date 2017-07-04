@@ -26,5 +26,6 @@ SelectInput.PropTypes = {
     title: PropTypes.string,
     className: PropTypes.string,
     data_placeholder: PropTypes.string
-}
+};
+
 export default SelectInput;

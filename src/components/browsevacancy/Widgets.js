@@ -1,51 +1,36 @@
 import React from 'react';
-import Slider from './prise';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import * as consts from '../../constants/const';
+import * as types from '../../actions/actionTypes';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 import { searchVacancy } from '../../actions/vacancyActions';
+import TypeWork from './TypeWork';
+import PricePerHour from './PricePerHour';
 
 class Widgets extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      city: "",
-      job_type: "",
-      isChecked: false
+      city: this.props.filter.city,
     };
-    this.inputChange = this.
-      inputChange
-      .bind(this);
-    this.onSearchInput = this
-      .onSearchInput
-      .bind(this);
+    this.inputChange = this.inputChange.bind(this);
+    this.onSearchInput = this.onSearchInput.bind(this);
   }
-
   inputChange(e) {
-    let isChecked = false;
-    this.setState({
-      city: e.target.value,
-      job_type: e.target.value
-    });
-    if (isChecked === true) {
-      console.log(e.target.value);
-    }
+    this.setState({ city: e.target.value });
   }
-
   onSearchInput(e, city) {
     e.preventDefault();
     const query = { city };
-    this.props.searchVacancy(query, consts.PAGES.BROWSE_VACANCY);
+    // // TODO save city to store
+    this.props.dispatch({ type: types.ABOUT_SEARCH.SET_CITY, payload: city });
+    this.props.dispatch(searchVacancy(query, consts.PAGES.BROWSE_VACANCY));
   }
-
-
   render() {
-
     return (
       <div>
-        <h4>Сортувати за </h4>
         <div className="widget">
           <TextInput
             type="text"
@@ -57,62 +42,9 @@ class Widgets extends React.Component {
           />
           <button className="button" onClick={(e) => { this.onSearchInput(e, this.state.city); }}>Пошук</button>
         </div>
-
-        <div className="widget">
-          <h4>Тип роботи</h4>
-          <ul className="checkboxes">
-            <li >
-              <input
-                id="check-1"
-                type="checkbox"
-                name="check"
-                value="Будь-який" />
-              <label htmlFor="check-1">
-                Будь-який
-              </label>
-            </li>
-            <li>
-              <input
-                id="check-2"
-                type="checkbox"
-                name="check"
-                value="Повна занятість" />
-              <label htmlFor="check-2">
-                Повна занятість <span />
-              </label>
-            </li>
-            <li>
-              <input
-                id="check-3"
-                type="checkbox"
-                name="check"
-                value="Часткова занятість" />
-              <label htmlFor="check-3">
-                Часткова занятість <span />
-              </label>
-            </li>
-            <li>
-              <input
-                id="check-4"
-                type="checkbox"
-                name="check"
-                value="Інтернатура " />
-              <label htmlFor="check-4">Інтернатура <span /></label>
-            </li>
-            <li>
-              <input
-                id="check-5"
-                type="checkbox"
-                name="check"
-                value="Фріланс" />
-              <label htmlFor="check-5">Фріланс <span /></label>
-            </li>
-          </ul>
-        </div>
-
-
-        <Slider />
-      </div >
+        <TypeWork />
+        <PricePerHour />
+      </div>
     );
   }
 }
@@ -127,7 +59,12 @@ function mapStateToProps(state) {
   return {
     vacancy: state.vacancy,
     SearchResults: state.vacancy.SearchResults,
+    filter: state.filter,
   };
 }
 
-export default connect(mapStateToProps, { searchVacancy })(Widgets);
+function mapDispatchToProps(dispatch) {
+  return { dispatch };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Widgets);

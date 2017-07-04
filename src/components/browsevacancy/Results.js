@@ -3,29 +3,26 @@ import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import picture from '../../styles/images/job-list-logo-01.png';
-import { getAllVacancy, searchVacancy } from '../../actions/vacancyActions';
+import { searchVacancy } from '../../actions/vacancyActions';
 import Widgets from './Widgets';
 import { PAGES } from '../../constants/const';
-
+import * as types from '../../actions/actionTypes';
 
 class Results extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       currentPage: 1,
-      vacancyPerPage: 10,
-      title: "",
+      vacancyPerPage: 6,
+      title: this.props.filter.title,
     };
+    this.handleClick = this.handleClick.bind(this);
+    this.inputChange = this.inputChange.bind(this);
+    this.onSearchInput = this.onSearchInput.bind(this);
+  }
 
-    this.handleClick = this
-      .handleClick
-      .bind(this);
-    this.inputChange = this
-      .inputChange
-      .bind(this);
-    this.onSearchInput = this
-      .onSearchInput
-      .bind(this);
+  componentDidMount() {
+    window.scrollTo(0, 0);
   }
 
   handleClick(event) {
@@ -41,31 +38,26 @@ class Results extends React.Component {
   onSearchInput(e, title) {
     e.preventDefault();
     const query = { title };
-    this.props.searchVacancy(query, PAGES.BROWSE_VACANCY);
+    this.props.dispatch({ type: types.ABOUT_SEARCH.SET_TITLE, payload: title });
+    this.props.dispatch(searchVacancy(query, PAGES.BROWSE_VACANCY));
   }
 
   spanColor({ job_type }) {
-    //debugger;
-    console.log(job_type);
     if (job_type === "Повна зайнятість") {
-      console.log("full-time");
       return ("full-time");
     } else if (job_type === "Часткова зайнятість") {
-      console.log("part-time");
       return ("part-time");
     } else if (job_type === "Фріланс") {
-      console.log("freelance");
       return ("freelance");
     } else if (job_type === "Інтернатура") {
-      console.log("internship");
       return ("internship");
     }
   }
 
   renderVacancy() {
     const vacancies = this.props.SearchResults;
-    console.log(vacancies);
-    console.log(this.props.vacancy.vacancies)
+    console.log('vacancies', vacancies);
+    console.log('vacancy.vacancies', this.props.vacancy.vacancies)
     //pagination
     // Logic for displaying vacancies
     const indexOfLastVacancy = this.state.currentPage * this.state.vacancyPerPage;
@@ -78,52 +70,57 @@ class Results extends React.Component {
       pageNumbers.push(i);
     }
 
-    return (
-      <div>
-        <ul className="job-list full">
-          {currentVacancise.map((item) => {
-            const job_type = item.job_type;
-            return (<li className="highlighted" key={item.id} >
-              <Link to={"vacancy_detail/" + item.id}
-                onClick={() => { browserHistory.push(item.id); }}>
-                <img src={picture} />
-                <div className="job-list-content">
-                  <h4>{item.title}
-                    <span className={this.spanColor({ job_type })}>{job_type}</span>
-                  </h4>
-                  <div className="job-icons">
-                    <span>
-                      <i className="fa fa-briefcase" />Компанія:{item.company}
-                    </span>
-                    <span>
-                      <i className="fa fa-map-marker" />{item.city}
-                    </span>
-                    <span>
-                      <i className="fa fa-money" />{item.price_per_hour} грн/год
+    if (vacancies.length > 0) {
+      return (
+        <div>
+          <ul className="job-list full">
+            {currentVacancise.map((item) => {
+              const job_type = item.job_type;
+              return (<li className="highlighted" key={item.id} >
+                <Link to={"vacancy_detail/" + item.id}
+                  onClick={() => { browserHistory.push(item.id); }}>
+                  <img src={picture} />
+                  <div className="job-list-content">
+                    <h4>{item.title}
+                      <span className={this.spanColor({ job_type })}>{item.job_type}</span>
+                    </h4>
+                    <div className="job-icons">
+                      <span>
+                        <i className="fa fa-briefcase" />Компанія:{item.company}
                       </span>
+                      <span>
+                        <i className="fa fa-map-marker" />{item.city}
+                      </span>
+                      <span>
+                        <i className="fa fa-money" />{item.price_per_hour} грн/год
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </Link>
-              <div className="clearfix" />
-            </li>
-            );
-          })}
-        </ul>
-        {/*
-        // <div className="pagination">
-        //   <ul >{
-        //     pageNumbers.map(number => {
-        //       return (
-        //         <button key={number}>
-        //           <li
-        //             key={number}
-        //             id={number}
-        //             onClick={this.handleClick}>{number}</li></button>
-        //       );
-        //     })
-        //   }</ul></div>*/}
-      </div>
-    );
+                </Link>
+                <div className="clearfix" />
+              </li>
+              );
+            })}
+          </ul>
+          <div className="pagination">
+            <ul >{
+              pageNumbers.map(number => {
+                return (
+                  <button key={number}>
+                    <li
+                      key={number}
+                      id={number}
+                      onClick={this.handleClick}>{number}</li></button>
+                );
+              })
+            }</ul></div>
+        </div>
+      );
+    } else {
+      return (
+        <p>За вашими критеріями не було знайдено жoдної вакансії</p>
+      );
+    }
   }
 
   render() {
@@ -131,11 +128,11 @@ class Results extends React.Component {
       <div className="container">
         <div className="eleven columns">
           <div className="padding-right">
-            <form className="list-search">
-              <button type="submit" onClick={(e) => { this.onSearchInput(e, this.state.title); }}><i className="fa fa-search" /></button>
+            <form className='list-search'>
+              <button type="submit" onClick={(e) => { this.onSearchInput(e, this.state.title) }}><i className="fa fa-search" /></button>
               <input
                 type="text"
-                placeholder="Назва вакансії"
+                placeholder="Вакансія..."
                 value={this.state.title}
                 onChange={this.inputChange}
                 autoComplete="on"
@@ -149,7 +146,6 @@ class Results extends React.Component {
         </div>
         <div className="five columns">
           <Widgets />
-
         </div>
       </div>
     );
@@ -163,14 +159,19 @@ Results.PropTypes = {
   onSearchInput: PropTypes.func.isRequired,
   handleClick: PropTypes.func.isRequired,
   inputChange: PropTypes.func.isRequired,
+  spanColor: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     vacancy: state.vacancy,
     SearchResults: state.vacancy.SearchResults,
-
+    filter: state.filter,
   };
 }
 
-export default connect(mapStateToProps, { getAllVacancy, searchVacancy })(Results);
+function mapDispatchToProps(dispatch) {
+  return { dispatch };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Results);

@@ -1,9 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-
-
-const TextInput = ({ name, onChange, placeholder, title, type, value, className, id }) => {
+const TextInput = ({ name, onChange, placeholder, title, type, value, className, id, onKeyPress, ref }) => {
 
   return (
     <div className="form">
@@ -15,9 +13,10 @@ const TextInput = ({ name, onChange, placeholder, title, type, value, className,
         className={"search-field" || className}
         value={value || ''}
         onChange={onChange}
+        onKeyPress={onKeyPress}
         id={id}
         name={name}
-      />
+        ref={ref} />
     </div>
   );
 };
@@ -25,9 +24,11 @@ const TextInput = ({ name, onChange, placeholder, title, type, value, className,
 TextInput.PropTypes = {
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  onKeyPress: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   title: PropTypes.string,
   className: PropTypes.string
-}
+};
+
 export default TextInput;

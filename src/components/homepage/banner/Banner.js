@@ -1,8 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router';
-import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
+import { connect } from 'react-redux';
+import { Link, browserHistory } from 'react-router';
 import { searchVacancy } from '../../../actions/vacancyActions';
+import { PAGES } from '../../../constants/const';
+import * as types from '../../../actions/actionTypes';
 
 class Banner extends React.Component {
   constructor(props, context) {
@@ -13,8 +15,16 @@ class Banner extends React.Component {
         city: "",
       },
     };
-    this.inputChange = this.inputChange.bind(this);
-    this.searchSubmit = this.searchSubmit.bind(this);
+
+    this.inputChange = this
+      .inputChange
+      .bind(this);
+    this.searchSubmit = this
+      .searchSubmit
+      .bind(this);
+    this.transition = this
+      .transition
+      .bind(this);
   }
 
   inputChange(e) {
@@ -22,18 +32,19 @@ class Banner extends React.Component {
     search[e.target.name] = e.target.value;
     this.setState({ search });
   }
+
   searchSubmit(e, city, title) {
     e.preventDefault();
     const query = { city, title };
-    this.props.searchVacancy(query);
+    this.props.dispatch({ type: types.ABOUT_SEARCH.SET_CITY, payload: city });
+    this.props.dispatch({ type: types.ABOUT_SEARCH.SET_TITLE, payload: title });
+    this.props.dispatch(searchVacancy(query, PAGES.HOME_PAGE));
   }
 
-  // handleKeyPress(event) {
-  //   if (event.key == 'Enter') {
-  //     console.log('enter press here! ');
-  //     this.searchSubmit(event, this.state.search.city, this.state.search.title);
-  //   }
-  // }
+  transition(e) {
+    e.preventDefault();
+    browserHistory.push('/browse_categories');
+  }
 
   render() {
     return (
@@ -43,7 +54,6 @@ class Banner extends React.Component {
             <div className="container">
               <div className="sixteen columns">
                 <div className="search-container">
-
                   <h2>Пошук роботи</h2>
                   <div id="1">
                     <input
@@ -59,7 +69,7 @@ class Banner extends React.Component {
                   </div>
                   <div id="2">
                     <input
-                      name="city"
+                      name='city'
                       type="text"
                       className="ico-02"
                       placeholder="місто"
@@ -70,13 +80,10 @@ class Banner extends React.Component {
                     />
                   </div>
                   <a href="" onClick={(e) => { this.searchSubmit(e, this.state.search.city, this.state.search.title); }}><button><i className="fa fa-search" /></button></a>
-
                   <div className="browse-jobs">
                     <h3>Сортувати вакансії за
-                      <Link to={"/browse_categories"}>категорією</Link>
-                    </h3>
+                        <a href=" " onClick={(e) => { this.transition(e); }}> категорією</a></h3>
                   </div>
-
                   <div className="announce">
                     <p>Ми можемо знайти роботу для тебе!</p>
                   </div>
@@ -91,13 +98,20 @@ class Banner extends React.Component {
 }
 
 Banner.PropTypes = {
-  searchVacancy: PropTypes.func.isRequired
+  searchVacancy: PropTypes.func.isRequired,
+  inputChange: PropTypes.func.isRequired,
+  transition: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     vacancy: state.vacancy,
+    filter: state.filter,
   };
 }
 
-export default connect(mapStateToProps, { searchVacancy })(Banner);
+function mapDispatchToProps(dispatch) {
+  return { dispatch };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Banner);

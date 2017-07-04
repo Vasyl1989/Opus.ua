@@ -26,6 +26,7 @@ class AddVacancyForm extends React.Component {
       .handleInputChange
       .bind(this);
 
+
     this.state = {
       vacancy: props.singleVacancy || {
         email: "",
@@ -45,15 +46,9 @@ class AddVacancyForm extends React.Component {
       modalIsOpenTwo: false
     };
 
-    this.openModal = this
-      .openModal
-      .bind(this);
-    this.afterOpenModal = this
-      .afterOpenModal
-      .bind(this);
-    this.closeModal = this
-      .closeModal
-      .bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.afterOpenModal = this.afterOpenModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
 
     this.handleSubmit = this
       .handleSubmit
@@ -102,7 +97,6 @@ class AddVacancyForm extends React.Component {
       formIsValid = false;
       errors["company"] = "Вкажіть назву компанії";
     }
-
     this.setState({ errors: errors });
     return formIsValid;
   }
@@ -127,8 +121,8 @@ class AddVacancyForm extends React.Component {
     });
   }
 
-
   handleInputChange(e) {
+
     const vacancy = Object.assign({}, this.state.vacancy);
     vacancy[e.target.name] = e.target.value;
     this.setState({ vacancy: vacancy });
@@ -147,6 +141,7 @@ class AddVacancyForm extends React.Component {
     } else {
       this.props.dispatch(Actions.sendVacancy(this.state.vacancy));
     }
+
   }
 
   render() {
@@ -274,7 +269,8 @@ class AddVacancyForm extends React.Component {
                 onAfterOpen={this.afterOpenModal}
                 onRequestClose={this.closeModal}
                 style={customStyles}
-                contentLabel="Example Modal">
+                contentLabel="Example Modal"
+              >
                 <h2 ref={subtitle => this.subtitle = subtitle}>Форма заповнена не вірно</h2>
                 <button onClick={this.closeModal}>close</button>
               </Modal>
@@ -284,7 +280,8 @@ class AddVacancyForm extends React.Component {
                 onAfterOpen={this.afterOpenModal}
                 onRequestClose={this.closeModal}
                 style={customStyles}
-                contentLabel="Example Modal">
+                contentLabel="Example Modal"
+              >
                 <h2 ref={subtitle => this.subtitle = subtitle}>Вакансія надіслана успішно</h2>
                 <button onClick={this.closeModal}>close</button>
               </Modal>
@@ -294,12 +291,14 @@ class AddVacancyForm extends React.Component {
       </div>
     );
   }
-
 }
 
 AddVacancyForm.PropTypes = {
   createVacancy: PropTypes.func.isRequired,
-  vacancies: PropTypes.array.isRequired
+  vacancies: PropTypes.array.isRequired,
+  openModal: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  afterOpenModal: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {

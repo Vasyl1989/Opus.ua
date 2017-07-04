@@ -10,10 +10,8 @@ const BrowseVacancy = () => {
   return (
     <div>
       <Header />
-      <TitlebarBrowseVacancy />
-
+      <TitlebarBrowseVacancy/>
       <Results />
-
       <Footer />
     </div>
   );

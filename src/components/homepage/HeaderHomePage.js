@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 
 const HeaderHomePage = () => {
   return (
+
     <div id="headerhomepage">
       <header className="transparent sticky-header full-width headerhomepage">
         <div className="container">
@@ -24,7 +25,8 @@ const HeaderHomePage = () => {
                   <a href="#">Працівнику</a>
                   <ul>
                     <li>
-                      <Link to={"/browse_categories"}>Вакансії за категорями</Link>
+
+                      <Link to="/browse_categories">Вакансії за категорями</Link>
                     </li>
                   </ul>
                 </li>
@@ -45,7 +47,7 @@ const HeaderHomePage = () => {
 
             {/*Navigation*/}
             <div id="mobile-navigation">
-              <a href="#menu" className="menu-trigger"><i className="fa fa-reorder" />Menu</a>
+              <a href="#menu" className="menu-trigger"><i className="fa fa-reorder" /> Menu</a>
             </div>
 
           </div>
