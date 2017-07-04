@@ -47,44 +47,51 @@ class ResentVacancy extends React.Component {
 
   renderVacancies() {
     const vacancies = this.props.paginationData;
-    return (
-      <div>
-        <ul className="job-list">
-          {
-            vacancies.map((item, index) => {
-              const job_type = item.job_type;
-              return (<li className="highlighted" key={index} >
-                <Link to={"vacancy_detail/" + item.id}
-                  onClick={() => {
-                    browserHistory.push(item.id);
-                  }}>
+    if (vacancies.length > 0) {
+      return (
+        <div>
+          <ul className="job-list">
+            {
+              vacancies.map((item, index) => {
+                const job_type = item.job_type;
+                return (<li className="highlighted" key={index} >
+                  <Link to={"vacancy_detail/" + item.id}
+                    onClick={() => {
+                      browserHistory.push(item.id);
+                    }}>
 
-                  <img src={picture} />
-                  <div className="job-list-content">
-                    <h4>{item.title}
-                      <span className={this.spanColor({ job_type })}>{item.job_type}</span>
-                    </h4>
-                    <div className="job-icons">
-                      <span>
-                        <i className="fa fa-briefcase" />Компанія:
+                    <img src={picture} />
+                    <div className="job-list-content">
+                      <h4>{item.title}
+                        <span className={this.spanColor({ job_type })}>{item.job_type}</span>
+                      </h4>
+                      <div className="job-icons">
+                        <span>
+                          <i className="fa fa-briefcase" />Компанія:
                         {item.company}</span>
-                      <span>
-                        <i className="fa fa-map-marker" />
-                        {item.city}</span>
-                      <span>
-                        <i className="fa fa-money" />
-                        {item.price_per_hour}
-                        / hour</span>
+                        <span>
+                          <i className="fa fa-map-marker" />
+                          {item.city}</span>
+                        <span>
+                          <i className="fa fa-money" />
+                          {item.price_per_hour}
+                          / hour</span>
+                      </div>
                     </div>
-                  </div>
-                </Link>
-                <div className="clearfix" />
-              </li>);
-            })
-          }
-        </ul>
-      </div>
-    );
+                  </Link>
+                  <div className="clearfix" />
+                </li>);
+              })
+            }
+          </ul>
+        </div>
+      );
+    } else {
+      return (
+        <div id="loading" />
+      );
+    }
+
   }
 
   render() {
