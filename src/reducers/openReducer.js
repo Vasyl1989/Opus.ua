@@ -2,10 +2,8 @@ import * as types from '../actions/actionTypes';
 
 const initialState = {
   isOpen: false,
-  onResponse: {
-    success: false,
-    error: false,
-  },
+  success: false,
+  error: false,
 
 };
 
@@ -16,22 +14,26 @@ export default function openReducer(state = initialState, action) {
         ...state,
         isOpen: !state.isOpen,
       };
+
     case types.SHOULD_OPEN_CLOSE.ERROR:
       return {
         ...state,
-        error: !state.onResponse.error,
+        error: !state.error,
       };
+      
     case types.SHOULD_OPEN_CLOSE.SUCCESS:
-      // return R.over(R.lensPath(["onResponse", "success"]), R.not, state);
-      // return R.assocPath(["onResponse", "success"], !state.onResponse.success, state);
       return {
         ...state,
-        // success: !state.onResponse.success,
-        onResponse: {
-          ...state.onResponse,
-          success: !state.onResponse.success
-        }
+        success: !state.success,
       };
+
     default: return state;
   }
 }
+
+
+
+
+
+      // return R.over(R.lensPath(["onResponse", "success"]), R.not, state);
+      // return R.assocPath(["onResponse", "success"], !state.onResponse.success, state);

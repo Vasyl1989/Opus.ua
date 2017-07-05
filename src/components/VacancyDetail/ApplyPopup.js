@@ -4,8 +4,8 @@ import Modal from 'react-modal';
 import { connect } from 'react-redux';
 import TextInput from '../common/TextInput';
 import { agreeToVacancy } from '../../actions/vacancyActions';
-import { opening } from '../../actions/openActions';
-
+import { opening, closeOpenSucces, closeOpenError } from '../../actions/openActions';
+import * as types from '../../actions/actionTypes';
 
 const customStyles = {
   content: {
@@ -34,7 +34,8 @@ class ApplyPopup extends React.Component {
     };
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-
+    this.closeModal2 = this.closeModal2.bind(this);
+    this.closeModal3 = this.closeModal3.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
@@ -45,6 +46,17 @@ class ApplyPopup extends React.Component {
 
   closeModal() {
     this.props.dispatch(opening());
+    
+    //this.props.dispatch(closeOpenSucces());
+  }
+
+  closeModal2() {
+    this.props.dispatch(closeOpenError());
+  }
+
+  closeModal3() { 
+    this.props.dispatch(closeOpenSucces());
+    this.setState({users_vacancy:""});
   }
 
   handleValidation() {
@@ -92,11 +104,6 @@ class ApplyPopup extends React.Component {
   onFormSubmit(e) {
     e.preventDefault();
     this.props.dispatch(agreeToVacancy(this.state.users_vacancy));
-    // if (this.handleValidation()) {
-    //   this.setState({ modalIsOpenTwo: true });
-    // } else {
-    //   this.setState({ modalIsOpenThree: true });
-    // }
   }
 
   render() {
@@ -159,24 +166,24 @@ class ApplyPopup extends React.Component {
                 <button className="send" type="submit">Надіслати заявку</button>
 
                 <Modal
-                  isOpen={this.props.onResponse.error}
-                  onRequestClose={this.closeModal}
+                  isOpen={this.props.error}
+                  onRequestClose={this.closeModal2}
                   style={customStyles}
                   contentLabel="Example Modal"
                 >
                   <h2 ref={subtitle => this.subtitle = subtitle}>Спробуйте надіслати заявку ще раз</h2>
-                  <button onClick={this.closeModal}>close</button>
+                  <button onClick={this.closeModal2}>close</button>
                 </Modal>
 
-              
+
                 <Modal
-                  isOpen={this.props.onResponse.success}
-                  onRequestClose={this.closeModal}
+                  isOpen={this.props.success}
+                  onRequestClose={this.closeModal3}
                   style={customStyles}
                   contentLabel="Example Modal"
                 >
                   <h2 ref={subtitle => this.subtitle = subtitle}>Заявка надіслана успішно</h2>
-                  <button onClick={this.closeModal}>close</button>
+                  <button onClick={this.closeModal3}>close</button>
                 </Modal>
               </form>
             </div>
@@ -195,7 +202,8 @@ function mapStateToProps(state) {
     users_vacancy: state.users_vacancy,
     singleVacancy: state.vacancy.singleVacancy,
     isOpen: state.open.isOpen,
-    onResponse:state.open.onResponse,
+    error: state.open.error,
+    success: state.open.success,
   };
 }
 
