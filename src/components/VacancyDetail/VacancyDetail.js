@@ -45,7 +45,7 @@ class VacancyDetail extends React.Component {
         <div id="titlebar">
           <div className="container">
             <div className="ten columns">
-              <span><a href="" data-name={vacancy.category} onClick={(e) => { this.serchSubmit(e); }}>{vacancy.category}</a></span>
+              <span><a href="" data-name={vacancy.category} onClick={(e) => { this.serchSubmit(e) }}>{vacancy.category}</a></span>
               <h2>{vacancy.title}<span className={this.spanColor({ job_type })}>{vacancy.job_type}</span></h2>
             </div>
           </div>
@@ -60,9 +60,9 @@ class VacancyDetail extends React.Component {
                 <img src={picture} alt="" />
                 <div className="content">
                   <h4>Компанія:{vacancy.company}</h4>
-                  <span><a href="#"><i className="fa fa-link" />{vacancy.website}</a></span>
+                  <span><a href="#"><i className="fa fa-link" /> {vacancy.website}</a></span>
                 </div>
-                <div className="clearfix"></div>
+                <div className="clearfix" />
               </div>
               <p className="margin-reset">  {vacancy.description} </p>
             </div>
@@ -70,7 +70,9 @@ class VacancyDetail extends React.Component {
           <div className="five columns">
             <div className="widget">
               <h4>Загальний перегляд</h4>
+
               <div className="job-overview">
+
                 <ul>
                   <li>
                     <i className="fa fa-map-marker" />
@@ -101,18 +103,17 @@ class VacancyDetail extends React.Component {
         </div>
         <Footer />
       </div>
-    );
+    )
   }
 }
-
 VacancyDetail.PropTypes = {
-  searchVacancy: PropTypes.func.isRequired
+  searchVacancy: PropTypes.func.isRequired,
+  getVacancyById: PropTypes.func.isRequired,
 };
-
 function mapStateToProps(state) {
   return {
     singleVacancy: state.vacancy.singleVacancy,
-    vacancies: state.vacancy.vacancies
+    vacancies: state.vacancy.vacancies,
   };
 }
 

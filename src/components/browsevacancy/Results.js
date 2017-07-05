@@ -8,6 +8,7 @@ import Widgets from './Widgets';
 import { PAGES } from '../../constants/const';
 import * as types from '../../actions/actionTypes';
 
+
 class Results extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -21,20 +22,14 @@ class Results extends React.Component {
     this.onSearchInput = this.onSearchInput.bind(this);
   }
 
-  componentDidMount() {
-    window.scrollTo(0, 0);
-  }
-
   handleClick(event) {
     this.setState({
       currentPage: Number(event.target.id)
     });
   }
-
   inputChange(e) {
     this.setState({ title: e.target.value });
   }
-
   onSearchInput(e, title) {
     e.preventDefault();
     const query = { title };
@@ -55,9 +50,8 @@ class Results extends React.Component {
   }
 
   renderVacancy() {
+    window.scrollTo(0, 0);
     const vacancies = this.props.SearchResults;
-    console.log('vacancies', vacancies);
-    console.log('vacancy.vacancies', this.props.vacancy.vacancies)
     //pagination
     // Logic for displaying vacancies
     const indexOfLastVacancy = this.state.currentPage * this.state.vacancyPerPage;
@@ -69,10 +63,10 @@ class Results extends React.Component {
     for (let i = 1; i <= Math.ceil(vacancies.length / this.state.vacancyPerPage); i++) {
       pageNumbers.push(i);
     }
-
     if (vacancies.length > 0) {
       return (
         <div>
+
           <ul className="job-list full">
             {currentVacancise.map((item) => {
               const job_type = item.job_type;
@@ -118,9 +112,11 @@ class Results extends React.Component {
       );
     } else {
       return (
-        <p>За вашими критеріями не було знайдено жoдної вакансії</p>
-      );
+        <p>Вакансій не знайдено.</p>
+      )
+
     }
+
   }
 
   render() {
@@ -146,6 +142,7 @@ class Results extends React.Component {
         </div>
         <div className="five columns">
           <Widgets />
+
         </div>
       </div>
     );
@@ -160,6 +157,7 @@ Results.PropTypes = {
   handleClick: PropTypes.func.isRequired,
   inputChange: PropTypes.func.isRequired,
   spanColor: PropTypes.func.isRequired,
+  isEmpty: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -169,9 +167,7 @@ function mapStateToProps(state) {
     filter: state.filter,
   };
 }
-
 function mapDispatchToProps(dispatch) {
-  return { dispatch };
+  return { dispatch }
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(Results);

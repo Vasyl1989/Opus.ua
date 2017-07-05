@@ -15,24 +15,15 @@ class Banner extends React.Component {
         city: "",
       },
     };
-
-    this.inputChange = this
-      .inputChange
-      .bind(this);
-    this.searchSubmit = this
-      .searchSubmit
-      .bind(this);
-    this.transition = this
-      .transition
-      .bind(this);
+    this.inputChange = this.inputChange.bind(this);
+    this.searchSubmit = this.searchSubmit.bind(this);
+    this.transition=this.transition.bind(this);
   }
-
   inputChange(e) {
-    const search = Object.assign({}, this.state.search);
+    const search = Object.assign({}, this.state.search)
     search[e.target.name] = e.target.value;
     this.setState({ search });
   }
-
   searchSubmit(e, city, title) {
     e.preventDefault();
     const query = { city, title };
@@ -40,12 +31,10 @@ class Banner extends React.Component {
     this.props.dispatch({ type: types.ABOUT_SEARCH.SET_TITLE, payload: title });
     this.props.dispatch(searchVacancy(query, PAGES.HOME_PAGE));
   }
-
-  transition(e) {
-    e.preventDefault();
-    browserHistory.push('/browse_categories');
+  transition(e){
+      e.preventDefault();
+      browserHistory.push('/browse_categories');
   }
-
   render() {
     return (
       <div>
@@ -54,6 +43,8 @@ class Banner extends React.Component {
             <div className="container">
               <div className="sixteen columns">
                 <div className="search-container">
+
+
                   <h2>Пошук роботи</h2>
                   <div id="1">
                     <input
@@ -79,11 +70,13 @@ class Banner extends React.Component {
                       onKeyPress={(e) => { if (e.key == 'Enter') { this.searchSubmit(e, this.state.search.city, this.state.search.title); } }}
                     />
                   </div>
-                  <a href="" onClick={(e) => { this.searchSubmit(e, this.state.search.city, this.state.search.title); }}><button><i className="fa fa-search" /></button></a>
+                  <a href='' onClick={(e) => { this.searchSubmit(e, this.state.search.city, this.state.search.title) }}><button><i className="fa fa-search" /></button></a>
+
                   <div className="browse-jobs">
                     <h3>Сортувати вакансії за
-                        <a href=" " onClick={(e) => { this.transition(e); }}> категорією</a></h3>
+                        <a href=" " onClick={(e) => {this.transition(e) }}> категорією</a></h3>
                   </div>
+
                   <div className="announce">
                     <p>Ми можемо знайти роботу для тебе!</p>
                   </div>
@@ -109,9 +102,7 @@ function mapStateToProps(state) {
     filter: state.filter,
   };
 }
-
 function mapDispatchToProps(dispatch) {
-  return { dispatch };
+  return { dispatch }
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(Banner);

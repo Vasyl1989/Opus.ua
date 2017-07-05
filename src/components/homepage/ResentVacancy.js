@@ -12,10 +12,8 @@ class ResentVacancy extends React.Component {
     this.state = {
       page: 1,
       per: 3
-    };
-    this.handleClick = this
-      .handleClick
-      .bind(this);
+    }
+    this.handleClick = this.handleClick.bind(this);
   }
   componentDidMount() {
     const page = this.state.page;
@@ -27,7 +25,7 @@ class ResentVacancy extends React.Component {
 
   handleClick(event) {
     const page = this.state.page;
-    const per = 3;
+    const per = this.state.per;
     const query = { page, per };
     this.props.pagination(query);
     this.setState({ page: this.state.page + 1 });
@@ -45,74 +43,81 @@ class ResentVacancy extends React.Component {
     }
   }
 
-  renderVacancies() {
-    const vacancies = this.props.paginationData;
-    if (vacancies.length > 0) {
-      return (
-        <div>
-          <ul className="job-list">
-            {
-              vacancies.map((item, index) => {
-                const job_type = item.job_type;
-                return (<li className="highlighted" key={index} >
-                  <Link to={"vacancy_detail/" + item.id}
-                    onClick={() => {
-                      browserHistory.push(item.id);
-                    }}>
 
-                    <img src={picture} />
-                    <div className="job-list-content">
-                      <h4>{item.title}
-                        <span className={this.spanColor({ job_type })}>{item.job_type}</span>
-                      </h4>
-                      <div className="job-icons">
-                        <span>
-                          <i className="fa fa-briefcase" />Компанія:
+  renderVacancies() {
+
+    const vacancies = this.props.paginationData;
+
+    return (
+      <div>
+        <ul className="job-list">
+          {
+            vacancies.map((item, index) => {
+              const job_type = item.job_type;
+              return (<li className="highlighted" key={index} >
+                <Link to={"vacancy_detail/" + item.id}
+                  onClick={() => {
+                    browserHistory.push(item.id);
+                  }}>
+
+                  <img src={picture} />
+                  <div className="job-list-content">
+                    <h4>{item.title}
+                      <span className={this.spanColor({ job_type })}>{item.job_type}</span>
+                    </h4>
+                    <div className="job-icons">
+                      <span>
+                        <i className="fa fa-briefcase"/>Компанія:
                         {item.company}</span>
-                        <span>
-                          <i className="fa fa-map-marker" />
-                          {item.city}</span>
-                        <span>
-                          <i className="fa fa-money" />
-                          {item.price_per_hour}
-                          / hour</span>
-                      </div>
+                      <span>
+                        <i className="fa fa-map-marker"/>
+                        {item.city}</span>
+                      <span>
+                        <i className="fa fa-money"/>
+                        {item.price_per_hour}
+                        / hour</span>
                     </div>
-                  </Link>
-                  <div className="clearfix" />
-                </li>);
-              })
-            }
-          </ul>
-        </div>
-      );
-    } else {
-      return (
-        <div id="loading" />
-      );
-    }
+                  </div>
+                </Link>
+                <div className="clearfix"/>
+              </li>);
+
+            })
+          }
+
+        </ul>
+      </div>
+
+    );
 
   }
 
   render() {
     // console.log('----------------------------', this.props.vacancy.vacancies.length);
     return (
+
       <div className="container">
+
+
         <div className="sixteen columns">
           <div className="padding-right">
             <h3 className="margin-bottom-25">Актуальні вакансії</h3>
+
             {this.props.vacancy.vacancies && this.renderVacancies()}
             <button onClick={this.handleClick}>
               <ul>
                 <li>Показати ще</li>
               </ul>
             </button>
-            <div className="margin-bottom-55" />
+            <div className="margin-bottom-55"></div>
           </div>
+
         </div>
       </div>
+
     );
   }
+
 }
 
 ResentVacancy.PropTypes = {

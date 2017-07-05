@@ -2,7 +2,6 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { searchVacancy } from '../../actions/vacancyActions';
-import { filtration, withoutFilter } from '../../actions/filterAction';
 import * as consts from '../../constants/const';
 
 
@@ -30,7 +29,7 @@ function addJobType(filter, type, isChecked) {
       }
     }
   }
-  console.log('myFilter', myFilter)
+  console.log('myFilter', myFilter);
   return myFilter;
 }
 
@@ -43,14 +42,11 @@ class TypeWork extends React.Component {
   onCheck(e) {
     const job_type = e.target.value;
     const checkedElement = e.target.checked;
-    console.log('checked', e.target.checked);
     const query = {
       job_type,
       checkedElement,
-    }
-    console.log('query', query);
+    };
     this.props.dispatch(searchVacancy(serializeArrayToQueryString(addJobType(this.props.filter, job_type, checkedElement)), consts.PAGES.BROWSE_VACANCY, query));
-    console.log('this.props.filter', this.props.filter)
   }
 
   render() {
@@ -62,10 +58,11 @@ class TypeWork extends React.Component {
             <input
               id="check-1"
               type="checkbox"
-              value="Повна"
               name="check"
-              onChange={this.onCheck} />
-            <label htmlFor="check-1">Повна занятість <span /></label>
+              onChange={this.onCheck}
+              value="Повна"
+            />
+            <label htmlFor="check-1">Повна занятість </label>
           </li>
           <li>
             <input
@@ -74,7 +71,7 @@ class TypeWork extends React.Component {
               name="check"
               onChange={this.onCheck}
               value="Часткова" />
-            <label htmlFor="check-2">Часткова занятість <span /></label>
+            <label htmlFor="check-2">Часткова занятість </label>
           </li>
           <li>
             <input
@@ -83,7 +80,7 @@ class TypeWork extends React.Component {
               name="check"
               onChange={this.onCheck}
               value="Інтернатура" />
-            <label htmlFor="check-3">Інтернатура <span /></label>
+            <label htmlFor="check-3">Інтернатура </label>
           </li>
           <li>
             <input
@@ -92,21 +89,21 @@ class TypeWork extends React.Component {
               onClick={this.onCheck}
               name="check"
               value="Фріланс" />
-            <label htmlFor="check-4">Фріланс <span /></label>
+            <label htmlFor="check-4">Фріланс </label>
           </li>
+        
         </ul>
       </div>
-    );
+    )
   }
 }
 
 TypeWork.PropTypes = {
   onCheck: PropTypes.func.isRequired,
   searchVacancy: PropTypes.func.isRequired,
-  filtration: PropTypes.func.isRequired,
   serializeArrayToQueryString: PropTypes.func.isRequired,
   addJobType: PropTypes.func.isRequired,
-};
+}
 
 function mapStateToProps(state) {
   return {
@@ -117,7 +114,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return { dispatch };
+  return { dispatch }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TypeWork);
