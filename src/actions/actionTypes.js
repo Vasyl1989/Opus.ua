@@ -7,12 +7,22 @@ export const SHOULD_UPDATE = 'SHOULD_UPDATE';
 
 export const GET_VACANCY_BY_ID = 'GET_VACANCY_BY_ID';
 export const PAGINATION = 'PAGINATION';
-export const CHECK='CHECK';
-export const CHECK_OUT='CHECK_OUT';
+
+export const CHECK = 'CHECK';
+export const CHECK_OUT = 'CHECK_OUT';
 
 
 export const ABOUT_SEARCH = {
   SET_CITY: "SET_CITY",
   SET_TITLE: "SET_TITLE",
   SET_CATEGORY: "SET_CATEGORY",
-}
+};
+
+export const SHOULD_OPEN_CLOSE = {
+  SUCCESS: 'SUCCESS',
+  ERROR: 'ERROR',
+};
+export const SHOULD_OPEN_CLOSE_MAIN= 'SHOULD_OPEN_CLOSE_MAIN';
+
+
+

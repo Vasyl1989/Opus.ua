@@ -25,7 +25,7 @@ class ResentVacancy extends React.Component {
 
   handleClick(event) {
     const page = this.state.page;
-    const per = 3;
+    const per = this.state.per;
     const query = { page, per };
     this.props.pagination(query);
     this.setState({ page: this.state.page + 1 });
@@ -119,6 +119,7 @@ class ResentVacancy extends React.Component {
   }
 
 }
+
 ResentVacancy.PropTypes = {
   handleClick: PropTypes.func.isRequired,
   handleOpenVacancy: PropTypes.func.isRequired,

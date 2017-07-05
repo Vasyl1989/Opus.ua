@@ -6,7 +6,6 @@ import { browserHistory } from 'react-router';
 import { filtration } from './filterActions';
 
 export function getVacancyById(id, vacancies, forUpdate) {
-
   return dispatch => {
     if (forUpdate) {
       dispatch({ type: types.SHOULD_UPDATE });
@@ -55,6 +54,7 @@ export function sendVacancy(vacancy) {
       .then((response) => {
         if (response && response.status === 200 || response.status === 201) {
           console.log('data send on server success');
+
         }
       })
       .catch(function (error) {
@@ -121,6 +121,7 @@ export function pagination(query) {
 
 
 export function agreeToVacancy(users_vacancy) {
+  //debugger;
   return dispatch => {
     const formData = new FormData();
     for (const k in users_vacancy) {
@@ -131,10 +132,12 @@ export function agreeToVacancy(users_vacancy) {
       .then((response) => {
         if (response && response.status === 200 || response.status === 201) {
           console.log('data send on server success');
+          dispatch({ type: types.SHOULD_OPEN_CLOSE.SUCCESS });
         }
       })
       .catch(function (error) {
         console.log(error);
+        dispatch({ type: types.SHOULD_OPEN_CLOSE.ERROR });
       });
   };
 }

@@ -15,7 +15,7 @@ const Header = () => {
 
             <div id="logo">
               <h1>
-                <Link to={"/"}>OPUS.ua</Link>
+                <a href="/">OPUS.ua</a>
 
               </h1>
             </div>

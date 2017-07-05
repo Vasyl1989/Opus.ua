@@ -1,6 +1,6 @@
 import * as types from '../actions/actionTypes';
 
- export  const initialState = {
+ const initialState = {
   fething: false,
   singleVacancy: {},
   shouldUpdate: false,
@@ -42,7 +42,7 @@ export default function vacancyReduce(state = initialState, action) {
       return {
         ...state,
         fething: false,
-        shouldUpdate: true,
+        shouldUpdate: !state.shouldUpdate,
       };
 
     case types.SEARCH:
@@ -52,7 +52,9 @@ export default function vacancyReduce(state = initialState, action) {
         SearchResults: action.payload,
       };
 
- 
+
+
+
     case types.PAGINATION:
     return{
       ...state,
@@ -61,5 +63,5 @@ export default function vacancyReduce(state = initialState, action) {
 
     default:
       return state;
-  };
+  }
 }

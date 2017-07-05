@@ -1,8 +1,11 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
 import TextInput from '../common/TextInput';
-import {agreeToVacancy} from '../../actions/vacancyActions';
+import { agreeToVacancy } from '../../actions/vacancyActions';
+import { opening } from '../../actions/openActions';
+
 
 const customStyles = {
   content: {
@@ -20,9 +23,6 @@ class ApplyPopup extends React.Component {
   constructor() {
     super();
     this.state = {
-      modalIsOpen: false,
-      modalIsOpenTwo: false,
-      modalIsOpenThree: false,
       users_vacancy: {
         full_name: "",
         email: "",
@@ -32,38 +32,19 @@ class ApplyPopup extends React.Component {
       },
       errors: {},
     };
-
-    this.openModal = this
-      .openModal
-      .bind(this);
-    this.afterOpenModal = this
-      .afterOpenModal
-      .bind(this);
-    this.closeModal = this
-      .closeModal
-      .bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
 
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
 
   openModal() {
-    this.setState({
-      modalIsOpen: true
-    });
-  }
-
-  afterOpenModal() {
-    // references are now sync'd and can be accessed. 
-    this.subtitle.style.color = '#f00';
+    this.props.dispatch(opening());
   }
 
   closeModal() {
-    this.setState({
-      modalIsOpen: false,
-      modalIsOpenTwo: false,
-      modalIsOpenThree: false,
-    });
+    this.props.dispatch(opening());
   }
 
   handleValidation() {
@@ -104,28 +85,26 @@ class ApplyPopup extends React.Component {
     users_vacancy.file = this.fileUpload.files[0];
     this.setState({ users_vacancy: users_vacancy });
     const vacancy = this.props.singleVacancy;
-    const aaa = vacancy.id;
-    users_vacancy.vacancy_id = aaa;
+    const id = vacancy.id;
+    users_vacancy.vacancy_id = id;
   }
 
   onFormSubmit(e) {
     e.preventDefault();
     this.props.dispatch(agreeToVacancy(this.state.users_vacancy));
-    if (this.handleValidation()) {
-      this.setState({ modalIsOpenTwo: true });
-    } else {
-      this.setState({ modalIsOpenThree: true });
-    }
+    // if (this.handleValidation()) {
+    //   this.setState({ modalIsOpenTwo: true });
+    // } else {
+    //   this.setState({ modalIsOpenThree: true });
+    // }
   }
 
   render() {
-    const vacancy = this.props.singleVacancy;
     return (
       <div>
         <button onClick={this.openModal}>Погодитись на цю роботу</button>
         <Modal
-          isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
+          isOpen={this.props.isOpen}
           onRequestClose={this.closeModal}
           style={customStyles}
           contentLabel="Example Modal"
@@ -179,10 +158,8 @@ class ApplyPopup extends React.Component {
                 <div className="divider" />
                 <button className="send" type="submit">Надіслати заявку</button>
 
-
                 <Modal
-                  isOpen={this.state.modalIsOpenThree}
-                  onAfterOpen={this.afterOpenModal}
+                  isOpen={this.props.onResponse.error}
                   onRequestClose={this.closeModal}
                   style={customStyles}
                   contentLabel="Example Modal"
@@ -191,9 +168,9 @@ class ApplyPopup extends React.Component {
                   <button onClick={this.closeModal}>close</button>
                 </Modal>
 
+              
                 <Modal
-                  isOpen={this.state.modalIsOpenTwo}
-                  onAfterOpen={this.afterOpenModal}
+                  isOpen={this.props.onResponse.success}
                   onRequestClose={this.closeModal}
                   style={customStyles}
                   contentLabel="Example Modal"
@@ -209,12 +186,16 @@ class ApplyPopup extends React.Component {
     );
   }
 }
-
+ApplyPopup.PropTypes = {
+  isOpen: PropTypes.bool,
+};
 
 function mapStateToProps(state) {
   return {
     users_vacancy: state.users_vacancy,
     singleVacancy: state.vacancy.singleVacancy,
+    isOpen: state.open.isOpen,
+    onResponse:state.open.onResponse,
   };
 }
 
