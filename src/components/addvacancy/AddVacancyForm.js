@@ -1,5 +1,5 @@
 import React from "react";
-import  PropTypes  from "prop-types";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Modal from "react-modal";
 
@@ -11,6 +11,7 @@ import * as types from "../../actions/actionTypes";
 
 const customStyles = {
   content: {
+    padding: ""
     top: "50%",
     left: "50%",
     right: "auto",
@@ -390,7 +391,7 @@ AddVacancyForm.PropTypes = {
   openModal: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
   afterOpenModal: PropTypes.func.isRequired,
-  shouldUpdate:PropTypes.bool,
+  shouldUpdate: PropTypes.bool,
 };
 
 function mapStateToProps(state) {
