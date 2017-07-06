@@ -8,6 +8,7 @@ import * as consts from "../../constants/const";
 import TextInput from "../common/TextInput";
 import SelectInput from "../common/SelectInput";
 import * as types from "../../actions/actionTypes";
+import {closeError,closeSucces} from "../../actions/openActions";
 
 const customStyles = {
   content: {
@@ -29,8 +30,8 @@ class AddVacancyForm extends React.Component {
       this.state = {
         vacancy: props.singleVacancy,
         errors: {},
-        modalIsOpen: false,
-        modalIsOpenTwo: false
+        // modalIsOpen: false,
+        // modalIsOpenTwo: false
       };
     } else {
       this.state = {
@@ -53,10 +54,10 @@ class AddVacancyForm extends React.Component {
       };
     }
 
-    this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-
+    
+    
+    this.closeModal2 = this.closeModal2.bind(this);
+    this.closeModal3 = this.closeModal3.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -120,23 +121,17 @@ class AddVacancyForm extends React.Component {
   }
 
   //modal window
-  openModal() {
-    this.setState({
-      modalIsOpen: true,
-      modalIsOpenTwo: true
-    });
+
+
+
+
+  closeModal2() {
+    this.props.dispatch(closeError());
   }
 
-  afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    this.subtitle.style.color = "#f00";
-  }
-
-  closeModal() {
-    this.setState({
-      modalIsOpen: false,
-      modalIsOpenTwo: false
-    });
+  closeModal3() { 
+    this.props.dispatch(closeSucces());
+   
   }
 
   handleInputChange(e) {
@@ -194,7 +189,6 @@ class AddVacancyForm extends React.Component {
   }
 
   render() {
-    // const vacancy = this.props.singleVacancy;
     return (
       <div className="container form-add-job">
 
@@ -262,6 +256,7 @@ class AddVacancyForm extends React.Component {
                 title="Тип роботи"
                 onChange={this.handleInputChange}
                 name="job_type"
+                className="selectInput"
                 options={consts.JOB_TYPE}
               />
               {/*------- Choose Category------*/}
@@ -269,6 +264,7 @@ class AddVacancyForm extends React.Component {
               <SelectInput
                 title="Категорія"
                 name="category"
+                className="selectInput"
                 onChange={this.handleInputChange}
                 options={consts.CATEGORY}
               />
@@ -346,9 +342,9 @@ class AddVacancyForm extends React.Component {
               </button>
 
               <Modal
-                isOpen={this.state.modalIsOpen}
-                onAfterOpen={this.afterOpenModal}
-                onRequestClose={this.closeModal}
+                isOpen={this.props.error}
+                
+                onRequestClose={this.closeModal2}
                 style={customStyles}
                 contentLabel="Example Modal"
               >
@@ -356,14 +352,14 @@ class AddVacancyForm extends React.Component {
                 <h2 ref={subtitle => this.subtitle = subtitle}>
                   Форма заповнена не вірно
                 </h2>
-                <button onClick={this.closeModal}>close</button>
+                <button onClick={this.closeModal2}>close</button>
 
               </Modal>
 
               <Modal
-                isOpen={this.state.modalIsOpenTwo}
-                onAfterOpen={this.afterOpenModal}
-                onRequestClose={this.closeModal}
+                isOpen={this.props.success}
+                
+                onRequestClose={this.closeModal3}
                 style={customStyles}
                 contentLabel="Example Modal"
               >
@@ -371,7 +367,7 @@ class AddVacancyForm extends React.Component {
                 <h2 ref={subtitle => this.subtitle = subtitle}>
                   Вакансія надіслана успішно
                 </h2>
-                <button onClick={this.closeModal}>close</button>
+                <button onClick={this.closeModal3}>close</button>
 
               </Modal>
 
@@ -397,7 +393,9 @@ function mapStateToProps(state) {
   return {
     vacancy: state.vacancy,
     singleVacancy: state.vacancy.singleVacancy,
-    shouldUpdate: state.vacancy.shouldUpdate
+    shouldUpdate: state.vacancy.shouldUpdate,
+    error: state.open.error,
+    success: state.open.success,
   };
 }
 

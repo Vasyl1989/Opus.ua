@@ -6,13 +6,13 @@ export function opening(){
   };
 }
 
-export function closeOpenError(){
+export function closeError(){
   return dispatch=>{
     dispatch({ type: types.SHOULD_OPEN_CLOSE.ERROR });
   };
 }
 
-export function closeOpenSucces(){
+export function closeSucces(){
   return dispatch=>{
     dispatch({ type: types.SHOULD_OPEN_CLOSE.SUCCESS });
   };

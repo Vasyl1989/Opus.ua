@@ -54,11 +54,12 @@ export function sendVacancy(vacancy) {
       .then((response) => {
         if (response && response.status === 200 || response.status === 201) {
           console.log('data send on server success');
-
+          dispatch({ type: types.SHOULD_OPEN_CLOSE.SUCCESS });
         }
       })
       .catch(function (error) {
         console.log(error);
+        dispatch({ type: types.SHOULD_OPEN_CLOSE.ERROR });
       });
   };
 }

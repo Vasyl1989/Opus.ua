@@ -23,28 +23,28 @@ class Categories extends React.Component {
           <div className="sixteen columns">
             <h3 className="margin-bottom-25">Актуальні категорії</h3>
             <ul id="popular-categories">
-              <li><a href="" data-name="Управління персоналом" onClick={(e) => { this.serchSubmit(e) }}>
+              <li><a href="" data-name="Управління персоналом" onClick={(e) => { this.serchSubmit(e); }}>
                 <i className="ln ln-icon-People-onCloud"/> Управління персоналом
          </a></li>
-              <li><a href="" data-name="ІТ" onClick={(e) => { this.serchSubmit(e) }}>
+              <li><a href="" data-name="ІТ" onClick={(e) => { this.serchSubmit(e); }}>
                 <i className="ln ln-icon-Computer-2"/> ІТ
          </a></li>
-              <li><a href="" data-name="Будівництво" onClick={(e) => { this.serchSubmit(e) }}>
+              <li><a href="" data-name="Будівництво" onClick={(e) => { this.serchSubmit(e); }}>
                 <i className="ln ln-icon-Worker"/> Будівництво
          </a></li>
-              <li><a href="" data-name="Навчання та репетиторство" onClick={(e) => { this.serchSubmit(e) }}>
+              <li><a href="" data-name="Навчання та репетиторство" onClick={(e) => { this.serchSubmit(e); }}>
                 <i className="ln ln-icon-Student-Female"/>Навчання та репетиторство
          </a></li>
-              <li><a href="" data-name="Медицина" onClick={(e) => { this.serchSubmit(e) }}>
+              <li><a href="" data-name="Медицина" onClick={(e) => { this.serchSubmit(e); }}>
                 <i className="ln  ln-icon-Medical-Sign"/> Медицина
          </a></li>
-              <li><a href="" data-name="Сфера обслуговування" onClick={(e) => { this.serchSubmit(e) }}>
+              <li><a href="" data-name="Сфера обслуговування" onClick={(e) => { this.serchSubmit(e); }}>
                 <i className="ln  ln-icon-Plates"/>Сфера обслуговування
          </a></li>
-              <li><a href="" data-name="Автоперевезення / Логістика" onClick={(e) => { this.serchSubmit(e) }}>
+              <li><a href="" data-name="Автоперевезення / Логістика" onClick={(e) => { this.serchSubmit(e); }}>
                 <i className="ln  ln-icon-Globe"/> Автоперевезення / Логістика
          </a></li>
-              <li><a href="" data-name="Телекомунікація" onClick={(e) => { this.serchSubmit(e) }}>
+              <li><a href="" data-name="Телекомунікація" onClick={(e) => { this.serchSubmit(e); }}>
                 <i className="ln  ln-icon-Laptop-3"/> Телекомунікація
          </a></li>
             </ul>
@@ -60,7 +60,8 @@ class Categories extends React.Component {
     );
   }
 
-};
+}
+
 Categories.PropTypes = {
   searchVacancy: PropTypes.func.isRequired,
 

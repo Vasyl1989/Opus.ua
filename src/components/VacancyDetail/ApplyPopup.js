@@ -4,8 +4,8 @@ import Modal from 'react-modal';
 import { connect } from 'react-redux';
 import TextInput from '../common/TextInput';
 import { agreeToVacancy } from '../../actions/vacancyActions';
-import { opening, closeOpenSucces, closeOpenError } from '../../actions/openActions';
-import * as types from '../../actions/actionTypes';
+import { opening, closeSucces, closeError } from '../../actions/openActions';
+
 
 const customStyles = {
   content: {
@@ -32,6 +32,7 @@ class ApplyPopup extends React.Component {
       },
       errors: {},
     };
+
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.closeModal2 = this.closeModal2.bind(this);
@@ -46,16 +47,14 @@ class ApplyPopup extends React.Component {
 
   closeModal() {
     this.props.dispatch(opening());
-    
-    //this.props.dispatch(closeOpenSucces());
   }
 
   closeModal2() {
-    this.props.dispatch(closeOpenError());
+    this.props.dispatch(closeError());
   }
 
   closeModal3() { 
-    this.props.dispatch(closeOpenSucces());
+    this.props.dispatch(closeSucces());
     this.setState({users_vacancy:""});
   }
 
@@ -156,13 +155,21 @@ class ApplyPopup extends React.Component {
                   <span>Максимальний розмір файлу: 5MB</span>
                 </div>
                 <div className="clearfix" />
+                
                 <input
+                  id="file"
                   ref={(ref) => this.fileUpload = ref}
                   type="file"
                   onChange={this.onChange}
-                  name="file" />
+                  name="file" 
+                  />
+                  <label htmlFor="file" className="upload-btn">
+                 <i className="fa fa-upload" />
+                  Завантажити</label>
                 <span className="errorMassage" style={{ color: "red" }}>{this.state.errors["file"]}</span>
                 <div className="divider" />
+
+
                 <button className="send" type="submit">Надіслати заявку</button>
 
                 <Modal
@@ -193,8 +200,10 @@ class ApplyPopup extends React.Component {
     );
   }
 }
+
 ApplyPopup.PropTypes = {
   isOpen: PropTypes.bool,
+  
 };
 
 function mapStateToProps(state) {

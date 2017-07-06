@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import { Link, browserHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import { searchVacancy } from '../../../actions/vacancyActions';
 import { PAGES } from '../../../constants/const';
 import * as types from '../../../actions/actionTypes';
@@ -60,7 +60,7 @@ class Banner extends React.Component {
                   </div>
                   <div id="2">
                     <input
-                      name='city'
+                      name="city"
                       type="text"
                       className="ico-02"
                       placeholder="місто"
@@ -70,11 +70,11 @@ class Banner extends React.Component {
                       onKeyPress={(e) => { if (e.key == 'Enter') { this.searchSubmit(e, this.state.search.city, this.state.search.title); } }}
                     />
                   </div>
-                  <a href='' onClick={(e) => { this.searchSubmit(e, this.state.search.city, this.state.search.title) }}><button><i className="fa fa-search" /></button></a>
+                  <a href="" onClick={(e) => { this.searchSubmit(e, this.state.search.city, this.state.search.title); }}><button><i className="fa fa-search" /></button></a>
 
                   <div className="browse-jobs">
                     <h3>Сортувати вакансії за
-                        <a href=" " onClick={(e) => {this.transition(e) }}> категорією</a></h3>
+                        <a href=" " onClick={(e) => {this.transition(e); }}> категорією</a></h3>
                   </div>
 
                   <div className="announce">
@@ -103,6 +103,6 @@ function mapStateToProps(state) {
   };
 }
 function mapDispatchToProps(dispatch) {
-  return { dispatch }
+  return { dispatch };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Banner);

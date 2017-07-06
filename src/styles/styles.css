@@ -749,7 +749,8 @@ input .ico-02 {
   box-sizing: border-box;
   text-align: center;
   height: 60px;
-  width: 7%;
+  width: 6%;
+  top: 3px;
   position: relative;
 }
 
@@ -7820,11 +7821,16 @@ label.upload-btn input[type="file"] {
 }
 
 .upload-btn {
-  float: left;
-  padding: 11px 18px;
-  margin-right: 18px;
-  height: 34px;
-  top: 1px;
+      float: left;
+    padding: 7px;
+    padding-top: 13px;
+    /* left: 3px; */
+    /* margin-right: 18px; */
+    height: 35px;
+    /* top: 1px; */
+    position: relative;
+    bottom: 56px;
+    margin: 0;
 }
 
 .small-dialog-content textarea {
@@ -7852,7 +7858,6 @@ label.upload-btn input[type="file"] {
 
 .small-dialog-content button.send {
   width: 100%;
-  margin-top: 25px;
 }
 
 .small-dialog-content .divider {
@@ -7860,6 +7865,9 @@ label.upload-btn input[type="file"] {
   border-top: 1px solid #e0e0e0;
   height: 1px;
   width: 100%;
+  position: relative;
+  margin: 0;
+  top: -20px;
 }
 
 .slidesStrong {
@@ -8485,7 +8493,9 @@ div.layout-style {
 .colors li a.active {
   box-shadow: 0 0 0 2px #fff inset
 }
-
+.selectInput{
+  padding: 14px;
+}
 #reset {
   margin: 0 0 10px 2px;
 }
