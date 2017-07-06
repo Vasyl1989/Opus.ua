@@ -749,7 +749,8 @@ input .ico-02 {
   box-sizing: border-box;
   text-align: center;
   height: 60px;
-  width: 7%;
+  width: 6%;
+  top: 3px;
   position: relative;
 }
 
