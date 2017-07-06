@@ -740,6 +740,10 @@ input .ico-02 {
   border: none;
 }
 
+.selectinput {
+  padding: 14px;
+}
+
 .search-container button {
   background-color: #505050;
   color: #fff;

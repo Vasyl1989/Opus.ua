@@ -2,16 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Modal from "react-modal";
-
 import * as Actions from "../../actions/vacancyActions";
 import * as consts from "../../constants/const";
 import TextInput from "../common/TextInput";
 import SelectInput from "../common/SelectInput";
 import * as types from "../../actions/actionTypes";
+import { closeOpenSucces, closeOpenError } from '../../actions/openActions';
 
 const customStyles = {
   content: {
-    padding: ""
+    padding: "10px",
     top: "50%",
     left: "50%",
     right: "auto",
@@ -30,8 +30,6 @@ class AddVacancyForm extends React.Component {
       this.state = {
         vacancy: props.singleVacancy,
         errors: {},
-        modalIsOpen: false,
-        modalIsOpenTwo: false
       };
     } else {
       this.state = {
@@ -49,14 +47,11 @@ class AddVacancyForm extends React.Component {
           website: ""
         },
         errors: {},
-        modalIsOpen: false,
-        modalIsOpenTwo: false
       };
     }
 
-    this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
+    this.closeModal2 = this.closeModal2.bind(this);
+    this.closeModal3 = this.closeModal3.bind(this);
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -120,24 +115,13 @@ class AddVacancyForm extends React.Component {
     return formIsValid;
   }
 
-  //modal window
-  openModal() {
-    this.setState({
-      modalIsOpen: true,
-      modalIsOpenTwo: true
-    });
+  closeModal2() {
+    this.props.dispatch(closeOpenError());
   }
 
-  afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    this.subtitle.style.color = "#f00";
-  }
+  closeModal3() {
+    this.props.dispatch(closeOpenSucces());
 
-  closeModal() {
-    this.setState({
-      modalIsOpen: false,
-      modalIsOpenTwo: false
-    });
   }
 
   handleInputChange(e) {
@@ -195,17 +179,15 @@ class AddVacancyForm extends React.Component {
   }
 
   render() {
-    // const vacancy = this.props.singleVacancy;
     return (
       <div className="container form-add-job">
 
         {/*------Submit Page------*/}
         <div className="sixteen columns">
           <div className="submit-page">
-
             <form onSubmit={this.handleSubmit}>
-              {/*------- Emaile------*/}
 
+              {/*------- Emaile------*/}
               <TextInput
                 type="email"
                 title="Електронна пошта"
@@ -217,10 +199,9 @@ class AddVacancyForm extends React.Component {
               <span className="errorMassage" style={{ color: "red" }}>
                 {this.state.errors["email"]}
               </span>
-
               <div className="clearfixform" />
-              {/*------- Title------*/}
 
+              {/*------- Title------*/}
               <TextInput
                 title="Назва вакансії"
                 type="text"
@@ -231,8 +212,8 @@ class AddVacancyForm extends React.Component {
               <span className="errorMassage" style={{ color: "red" }}>
                 {this.state.errors["title"]}
               </span>
-
               <div className="clearfixform" />
+
               {/*------- Job Pair------*/}
               <TextInput
                 title="Заробітня плата"
@@ -257,17 +238,19 @@ class AddVacancyForm extends React.Component {
                 onChange={this.handleInputChange}
               />
               <div className="clearfixform" />
-              {/*------- Job Type------*/}
 
+              {/*------- Job Type------*/}
               <SelectInput
+                className="selectinput"
                 title="Тип роботи"
                 onChange={this.handleInputChange}
                 name="job_type"
                 options={consts.JOB_TYPE}
               />
-              {/*------- Choose Category------*/}
 
+              {/*------- Choose Category------*/}
               <SelectInput
+                className="selectinput"
                 title="Категорія"
                 name="category"
                 onChange={this.handleInputChange}
@@ -292,8 +275,8 @@ class AddVacancyForm extends React.Component {
                 </span>
               </div>
               <div className="clearfixform" />
-              {/*------- TClosing Date------*/}
 
+              {/*------- TClosing Date------*/}
               <TextInput
                 title="Оголошення активне до:"
                 type="date"
@@ -306,13 +289,13 @@ class AddVacancyForm extends React.Component {
                 {this.state.errors["active_to_date"]}
               </span>
               <div className="clearfixform" />
+
               {/*------- Company Details------*/}
               <div className="divider">
                 <h3>Додатково про компанію</h3>
               </div>
 
               {/*------- Company Name------*/}
-
               <TextInput
                 title="Компанія"
                 type="text"
@@ -325,8 +308,8 @@ class AddVacancyForm extends React.Component {
                 {this.state.errors["company"]}
               </span>
               <div className="clearfixform" />
-              {/*------- Website------*/}
 
+              {/*------- Website------*/}
               <TextInput
                 title="Вебсайт"
                 type="text"
@@ -341,45 +324,35 @@ class AddVacancyForm extends React.Component {
               <button
                 className="button big margin-top-5"
                 type="submit"
-                id="vacancy"
-              >
+                id="vacancy">
                 Додати
               </button>
 
               <Modal
-                isOpen={this.state.modalIsOpen}
-                onAfterOpen={this.afterOpenModal}
-                onRequestClose={this.closeModal}
+                isOpen={this.props.error}
+                onRequestClose={this.closeModal2}
                 style={customStyles}
                 contentLabel="Example Modal"
               >
-
                 <h2 ref={subtitle => this.subtitle = subtitle}>
                   Форма заповнена не вірно
                 </h2>
-                <button onClick={this.closeModal}>close</button>
-
+                <button onClick={this.closeModal2}>close</button>
               </Modal>
 
               <Modal
-                isOpen={this.state.modalIsOpenTwo}
-                onAfterOpen={this.afterOpenModal}
-                onRequestClose={this.closeModal}
+                isOpen={this.props.success}
+                onRequestClose={this.closeModal3}
                 style={customStyles}
-                contentLabel="Example Modal"
-              >
-
+                contentLabel="Example Modal">
                 <h2 ref={subtitle => this.subtitle = subtitle}>
                   Вакансія надіслана успішно
                 </h2>
-                <button onClick={this.closeModal}>close</button>
-
+                <button onClick={this.closeModal3}>close</button>
               </Modal>
-
             </form>
           </div>
         </div>
-
       </div>
     );
   }
@@ -398,7 +371,9 @@ function mapStateToProps(state) {
   return {
     vacancy: state.vacancy,
     singleVacancy: state.vacancy.singleVacancy,
-    shouldUpdate: state.vacancy.shouldUpdate
+    shouldUpdate: state.vacancy.shouldUpdate,
+    error: state.open.error,
+    success: state.open.success,
   };
 }
 

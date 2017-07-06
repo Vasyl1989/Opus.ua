@@ -10,7 +10,6 @@ export function getVacancyById(id, vacancies, forUpdate) {
     if (forUpdate) {
       dispatch({ type: types.SHOULD_UPDATE });
     }
-
     const vacancy = _.find(vacancies, { id: Number(id) });
     if (vacancy) {
       dispatch({ type: types.GET_VACANCY_BY_ID, payload: vacancy });
@@ -21,7 +20,6 @@ export function getVacancyById(id, vacancies, forUpdate) {
         browserHistory.push(`/vacancy_detail/${id}`)
         return;
       }
-
     }
 
     sendRequest('get', `/vacancies/${id}`, null, null)
@@ -34,7 +32,6 @@ export function getVacancyById(id, vacancies, forUpdate) {
         }
       })
       .catch((error) => console.error(error));
-
   };
 }
 
@@ -43,28 +40,27 @@ export function getAllVacancy() {
     sendRequest('get', '/vacancies', null, null)
       .then(response => dispatch({ type: types.GET_ALL_VACANCIES, payload: response.data }))
       .catch((error) => console.log(error));
-
   };
 }
+
 export function sendVacancy(vacancy) {
   return dispatch => {
     const data = { vacancy };
-
     sendRequest('post', consts.PATH, data)
       .then((response) => {
         if (response && response.status === 200 || response.status === 201) {
           console.log('data send on server success');
-
+          dispatch({ type: types.SHOULD_OPEN_CLOSE.SUCCESS });
         }
       })
       .catch(function (error) {
         console.log(error);
+        dispatch({ type: types.SHOULD_OPEN_CLOSE.ERROR });
       });
   };
 }
 
 export function deleteVacancy(id, vacancies) {
-
   return dispatch => {
     sendRequest('delete', `/vacancies/${id}`, null, null)
       .then(response => {
@@ -75,11 +71,9 @@ export function deleteVacancy(id, vacancies) {
   };
 }
 
-export function editVacancy(vacancy, vacancies) {
-
+export function editVacancy(vacancy) {
   const data = { vacancy };
   return dispatch => {
-
     sendRequest('put', `/vacancies/${vacancy.id}`, data, null)
       .then(response => {
         const rest = _.map(vacancy => vacancy.id === vacancy.id);
@@ -88,11 +82,10 @@ export function editVacancy(vacancy, vacancies) {
       .catch((error) => {
         console.log(error);
       });
-  }
+  };
 }
 
 export function searchVacancy(query, fromPage, parametr) {
-
   return dispatch => {
     sendRequest('get', '/vacancies', null, query)
       .then(response => {
@@ -100,11 +93,11 @@ export function searchVacancy(query, fromPage, parametr) {
         if (fromPage !== consts.PAGES.BROWSE_VACANCY) {
           browserHistory.push("/browse_vacancy");
         }
-        dispatch(filtration(parametr))
+        dispatch(filtration(parametr));
       }).catch((error) => {
         console.log(error);
       });
-  }
+  };
 }
 
 export function pagination(query) {
@@ -115,10 +108,8 @@ export function pagination(query) {
       }).catch((error) => {
         console.log(error);
       });
-  }
+  };
 }
-
-
 
 export function agreeToVacancy(users_vacancy) {
   //debugger;
@@ -127,7 +118,6 @@ export function agreeToVacancy(users_vacancy) {
     for (const k in users_vacancy) {
       formData.append(`users_vacancy[${k}]`, users_vacancy[k]);
     }
-
     sendRequest('post', '/users_vacancies', formData)
       .then((response) => {
         if (response && response.status === 200 || response.status === 201) {
