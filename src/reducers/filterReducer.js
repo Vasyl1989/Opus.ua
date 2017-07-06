@@ -33,6 +33,8 @@ export default function filterReducer(state = initialState, action) {
         ...state,
         title: action.payload,
       };
+
+
     default:
       return state;
   }

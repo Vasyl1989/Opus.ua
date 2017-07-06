@@ -3,22 +3,9 @@ import * as consts from '../constants/const';
 import * as _ from 'lodash';
 import { sendRequest } from '../utils/api';
 import { browserHistory } from 'react-router';
-import { filtration } from './filterAction';
-import Modal from 'react-modal';
-
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
-  }
-};
+import { filtration } from './filterActions';
 
 export function getVacancyById(id, vacancies, forUpdate) {
-
   return dispatch => {
     if (forUpdate) {
       dispatch({ type: types.SHOULD_UPDATE });
@@ -31,9 +18,10 @@ export function getVacancyById(id, vacancies, forUpdate) {
         browserHistory.push("/add_vacancy");
         return;
       } else {
-        browserHistory.push(`/vacancy_detail/${id}`);
+        browserHistory.push(`/vacancy_detail/${id}`)
         return;
       }
+
     }
 
     sendRequest('get', `/vacancies/${id}`, null, null)
@@ -46,6 +34,7 @@ export function getVacancyById(id, vacancies, forUpdate) {
         }
       })
       .catch((error) => console.error(error));
+
   };
 }
 
@@ -57,7 +46,6 @@ export function getAllVacancy() {
 
   };
 }
-
 export function sendVacancy(vacancy) {
   return dispatch => {
     const data = { vacancy };
@@ -66,29 +54,11 @@ export function sendVacancy(vacancy) {
       .then((response) => {
         if (response && response.status === 200 || response.status === 201) {
           console.log('data send on server success');
+
         }
       })
       .catch(function (error) {
         console.log(error);
-      });
-  };
-}
-
-export function sendVacancy2(users_vacancy) {
-  return dispatch => {
-    const formData = new FormData();
-    for (const k in users_vacancy) {
-      formData.append(`users_vacancy[${k}]`, users_vacancy[k]);
-    }
-
-    sendRequest('post', '/users_vacancies', formData)
-      .then((response) => {
-        if (response && response.status === 200 || response.status === 201) {
-          alert('Ваша заявка успішно надіслана');
-        }
-      })
-      .catch(function (error) {
-        alert('Спробуйте надіслати заявку ще раз');
       });
   };
 }
@@ -118,16 +88,14 @@ export function editVacancy(vacancy, vacancies) {
       .catch((error) => {
         console.log(error);
       });
-  };
+  }
 }
 
 export function searchVacancy(query, fromPage, parametr) {
-  // debugger;
+
   return dispatch => {
     sendRequest('get', '/vacancies', null, query)
       .then(response => {
-        parametr;
-        console.log('parametr', parametr)
         dispatch({ type: types.SEARCH, payload: response.data });
         if (fromPage !== consts.PAGES.BROWSE_VACANCY) {
           browserHistory.push("/browse_vacancy");
@@ -136,7 +104,7 @@ export function searchVacancy(query, fromPage, parametr) {
       }).catch((error) => {
         console.log(error);
       });
-  };
+  }
 }
 
 export function pagination(query) {
@@ -146,6 +114,30 @@ export function pagination(query) {
         dispatch({ type: types.PAGINATION, payload: response.data });
       }).catch((error) => {
         console.log(error);
+      });
+  }
+}
+
+
+
+export function agreeToVacancy(users_vacancy) {
+  //debugger;
+  return dispatch => {
+    const formData = new FormData();
+    for (const k in users_vacancy) {
+      formData.append(`users_vacancy[${k}]`, users_vacancy[k]);
+    }
+
+    sendRequest('post', '/users_vacancies', formData)
+      .then((response) => {
+        if (response && response.status === 200 || response.status === 201) {
+          console.log('data send on server success');
+          dispatch({ type: types.SHOULD_OPEN_CLOSE.SUCCESS });
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+        dispatch({ type: types.SHOULD_OPEN_CLOSE.ERROR });
       });
   };
 }

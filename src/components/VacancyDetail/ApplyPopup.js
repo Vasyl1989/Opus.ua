@@ -1,9 +1,11 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
-import { PropTypes } from 'prop-types';
 import TextInput from '../common/TextInput';
-import * as Actions from '../../actions/vacancyActions';
+import { agreeToVacancy } from '../../actions/vacancyActions';
+import { opening, closeOpenSucces, closeOpenError } from '../../actions/openActions';
+import * as types from '../../actions/actionTypes';
 
 const customStyles = {
   content: {
@@ -17,13 +19,22 @@ const customStyles = {
   }
 };
 
+const customStyles2 = {
+  content: {
+    padding: '10px',
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
+  }
+};
+
 class ApplyPopup extends React.Component {
   constructor() {
     super();
     this.state = {
-      modalIsOpen: false,
-      modalIsOpenTwo: false,
-      modalIsOpenThree: false,
       users_vacancy: {
         full_name: "",
         email: "",
@@ -33,38 +44,31 @@ class ApplyPopup extends React.Component {
       },
       errors: {},
     };
-
-    this.openModal = this
-      .openModal
-      .bind(this);
-    this.afterOpenModal = this
-      .afterOpenModal
-      .bind(this);
-    this.closeModal = this
-      .closeModal
-      .bind(this);
-
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.closeModal2 = this.closeModal2.bind(this);
+    this.closeModal3 = this.closeModal3.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
 
   openModal() {
-    this.setState({
-      modalIsOpen: true
-    });
-  }
-
-  afterOpenModal() {
-    // references are now sync'd and can be accessed. 
-    this.subtitle.style.color = '#f00';
+    this.props.dispatch(opening());
   }
 
   closeModal() {
-    this.setState({
-      modalIsOpen: false,
-      modalIsOpenTwo: false,
-      modalIsOpenThree: false,
-    });
+    this.props.dispatch(opening());
+
+    //this.props.dispatch(closeOpenSucces());
+  }
+
+  closeModal2() {
+    this.props.dispatch(closeOpenError());
+  }
+
+  closeModal3() {
+    this.props.dispatch(closeOpenSucces());
+    this.setState({ users_vacancy: "" });
   }
 
   handleValidation() {
@@ -105,18 +109,13 @@ class ApplyPopup extends React.Component {
     users_vacancy.file = this.fileUpload.files[0];
     this.setState({ users_vacancy: users_vacancy });
     const vacancy = this.props.singleVacancy;
-    const aaa = vacancy.id;
-    users_vacancy.vacancy_id = aaa;
+    const id = vacancy.id;
+    users_vacancy.vacancy_id = id;
   }
 
   onFormSubmit(e) {
     e.preventDefault();
-    this.props.dispatch(Actions.sendVacancy2(this.state.users_vacancy));
-    if (this.handleValidation()) {
-      this.setState({ modalIsOpenTwo: true });
-    } else {
-      this.setState({ modalIsOpenThree: true });
-    }
+    this.props.dispatch(agreeToVacancy(this.state.users_vacancy));
   }
 
   render() {
@@ -124,8 +123,7 @@ class ApplyPopup extends React.Component {
       <div>
         <button onClick={this.openModal}>Погодитись на цю роботу</button>
         <Modal
-          isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
+          isOpen={this.props.isOpen}
           onRequestClose={this.closeModal}
           style={customStyles}
           contentLabel="Example Modal"
@@ -166,40 +164,43 @@ class ApplyPopup extends React.Component {
                 <div className="clearfixform" />
 
                 <div className="upload-info">
+                  <p />
                   <strong>Завантажити ваше резюме</strong>
                   <span>Максимальний розмір файлу: 5MB</span>
                 </div>
                 <div className="clearfix" />
                 <input
+                  id="file"
                   ref={(ref) => this.fileUpload = ref}
                   type="file"
                   onChange={this.onChange}
                   name="file" />
-                <span className="errorMassage" style={{ color: "red" }}>{this.state.errors["file"]}</span>
+                <label htmlFor="file" className="upload-btn">
+                  <i className="fa fa-upload" />
+                  Завантажити</label>
                 <div className="divider" />
                 <button className="send" type="submit">Надіслати заявку</button>
 
-
                 <Modal
-                  isOpen={this.state.modalIsOpenThree}
-                  onAfterOpen={this.afterOpenModal}
-                  onRequestClose={this.closeModal}
-                  style={customStyles}
+                  isOpen={this.props.error}
+                  onRequestClose={this.closeModal2}
+                  style={customStyles2}
                   contentLabel="Example Modal"
                 >
-                  <h2 ref={subtitle => this.subtitle = subtitle}>Спробуйте надіслати заявку ще раз</h2>
-                  <button onClick={this.closeModal}>close</button>
+                  <h2 ref={subtitle => this.subtitle = subtitle}>
+                    Форма заповнена не вірно.<br />Спробуйте надіслати заявку ще раз</h2>
+                  <button onClick={this.closeModal2}>close</button>
                 </Modal>
 
+
                 <Modal
-                  isOpen={this.state.modalIsOpenTwo}
-                  onAfterOpen={this.afterOpenModal}
-                  onRequestClose={this.closeModal}
-                  style={customStyles}
+                  isOpen={this.props.success}
+                  onRequestClose={this.closeModal3}
+                  style={customStyles2}
                   contentLabel="Example Modal"
                 >
                   <h2 ref={subtitle => this.subtitle = subtitle}>Заявка надіслана успішно</h2>
-                  <button onClick={this.closeModal}>close</button>
+                  <button onClick={this.closeModal3}>close</button>
                 </Modal>
               </form>
             </div>
@@ -209,23 +210,22 @@ class ApplyPopup extends React.Component {
     );
   }
 }
-
+ApplyPopup.PropTypes = {
+  isOpen: PropTypes.bool,
+};
 
 function mapStateToProps(state) {
   return {
     users_vacancy: state.users_vacancy,
     singleVacancy: state.vacancy.singleVacancy,
+    isOpen: state.open.isOpen,
+    error: state.open.error,
+    success: state.open.success,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return { dispatch };
 }
-
-ApplyPopup.PropTypes = {
-  dispatch: PropTypes.func.isRequired,
-  singleVacancy: PropTypes.Object.isRequired,
-};
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApplyPopup);

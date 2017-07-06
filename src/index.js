@@ -6,7 +6,7 @@ import {Router, Route, browserHistory } from 'react-router';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import { Provider } from 'react-redux';
 import routes from './routes';
-// import {rootReducer} from './reducers/index';
+
 
 
 require('./favicon.ico'); // Tell webpack to load favicon.ico

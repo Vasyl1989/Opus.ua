@@ -42,7 +42,7 @@
 18. Footer
 19. Manage Applications Styles
 20. Job List Page
-21. Media Queries#00FFFF
+21. Media Queries
 22. Styles Switcher
 
 ---------------------------------------------------------------------- */
@@ -114,52 +114,6 @@ header.full-width #navigation ul.float-right {
 
 
 /* ---------------------------------- */
-
-
-/* Animation */
-
-@-webkit-keyframes loading {
-  to {
-    -webkit-transform: rotate(360deg);
-  }
-}
-
-@-moz-keyframes loading {
-  to {
-    -moz-transform: rotate(360deg);
-  }
-}
-
-@-ms-keyframes loading {
-  to {
-    -ms-transform: rotate(360deg);
-  }
-}
-
-@keyframes loading {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-
-/* Loader (*/
-
-#loading {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-image: linear-gradient(bottom, #ffb400 50%, #959595 50%);
-  background-image: -o-linear-gradient(bottom, #ffb400 50%, #959595 50%);
-  background-image: -moz-linear-gradient(bottom, #ffb400 50%, #959595 50%);
-  background-image: -webkit-linear-gradient(bottom, #ffb400 50%, #959595 50%);
-  background-image: -ms-linear-gradient(bottom, #ffb400 50%, #959595 50%);
-  background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0.5, #ffb400), color-stop(0.5, #959595));
-  -webkit-animation: loading 1s infinite linear;
-  -moz-animation: loading 1s infinite linear;
-  -ms-animation: loading 1s infinite linear;
-  animation: loading 1s infinite linear;
-}
 
 
 /* Transparent Header
@@ -795,8 +749,7 @@ input .ico-02 {
   box-sizing: border-box;
   text-align: center;
   height: 60px;
-  width: 5, 6%;
-  top: 5px;
+  width: 7%;
   position: relative;
 }
 
@@ -7750,7 +7703,6 @@ ul.footer-links {
   float: right;
   right: 33%;
   width: 56px;
-  top: 10px;
   height: 50px;
   display: inline;
   padding: 0;
@@ -7869,10 +7821,15 @@ label.upload-btn input[type="file"] {
 
 .upload-btn {
   float: left;
-  padding: 11px 18px;
-  margin-right: 18px;
-  height: 34px;
-  top: 5px;
+  padding: 9px;
+  padding-top: 13px;
+  left: 3px;
+  /* margin-right: 18px; */
+  height: 35px;
+  /* top: 1px; */
+  position: relative;
+  bottom: 60px;
+  margin: 0;
 }
 
 .small-dialog-content textarea {
@@ -7900,7 +7857,6 @@ label.upload-btn input[type="file"] {
 
 .small-dialog-content button.send {
   width: 100%;
-  margin-top: 25px;
 }
 
 .small-dialog-content .divider {
@@ -7908,6 +7864,9 @@ label.upload-btn input[type="file"] {
   border-top: 1px solid #e0e0e0;
   height: 1px;
   width: 100%;
+  position: relative;
+  margin: 0;
+  top: -20px;
 }
 
 .slidesStrong {
