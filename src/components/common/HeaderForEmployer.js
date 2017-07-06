@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../styles/styles.css';
-import { Link} from 'react-router';
+import { Link } from 'react-router';
 
 const HeaderForEmployer = () => {
   return (
@@ -14,7 +14,7 @@ const HeaderForEmployer = () => {
 
             <div id="logo">
               <h1>
-               <a href="/">OPUS.ua</a>
+                <a href="/">OPUS.ua</a>
               </h1>
             </div>
 
@@ -40,27 +40,33 @@ const HeaderForEmployer = () => {
                       <Link to={"/add_vacancy"}>Створити вакансію</Link>
                     </li>
                     <li>
-                     <Link to={"/manage_vacancy"}>Редагувати вакансію</Link>
-                      </li>
+                      <Link to={"/manage_vacancy"}>Редагувати вакансію</Link>
+                    </li>
                   </ul>
                 </li>
+                
+               
               </ul>
+               <ul className="responsive float-right">
+                  <li><Link to={"/registration"}><i className="fa fa-user" /> Sign Up</Link></li>
+                  <li><Link to={"/login"}><i className="fa fa-lock" /> Log In</Link></li>
+                </ul>
             </nav>
 
-              {/*-------Navigation-----*/}
+            {/*-------Navigation-----*/}
 
-              <div id="mobile-navigation">
-                <a href="#menu" className="menu-trigger"><i className="fa fa-reorder"/> Menu</a>
-              </div>
+            <div id="mobile-navigation">
+              <a href="#menu" className="menu-trigger"><i className="fa fa-reorder" /> Menu</a>
+            </div>
 
           </div>
-          </div>
+        </div>
       </header>
-        <div className="clearfix"/>
+      <div className="clearfix" />
 
     </div>
 
-      );
+  );
 };
 
 export default HeaderForEmployer;

@@ -151,7 +151,7 @@ class ApplyPopup extends React.Component {
                 <div className="clearfixform" />
 
                 <div className="upload-info">
-                  <strong>Завантажити ваше резюме</strong>
+                  <strong>Завантажити ваше резюме .</strong>
                   <span>Максимальний розмір файлу: 5MB</span>
                 </div>
                 <div className="clearfix" />

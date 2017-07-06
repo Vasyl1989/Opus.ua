@@ -8,7 +8,8 @@ import AddVacancy from './components/addvacancy/AddVacancy';
 import BrowseVacancy from './components/browsevacancy/BrowseVacancy';
 import BrowseCategories from './components/browsecategories/BrowseCategories';
 import ManageVacancy from './components/manageVacancy/ManageVacancy';
-
+import Registration from './components/registration/Registration';
+import Login from './components/registration/Login';
 
 export default (
   <Route path="/" component={App}>
@@ -18,6 +19,8 @@ export default (
     <Route path="browse_vacancy" component={BrowseVacancy} />
     <Route path="manage_vacancy" component={ManageVacancy} />
     <Route path="browse_categories" component={BrowseCategories} />
+    <Route path="registration" component={Registration} />
+    <Route path="login" component={Login} />
   </Route>
 );
 

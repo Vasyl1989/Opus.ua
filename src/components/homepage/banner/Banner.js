@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { searchVacancy } from '../../../actions/vacancyActions';
 import { PAGES } from '../../../constants/const';
-import * as types from '../../../actions/actionTypes';
+
 
 class Banner extends React.Component {
   constructor(props, context) {
@@ -27,8 +27,6 @@ class Banner extends React.Component {
   searchSubmit(e, city, title) {
     e.preventDefault();
     const query = { city, title };
-    this.props.dispatch({ type: types.ABOUT_SEARCH.SET_CITY, payload: city });
-    this.props.dispatch({ type: types.ABOUT_SEARCH.SET_TITLE, payload: title });
     this.props.dispatch(searchVacancy(query, PAGES.HOME_PAGE));
   }
   transition(e){

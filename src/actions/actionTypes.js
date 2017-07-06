@@ -21,8 +21,11 @@ export const ABOUT_SEARCH = {
 export const SHOULD_OPEN_CLOSE = {
   SUCCESS: 'SUCCESS',
   ERROR: 'ERROR',
+  MAIN: 'MAIN',
 };
-export const SHOULD_OPEN_CLOSE_MAIN= 'SHOULD_OPEN_CLOSE_MAIN';
+ 
+
+
 
 
 

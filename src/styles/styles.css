@@ -321,8 +321,9 @@ header.transparent .menu ul ul li a:hover {
 /* Navigation
 ------------------------------------- */
 
+
 #navigation {
-  float: right;
+  float: left;
   margin-right: 40px;
 }
 
@@ -905,7 +906,7 @@ input .ico-02 {
 
 #titlebar.photo-bg {
   background-color: #222;
-  padding: 95px 0;
+  /*padding: 95px 0;*/
   overflow: hidden;
   background-repeat: no-repeat;
   background-position: 50%;

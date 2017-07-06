@@ -23,11 +23,13 @@ const Header = () => {
             {/*---------Menu-------*/}
 
             <nav id="navigation" className="menu sf-js-enabled sf-arrows">
+
               <ul id="responsive">
+
                 <li>
                   <Link to={"/"}>Головна</Link>
-
                 </li>
+
                 <li>
                   <a href="#" id="current">Працівнику</a>
                   <ul>
@@ -36,32 +38,36 @@ const Header = () => {
                     </li>
                   </ul>
                 </li>
+
                 <li>
                   <a href="#">Роботодавцю</a>
                   <ul>
                     <li>
                       <Link to={"/add_vacancy"}>Створити вакансію</Link>
-
                     </li>
                     <li>
                       <Link to={"/manage_vacancy"}>Редагувати вакансію</Link>
-
                     </li>
                   </ul>
                 </li>
+
               </ul>
+               <ul className="responsive float-right">
+                  <li><Link to={"/registration"}><i className="fa fa-user" /> Sign Up</Link></li>
+                  <li><Link to={"/login"}><i className="fa fa-lock" /> Log In</Link></li>
+                </ul>
             </nav>
 
             {/*-------Navigation-----*/}
 
             <div id="mobile-navigation">
-              <a href="#menu" className="menu-trigger"><i className="fa fa-reorder"/> Menu</a>
+              <a href="#menu" className="menu-trigger"><i className="fa fa-reorder" /> Menu</a>
             </div>
 
           </div>
         </div>
       </header>
-      <div className="clearfix"/>
+      <div className="clearfix" />
 
     </div>
 
