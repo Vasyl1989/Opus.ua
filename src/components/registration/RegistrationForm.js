@@ -33,30 +33,29 @@ class RegistrationForm extends React.Component {
 		console.log('state reg', this.state);
 	}
 	//validation
+	handleValidation() {
+		let user = this.state.user;
+		let errors = {};
+		let formIsValid = true;
 
-  handleValidation() {
-    let user = this.state.user;
-    let errors = {};
-    let formIsValid = true;
+		{
+			/*------- first_name validation------*/
+		}
+		if (!user["first_name"]) {
+			formIsValid = false;
+			errors["first_name"] = "Це поле не може бути пустим";
+		}
 
-    {
-      /*------- title validation------*/
-    }
-    if (!user["first_name"]) {
-      formIsValid = false;
-      errors["first_name"] = "Це поле не може бути пустим";
-    }
-
-    {
-      /*------- email validation------*/
-    }
-    if (!user["email"]) {
-      formIsValid = false;
-      errors["email"] = "Це поле не може бути пустим";
-    }
-    this.setState({ errors: errors });
-    return formIsValid;
-  }
+		{
+			/*------- email validation------*/
+		}
+		if (!user["email"]) {
+			formIsValid = false;
+			errors["email"] = "Це поле не може бути пустим";
+		}
+		this.setState({ errors: errors });
+		return formIsValid;
+	}
 	render() {
 		return (
 			<div className="container">
@@ -80,10 +79,8 @@ class RegistrationForm extends React.Component {
 											value={this.state.user.first_name} />
 									</label>
 									<span className="errorMassage" style={{ color: "red" }}>
-                {this.state.errors["first_name"]}
-              </span>
-
-              <div className="clearfixform" />
+										{this.state.errors["first_name"]}
+									</span>
 								</p>
 
 								<p className="form-row form-row-wide">
@@ -98,11 +95,9 @@ class RegistrationForm extends React.Component {
 											value={this.state.user.email} />
 									</label>
 									<span className="errorMassage" style={{ color: "red" }}>
-                {this.state.errors["email"]}
-              </span>
-              <div className="clearfixform" />
+										{this.state.errors["email"]}
+									</span>
 								</p>
-
 								<p className="form-row form-row-wide">
 									<label htmlFor="password1">Password:
 						<i className="ln ln-icon-Lock-2" />

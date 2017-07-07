@@ -9,6 +9,7 @@ class LoginForm extends React.Component {
 		this.state = {
 			email: "",
 			password: "",
+			errors: {},
 		};
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,6 +23,24 @@ class LoginForm extends React.Component {
 	handleSubmit(e) {
 		console.log('state login', this.state);
 		e.preventDefault();
+		this.handleValidation();
+	}
+	handleValidation() {
+		let user = this.state;
+		let errors = {};
+		let formIsValid = true;
+		{/*------- password validation------*/ }
+		if (!user["password"]) {
+			formIsValid = false;
+			errors["password"] = "Це поле не може бути пустим,довжина більше 8 символів";
+		}
+		{	/*------- email validation------*/ }
+		if (!user["email"]) {
+			formIsValid = false;
+			errors["email"] = "Це поле не може бути пустим";
+		}
+		this.setState({ errors: errors });
+		return formIsValid;
 	}
 	render() {
 		return (
@@ -46,6 +65,9 @@ class LoginForm extends React.Component {
 											onChange={this.handleInputChange}
 											value={this.state.email} />
 									</label>
+									<span className="errorMassage" style={{ color: "red" }}>
+										{this.state.errors["email"]}
+									</span>
 								</p>
 
 								<p className="form-row form-row-wide">
@@ -60,6 +82,9 @@ class LoginForm extends React.Component {
 											value={this.state.password}
 										/>
 									</label>
+									<span className="errorMassage" style={{ color: "red" }}>
+										{this.state.errors["password"]}
+									</span>
 								</p>
 
 								<p className="form-row">
