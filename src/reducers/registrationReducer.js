@@ -1,24 +1,26 @@
 import * as types from '../actions/actionTypes';
 
 const initialState = {
-  users: [],
-  authenticated: false,
+   uid:"",
+   accessToken:"",
+   client:"",
 };
 
 export default function registrationReducer(state = initialState, action) {
   switch (action.type) {
-
-    case types.SIGN_UP:
+   
+    case types.SIGN_IN:
       return {
         ...state,
-        users: action.payload,
-        authenticated: true,
+       uid:action.payload.headers.uid,
+       client:action.payload.headers.client
       };
+    
 
     case types.SIGN_OUT:
       return {
         ...state,
-        authenticated: false,
+        
       };
 
     default: return state;

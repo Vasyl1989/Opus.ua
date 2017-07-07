@@ -1,7 +1,21 @@
 import React from "react";
-// import  PropTypes  from "prop-types";
 import { connect } from "react-redux";
 import { Link } from 'react-router';
+import { singIn } from '../../actions/registrationActions';
+import Modal from 'react-modal';
+import { closeSucces, closeError } from '../../actions/openActions';
+
+const customStyles = {
+	content: {
+		padding: '0',
+		top: '50%',
+		left: '50%',
+		right: 'auto',
+		bottom: 'auto',
+		marginRight: '-50%',
+		transform: 'translate(-50%, -50%)'
+	}
+};
 
 class LoginForm extends React.Component {
 	constructor(props, context) {
@@ -13,17 +27,29 @@ class LoginForm extends React.Component {
 		};
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.closeModal2 = this.closeModal2.bind(this);
+		this.closeModal3 = this.closeModal3.bind(this);
 	}
+
 	handleInputChange(e) {
 		const target = e.target;
 		const value = target.value;
 		const name = target.name;
 		this.setState({ [name]: value });
 	}
+
 	handleSubmit(e) {
-		console.log('state login', this.state);
 		e.preventDefault();
 		this.handleValidation();
+		this.props.dispatch(singIn(this.state.email, this.state.password));
+	}
+
+	closeModal2() {
+		this.props.dispatch(closeError());
+	}
+
+	closeModal3() {
+		this.props.dispatch(closeSucces());
 	}
 	handleValidation() {
 		let user = this.state;
@@ -86,13 +112,38 @@ class LoginForm extends React.Component {
 										{this.state.errors["password"]}
 									</span>
 								</p>
-
 								<p className="form-row">
-									<input type="submit" className="button border fw margin-top-10" name="login" value="Login" />
+									<button
+										className="button big margin-top-5"
+										type="submit"
+										name="login"
+									>	Login
+              </button>
 								</p>
+								<Modal
+									isOpen={this.props.error}
+									onRequestClose={this.closeModal2}
+									style={customStyles}
+									contentLabel="Example Modal"
+								>
+									<h2 ref={subtitle => this.subtitle = subtitle}>
+										Ви не змогли увійти на сайт <br />
+										Перевірте емайл адресу та пароль
+                </h2>
+									<button onClick={this.closeModal2}>close</button>
+								</Modal>
 
-								
-
+								<Modal
+									isOpen={this.props.success}
+									onRequestClose={this.closeModal3}
+									style={customStyles}
+									contentLabel="Example Modal"
+								>
+									<h2 ref={subtitle => this.subtitle = subtitle}>
+										Ви успішно авторизувались
+                </h2>
+									<button onClick={this.closeModal3}>close</button>
+								</Modal>
 							</form>
 						</div>
 					</div>
@@ -103,7 +154,8 @@ class LoginForm extends React.Component {
 }
 function mapStateToProps(state) {
 	return {
-		state
+		error: state.open.error,
+		success: state.open.success,
 	};
 }
 function mapDispatchToProps(dispatch) {

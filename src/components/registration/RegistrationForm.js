@@ -67,7 +67,7 @@ class RegistrationForm extends React.Component {
 			formIsValid = false;
 			errors["first_name"] = "Це поле не може бути пустим";
 		}
-		
+
 		{/*------- email validation------*/ }
 		if (!user["email"]) {
 			formIsValid = false;
@@ -178,7 +178,7 @@ class RegistrationForm extends React.Component {
 									contentLabel="Example Modal"
 								>
 									<h2 ref={subtitle => this.subtitle = subtitle}>
-										Форма заповнена не вірно
+										Ви не змогли зареєструвалися
                 </h2>
 									<button onClick={this.closeModal2}>close</button>
 								</Modal>
@@ -190,7 +190,7 @@ class RegistrationForm extends React.Component {
 									contentLabel="Example Modal"
 								>
 									<h2 ref={subtitle => this.subtitle = subtitle}>
-										Вакансія надіслана успішно
+										Ви успішно зареєструвалися 
                 </h2>
 									<button onClick={this.closeModal3}>close</button>
 								</Modal>
