@@ -1,8 +1,21 @@
 import React from "react";
-// import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from 'react-router';
+import Modal from 'react-modal';
 import { signUp } from '../../actions/registrationActions';
+import { closeSucces, closeError } from '../../actions/openActions';
+
+const customStyles = {
+	content: {
+		padding: '0',
+		top: '50%',
+		left: '50%',
+		right: 'auto',
+		bottom: 'auto',
+		marginRight: '-50%',
+		transform: 'translate(-50%, -50%)'
+	}
+};
 
 class RegistrationForm extends React.Component {
 	constructor(props, context) {
@@ -19,40 +32,57 @@ class RegistrationForm extends React.Component {
 		};
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.closeModal2 = this.closeModal2.bind(this);
+		this.closeModal3 = this.closeModal3.bind(this);
 	}
+
 	handleInputChange(e) {
 		const user = Object.assign({}, this.state.user);
 		user[e.target.name] = e.target.value;
 		this.setState({ user: user });
 	}
+
 	handleSubmit(e) {
 		e.preventDefault();
 		this.handleValidation();
 		this.props.dispatch(signUp(this.state.user));
-		this.setState({ user: "" });
-		console.log('state reg', this.state);
 	}
+
+	closeModal2() {
+		this.props.dispatch(closeError());
+	}
+
+	closeModal3() {
+		this.props.dispatch(closeSucces());
+	}
+
 	//validation
 	handleValidation() {
 		let user = this.state.user;
 		let errors = {};
 		let formIsValid = true;
 
-		{
-			/*------- first_name validation------*/
-		}
+		{	/*------- first_name validation------*/ }
 		if (!user["first_name"]) {
 			formIsValid = false;
 			errors["first_name"] = "Це поле не може бути пустим";
 		}
-
-		{
-			/*------- email validation------*/
-		}
+		
+		{/*------- email validation------*/ }
 		if (!user["email"]) {
 			formIsValid = false;
 			errors["email"] = "Це поле не може бути пустим";
 		}
+		{/*------- password validation------*/ }
+		if (!user["password"]) {
+			formIsValid = false;
+			errors["password"] = "Це поле не може бути пустим,довжина більше 8 символів";
+		}
+		if (!user["password_confirmation"]) {
+			formIsValid = false;
+			errors["password_confirmation"] = "Паролі повинні співпадати";
+		}
+
 		this.setState({ errors: errors });
 		return formIsValid;
 	}
@@ -87,7 +117,7 @@ class RegistrationForm extends React.Component {
 									<label htmlFor="email2">Email Address:
 						<i className="ln ln-icon-Mail" />
 										<input
-											type="email"
+											type="text"
 											className="input-text"
 											name="email"
 											id="email2"
@@ -110,6 +140,9 @@ class RegistrationForm extends React.Component {
 											value={this.state.user.password}
 										/>
 									</label>
+									<span className="errorMassage" style={{ color: "red" }}>
+										{this.state.errors["password"]}
+									</span>
 								</p>
 
 								<p className="form-row form-row-wide">
@@ -124,16 +157,43 @@ class RegistrationForm extends React.Component {
 											value={this.state.user.password_confirmation}
 										/>
 									</label>
+									<span className="errorMassage" style={{ color: "red" }}>
+										{this.state.errors["password_confirmation"]}
+									</span>
 								</p>
 
 								<p className="form-row">
-									<input
+									<button
+										className="button big margin-top-5"
 										type="submit"
-										className="button border fw margin-top-10"
 										name="register"
-										value="Register" />
+									>
+										Зареєструватись
+              </button>
 								</p>
+								<Modal
+									isOpen={this.props.error}
+									onRequestClose={this.closeModal2}
+									style={customStyles}
+									contentLabel="Example Modal"
+								>
+									<h2 ref={subtitle => this.subtitle = subtitle}>
+										Форма заповнена не вірно
+                </h2>
+									<button onClick={this.closeModal2}>close</button>
+								</Modal>
 
+								<Modal
+									isOpen={this.props.success}
+									onRequestClose={this.closeModal3}
+									style={customStyles}
+									contentLabel="Example Modal"
+								>
+									<h2 ref={subtitle => this.subtitle = subtitle}>
+										Вакансія надіслана успішно
+                </h2>
+									<button onClick={this.closeModal3}>close</button>
+								</Modal>
 							</form>
 						</div>
 					</div>
@@ -148,6 +208,8 @@ RegistrationForm.PropTypes = {
 function mapStateToProps(state) {
 	return {
 		user: state.registration,
+		error: state.open.error,
+		success: state.open.success,
 	};
 }
 function mapDispatchToProps(dispatch) {

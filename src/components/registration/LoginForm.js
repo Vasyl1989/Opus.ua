@@ -89,19 +89,9 @@ class LoginForm extends React.Component {
 
 								<p className="form-row">
 									<input type="submit" className="button border fw margin-top-10" name="login" value="Login" />
-
-									<label htmlFor="rememberme" className="rememberme">
-										<input
-											name="rememberme"
-											type="checkbox"
-											id="rememberme"
-											value="forever" />
-										Remember Me</label>
 								</p>
 
-								<p className="lost_password">
-									<a href="#" >Lost Your Password?</a>
-								</p>
+								
 
 							</form>
 						</div>

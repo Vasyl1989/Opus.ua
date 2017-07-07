@@ -6,7 +6,6 @@ import TextInput from '../common/TextInput';
 import { agreeToVacancy } from '../../actions/vacancyActions';
 import { opening, closeSucces, closeError } from '../../actions/openActions';
 
-
 const customStyles = {
   content: {
     padding: '0',
