@@ -1,13 +1,13 @@
 import * as types from '../actions/actionTypes';
 
- const initialState = {
+const initialState = {
   fething: false,
   singleVacancy: {},
   shouldUpdate: false,
   vacancies: [],
   SearchResults: [],
-  paginationData:[],
- };
+  paginationData: [],
+};
 
 
 export default function vacancyReduce(state = initialState, action) {
@@ -52,14 +52,11 @@ export default function vacancyReduce(state = initialState, action) {
         SearchResults: action.payload,
       };
 
-
-
-
     case types.PAGINATION:
-    return{
-      ...state,
-      paginationData: state.paginationData.concat(action.payload),
-    };
+      return {
+        ...state,
+        paginationData: state.paginationData.concat(action.payload),
+      };
 
     default:
       return state;

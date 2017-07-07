@@ -121,7 +121,6 @@ class AddVacancyForm extends React.Component {
 
   closeModal3() {
     this.props.dispatch(closeOpenSucces());
-
   }
 
   handleInputChange(e) {

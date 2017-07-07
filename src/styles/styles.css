@@ -322,7 +322,7 @@ header.transparent .menu ul ul li a:hover {
 ------------------------------------- */
 
 #navigation {
-  float: right;
+  float: left;
   margin-right: 40px;
 }
 

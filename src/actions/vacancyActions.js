@@ -1,9 +1,9 @@
-import * as types from './actionTypes';
-import * as consts from '../constants/const';
 import * as _ from 'lodash';
+import * as types from './actionTypes';
 import { sendRequest } from '../utils/api';
-import { browserHistory } from 'react-router';
+import * as consts from '../constants/const';
 import { filtration } from './filterActions';
+import { browserHistory } from 'react-router';
 
 export function getVacancyById(id, vacancies, forUpdate) {
   return dispatch => {
@@ -17,18 +17,18 @@ export function getVacancyById(id, vacancies, forUpdate) {
         browserHistory.push("/add_vacancy");
         return;
       } else {
-        browserHistory.push(`/vacancy_detail/${id}`)
+        browserHistory.push(`/vacancy_detail/${id}`);
         return;
       }
     }
 
     sendRequest('get', `/vacancies/${id}`, null, null)
       .then(response => {
-        dispatch({ type: types.GET_VACANCY_BY_ID, payload: response.data })
+        dispatch({ type: types.GET_VACANCY_BY_ID, payload: response.data });
         if (forUpdate) {
           browserHistory.push("/add_vacancy");
         } else {
-          browserHistory.push(`/vacancy_detail/${id}`)
+          browserHistory.push(`/vacancy_detail/${id}`);
         }
       })
       .catch((error) => console.error(error));

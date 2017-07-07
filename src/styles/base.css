@@ -259,6 +259,7 @@ a.menu-trigger,
 
 .margin-top-10 {
   margin-top: 10px !important;
+  z-index: 0;
 }
 
 .margin-top-15 {
