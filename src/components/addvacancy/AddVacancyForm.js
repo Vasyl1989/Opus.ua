@@ -1,17 +1,17 @@
 import React from "react";
-import PropTypes from "prop-types";
+import  PropTypes  from "prop-types";
 import { connect } from "react-redux";
 import Modal from "react-modal";
+
 import * as Actions from "../../actions/vacancyActions";
 import * as consts from "../../constants/const";
 import TextInput from "../common/TextInput";
 import SelectInput from "../common/SelectInput";
 import * as types from "../../actions/actionTypes";
-import { closeOpenSucces, closeOpenError } from '../../actions/openActions';
+import {closeError,closeSucces} from "../../actions/openActions";
 
 const customStyles = {
   content: {
-    padding: "10px",
     top: "50%",
     left: "50%",
     right: "auto",
@@ -52,7 +52,6 @@ class AddVacancyForm extends React.Component {
 
     this.closeModal2 = this.closeModal2.bind(this);
     this.closeModal3 = this.closeModal3.bind(this);
-
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -115,12 +114,14 @@ class AddVacancyForm extends React.Component {
     return formIsValid;
   }
 
+  //modal window
+
   closeModal2() {
-    this.props.dispatch(closeOpenError());
+    this.props.dispatch(closeError());
   }
 
-  closeModal3() {
-    this.props.dispatch(closeOpenSucces());
+  closeModal3() { 
+    this.props.dispatch(closeSucces());
   }
 
   handleInputChange(e) {
@@ -131,11 +132,7 @@ class AddVacancyForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    if (this.handleValidation()) {
-      this.setState({ modalIsOpenTwo: true });
-    } else {
-      this.setState({ modalIsOpen: true });
-    }
+    this.handleValidation();
     if (this.props.shouldUpdate) {
       this.props.dispatch(
         Actions.editVacancy(this.state.vacancy, this.props.vacancies)
@@ -184,9 +181,10 @@ class AddVacancyForm extends React.Component {
         {/*------Submit Page------*/}
         <div className="sixteen columns">
           <div className="submit-page">
-            <form onSubmit={this.handleSubmit}>
 
+            <form onSubmit={this.handleSubmit}>
               {/*------- Emaile------*/}
+
               <TextInput
                 type="email"
                 title="Електронна пошта"
@@ -198,9 +196,10 @@ class AddVacancyForm extends React.Component {
               <span className="errorMassage" style={{ color: "red" }}>
                 {this.state.errors["email"]}
               </span>
-              <div className="clearfixform" />
 
+              <div className="clearfixform" />
               {/*------- Title------*/}
+
               <TextInput
                 title="Назва вакансії"
                 type="text"
@@ -211,8 +210,8 @@ class AddVacancyForm extends React.Component {
               <span className="errorMassage" style={{ color: "red" }}>
                 {this.state.errors["title"]}
               </span>
-              <div className="clearfixform" />
 
+              <div className="clearfixform" />
               {/*------- Job Pair------*/}
               <TextInput
                 title="Заробітня плата"
@@ -237,21 +236,21 @@ class AddVacancyForm extends React.Component {
                 onChange={this.handleInputChange}
               />
               <div className="clearfixform" />
-
               {/*------- Job Type------*/}
+
               <SelectInput
-                className="selectinput"
                 title="Тип роботи"
                 onChange={this.handleInputChange}
                 name="job_type"
+                className="selectInput"
                 options={consts.JOB_TYPE}
               />
-
               {/*------- Choose Category------*/}
+
               <SelectInput
-                className="selectinput"
                 title="Категорія"
                 name="category"
+                className="selectInput"
                 onChange={this.handleInputChange}
                 options={consts.CATEGORY}
               />
@@ -274,8 +273,8 @@ class AddVacancyForm extends React.Component {
                 </span>
               </div>
               <div className="clearfixform" />
-
               {/*------- TClosing Date------*/}
+
               <TextInput
                 title="Оголошення активне до:"
                 type="date"
@@ -288,13 +287,13 @@ class AddVacancyForm extends React.Component {
                 {this.state.errors["active_to_date"]}
               </span>
               <div className="clearfixform" />
-
               {/*------- Company Details------*/}
               <div className="divider">
                 <h3>Додатково про компанію</h3>
               </div>
 
               {/*------- Company Name------*/}
+
               <TextInput
                 title="Компанія"
                 type="text"
@@ -307,8 +306,8 @@ class AddVacancyForm extends React.Component {
                 {this.state.errors["company"]}
               </span>
               <div className="clearfixform" />
-
               {/*------- Website------*/}
+
               <TextInput
                 title="Вебсайт"
                 type="text"
@@ -323,35 +322,43 @@ class AddVacancyForm extends React.Component {
               <button
                 className="button big margin-top-5"
                 type="submit"
-                id="vacancy">
+                id="vacancy"
+              >
                 Додати
               </button>
 
               <Modal
-                isOpen={this.props.error}
+                isOpen={this.props.error}   
                 onRequestClose={this.closeModal2}
                 style={customStyles}
                 contentLabel="Example Modal"
               >
+
                 <h2 ref={subtitle => this.subtitle = subtitle}>
                   Форма заповнена не вірно
                 </h2>
                 <button onClick={this.closeModal2}>close</button>
+
               </Modal>
 
               <Modal
-                isOpen={this.props.success}
+                isOpen={this.props.success}           
                 onRequestClose={this.closeModal3}
                 style={customStyles}
-                contentLabel="Example Modal">
+                contentLabel="Example Modal"
+              >
+
                 <h2 ref={subtitle => this.subtitle = subtitle}>
                   Вакансія надіслана успішно
                 </h2>
                 <button onClick={this.closeModal3}>close</button>
+
               </Modal>
+
             </form>
           </div>
         </div>
+
       </div>
     );
   }
@@ -362,8 +369,7 @@ AddVacancyForm.PropTypes = {
   vacancies: PropTypes.array.isRequired,
   openModal: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
-  afterOpenModal: PropTypes.func.isRequired,
-  shouldUpdate: PropTypes.bool,
+  shouldUpdate:PropTypes.bool,
 };
 
 function mapStateToProps(state) {

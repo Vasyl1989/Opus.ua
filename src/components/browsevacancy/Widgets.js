@@ -39,7 +39,7 @@ class Widgets extends React.Component {
             autoComplete="on"
             onKeyPress={(e) => { if (e.key == 'Enter') { this.onSearchInput(e, this.state.city); } }}
           />
-          <button className="button" onClick={(e) => { this.onSearchInput(e, this.state.city) }}>Пошук</button>
+          <button className="button" onClick={(e) => { this.onSearchInput(e, this.state.city); }}>Пошук</button>
         </div>
         <TypeWork />
         <PricePerHour />
@@ -60,6 +60,6 @@ function mapStateToProps(state) {
   };
 }
 function mapDispatchToProps(dispatch){
-  return { dispatch }
+  return { dispatch };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Widgets);

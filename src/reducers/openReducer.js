@@ -9,7 +9,7 @@ const initialState = {
 
 export default function openReducer(state = initialState, action) {
   switch (action.type) {
-    case types.SHOULD_OPEN_CLOSE_MAIN:
+    case types.SHOULD_OPEN_CLOSE.MAIN:
       return {
         ...state,
         isOpen: !state.isOpen,

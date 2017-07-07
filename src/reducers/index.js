@@ -1,19 +1,24 @@
 import { combineReducers } from 'redux';
 import vacancy from './vacancyReducer';
 import filter from './filterReducer';
-import registration from './registrationReducer';
 import open from './openReducer';
+import registration from './registrationReducer';
 import { routerReducer } from 'react-router-redux';
 
 const rootReducer = combineReducers({
-  registration,
   vacancy,
   filter,
   open,
+  registration,
   routing: routerReducer,
 });
 
 export default rootReducer;
+
+
+
+
+
 
 // selectors
 

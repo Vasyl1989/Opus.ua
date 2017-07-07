@@ -20,9 +20,8 @@ export const ABOUT_SEARCH = {
 export const SHOULD_OPEN_CLOSE = {
   SUCCESS: 'SUCCESS',
   ERROR: 'ERROR',
+  MAIN: 'MAIN',
 };
-export const SHOULD_OPEN_CLOSE_MAIN = 'SHOULD_OPEN_CLOSE_MAIN';
 
-export const CREATE_REGISTRATION = 'CREATE_REGISTRATION';
-
-
+export const SIGN_UP = "SIGN_UP";
+export const SING_IN = "SING_IN";

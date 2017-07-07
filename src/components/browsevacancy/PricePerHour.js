@@ -53,7 +53,7 @@ class PricePerHour extends React.Component {
           <input type="range" value={this.state.secondValue} min={this.state.minValue} max={this.state.maxValue} step={this.state.step} onChange={this.handleChange.bind(this, "second")} />
           <div className="minValue"><span>від: {this.state.minValue}</span><span className="arr" />до: {this.state.maxValue}</div>
         </section>
-        <button type='submit'onClick={(event)=>{this.filterSubmit(event,this.state.firstValue,this.state.secondValue)}}>Відфільтрувати</button>
+        <button type="submit" onClick={(event)=>{this.filterSubmit(event,this.state.firstValue,this.state.secondValue);}}>Відфільтрувати</button>
       </div>
     )
   }

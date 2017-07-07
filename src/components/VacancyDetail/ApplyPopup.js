@@ -4,24 +4,12 @@ import Modal from 'react-modal';
 import { connect } from 'react-redux';
 import TextInput from '../common/TextInput';
 import { agreeToVacancy } from '../../actions/vacancyActions';
-import { opening, closeOpenSucces, closeOpenError } from '../../actions/openActions';
-import * as types from '../../actions/actionTypes';
+import { opening, closeSucces, closeError } from '../../actions/openActions';
+
 
 const customStyles = {
   content: {
     padding: '0',
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
-  }
-};
-
-const customStyles2 = {
-  content: {
-    padding: '10px',
     top: '50%',
     left: '50%',
     right: 'auto',
@@ -44,6 +32,7 @@ class ApplyPopup extends React.Component {
       },
       errors: {},
     };
+
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.closeModal2 = this.closeModal2.bind(this);
@@ -58,17 +47,15 @@ class ApplyPopup extends React.Component {
 
   closeModal() {
     this.props.dispatch(opening());
-
-    //this.props.dispatch(closeOpenSucces());
   }
 
   closeModal2() {
-    this.props.dispatch(closeOpenError());
+    this.props.dispatch(closeError());
   }
 
-  closeModal3() {
-    this.props.dispatch(closeOpenSucces());
-    this.setState({ users_vacancy: "" });
+  closeModal3() { 
+    this.props.dispatch(closeSucces());
+    this.setState({users_vacancy:""});
   }
 
   handleValidation() {
@@ -164,31 +151,34 @@ class ApplyPopup extends React.Component {
                 <div className="clearfixform" />
 
                 <div className="upload-info">
-                  <p />
-                  <strong>Завантажити ваше резюме</strong>
+                  <strong>Завантажити ваше резюме .</strong>
                   <span>Максимальний розмір файлу: 5MB</span>
                 </div>
                 <div className="clearfix" />
+                
                 <input
                   id="file"
                   ref={(ref) => this.fileUpload = ref}
                   type="file"
                   onChange={this.onChange}
-                  name="file" />
-                <label htmlFor="file" className="upload-btn">
-                  <i className="fa fa-upload" />
+                  name="file" 
+                  />
+                  <label htmlFor="file" className="upload-btn">
+                 <i className="fa fa-upload" />
                   Завантажити</label>
+                <span className="errorMassage" style={{ color: "red" }}>{this.state.errors["file"]}</span>
                 <div className="divider" />
+
+
                 <button className="send" type="submit">Надіслати заявку</button>
 
                 <Modal
                   isOpen={this.props.error}
                   onRequestClose={this.closeModal2}
-                  style={customStyles2}
+                  style={customStyles}
                   contentLabel="Example Modal"
                 >
-                  <h2 ref={subtitle => this.subtitle = subtitle}>
-                    Форма заповнена не вірно.<br />Спробуйте надіслати заявку ще раз</h2>
+                  <h2 ref={subtitle => this.subtitle = subtitle}>Спробуйте надіслати заявку ще раз</h2>
                   <button onClick={this.closeModal2}>close</button>
                 </Modal>
 
@@ -196,7 +186,7 @@ class ApplyPopup extends React.Component {
                 <Modal
                   isOpen={this.props.success}
                   onRequestClose={this.closeModal3}
-                  style={customStyles2}
+                  style={customStyles}
                   contentLabel="Example Modal"
                 >
                   <h2 ref={subtitle => this.subtitle = subtitle}>Заявка надіслана успішно</h2>
@@ -210,8 +200,10 @@ class ApplyPopup extends React.Component {
     );
   }
 }
+
 ApplyPopup.PropTypes = {
   isOpen: PropTypes.bool,
+  
 };
 
 function mapStateToProps(state) {

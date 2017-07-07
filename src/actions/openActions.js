@@ -2,17 +2,17 @@ import * as types from './actionTypes';
 
 export function opening(){
   return dispatch=>{
-    dispatch({type:types.SHOULD_OPEN_CLOSE_MAIN});
+    dispatch({type:types.SHOULD_OPEN_CLOSE.MAIN});
   };
 }
 
-export function closeOpenError(){
+export function closeError(){
   return dispatch=>{
     dispatch({ type: types.SHOULD_OPEN_CLOSE.ERROR });
   };
 }
 
-export function closeOpenSucces(){
+export function closeSucces(){
   return dispatch=>{
     dispatch({ type: types.SHOULD_OPEN_CLOSE.SUCCESS });
   };
