@@ -15,8 +15,7 @@ const Header = () => {
 
             <div id="logo">
               <h1>
-                <a href="/">OPUS.ua</a>
-
+                <Link to={"/"}>OPUS.ua</Link>
               </h1>
             </div>
 
@@ -50,21 +49,26 @@ const Header = () => {
                   </ul>
                 </li>
               </ul>
+              <ul className="responsive float-right">
+                <li>
+                  <Link to={"/login"}><i className="fa fa-user" />Увійти</Link>
+                </li>
+                <li>
+                  <Link to={"/registration"}><i className="fa fa-lock" /> Зареєструватись</Link>
+                </li>
+              </ul>
             </nav>
 
             {/*-------Navigation-----*/}
-
             <div id="mobile-navigation">
-              <a href="#menu" className="menu-trigger"><i className="fa fa-reorder"/> Menu</a>
+              <a href="#menu" className="menu-trigger"><i className="fa fa-reorder" /> Menu</a>
             </div>
 
           </div>
         </div>
       </header>
-      <div className="clearfix"/>
-
+      <div className="clearfix" />
     </div>
-
   );
 };
 

@@ -322,7 +322,7 @@ header.transparent .menu ul ul li a:hover {
 ------------------------------------- */
 
 #navigation {
-  float: right;
+  float: left;
   margin-right: 40px;
 }
 
@@ -738,6 +738,10 @@ input .ico-02 {
 
 .search-container input:focus {
   border: none;
+}
+
+.selectinput {
+  padding: 14px;
 }
 
 .search-container button {

@@ -2,15 +2,13 @@ import React from 'react';
 import '../../styles/styles.css';
 import { Link } from 'react-router';
 
-const HeaderForEmployer = () => {
+const HeaderHomePage = () => {
   return (
-    <div>
 
-      <header className="sticky-header">
+    <div id="headerhomepage">
+      <header className="transparent sticky-header full-width headerhomepage">
         <div className="container">
           <div className="sixteen columns">
-
-            {/*--------Logo-------*/}
 
             <div id="logo">
               <h1>
@@ -18,9 +16,7 @@ const HeaderForEmployer = () => {
               </h1>
             </div>
 
-            {/*---------Menu-------*/}
-
-            <nav id="navigation" className="menu sf-js-enabled sf-arrows">
+            <nav id="navigation" className="menu">
               <ul id="responsive">
                 <li>
                   <Link to={"/"} id="current">Головна</Link>
@@ -34,7 +30,7 @@ const HeaderForEmployer = () => {
                   </ul>
                 </li>
                 <li>
-                  <a href="#" id="current">Роботодавцю</a>
+                  <a href="#">Роботодавцю</a>
                   <ul>
                     <li>
                       <Link to={"/add_vacancy"}>Створити вакансію</Link>
@@ -55,11 +51,10 @@ const HeaderForEmployer = () => {
               </ul>
             </nav>
 
-            {/*-------Navigation-----*/}
+            {/*Navigation*/}
             <div id="mobile-navigation">
               <a href="#menu" className="menu-trigger"><i className="fa fa-reorder" /> Menu</a>
             </div>
-
           </div>
         </div>
       </header>
@@ -68,4 +63,4 @@ const HeaderForEmployer = () => {
   );
 };
 
-export default HeaderForEmployer;
+export default HeaderHomePage;
