@@ -30,8 +30,6 @@ class AddVacancyForm extends React.Component {
       this.state = {
         vacancy: props.singleVacancy,
         errors: {},
-        // modalIsOpen: false,
-        // modalIsOpenTwo: false
       };
     } else {
       this.state = {
@@ -49,13 +47,9 @@ class AddVacancyForm extends React.Component {
           website: ""
         },
         errors: {},
-        modalIsOpen: false,
-        modalIsOpenTwo: false
       };
     }
 
-    
-    
     this.closeModal2 = this.closeModal2.bind(this);
     this.closeModal3 = this.closeModal3.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -122,16 +116,12 @@ class AddVacancyForm extends React.Component {
 
   //modal window
 
-
-
-
   closeModal2() {
     this.props.dispatch(closeError());
   }
 
   closeModal3() { 
     this.props.dispatch(closeSucces());
-   
   }
 
   handleInputChange(e) {
@@ -142,11 +132,7 @@ class AddVacancyForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    if (this.handleValidation()) {
-      this.setState({ modalIsOpenTwo: true });
-    } else {
-      this.setState({ modalIsOpen: true });
-    }
+    this.handleValidation();
     if (this.props.shouldUpdate) {
       this.props.dispatch(
         Actions.editVacancy(this.state.vacancy, this.props.vacancies)
@@ -342,8 +328,7 @@ class AddVacancyForm extends React.Component {
               </button>
 
               <Modal
-                isOpen={this.props.error}
-                
+                isOpen={this.props.error}   
                 onRequestClose={this.closeModal2}
                 style={customStyles}
                 contentLabel="Example Modal"
@@ -357,8 +342,7 @@ class AddVacancyForm extends React.Component {
               </Modal>
 
               <Modal
-                isOpen={this.props.success}
-                
+                isOpen={this.props.success}           
                 onRequestClose={this.closeModal3}
                 style={customStyles}
                 contentLabel="Example Modal"
@@ -385,7 +369,6 @@ AddVacancyForm.PropTypes = {
   vacancies: PropTypes.array.isRequired,
   openModal: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
-  afterOpenModal: PropTypes.func.isRequired,
   shouldUpdate:PropTypes.bool,
 };
 

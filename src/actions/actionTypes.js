@@ -23,8 +23,8 @@ export const SHOULD_OPEN_CLOSE = {
   ERROR: 'ERROR',
   MAIN: 'MAIN',
 };
- 
 
+ export const SIGN_UP="SIGN_UP";
 
 
 

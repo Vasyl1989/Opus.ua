@@ -2,12 +2,14 @@ import { combineReducers } from 'redux';
 import vacancy from './vacancyReducer';
 import filter from './filterReducer';
 import open from './openReducer';
+import registration from './registrationReducer';
 import { routerReducer } from 'react-router-redux';
 
 const rootReducer = combineReducers({
   vacancy,
   filter,
   open,
+  registration,
   routing: routerReducer,
 });
 

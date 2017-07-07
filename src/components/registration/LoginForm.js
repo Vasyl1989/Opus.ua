@@ -1,27 +1,50 @@
 import React from "react";
 // import  PropTypes  from "prop-types";
-// import { connect } from "react-redux";
-import RegistrationLogin from './RegistrationLogin';
+import { connect } from "react-redux";
+import { Link } from 'react-router';
 
 class LoginForm extends React.Component {
+	constructor(props, context) {
+		super(props, context);
+		this.state = {
+			email: "",
+			password: "",
+		};
+		this.handleInputChange = this.handleInputChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+	}
+	handleInputChange(e) {
+		const target = e.target;
+		const value = target.value;
+		const name = target.name;
+		this.setState({ [name]: value });
+	}
+	handleSubmit(e) {
+		console.log('state login', this.state);
+		e.preventDefault();
+	}
 	render() {
 		return (
 			<div className="container">
 				<div className="my-account">
-					<RegistrationLogin />
+					<ul className="tabs-nav">
+						<li><Link to={"/registration"}> Sign Up</Link></li>
+						<li className="active"><Link to={"/login"}>Log In</Link></li>
+					</ul>
 					<div className="tabs-container">
 						<div className="tab-content" id="tab2" >
-							<form method="post" className="login">
+							<form onSubmit={this.handleSubmit} className="login">
 
 								<p className="form-row form-row-wide">
-									<label htmlFor="username">Username:
+									<label htmlFor="username">Email Address:
 							<i className="ln ln-icon-Male" />
 										<input
 											type="text"
 											className="input-text"
-											name="username"
+											name="email"
 											id="username"
-											value="" />
+											onChange={this.handleInputChange}
+											value={this.state.email} />
 									</label>
 								</p>
 
@@ -32,7 +55,10 @@ class LoginForm extends React.Component {
 											className="input-text"
 											type="password"
 											name="password"
-											id="password" />
+											id="password"
+											onChange={this.handleInputChange}
+											value={this.state.password}
+										/>
 									</label>
 								</p>
 
@@ -60,4 +86,12 @@ class LoginForm extends React.Component {
 		);
 	}
 }
-export default LoginForm;
+function mapStateToProps(state) {
+	return {
+		state
+	};
+}
+function mapDispatchToProps(dispatch) {
+	return { dispatch };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
