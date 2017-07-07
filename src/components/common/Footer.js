@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { PropTypes } from 'prop-types';
+
 
 class Footer extends React.Component {
 
@@ -8,7 +8,7 @@ class Footer extends React.Component {
   render() {
     return (
       <div>
-        <div className="margin-top-15"></div>
+        <div className="margin-top-15"/>
 
         <div id="footer">
 
@@ -21,7 +21,7 @@ class Footer extends React.Component {
        швидко і легко знайти необхідну роботу всього лише заповнивши резюме або пошукати в розділах
        вакансій. <strong className="slidesStrong">OPUS.ua</strong> створений
        для людей, які шукають тимчасову роботу, без посередників і не мають досвіду роботи.</p>
-              <Link to="/" className="button" id='startbutton' >Почати</Link>
+              <Link to="/" className="button" id="startbutton" >Почати</Link>
             </div>
           </div>
 
@@ -42,11 +42,11 @@ class Footer extends React.Component {
           </div>
 
         </div>
-        <div id="backtotop"><a href="#" ></a></div>
+        <div id="backtotop"><a href="#" /></div>
       </div>
     );
   }
 
-};
+}
 
 export default Footer;

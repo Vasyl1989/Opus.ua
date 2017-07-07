@@ -9,7 +9,7 @@ import BrowseVacancy from './components/browsevacancy/BrowseVacancy';
 import BrowseCategories from './components/browsecategories/BrowseCategories';
 import ManageVacancy from './components/manageVacancy/ManageVacancy';
 import Registration from './components/registration/Registration';
-import Login from './components/login/Login';
+import Login from './components/registration/Login';
 
 export default (
   <Route path="/" component={App}>
@@ -23,3 +23,4 @@ export default (
     <Route path="login" component={Login} />
   </Route>
 );
+

@@ -13,9 +13,3 @@ export const PAGES = {
   ADD_VACANCY: 'ADD_VACANCY',
   HOME_PAGE: 'HOME_PAGE',
 };
-
-export const TYPE_CLOSE_OPEN = {
-  MAIN: "main",
-  SUCCESS: 'success',
-  ERROR: 'error',
-};

@@ -20,8 +20,8 @@ const TextInput = ({ name, onChange, placeholder, title, type, value,className ,
         name={name} 
         ref={ref}/>
     </div>
-  )
-}
+  );
+};
 TextInput.PropTypes = {
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,

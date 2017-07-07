@@ -5,21 +5,17 @@ import { Link } from 'react-router';
 const HeaderForEmployer = () => {
   return (
     <div>
-
       <header className="sticky-header">
         <div className="container">
           <div className="sixteen columns">
 
             {/*--------Logo-------*/}
-
             <div id="logo">
               <h1>
                 <Link to={"/"}>OPUS.ua</Link>
               </h1>
             </div>
-
             {/*---------Menu-------*/}
-
             <nav id="navigation" className="menu sf-js-enabled sf-arrows">
               <ul id="responsive">
                 <li>
@@ -46,20 +42,14 @@ const HeaderForEmployer = () => {
                 </li>
               </ul>
               <ul className="responsive float-right">
-                <li>
-                  <Link to={"/login"}><i className="fa fa-user" />Увійти</Link>
-                </li>
-                <li>
-                  <Link to={"/registration"}><i className="fa fa-lock" /> Зареєструватись</Link>
-                </li>
+                <li><Link to={"/login"}><i className="fa fa-lock" /> Увійти</Link></li>
+                <li><Link to={"/registration"}><i className="fa fa-user" /> Зареєструватись</Link></li>
               </ul>
             </nav>
-
             {/*-------Navigation-----*/}
             <div id="mobile-navigation">
               <a href="#menu" className="menu-trigger"><i className="fa fa-reorder" /> Menu</a>
             </div>
-
           </div>
         </div>
       </header>

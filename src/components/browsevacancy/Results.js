@@ -124,8 +124,8 @@ class Results extends React.Component {
       <div className="container">
         <div className="eleven columns">
           <div className="padding-right">
-            <form className='list-search'>
-              <button type="submit" onClick={(e) => { this.onSearchInput(e, this.state.title) }}><i className="fa fa-search" /></button>
+            <form className="list-search">
+              <button type="submit" onClick={(e) => { this.onSearchInput(e, this.state.title); }}><i className="fa fa-search" /></button>
               <input
                 type="text"
                 placeholder="Вакансія..."

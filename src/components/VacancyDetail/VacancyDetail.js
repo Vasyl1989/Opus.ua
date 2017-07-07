@@ -35,7 +35,6 @@ class VacancyDetail extends React.Component {
     }
   }
   render() {
-
     const vacancy = this.props.singleVacancy;
     const job_type = vacancy.job_type;
     return (
@@ -72,7 +71,6 @@ class VacancyDetail extends React.Component {
               <h4>Загальний перегляд</h4>
 
               <div className="job-overview">
-
                 <ul>
                   <li>
                     <i className="fa fa-map-marker" />
