@@ -82,8 +82,8 @@ class RegistrationForm extends React.Component {
 			<div className="container">
 				<div className="my-account">
 					<ul className="tabs-nav">
-						<li className="active"><Link to={"/registration"}> Sign Up</Link></li>
-						<li><Link to={"/login"}>Log In</Link></li>
+						<li className="active"><Link to={"/registration"}> Зареєструватись</Link></li>
+						<li><Link to={"/login"}>Увійти</Link></li>
 					</ul>
 					<div className="tabs-container">
 						<div className="tab-content" id="tab1" >

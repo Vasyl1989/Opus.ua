@@ -51,7 +51,7 @@ class HeaderHomePage extends React.Component {
                 </li>                
               </ul>
               <ul className="responsive float-right">
-                  <li><Link to={"/registration"}><i className="fa fa-user" /> Sign Up</Link></li>
+                  <li><Link to={"/registration"}><i className="fa fa-user" /> Зареєструватись</Link></li>
                   <li ><a href="/logout" onClick={this.logOut}><i className="fa fa-lock" />Вийти</a></li>
                 </ul>
             </nav>
@@ -102,8 +102,8 @@ class HeaderHomePage extends React.Component {
                 </li>                
               </ul>
               <ul className="responsive float-right">
-                  <li><Link to={"/registration"}><i className="fa fa-user" /> Sign Up</Link></li>
-                  <li><Link to={"/login"}><i className="fa fa-lock" /> Log In</Link></li>
+                  <li><Link to={"/registration"}><i className="fa fa-user" /> Зареєструватись</Link></li>
+                  <li><Link to={"/login"}><i className="fa fa-lock" /> Увійти</Link></li>
                 </ul>
             </nav>
             {/*Navigation*/}

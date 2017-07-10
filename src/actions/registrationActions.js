@@ -27,9 +27,9 @@ export function singIn(email, password) {
         if (response && response.status === 200 || response.status === 201) {
           console.log("SignIp success");
 
-          localStorage.setItem('client', response.headers.client);
-          localStorage.setItem('token', response.headers['access-token']);
-          localStorage.setItem('uid', response.headers.uid);
+          sessionStorage.setItem('client', response.headers.client);
+          sessionStorage.setItem('access-token', response.headers['access-token']);
+          sessionStorage.setItem('uid', response.headers.uid);
 
           dispatch({ type: types.SIGN_IN, payload: response });
           dispatch({ type: types.SHOULD_OPEN_CLOSE.SUCCESS });
@@ -46,13 +46,16 @@ export function singIn(email, password) {
 
 export function signOut() {
   return dispatch => {
+    
     sendRequest("delete", "/auth/sign_out", null, null)
       .then(response => {
+         
         if (response && response.status === 200 || response.status === 201) {
-          localStorage.removeItem('client');
-          localStorage.removeItem("token");
-          localStorage.removeItem('uid');
+           sessionStorage.removeItem('client');
+           sessionStorage.removeItem("access-token");
+           sessionStorage.removeItem('uid');  
           dispatch({ type: types.SIGN_OUT });
+          browserHistory.push("/"); 
         }
       }).catch(function (error) {
         console.log(error);
