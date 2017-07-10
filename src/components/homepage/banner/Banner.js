@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { searchVacancy } from '../../../actions/vacancyActions';
-import { PAGES } from '../../../constants/const';
+import { PAGES } from '../../../constants/constants';
 
 
 class Banner extends React.Component {

@@ -4,22 +4,13 @@ import { connect } from "react-redux";
 import Modal from "react-modal";
 
 import * as Actions from "../../actions/vacancyActions";
-import * as consts from "../../constants/const";
+import * as consts from "../../constants/constants";
 import TextInput from "../common/TextInput";
 import SelectInput from "../common/SelectInput";
 import * as types from "../../actions/actionTypes";
 import {closeError,closeSucces} from "../../actions/openActions";
+import {customStyles} from "../../constants/constants";
 
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)"
-  }
-};
 
 class AddVacancyForm extends React.Component {
   constructor(props, context) {

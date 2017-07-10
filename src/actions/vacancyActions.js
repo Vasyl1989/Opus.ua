@@ -1,5 +1,5 @@
 import * as types from './actionTypes';
-import * as consts from '../constants/const';
+import * as consts from '../constants/constants';
 import * as _ from 'lodash';
 import { sendRequest } from '../utils/api';
 import { browserHistory } from 'react-router';

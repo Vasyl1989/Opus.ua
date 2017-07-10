@@ -2,7 +2,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { searchVacancy } from '../../actions/vacancyActions';
-import { PAGES } from '../../constants/const';
+import { PAGES } from '../../constants/constants';
 import { Link } from 'react-router';
 
 class Categories extends React.Component {

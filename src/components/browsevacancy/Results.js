@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router';
 import picture from '../../styles/images/job-list-logo-01.png';
 import { searchVacancy } from '../../actions/vacancyActions';
 import Widgets from './Widgets';
-import { PAGES } from '../../constants/const';
+import { PAGES } from '../../constants/constants';
 import * as types from '../../actions/actionTypes';
 
 

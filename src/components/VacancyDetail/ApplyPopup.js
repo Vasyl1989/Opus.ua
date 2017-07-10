@@ -5,18 +5,8 @@ import { connect } from 'react-redux';
 import TextInput from '../common/TextInput';
 import { agreeToVacancy } from '../../actions/vacancyActions';
 import { opening, closeSucces, closeError } from '../../actions/openActions';
+import {customStyles} from "../../constants/constants";
 
-const customStyles = {
-  content: {
-    padding: '0',
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
-  }
-};
 
 class ApplyPopup extends React.Component {
   constructor() {

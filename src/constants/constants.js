@@ -13,3 +13,15 @@ export const PAGES = {
   ADD_VACANCY: 'ADD_VACANCY',
   HOME_PAGE: 'HOME_PAGE',
 };
+
+export const customStyles = {
+	content: {
+		padding: '0',
+		top: '50%',
+		left: '50%',
+		right: 'auto',
+		bottom: 'auto',
+		marginRight: '-50%',
+		transform: 'translate(-50%, -50%)'
+	}
+};

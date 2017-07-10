@@ -4,18 +4,9 @@ import { Link } from 'react-router';
 import Modal from 'react-modal';
 import { signUp } from '../../actions/registrationActions';
 import { closeSucces, closeError } from '../../actions/openActions';
+import {customStyles} from "../../constants/constants";
 
-const customStyles = {
-	content: {
-		padding: '0',
-		top: '50%',
-		left: '50%',
-		right: 'auto',
-		bottom: 'auto',
-		marginRight: '-50%',
-		transform: 'translate(-50%, -50%)'
-	}
-};
+
 
 class RegistrationForm extends React.Component {
 	constructor(props, context) {
@@ -190,7 +181,7 @@ class RegistrationForm extends React.Component {
 									contentLabel="Example Modal"
 								>
 									<h2 ref={subtitle => this.subtitle = subtitle}>
-										Ви успішно зареєструвалися 
+										Ви успішно зареєструвалися.Можете увійти в систему.
                 </h2>
 									<button onClick={this.closeModal3}>close</button>
 								</Modal>

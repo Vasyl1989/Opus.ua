@@ -2,7 +2,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { searchVacancy } from '../../actions/vacancyActions';
-import * as consts from '../../constants/const';
+import * as consts from '../../constants/constants';
 
 
 function serializeArrayToQueryString(objectOfQueries) {
