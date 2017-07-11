@@ -1,5 +1,5 @@
 import React from 'react';
-import HeaderForEmployer from '../common/HeaderForEmployer';
+import Header from '../common/Header';
 import Footer from '../common/Footer';
 import ContextManage from './ContextManage';
 import TitleBarManagePage from './titleBarManagePage';
@@ -8,7 +8,7 @@ import TitleBarManagePage from './titleBarManagePage';
 const ManageVacancy = () => {
  return (
   <div>
-   <HeaderForEmployer />
+   <Header />
    <TitleBarManagePage />
    <ContextManage/>
    <Footer />

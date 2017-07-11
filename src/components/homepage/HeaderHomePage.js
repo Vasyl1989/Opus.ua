@@ -51,7 +51,7 @@ class HeaderHomePage extends React.Component {
                 </li>                
               </ul>
               <ul className="responsive float-right">
-                  <li><Link to={"/registration"}><i className="fa fa-user" /> Зареєструватись</Link></li>
+                  <li><a href=""><i className="fa fa-user" onClick={(e)=>{e.preventDefault();}}/> {this.props.user.user.first_name}</a></li>
                   <li ><a href="/logout" onClick={this.logOut}><i className="fa fa-lock" />Вийти</a></li>
                 </ul>
             </nav>

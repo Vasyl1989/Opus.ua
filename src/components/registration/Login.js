@@ -1,5 +1,5 @@
 import React from 'react';
-import HeaderForRegistration from './HeaderForRegistration';
+import Header from '../common/Header';
 import Footer from '../common/Footer';
 import TitleBar from './TitleBar';
 import LoginForm from './LoginForm';
@@ -8,7 +8,7 @@ import LoginForm from './LoginForm';
 const Registration = () => {
   return (
     <div>
-      <HeaderForRegistration />
+      <Header />
       <TitleBar />
       <LoginForm />
       <Footer />

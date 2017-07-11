@@ -1,13 +1,13 @@
 import React from 'react';
 import TitleBar from './TitleBar';
-import HeaderForEmployer from '../common/HeaderForEmployer';
+import Header from '../common/Header';
 import Footer from '../common/Footer';
 import AddVacancyForm from './AddVacancyForm';
 
 const AddVacancy = () => {
   return (
     <div>
-      <HeaderForEmployer />
+      <Header />
       <TitleBar />
       <AddVacancyForm />
       <Footer />

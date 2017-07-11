@@ -31,10 +31,10 @@ export function singIn(email, password) {
           sessionStorage.setItem('access-token', response.headers['access-token']);
           sessionStorage.setItem('uid', response.headers.uid);
 
-          dispatch({ type: types.SIGN_IN, payload: response });
+          dispatch({ type: types.SIGN_IN, payload: response.data.data });
           dispatch({ type: types.SHOULD_OPEN_CLOSE.SUCCESS });
           // browserHistory.push("/"); 
-          console.log(response);
+          // console.log('response from singIN',response);
         }
       }).catch(function (error) {
         console.log(error);
