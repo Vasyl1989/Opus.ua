@@ -5,7 +5,6 @@ const TitleBar = () => {
   return (
     <div id="titlebar" className="single">
       <div className="container">
-
         <div className="sixteen columns">
           <h2>Мій акаунт</h2>
           <nav id="breadcrumbs">
@@ -16,10 +15,8 @@ const TitleBar = () => {
             </ul>
           </nav>
         </div>
-
       </div>
     </div>
   );
 };
-
 export default TitleBar;

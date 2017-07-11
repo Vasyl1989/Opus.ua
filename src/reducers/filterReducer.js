@@ -7,9 +7,7 @@ const initialState = {
 };
 
 export default function filterReducer(state = initialState, action) {
-
   switch (action.type) {
-
     case types.CHECK:
       return {
         ...state,
@@ -33,8 +31,6 @@ export default function filterReducer(state = initialState, action) {
         ...state,
         title: action.payload,
       };
-
-
     default:
       return state;
   }

@@ -1,5 +1,5 @@
 import * as types from './actionTypes';
-import * as consts from '../constants/const';
+import * as consts from '../constants/constants';
 import * as _ from 'lodash';
 import { sendRequest } from '../utils/api';
 import { browserHistory } from 'react-router';
@@ -7,10 +7,11 @@ import { filtration } from './filterActions';
 
 export function getVacancyById(id, vacancies, forUpdate) {
   return dispatch => {
+    const id = localStorage.getItem('id');
+    console.log("user_id:", id);
     if (forUpdate) {
       dispatch({ type: types.SHOULD_UPDATE });
     }
-
     const vacancy = _.find(vacancies, { id: Number(id) });
     if (vacancy) {
       dispatch({ type: types.GET_VACANCY_BY_ID, payload: vacancy });
@@ -18,23 +19,20 @@ export function getVacancyById(id, vacancies, forUpdate) {
         browserHistory.push("/add_vacancy");
         return;
       } else {
-        browserHistory.push(`/vacancy_detail/${id}`)
+        browserHistory.push(`/vacancy_detail/${id}`);
         return;
       }
-
     }
-
-    sendRequest('get', `/vacancies/${id}`, null, null)
+    sendRequest('get', `/vacancies/user_id=${id}`, null, null)
       .then(response => {
-        dispatch({ type: types.GET_VACANCY_BY_ID, payload: response.data })
+        dispatch({ type: types.GET_VACANCY_BY_ID, payload: response.data });
         if (forUpdate) {
           browserHistory.push("/add_vacancy");
         } else {
-          browserHistory.push(`/vacancy_detail/${id}`)
+          browserHistory.push(`/vacancy_detail/${id}`);
         }
       })
       .catch((error) => console.error(error));
-
   };
 }
 
@@ -43,13 +41,12 @@ export function getAllVacancy() {
     sendRequest('get', '/vacancies', null, null)
       .then(response => dispatch({ type: types.GET_ALL_VACANCIES, payload: response.data }))
       .catch((error) => console.log(error));
-
   };
 }
+
 export function sendVacancy(vacancy) {
   return dispatch => {
     const data = { vacancy };
-
     sendRequest('post', consts.PATH, data)
       .then((response) => {
         if (response && response.status === 200 || response.status === 201) {
@@ -65,7 +62,6 @@ export function sendVacancy(vacancy) {
 }
 
 export function deleteVacancy(id, vacancies) {
-
   return dispatch => {
     sendRequest('delete', `/vacancies/${id}`, null, null)
       .then(response => {
@@ -77,10 +73,8 @@ export function deleteVacancy(id, vacancies) {
 }
 
 export function editVacancy(vacancy, vacancies) {
-
   const data = { vacancy };
   return dispatch => {
-
     sendRequest('put', `/vacancies/${vacancy.id}`, data, null)
       .then(response => {
         const rest = _.map(vacancy => vacancy.id === vacancy.id);
@@ -93,7 +87,6 @@ export function editVacancy(vacancy, vacancies) {
 }
 
 export function searchVacancy(query, fromPage, parametr) {
-
   return dispatch => {
     sendRequest('get', '/vacancies', null, query)
       .then(response => {
@@ -101,7 +94,7 @@ export function searchVacancy(query, fromPage, parametr) {
         if (fromPage !== consts.PAGES.BROWSE_VACANCY) {
           browserHistory.push("/browse_vacancy");
         }
-        dispatch(filtration(parametr))
+        dispatch(filtration(parametr));
       }).catch((error) => {
         console.log(error);
       });
@@ -116,10 +109,8 @@ export function pagination(query) {
       }).catch((error) => {
         console.log(error);
       });
-  }
+  };
 }
-
-
 
 export function agreeToVacancy(users_vacancy) {
   //debugger;
@@ -128,7 +119,6 @@ export function agreeToVacancy(users_vacancy) {
     for (const k in users_vacancy) {
       formData.append(`users_vacancy[${k}]`, users_vacancy[k]);
     }
-
     sendRequest('post', '/users_vacancies', formData)
       .then((response) => {
         if (response && response.status === 200 || response.status === 201) {

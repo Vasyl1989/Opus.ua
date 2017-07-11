@@ -5,7 +5,7 @@ import Header from '../common/Header';
 import Footer from '../common/Footer';
 import { getVacancyById, searchVacancy } from '../../actions/vacancyActions';
 import picture from '../../styles/images/company-logo.png';
-import { PAGES } from '../../constants/const';
+import { PAGES } from '../../constants/constants';
 import ApplyPopup from './ApplyPopup';
 
 class VacancyDetail extends React.Component {

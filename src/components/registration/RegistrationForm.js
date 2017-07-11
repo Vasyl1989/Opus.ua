@@ -1,21 +1,12 @@
 import React from "react";
-import Modal from "react-modal";
-import { Link } from 'react-router';
 import { connect } from "react-redux";
+import { Link } from 'react-router';
+import Modal from 'react-modal';
 import { signUp } from '../../actions/registrationActions';
-import { closeError, closeSucces } from '../../actions/openActions';
+import { closeSucces, closeError } from '../../actions/openActions';
+import {customStyles} from "../../constants/constants";
 
-const customStyles = {
-	content: {
-		padding: "10px",
-		top: "50%",
-		left: "50%",
-		right: "auto",
-		bottom: "auto",
-		marginRight: "-50%",
-		transform: "translate(-50%, -50%)"
-	}
-};
+
 
 class RegistrationForm extends React.Component {
 	constructor(props, context) {
@@ -56,45 +47,50 @@ class RegistrationForm extends React.Component {
 		this.props.dispatch(closeSucces());
 	}
 
-
 	//validation
 	handleValidation() {
 		let user = this.state.user;
 		let errors = {};
 		let formIsValid = true;
 
-		{
-			/*------- first_name validation------*/
-		}
+		{	/*------- first_name validation------*/ }
 		if (!user["first_name"]) {
 			formIsValid = false;
 			errors["first_name"] = "Це поле не може бути пустим";
 		}
 
-		{
-			/*------- email validation------*/
-		}
+		{/*------- email validation------*/ }
 		if (!user["email"]) {
 			formIsValid = false;
 			errors["email"] = "Це поле не може бути пустим";
 		}
+		{/*------- password validation------*/ }
+		if (!user["password"]) {
+			formIsValid = false;
+			errors["password"] = "Це поле не може бути пустим,довжина більше 8 символів";
+		}
+		if (!user["password_confirmation"]) {
+			formIsValid = false;
+			errors["password_confirmation"] = "Паролі повинні співпадати";
+		}
+
 		this.setState({ errors: errors });
 		return formIsValid;
 	}
-
 	render() {
 		return (
 			<div className="container">
 				<div className="my-account">
 					<ul className="tabs-nav">
-						<li><Link to={"/login"}>Увійти</Link></li>
-						<li className="active"><Link to={"/registration"}> Зареєструватись</Link></li>
+						<li className="active"><Link to={"/registration"}> Sign Up</Link></li>
+						<li><Link to={"/login"}>Log In</Link></li>
 					</ul>
 					<div className="tabs-container">
 						<div className="tab-content" id="tab1" >
 							<form onSubmit={this.handleSubmit} className="register">
+
 								<p className="form-row form-row-wide">
-									<label htmlFor="username2">Ім'я користувача:: <i className="ln ln-icon-Male" />
+									<label htmlFor="username2">Username: <i className="ln ln-icon-Male" />
 										<input
 											type="text"
 											className="input-text"
@@ -109,10 +105,10 @@ class RegistrationForm extends React.Component {
 								</p>
 
 								<p className="form-row form-row-wide">
-									<label htmlFor="email2">Електронна адреса:
+									<label htmlFor="email2">Email Address:
 						<i className="ln ln-icon-Mail" />
 										<input
-											type="email"
+											type="text"
 											className="input-text"
 											name="email"
 											id="email2"
@@ -124,7 +120,7 @@ class RegistrationForm extends React.Component {
 									</span>
 								</p>
 								<p className="form-row form-row-wide">
-									<label htmlFor="password1">Пароль:
+									<label htmlFor="password1">Password:
 						<i className="ln ln-icon-Lock-2" />
 										<input
 											className="input-text"
@@ -135,10 +131,13 @@ class RegistrationForm extends React.Component {
 											value={this.state.user.password}
 										/>
 									</label>
+									<span className="errorMassage" style={{ color: "red" }}>
+										{this.state.errors["password"]}
+									</span>
 								</p>
 
 								<p className="form-row form-row-wide">
-									<label htmlFor="password2">Введіть пароль ще раз:
+									<label htmlFor="password2">Repeat Password:
 						<i className="ln ln-icon-Lock-2" />
 										<input
 											className="input-text"
@@ -149,16 +148,20 @@ class RegistrationForm extends React.Component {
 											value={this.state.user.password_confirmation}
 										/>
 									</label>
+									<span className="errorMassage" style={{ color: "red" }}>
+										{this.state.errors["password_confirmation"]}
+									</span>
 								</p>
 
 								<p className="form-row">
-									<input
+									<button
+										className="button big margin-top-5"
 										type="submit"
-										className="button border fw margin-top-10"
 										name="register"
-										value="Register" />
+									>
+										Зареєструватись
+              </button>
 								</p>
-
 								<Modal
 									isOpen={this.props.error}
 									onRequestClose={this.closeModal2}
@@ -166,8 +169,8 @@ class RegistrationForm extends React.Component {
 									contentLabel="Example Modal"
 								>
 									<h2 ref={subtitle => this.subtitle = subtitle}>
-										Ви не змогли зареєструватись на сайті
-          </h2>
+										Ви не змогли зареєструвалися
+                </h2>
 									<button onClick={this.closeModal2}>close</button>
 								</Modal>
 
@@ -175,13 +178,13 @@ class RegistrationForm extends React.Component {
 									isOpen={this.props.success}
 									onRequestClose={this.closeModal3}
 									style={customStyles}
-									contentLabel="Example Modal">
+									contentLabel="Example Modal"
+								>
 									<h2 ref={subtitle => this.subtitle = subtitle}>
-										Ви успішно зареєструвались)
-          </h2>
+										Ви успішно зареєструвалися.Можете увійти в систему.
+                </h2>
 									<button onClick={this.closeModal3}>close</button>
 								</Modal>
-
 							</form>
 						</div>
 					</div>
@@ -190,7 +193,9 @@ class RegistrationForm extends React.Component {
 		);
 	}
 }
+RegistrationForm.PropTypes = {
 
+};
 function mapStateToProps(state) {
 	return {
 		user: state.registration,
@@ -198,9 +203,7 @@ function mapStateToProps(state) {
 		success: state.open.success,
 	};
 }
-
 function mapDispatchToProps(dispatch) {
 	return { dispatch };
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(RegistrationForm);

@@ -1,63 +1,99 @@
 import React from 'react';
 import '../../styles/styles.css';
 import { Link } from 'react-router';
+import { connect } from "react-redux";
+import { signOut } from '../../actions/registrationActions';
 
-const HeaderForRegistration = () => {
- return (
-  <div>
-   <header className="sticky-header">
-    <div className="container">
-     <div className="sixteen columns">
+class HeaderforRegistration extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.logOut = this.logOut.bind(this);
+  }
 
-      {/*--------Logo-------*/}
-      <div id="logo">
-       <h1>
-        <Link to={"/"}>OPUS.ua</Link>
-       </h1>
+  logOut(e) {
+    e.preventDefault();
+    this.props.dispatch(signOut());
+  }
+
+  logOutMenu() {
+    if (this.props.user.logIn === true) {
+      return (<ul className="responsive float-right">
+        <li ><Link to={"/registration"}><i className="fa fa-user" /> Зареєструватись</Link></li>
+        <li ><a href="/logout" onClick={this.logOut}><i className="fa fa-lock" />Вийти</a></li>
+      </ul>);
+    } else {
+      return (<ul className="responsive float-right">
+        <li ><Link to={"/registration"}><i className="fa fa-user" /> Зареєструватись</Link></li>
+        <li ><a href="/logout" onClick={this.logOut}><i className="fa fa-lock" />Увійти</a></li>
+      </ul>);
+    }
+  }
+
+  render() {
+
+    return (
+      <div>
+        <header className="sticky-header">
+          <div className="container">
+            <div className="sixteen columns">
+
+              {/*--------Logo-------*/}
+              <div id="logo">
+                <h1>
+                  <Link to={"/"}>OPUS.ua</Link>
+                </h1>
+              </div>
+
+              {/*---------Menu-------*/}
+              <nav id="navigation" className="menu sf-js-enabled sf-arrows">
+                <ul id="responsive">
+                  <li>
+                    <Link to={"/"}>Головна</Link>
+                  </li>
+                  <li>
+                    <a href="#">Працівнику</a>
+                    <ul>
+                      <li>
+                        <Link to="/browse_categories">Вакансії за категорями</Link>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="#">Роботодавцю</a>
+                    <ul>
+                      <li>
+                        <Link to={"/add_vacancy"}>Створити вакансію</Link>
+                      </li>
+                      <li>
+                        <Link to={"/manage_vacancy"}>Редагувати вакансію</Link>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+                {this.logOutMenu()}
+              </nav>
+
+              {/*-------Navigation-----*/}
+              <div id="mobile-navigation">
+                <a href="#menu" className="menu-trigger"><i className="fa fa-reorder" /> Menu</a>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div className="clearfix" />
       </div>
+    );
+  }
+}
 
-      {/*---------Menu-------*/}
-      <nav id="navigation" className="menu sf-js-enabled sf-arrows">
-       <ul id="responsive">
-        <li>
-         <Link to={"/"}>Головна</Link>
-        </li>
-        <li>
-         <a href="#" >Працівнику</a>
-         <ul>
-          <li>
-           <Link to="/browse_categories">Вакансії за категорями</Link>
-          </li>
-         </ul>
-        </li>
-        <li>
-         <a href="#">Роботодавцю</a>
-         <ul>
-          <li>
-           <Link to={"/add_vacancy"}>Створити вакансію</Link>
-          </li>
-          <li>
-           <Link to={"/manage_vacancy"}>Редагувати вакансію</Link>
-          </li>
-         </ul>
-        </li>
-       </ul>
-       <ul className="responsive float-right">
-        <li><Link to={"/login"}><i className="fa fa-lock" /> Увійти</Link></li>
-        <li><Link to={"/registration"}><i className="fa fa-user" /> Зареєструватись</Link></li>
-       </ul>
-      </nav>
+function mapStateToProps(state) {
+  return {
+    user: state.registration,
+  };
+}
 
-      {/*-------Navigation-----*/}
-      <div id="mobile-navigation">
-       <a href="#menu" className="menu-trigger"><i className="fa fa-reorder" /> Menu</a>
-      </div>
-     </div>
-    </div>
-   </header>
-   <div className="clearfix" />
-  </div>
- );
-};
+function mapDispatchToProps(dispatch) {
+  return { dispatch };
+}
 
-export default HeaderForRegistration;
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderforRegistration);

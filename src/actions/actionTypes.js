@@ -12,9 +12,10 @@ export const CHECK = 'CHECK';
 export const CHECK_OUT = 'CHECK_OUT';
 
 export const ABOUT_SEARCH = {
-  SET_CITY: "SET_CITY",
-  SET_TITLE: "SET_TITLE",
-  SET_CATEGORY: "SET_CATEGORY",
+  SET_CITY: 'SET_CITY',
+  SET_TITLE: 'SET_TITLE',
+  SET_CATEGORY: 'SET_CATEGORY',
+  SET_PRISE: 'SET_PRISE'
 };
 
 export const SHOULD_OPEN_CLOSE = {
@@ -23,5 +24,10 @@ export const SHOULD_OPEN_CLOSE = {
   MAIN: 'MAIN',
 };
 
-export const SIGN_UP = "SIGN_UP";
-export const SING_IN = "SING_IN";
+export const SIGN_IN = 'SIGN_IN';
+export const SIGN_OUT = 'SIGN_OUT';
+export const GET_USER = 'GET_USER';
+
+
+
+

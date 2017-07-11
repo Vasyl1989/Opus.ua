@@ -8,7 +8,7 @@ import RegistrationForm from './RegistrationForm';
 const Registration = () => {
   return (
     <div>
-      <HeaderForRegistration />
+      <HeaderForRegistration/>
       <TitleBar />
       <RegistrationForm />
       <Footer />

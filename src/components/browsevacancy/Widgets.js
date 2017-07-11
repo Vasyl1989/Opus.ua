@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import * as consts from '../../constants/const';
+import * as consts from '../../constants/constants';
 import * as types from '../../actions/actionTypes';
 import TextInput from '../common/TextInput';
 import { searchVacancy } from '../../actions/vacancyActions';

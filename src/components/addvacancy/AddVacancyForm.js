@@ -1,25 +1,16 @@
-import React from "react";
-import  PropTypes  from "prop-types";
-import { connect } from "react-redux";
-import Modal from "react-modal";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import Modal from 'react-modal';
 
-import * as Actions from "../../actions/vacancyActions";
-import * as consts from "../../constants/const";
-import TextInput from "../common/TextInput";
-import SelectInput from "../common/SelectInput";
+import * as Actions from '../../actions/vacancyActions';
+import * as consts from '../../constants/constants';
+import TextInput from '../common/TextInput';
+import SelectInput from '../common/SelectInput';
 import * as types from "../../actions/actionTypes";
-import {closeError,closeSucces} from "../../actions/openActions";
+import { closeError, closeSucces } from "../../actions/openActions";
+import { customStyles } from "../../constants/constants";
 
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)"
-  }
-};
 
 class AddVacancyForm extends React.Component {
   constructor(props, context) {
@@ -120,7 +111,7 @@ class AddVacancyForm extends React.Component {
     this.props.dispatch(closeError());
   }
 
-  closeModal3() { 
+  closeModal3() {
     this.props.dispatch(closeSucces());
   }
 
@@ -155,6 +146,8 @@ class AddVacancyForm extends React.Component {
       });
       this.props.dispatch({ type: types.SHOULD_UPDATE });
     } else {
+      const user_id = localStorage.getItem('id');
+      console.log(user_id);
       this.props.dispatch(Actions.sendVacancy(this.state.vacancy));
       this.setState({
         vacancy: {
@@ -328,7 +321,7 @@ class AddVacancyForm extends React.Component {
               </button>
 
               <Modal
-                isOpen={this.props.error}   
+                isOpen={this.props.error}
                 onRequestClose={this.closeModal2}
                 style={customStyles}
                 contentLabel="Example Modal"
@@ -342,7 +335,7 @@ class AddVacancyForm extends React.Component {
               </Modal>
 
               <Modal
-                isOpen={this.props.success}           
+                isOpen={this.props.success}
                 onRequestClose={this.closeModal3}
                 style={customStyles}
                 contentLabel="Example Modal"
@@ -369,7 +362,7 @@ AddVacancyForm.PropTypes = {
   vacancies: PropTypes.array.isRequired,
   openModal: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
-  shouldUpdate:PropTypes.bool,
+  shouldUpdate: PropTypes.bool,
 };
 
 function mapStateToProps(state) {
