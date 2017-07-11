@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { searchVacancy } from '../../actions/vacancyActions';
 import * as consts from '../../constants/constants';
-
+import * as types from '../../actions/actionTypes';
 
 
 class PricePerHour extends React.Component {
@@ -20,10 +20,10 @@ class PricePerHour extends React.Component {
       .handleChange
       .bind(this);
   }
-    componentWillMount() {
+  componentWillMount() {
     this.setState({ firstValue: this.state.minValue, secondValue: this.state.maxValue });
   }
- 
+
   handleChange(name, event) {
     let value = event.target.value;
     if (name === "second") {
@@ -37,23 +37,25 @@ class PricePerHour extends React.Component {
       }
     }
   }
-   filterSubmit(event, firstValue, secondValue) {
+  filterSubmit(event, firstValue, secondValue) {
     event.preventDefault();
     const prMn = firstValue;
     const prMx = secondValue;
     const query = { prMn, prMx };
-    this.props.searchVacancy(query, consts.PAGES.BROWSE_VACANCY);
+    this.props.dispatch({ type: types.ABOUT_SEARCH.SET_PRICE_MN, payload: prMn });
+    this.props.dispatch({ type: types.ABOUT_SEARCH.SET_PRICE_MX, payload: prMx });
+    this.props.dispatch(searchVacancy(query, consts.PAGES.BROWSE_VACANCY));
   }
   render() {
     return (
       <div className="widget">
-         <div className="rangeValues">Оплата: {this.state.firstValue} - {this.state.secondValue} грн.год</div>
+        <div className="rangeValues">Оплата: {this.state.firstValue} - {this.state.secondValue} грн.год</div>
         <section className="range-slider">
           <input type="range" value={this.state.firstValue} min={this.state.minValue} max={this.state.maxValue} step={this.state.step} onChange={this.handleChange.bind(this, "first")} />
           <input type="range" value={this.state.secondValue} min={this.state.minValue} max={this.state.maxValue} step={this.state.step} onChange={this.handleChange.bind(this, "second")} />
           <div className="minValue"><span>від: {this.state.minValue}</span><span className="arr" />до: {this.state.maxValue}</div>
         </section>
-        <button type="submit" onClick={(event)=>{this.filterSubmit(event,this.state.firstValue,this.state.secondValue);}}>Відфільтрувати</button>
+        <button type="submit" onClick={(event) => { this.filterSubmit(event, this.state.firstValue, this.state.secondValue); }}>Відфільтрувати</button>
       </div>
     )
   }
@@ -68,4 +70,9 @@ function mapStateToProps(state) {
     SearchResults: state.vacancy.SearchResults,
   };
 }
-export default connect(mapStateToProps,{searchVacancy})(PricePerHour);
+
+function mapDispatchToProps(dispatch) {
+  return { dispatch };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PricePerHour);

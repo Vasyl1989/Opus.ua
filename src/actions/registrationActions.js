@@ -25,16 +25,16 @@ export function singIn(email, password) {
     sendRequest("post", "/auth/sign_in", data, null)
       .then(response => {
         if (response && response.status === 200 || response.status === 201) {
-          console.log("SignIp success");
-
+          console.log("SignIp success",);
           sessionStorage.setItem('client', response.headers.client);
           sessionStorage.setItem('access-token', response.headers['access-token']);
           sessionStorage.setItem('uid', response.headers.uid);
-
+          sessionStorage.setItem('id',response.data.data.id);
+          sessionStorage.setItem('name',response.data.data.first_name);
           dispatch({ type: types.SIGN_IN, payload: response.data.data });
           dispatch({ type: types.SHOULD_OPEN_CLOSE.SUCCESS });
           // browserHistory.push("/"); 
-          // console.log('response from singIN',response);
+           console.log('response from singIN',response);
         }
       }).catch(function (error) {
         console.log(error);
@@ -46,16 +46,17 @@ export function singIn(email, password) {
 
 export function signOut() {
   return dispatch => {
-    
+
     sendRequest("delete", "/auth/sign_out", null, null)
       .then(response => {
-         
         if (response && response.status === 200 || response.status === 201) {
-           sessionStorage.removeItem('client');
-           sessionStorage.removeItem("access-token");
-           sessionStorage.removeItem('uid');  
           dispatch({ type: types.SIGN_OUT });
-          browserHistory.push("/"); 
+          sessionStorage.removeItem('client');
+          sessionStorage.removeItem("access-token");
+          sessionStorage.removeItem('uid');
+          sessionStorage.removeItem('id');
+          sessionStorage.removeItem('name');
+          browserHistory.push("/");
         }
       }).catch(function (error) {
         console.log(error);

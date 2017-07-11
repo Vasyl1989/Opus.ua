@@ -27,9 +27,11 @@ class Results extends React.Component {
       currentPage: Number(event.target.id)
     });
   }
+
   inputChange(e) {
     this.setState({ title: e.target.value });
   }
+
   onSearchInput(e, title) {
     e.preventDefault();
     const query = { title };
@@ -168,6 +170,6 @@ function mapStateToProps(state) {
   };
 }
 function mapDispatchToProps(dispatch) {
-  return { dispatch }
+  return { dispatch };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Results);

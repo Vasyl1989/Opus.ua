@@ -1,5 +1,5 @@
 import React from "react";
-import  PropTypes  from "prop-types";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Modal from "react-modal";
 
@@ -8,8 +8,8 @@ import * as consts from "../../constants/constants";
 import TextInput from "../common/TextInput";
 import SelectInput from "../common/SelectInput";
 import * as types from "../../actions/actionTypes";
-import {closeError,closeSucces} from "../../actions/openActions";
-import {customStyles} from "../../constants/constants";
+import { closeError, closeSucces } from "../../actions/openActions";
+import { customStyles } from "../../constants/constants";
 
 
 class AddVacancyForm extends React.Component {
@@ -111,7 +111,7 @@ class AddVacancyForm extends React.Component {
     this.props.dispatch(closeError());
   }
 
-  closeModal3() { 
+  closeModal3() {
     this.props.dispatch(closeSucces());
   }
 
@@ -123,7 +123,7 @@ class AddVacancyForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.handleValidation();
+     this.handleValidation();
     if (this.props.shouldUpdate) {
       this.props.dispatch(
         Actions.editVacancy(this.state.vacancy, this.props.vacancies)
@@ -319,7 +319,7 @@ class AddVacancyForm extends React.Component {
               </button>
 
               <Modal
-                isOpen={this.props.error}   
+                isOpen={this.props.error}
                 onRequestClose={this.closeModal2}
                 style={customStyles}
                 contentLabel="Example Modal"
@@ -333,7 +333,7 @@ class AddVacancyForm extends React.Component {
               </Modal>
 
               <Modal
-                isOpen={this.props.success}           
+                isOpen={this.props.success}
                 onRequestClose={this.closeModal3}
                 style={customStyles}
                 contentLabel="Example Modal"
@@ -360,7 +360,7 @@ AddVacancyForm.PropTypes = {
   vacancies: PropTypes.array.isRequired,
   openModal: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
-  shouldUpdate:PropTypes.bool,
+  shouldUpdate: PropTypes.bool,
 };
 
 function mapStateToProps(state) {
@@ -369,7 +369,7 @@ function mapStateToProps(state) {
     singleVacancy: state.vacancy.singleVacancy,
     shouldUpdate: state.vacancy.shouldUpdate,
     error: state.open.error,
-    success: state.open.success,
+    success: state.open.success, 
   };
 }
 

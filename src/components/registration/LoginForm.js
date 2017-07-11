@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import { singIn } from '../../actions/registrationActions';
 import Modal from 'react-modal';
 import { closeSucces, closeError } from '../../actions/openActions';
-import {customStyles} from "../../constants/constants";
+import { customStyles } from "../../constants/constants";
 
 class LoginForm extends React.Component {
 	constructor(props, context) {
@@ -30,12 +30,7 @@ class LoginForm extends React.Component {
 	handleSubmit(e) {
 		e.preventDefault();
 		this.handleValidation();
-		console.log('this.props.user', this.props.user);
-		if (this.state.email === this.props.user.email) {
-			alert('you are in system!');
-		} else {
-			this.props.dispatch(singIn(this.state.email, this.state.password));
-		}
+		this.props.dispatch(singIn(this.state.email, this.state.password));
 	}
 
 	closeModal2() {

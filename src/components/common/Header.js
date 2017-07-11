@@ -10,14 +10,15 @@ class Header extends React.Component {
     this.logOut = this.logOut.bind(this);
   }
   logOut(e) {
-    e.preventDefault();
+    e.preventDefault();  
     this.props.dispatch(signOut());
   }
-   logOutMenu() {
+  logOutMenu() {
     if (this.props.user.logIn === true) {
-      const name=this.props.user.user.first_name;
+      // const name = this.props.user.user.first_name;
+      const name = sessionStorage.getItem('name');
       return (<ul className="responsive float-right">
-        <li ><a href="" onClick={(e)=>{e.preventDefault();}}><i className="fa fa-user" /> {name}</a></li>
+        <li ><a href="" onClick={(e) => { e.preventDefault(); }}><i className="fa fa-user" /> {name}</a></li>
         <li ><a href="/logout" onClick={this.logOut}><i className="fa fa-lock" />Вийти</a></li>
       </ul>);
     } else {
@@ -34,14 +35,12 @@ class Header extends React.Component {
         <header className="sticky-header">
           <div className="container">
             <div className="sixteen columns">
-
               {/*--------Logo-------*/}
               <div id="logo">
                 <h1>
                   <a href="/">OPUS.ua</a>
                 </h1>
               </div>
-
               {/*---------Menu-------*/}
               <nav id="navigation" className="menu sf-js-enabled sf-arrows">
                 <ul id="responsive">

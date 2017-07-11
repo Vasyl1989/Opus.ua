@@ -4,6 +4,8 @@ const initialState = {
   title: '',
   city: '',
   job_type: [],
+  prMn: '',
+  prMx: '',
 };
 
 export default function filterReducer(state = initialState, action) {
@@ -34,6 +36,17 @@ export default function filterReducer(state = initialState, action) {
         title: action.payload,
       };
 
+    case types.ABOUT_SEARCH.SET_PRICE_MN:
+      return {
+        ...state,
+        prMn: action.payload,
+      };
+
+    case types.ABOUT_SEARCH.SET_PRICE_MX:
+      return {
+        ...state,
+        prMx: action.payload,
+      };
 
     default:
       return state;
