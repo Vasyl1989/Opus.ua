@@ -29,7 +29,7 @@ export function singIn(email, password) {
           localStorage.setItem('id',response.data.data.id);
           dispatch({ type: types.SIGN_IN, payload: response.data.data });
           dispatch({ type: types.SHOULD_OPEN_CLOSE.SUCCESS });
-          console.log(response.data.data)
+          console.log(response.data.data);
         }
       }).catch(function (error) {
         console.log(error);

@@ -24,7 +24,7 @@ logOutMenu() {
       const name = this.props.user.user.first_name;
 
       return (<ul className="responsive float-right">
-        <li ><a href=""><i className="fa fa-user" /> {name}</a></li>
+        <li ><a href="" onClick={(e)=>{e.preventDefault();}}><i className="fa fa-user" /> {name}</a></li>
         <li ><a href="" onClick={this.logOut}><i className="fa fa-lock" />Вийти</a></li>
       </ul>);
     } else {

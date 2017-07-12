@@ -6,6 +6,7 @@ import Modal from 'react-modal';
 import { closeSucces, closeError } from '../../actions/openActions';
 import { customStyles } from "../../constants/constants";
 
+
 class LoginForm extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -30,12 +31,8 @@ class LoginForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.handleValidation();
-    console.log('this.props.user', this.props.user);
-    if (this.state.email === this.props.user.email) {
-      alert('you are in system!');
-    } else {
-      this.props.dispatch(singIn(this.state.email, this.state.password));
-    }
+    this.props.dispatch(singIn(this.state.email, this.state.password));
+    this.setState({ email: "", password: "", });
   }
 
   closeModal2() {
@@ -45,6 +42,7 @@ class LoginForm extends React.Component {
   closeModal3() {
     this.props.dispatch(closeSucces());
   }
+
 
   handleValidation() {
     let user = this.state;
@@ -64,14 +62,28 @@ class LoginForm extends React.Component {
     return formIsValid;
   }
 
+  needRegistration() {
+    if (this.props.user.logIn === true) {
+      return (
+        <ul className="tabs-nav responsive">
+          <li className="active"><Link to={"/login"}>Увійти</Link></li>
+        </ul>
+      );
+    } else {
+      return (
+        <ul className="tabs-nav responsive">
+          <li><Link to={"/registration"}> Зареєструватись</Link></li>
+          <li className="active"><Link to={"/login"}>Увійти</Link></li>
+        </ul>
+      );
+    }
+  }
+
   render() {
     return (
       <div className="container">
         <div className="my-account">
-          <ul className="tabs-nav">
-            <li><Link to={"/registration"}> Зареєструватись</Link></li>
-            <li className="active"><Link to={"/login"}>Увійти</Link></li>
-          </ul>
+          {this.needRegistration()}
           <div className="tabs-container">
             <div className="tab-content" id="tab2" >
               <form onSubmit={this.handleSubmit} className="login">
