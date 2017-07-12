@@ -7,12 +7,8 @@ const instance = axios.create({
 function getHeaders() {
     return JSON.parse(localStorage.getItem('access-tokens'));
 }
-console.log(getHeaders());
 
 export function sendRequest(method, url, data, params) {
-    console.log('====================================');
-    console.log(params);
-    console.log('====================================');
     return instance({
         method: method,
         url: url,
@@ -21,12 +17,15 @@ export function sendRequest(method, url, data, params) {
         headers: getHeaders()
     }).then(response => {
         if (response && (response.status === 200 || response.status === 201)) {
-            const accessTokens = {
-                'access-token': response.headers['access-token'],
-                'client': response.headers.client,
-                'uid': response.headers.uid
-            };
-            if (accessTokens != null) { localStorage.setItem('access-tokens', JSON.stringify(accessTokens)); }
+            const aaa = response.headers['access-token'];
+            if (aaa) {
+                const accessTokens = {
+                    'access-token': response.headers['access-token'],
+                    'client': response.headers.client,
+                    'uid': response.headers.uid
+                };
+                localStorage.setItem('access-tokens', JSON.stringify(accessTokens));
+            }
 
             return response;
         } else {
