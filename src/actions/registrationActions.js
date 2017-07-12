@@ -4,10 +4,10 @@ import { sendRequest } from '../utils/api';
 import { browserHistory } from 'react-router';
 
 export function signUp(user) {
-  const { first_name, last_name, email, password } = user;
+  const data = user;
   return dispatch => {
     // dispatch(types.SIGN_UP_START)
-    api.signUp(first_name, last_name, email, password).then(() => {
+    api.signUp(data).then(() => {
       console.log("SignUp success");
       dispatch({ type: types.SHOULD_OPEN_CLOSE.SUCCESS });
       browserHistory.push("/login");
@@ -47,8 +47,19 @@ export function signOut() {
       dispatch({ type: types.SIGN_OUT });
       localStorage.removeItem('access-tokens');
       localStorage.removeItem('userData');
+      localStorage.removeItem('userId');
     }).catch(function (error) {
       console.log(error);
     });
+  };
+}
+
+export function getUserVacancies() {
+  const userId = localStorage.getItem('userId');
+  console.log(userId);
+  return dispatch => {
+    sendRequest('get', `/vacancies?user_id=${userId}`, null, null)
+      .then(response => dispatch({ type: types.GET_USER_VACANCIES, payload: response.data }))
+      .catch((error) => console.log(error));
   };
 }

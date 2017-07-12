@@ -1,13 +1,13 @@
 import React from 'react';
-import { getAllVacancy, deleteVacancy, getVacancyById } from '../../actions/vacancyActions';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
-
-
+import { getUser, getUserVacancies } from '../../actions/registrationActions';
+import { getAllVacancy, deleteVacancy, getVacancyById } from '../../actions/vacancyActions';
 
 class ContextManage extends React.Component {
-
   componentDidMount() {
-    this.props.getAllVacancy();
+    this.props.getUserVacancies();
+    this.props.getUser();
   }
 
   onDelete(id) {
@@ -19,17 +19,17 @@ class ContextManage extends React.Component {
     this.props.getVacancyById(id, this.props.vacancy.vacancies, true);
   }
 
-  renderVacancies() {
-    const vacancies = this.props.vacancy.vacancies;
-    return vacancies.map((item, index) => {
+  renderUserVacancies() {
+    const userVacancies = this.props.vacancy.vacancies;
+    return userVacancies.map((item, index) => {
       return (
         <tr key={index}>
           <td className="title"><a href="#">{item.title}</a></td>
           <td>{item.created_at}</td>
           <td>{item.active_to_date}</td>
-          <td className="action"> 
-            <a href="" onClick={(e) => this.handleGoToEditVacancy(e, item.id)}><i className="fa fa-pencil"/> Edit</a>
-            <a href="#" className="delete" onClick={() => this.onDelete(item.id)}><i className="fa fa-remove"/> Delete</a>
+          <td className="action">
+            <a href="" onClick={(e) => this.handleGoToEditVacancy(e, item.id)}><i className="fa fa-pencil" /> Edit</a>
+            <a href="#" className="delete" onClick={() => this.onDelete(item.id)}><i className="fa fa-remove" /> Delete</a>
           </td>
         </tr>
       );
@@ -47,25 +47,28 @@ class ContextManage extends React.Component {
             <thead>
               <tr>
                 <th><i className="fa fa-file-text" />Назва вакансії</th>
-                <th><i className="fa fa-calendar"/>Дата створення оголошення</th>
-                <th><i className="fa fa-calendar"/>Оголошення активне до</th>
-                <th></th>
+                <th><i className="fa fa-calendar" />Дата створення оголошення</th>
+                <th><i className="fa fa-calendar" />Оголошення активне до</th>
+                <th />
               </tr>
             </thead>
             <tbody>
-              {this.renderVacancies()}
+              {this.renderUserVacancies()}
             </tbody>
           </table>
-          <div className="manage"/>
-          <a href="AddVacancy" className="button">Додати нову вакансію</a>
+          <div className="manage" />
+          <Link to={"/add_vacancy"} className="button">Додати нову вакансію</Link>
         </div>
       </div>
     );
   }
 }
+
 function mapStateToProps(state) {
   return {
-    vacancy: state.vacancy
+    vacancy: state.vacancy,
+    user: state.registration,
   };
 }
-export default connect(mapStateToProps, { getAllVacancy, deleteVacancy, getVacancyById })(ContextManage);
+
+export default connect(mapStateToProps, { getAllVacancy, deleteVacancy, getVacancyById, getUser, getUserVacancies })(ContextManage);

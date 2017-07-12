@@ -1,9 +1,11 @@
 import * as types from '../actions/actionTypes';
 
 let userData;
+
 const initialState = {
   user: {},
   logIn: false,
+  userVacancies: []
 };
 
 export default function registrationReducer(state = initialState, action) {

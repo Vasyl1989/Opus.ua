@@ -7,7 +7,6 @@ import { filtration } from './filterActions';
 
 export function getVacancyById(id, vacancies, forUpdate) {
   return dispatch => {
-
     if (forUpdate) {
       dispatch({ type: types.SHOULD_UPDATE });
     }
@@ -15,7 +14,7 @@ export function getVacancyById(id, vacancies, forUpdate) {
     if (vacancy) {
       dispatch({ type: types.GET_VACANCY_BY_ID, payload: vacancy });
       if (forUpdate) {
-        browserHistory.push("/add_vacancy");
+        browserHistory.push('/add_vacancy');
         return;
       } else {
         browserHistory.push(`/vacancy_detail/${id}`);
@@ -27,7 +26,7 @@ export function getVacancyById(id, vacancies, forUpdate) {
       .then(response => {
         dispatch({ type: types.GET_VACANCY_BY_ID, payload: response.data });
         if (forUpdate) {
-          browserHistory.push("/add_vacancy");
+          browserHistory.push('/add_vacancy');
         } else {
           browserHistory.push(`/vacancy_detail/${id}`);
         }
