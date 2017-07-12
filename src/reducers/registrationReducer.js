@@ -1,30 +1,33 @@
 import * as types from '../actions/actionTypes';
 
-const isLoggedIn = localStorage.getItem('uid');
-console.log(isLoggedIn);
-
+let userData;
 const initialState = {
-  // uid: [],
-  // accessToken: [],
-  // client: [],
   user: {},
-  logIn: !!isLoggedIn,
+  logIn: false,
 };
 
 export default function registrationReducer(state = initialState, action) {
   switch (action.type) {
     case types.SIGN_IN:
-      console.log('user:action.payload', action.payload);
       return {
         ...state,
         user: action.payload,
-        logIn: true,
+        logIn: true
       };
 
     case types.SIGN_OUT:
       return {
         ...state,
-        logIn: false,
+        user: {},
+        logIn: false
+      };
+
+    case types.GET_USER:
+      userData = JSON.parse(localStorage.getItem('userData'));
+      return {
+        ...state,
+        user: userData,
+        logIn: !!userData
       };
 
     default: return state;

@@ -29,20 +29,19 @@ class PricePerHour extends React.Component {
       if (parseInt(this.state.firstValue) < parseInt(value)) {
         this.setState({ secondValue: value });
       }
-    }
-    else {
+    } else {
       if (parseInt(value) < parseInt(this.state.secondValue)) {
         this.setState({ firstValue: value });
       }
     }
   }
+
   filterSubmit(event, firstValue, secondValue) {
     event.preventDefault();
     const prMn = firstValue;
     const prMx = secondValue;
     const query = { prMn, prMx };
-    this.props.dispatch({ type: types.ABOUT_SEARCH.SET_PRISE, payload: prMn, prMx });
-    this.props.dispatch(searchVacancy(query, consts.PAGES.BROWSE_VACANCY));
+    this.props.searchVacancy(query, consts.PAGES.BROWSE_VACANCY);
 
   }
   render() {

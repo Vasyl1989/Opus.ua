@@ -7,8 +7,7 @@ import { filtration } from './filterActions';
 
 export function getVacancyById(id, vacancies, forUpdate) {
   return dispatch => {
-    const id = localStorage.getItem('id');
-    console.log("user_id:", id);
+
     if (forUpdate) {
       dispatch({ type: types.SHOULD_UPDATE });
     }
@@ -23,7 +22,8 @@ export function getVacancyById(id, vacancies, forUpdate) {
         return;
       }
     }
-    sendRequest('get', `/vacancies/user_id=${id}`, null, null)
+    // api.getVacancy(id)
+    sendRequest('get', `/vacancies/${id}`, null, null)
       .then(response => {
         dispatch({ type: types.GET_VACANCY_BY_ID, payload: response.data });
         if (forUpdate) {
@@ -86,10 +86,11 @@ export function editVacancy(vacancy, vacancies) {
   };
 }
 
-export function searchVacancy(query, fromPage, parametr) {
+export function searchVacancy(query, fromPage, parametr, id) {
   return dispatch => {
     sendRequest('get', '/vacancies', null, query)
       .then(response => {
+        console.log("hello i am category id:", id);
         dispatch({ type: types.SEARCH, payload: response.data });
         if (fromPage !== consts.PAGES.BROWSE_VACANCY) {
           browserHistory.push("/browse_vacancy");
@@ -132,14 +133,6 @@ export function agreeToVacancy(users_vacancy) {
       });
   };
 }
-
-
-
-
-
-
-
-
 
 
 

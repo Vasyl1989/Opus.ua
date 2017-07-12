@@ -1,21 +1,20 @@
 import * as types from './actionTypes';
+import * as api from '../utils/api';
 import { sendRequest } from '../utils/api';
 import { browserHistory } from 'react-router';
 
 export function signUp(user) {
-  const data = { user };
+  const { first_name, last_name, email, password } = user;
   return dispatch => {
-    sendRequest("post", "/auth/sign_up", data, null)
-      .then(response => {
-        if (response && response.status === 200 || response.status === 201) {
-          console.log("SignUp success");
-          dispatch({ type: types.SHOULD_OPEN_CLOSE.SUCCESS });
-          browserHistory.push("/login");
-        }
-      }).catch(function (error) {
-        console.log(error);
-        dispatch({ type: types.SHOULD_OPEN_CLOSE.ERROR });
-      });
+    // dispatch(types.SIGN_UP_START)
+    api.signUp(first_name, last_name, email, password).then(() => {
+      console.log("SignUp success");
+      dispatch({ type: types.SHOULD_OPEN_CLOSE.SUCCESS });
+      browserHistory.push("/login");
+    }).catch((error) => {
+      console.log(error);
+      dispatch({ type: types.SHOULD_OPEN_CLOSE.ERROR });
+    });
   };
 }
 
@@ -25,11 +24,7 @@ export function singIn(email, password) {
     sendRequest("post", "/auth/sign_in", data, null)
       .then(response => {
         if (response && response.status === 200 || response.status === 201) {
-          localStorage.setItem('client', response.headers.client);
-          localStorage.setItem('token', response.headers['access-token']);
-          localStorage.setItem('uid', response.headers.uid);
-          localStorage.setItem('id', response.data.data.id);
-          localStorage.setItem('name', response.data.data.first_name);
+          localStorage.setItem('userData', JSON.stringify(response.data.data));
           dispatch({ type: types.SIGN_IN, payload: response.data.data });
           dispatch({ type: types.SHOULD_OPEN_CLOSE.SUCCESS });
         }
@@ -40,24 +35,20 @@ export function singIn(email, password) {
   };
 }
 
-// export function getUser() {
-//   return dispatch => {
-//     dispatch({ type: types.GET_USER });
-//   };
-// }
+export function getUser() {
+  return dispatch => {
+    dispatch({ type: types.GET_USER });
+  };
+}
 
 export function signOut() {
   return dispatch => {
-    sendRequest("delete", "/auth/sign_out", null, null)
-      .then(response => {
-        if (response && response.status === 200 || response.status === 201) {
-          // localStorage.removeItem('client');
-          // localStorage.removeItem("token");
-          // localStorage.removeItem('uid');
-          dispatch({ type: types.SIGN_OUT });
-        }
-      }).catch(function (error) {
-        console.log(error);
-      });
+    api.signOut().then(() => {
+      dispatch({ type: types.SIGN_OUT });
+      localStorage.removeItem('access-tokens');
+      localStorage.removeItem('userData');
+    }).catch(function (error) {
+      console.log(error);
+    });
   };
 }

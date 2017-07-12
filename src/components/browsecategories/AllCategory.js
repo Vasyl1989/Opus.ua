@@ -13,18 +13,17 @@ class AllCategory extends React.Component {
   serchSubmit(e, { id }) {
     e.preventDefault();
     console.log(id);
-
     const category = e.currentTarget.dataset.name;
     const query = { category };
-    this.props.searchVacancy(query, PAGES.BROWSE_CATEGORIES, true);
+    this.props.searchVacancy(query, PAGES.BROWSE_CATEGORIES, true, id);
   }
 
   renderCategories() {
-    const aaa = categoriesConfig;
+    const categories = categoriesConfig;
     return (
       <ul id="popular-categories">
         {
-          aaa.map((item, index) => {
+          categories.map((item, index) => {
             const id = item.id;
             return (
               <li key={index}>

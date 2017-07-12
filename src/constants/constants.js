@@ -26,6 +26,18 @@ export const customStyles = {
   }
 };
 
+export const customStyles2 = {
+  content: {
+    padding: '15px',
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
+  }
+};
+
 export const categoriesConfig = [
   {
     id: 1,
@@ -130,5 +142,4 @@ export const categoriesConfigHome = [
     title: 'Телекомунікація',
     className: 'ln  ln-icon-Laptop-3'
   },
-
 ];

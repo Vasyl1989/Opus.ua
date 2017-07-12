@@ -2,34 +2,30 @@ import React from 'react';
 import '../../styles/styles.css';
 import { Link } from 'react-router';
 import { connect } from "react-redux";
-import { signOut } from '../../actions/registrationActions';
+import { signOut, getUser } from '../../actions/registrationActions';
 
 class HeaderHomePage extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.logOut = this.logOut.bind(this);
   }
-  // componentDidMount() {
-  //   this.props.getUser();
-  // this.props.user.user.first_name;
-  // }
+
+  componentDidMount() {
+    this.props.dispatch(getUser());
+  }
+
 
   logOut(e) {
     e.preventDefault();
     this.props.dispatch(signOut());
-    localStorage.removeItem('client');
-    localStorage.removeItem("token");
-    localStorage.removeItem('uid');
   }
 
   logOutMenu() {
     if (this.props.user.logIn === true) {
-      const nnnnn = localStorage.getItem('name');
-      console.log(nnnnn);
       const name = this.props.user.user.first_name;
-      console.log(this.props.user.user);
+
       return (<ul className="responsive float-right">
-        <li ><a href=""><i className="fa fa-user" /> {nnnnn}</a></li>
+        <li ><a href=""><i className="fa fa-user" /> {name}</a></li>
         <li ><a href="" onClick={this.logOut}><i className="fa fa-lock" />Вийти</a></li>
       </ul>);
     } else {

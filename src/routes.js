@@ -23,4 +23,3 @@ export default (
     <Route path="login" component={Login} />
   </Route>
 );
-
