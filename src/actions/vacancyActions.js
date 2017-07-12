@@ -7,6 +7,7 @@ import { filtration } from './filterActions';
 
 export function getVacancyById(id, vacancies, forUpdate) {
   return dispatch => {
+
     if (forUpdate) {
       dispatch({ type: types.SHOULD_UPDATE });
     }
@@ -21,6 +22,7 @@ export function getVacancyById(id, vacancies, forUpdate) {
         return;
       }
     }
+    // api.getVacancy(id)
     sendRequest('get', `/vacancies/${id}`, null, null)
       .then(response => {
         dispatch({ type: types.GET_VACANCY_BY_ID, payload: response.data });
@@ -42,13 +44,19 @@ export function getAllVacancy() {
   };
 }
 
-
+export function getAllUserVacancy(){
+ const id=localStorage.getItem('id');
+  return dispatch => {
+    sendRequest('get', `/vacancies?user_id=${id}`, null)
+      .then(response => dispatch({ type: types.GET_ALL_USER_VACANCIES, payload: response.data }))
+      .catch((error) => console.log(error));
+  };
+}
 
 export function sendVacancy(vacancy) {
-  // const id=sessionStorage.getItem('id');
   return dispatch => {
     const data = { vacancy };
-    sendRequest('post', `/vacancies`, data)
+    sendRequest('post', consts.PATH, data)
       .then((response) => {
         if (response && response.status === 200 || response.status === 201) {
           console.log('data send on server success');
@@ -73,11 +81,11 @@ export function deleteVacancy(id, vacancies) {
   };
 }
 
+
 export function editVacancy(vacancy, vacancies) {
   const data = { vacancy };
-  const id=sessionStorage.getItem('id');
   return dispatch => {
-    sendRequest('put', `/vacancies/user_id=${id}`, data, null)
+    sendRequest('put', `/vacancies/${vacancy.id}`, data, null)
       .then(response => {
         const rest = _.map(vacancy => vacancy.id === vacancy.id);
         dispatch({ type: types.EDIT_VACANCY, payload: rest });
@@ -88,11 +96,11 @@ export function editVacancy(vacancy, vacancies) {
   };
 }
 
-export function searchVacancy(query, fromPage, parametr) {
-
+export function searchVacancy(query, fromPage, parametr, id) {
   return dispatch => {
     sendRequest('get', '/vacancies', null, query)
       .then(response => {
+        console.log("hello i am category id:", id);
         dispatch({ type: types.SEARCH, payload: response.data });
         if (fromPage !== consts.PAGES.BROWSE_VACANCY) {
           browserHistory.push("/browse_vacancy");
@@ -115,8 +123,6 @@ export function pagination(query) {
   };
 }
 
-
-
 export function agreeToVacancy(users_vacancy) {
   //debugger;
   return dispatch => {
@@ -124,7 +130,6 @@ export function agreeToVacancy(users_vacancy) {
     for (const k in users_vacancy) {
       formData.append(`users_vacancy[${k}]`, users_vacancy[k]);
     }
-
     sendRequest('post', '/users_vacancies', formData)
       .then((response) => {
         if (response && response.status === 200 || response.status === 201) {
@@ -138,14 +143,6 @@ export function agreeToVacancy(users_vacancy) {
       });
   };
 }
-
-
-
-
-
-
-
-
 
 
 

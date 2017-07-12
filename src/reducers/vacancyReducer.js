@@ -20,6 +20,13 @@ export default function vacancyReduce(state = initialState, action) {
         vacancies: action.payload,
       };
 
+        case types.GET_ALL_USER_VACANCIES:
+     return {
+        ...state,
+        fething: false,
+        vacancies: action.payload,
+      };
+
     case types.GET_VACANCY_BY_ID:
       return {
         ...state,

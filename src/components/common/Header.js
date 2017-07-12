@@ -2,30 +2,60 @@ import React from 'react';
 import '../../styles/styles.css';
 import { Link } from 'react-router';
 import { connect } from "react-redux";
-import { signOut } from '../../actions/registrationActions';
+import { signOut, getUser } from '../../actions/registrationActions';
 
 class Header extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.logOut = this.logOut.bind(this);
   }
+
+  componentDidMount() {
+    this.props.dispatch(getUser());
+  }
+
   logOut(e) {
-    e.preventDefault();  
+    e.preventDefault();
     this.props.dispatch(signOut());
   }
+
   logOutMenu() {
     if (this.props.user.logIn === true) {
-      // const name = this.props.user.user.first_name;
-      const name = sessionStorage.getItem('name');
+      const name = this.props.user.user.first_name;
+
       return (<ul className="responsive float-right">
-        <li ><a href="" onClick={(e) => { e.preventDefault(); }}><i className="fa fa-user" /> {name}</a></li>
-        <li ><a href="/logout" onClick={this.logOut}><i className="fa fa-lock" />Вийти</a></li>
+        <li ><a href=""><i className="fa fa-user" /> {name}</a></li>
+        <li ><a href="" onClick={this.logOut}><i className="fa fa-lock" />Вийти</a></li>
       </ul>);
     } else {
       return (<ul className="responsive float-right">
         <li ><Link to={"/registration"}><i className="fa fa-user" /> Зареєструватись</Link></li>
-        <li ><Link to={"/login"} ><i className="fa fa-lock" />Увійти</Link></li>
+        <li ><Link to={"/login"}><i className="fa fa-lock" />Увійти</Link></li>
       </ul>);
+    }
+  }
+
+  logFeathers() {
+    if (this.props.user.logIn === true) {
+      return (
+        <ul>
+          <li>
+            <Link to={"/add_vacancy"}>Створити вакансію</Link>
+          </li>
+          <li>
+            <Link to={"/manage_vacancy"}>Редагувати вакансію</Link>
+          </li>
+        </ul>
+      );
+    } else {
+      return (
+        <ul>
+          <li>
+            <Link to={"/add_vacancy"}>Створити вакансію</Link>
+          </li>
+
+        </ul>
+      );
     }
   }
 
@@ -35,12 +65,14 @@ class Header extends React.Component {
         <header className="sticky-header">
           <div className="container">
             <div className="sixteen columns">
+
               {/*--------Logo-------*/}
               <div id="logo">
                 <h1>
-                  <a href="/">OPUS.ua</a>
+                  <Link to={"/"}>OPUS.ua</Link>
                 </h1>
               </div>
+
               {/*---------Menu-------*/}
               <nav id="navigation" className="menu sf-js-enabled sf-arrows">
                 <ul id="responsive">
@@ -57,14 +89,7 @@ class Header extends React.Component {
                   </li>
                   <li>
                     <a href="#">Роботодавцю</a>
-                    <ul>
-                      <li>
-                        <Link to={"/add_vacancy"}>Створити вакансію</Link>
-                      </li>
-                      <li>
-                        <Link to={"/manage_vacancy"}>Редагувати вакансію</Link>
-                      </li>
-                    </ul>
+                     {this.logFeathers()}
                   </li>
                 </ul>
                 {this.logOutMenu()}
@@ -94,3 +119,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
+

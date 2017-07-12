@@ -1,12 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import Modal from "react-modal";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import Modal from 'react-modal';
 
-import * as Actions from "../../actions/vacancyActions";
-import * as consts from "../../constants/constants";
-import TextInput from "../common/TextInput";
-import SelectInput from "../common/SelectInput";
+import * as Actions from '../../actions/vacancyActions';
+import * as consts from '../../constants/constants';
+import TextInput from '../common/TextInput';
+import SelectInput from '../common/SelectInput';
 import * as types from "../../actions/actionTypes";
 import { closeError, closeSucces } from "../../actions/openActions";
 import { customStyles } from "../../constants/constants";
@@ -123,7 +123,7 @@ class AddVacancyForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-     this.handleValidation();
+    this.handleValidation();
     if (this.props.shouldUpdate) {
       this.props.dispatch(
         Actions.editVacancy(this.state.vacancy, this.props.vacancies)
@@ -146,6 +146,8 @@ class AddVacancyForm extends React.Component {
       });
       this.props.dispatch({ type: types.SHOULD_UPDATE });
     } else {
+      const user_id = localStorage.getItem('id');
+      console.log(user_id);
       this.props.dispatch(Actions.sendVacancy(this.state.vacancy));
       this.setState({
         vacancy: {
@@ -369,7 +371,7 @@ function mapStateToProps(state) {
     singleVacancy: state.vacancy.singleVacancy,
     shouldUpdate: state.vacancy.shouldUpdate,
     error: state.open.error,
-    success: state.open.success, 
+    success: state.open.success,
   };
 }
 

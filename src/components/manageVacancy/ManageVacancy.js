@@ -10,7 +10,7 @@ const ManageVacancy = () => {
   <div>
    <Header />
    <TitleBarManagePage />
-   <ContextManage/>
+   <ContextManage />
    <Footer />
   </div>
  );

@@ -26,65 +26,120 @@ export const customStyles = {
   }
 };
 
-export const configCategory = [
+export const customStyles2 = {
+  content: {
+    padding: '15px',
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
+  }
+};
+
+export const categoriesConfig = [
   {
     id: 1,
-    category: "Автоперевезення / Логістика",
-    iClass:"ln  ln-icon-Globe",
+    title: 'Автоперевезення / Логістика',
+    className: 'ln  ln-icon-Globe'
   },
   {
     id: 2,
-    category: "Будівництво",
-    iClass:"ln ln-icon-Worker"
+    title: 'Будівництво',
+    className: 'ln ln-icon-Worker'
   },
   {
     id: 3,
-    category: "Виробництво",
-    iClass:"ln  ln-icon-Factory",
+    title: 'Виробництво',
+    className: 'ln  ln-icon-Factory'
   },
   {
     id: 4,
-    category: "ІТ",
-    iClass:"ln ln-icon-Computer-2",
+    title: 'IТ',
+    className: 'ln ln-icon-Computer-2'
   },
   {
     id: 5,
-    category: "Краса та здоров/я",
-    iClass:"ln ln-icon-Gemini-2",
+    title: 'Краса та здоровя',
+    className: 'ln ln-icon-Gemini-2'
   },
   {
     id: 6,
-    category: "Медицина",
-    iClass:"ln  ln-icon-Medical-Sign",
+    title: 'Медицина',
+    className: 'ln  ln-icon-Medical-Sign'
   },
   {
     id: 7,
-    category: "Навчання та репетиторство",
-    iClass:"ln ln-icon-Student-Female",
+    title: 'Навчання та репетиторство',
+    className: 'ln ln-icon-Student-Female'
   },
   {
     id: 8,
-    category: "Робочі спеціальності",
-    iClass:"ln ln-icon-Gear-2",
+    title: 'Робочі спеціальності',
+    className: 'ln ln-icon-Gear-2'
   },
   {
     id: 9,
-    category: "Сільськогосподарські роботи",
-    iClass:"ln  ln-icon-Farmer",
+    title: 'Сільськогосподарські роботи',
+    className: 'ln  ln-icon-Farmer'
   },
   {
     id: 10,
-    category: "Сфера обслуговування",
-    iClass:"ln  ln-icon-Plates",
+    title: 'Сфера обслуговування',
+    className: 'ln  ln-icon-Plates'
   },
   {
     id: 11,
-    category: "Телекомунікація",
-    iClass:"ln  ln-icon-Laptop-3",
+    title: 'Телекомунікація',
+    className: 'ln  ln-icon-Laptop-3'
   },
   {
     id: 12,
-    category: "Управління персоналом",
-    iClass:"ln  ln-icon-People-onCloud",
-  }
+    title: 'Управління персоналом',
+    className: 'ln  ln-icon-People-onCloud'
+  },
+];
+
+export const categoriesConfigHome = [
+  {
+    id: 1,
+    title: 'Управління персоналом',
+    className: 'ln  ln-icon-People-onCloud'
+  },
+  {
+    id: 2,
+    title: 'IТ',
+    className: 'ln ln-icon-Computer-2'
+  },
+  {
+    id: 3,
+    title: 'Будівництво',
+    className: 'ln ln-icon-Worker'
+  },
+  {
+    id: 4,
+    title: 'Навчання та репетиторство',
+    className: 'ln ln-icon-Student-Female'
+  },
+  {
+    id: 5,
+    title: 'Медицина',
+    className: 'ln  ln-icon-Medical-Sign'
+  },
+  {
+    id: 6,
+    title: 'Сфера обслуговування',
+    className: 'ln  ln-icon-Plates'
+  },
+  {
+    id: 7,
+    title: 'Автоперевезення / Логістика',
+    className: 'ln  ln-icon-Globe'
+  },
+  {
+    id: 8,
+    title: 'Телекомунікація',
+    className: 'ln  ln-icon-Laptop-3'
+  },
 ];

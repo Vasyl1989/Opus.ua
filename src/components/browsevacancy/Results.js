@@ -170,6 +170,6 @@ function mapStateToProps(state) {
   };
 }
 function mapDispatchToProps(dispatch) {
-  return { dispatch };
+  return { dispatch }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Results);

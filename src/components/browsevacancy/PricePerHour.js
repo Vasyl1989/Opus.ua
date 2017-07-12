@@ -1,10 +1,9 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import { searchVacancy } from '../../actions/vacancyActions';
-import * as consts from '../../constants/constants';
 import * as types from '../../actions/actionTypes';
-
+import * as consts from '../../constants/constants';
+import { searchVacancy } from '../../actions/vacancyActions';
 
 class PricePerHour extends React.Component {
   constructor(props) {
@@ -30,21 +29,20 @@ class PricePerHour extends React.Component {
       if (parseInt(this.state.firstValue) < parseInt(value)) {
         this.setState({ secondValue: value });
       }
-    }
-    else {
+    } else {
       if (parseInt(value) < parseInt(this.state.secondValue)) {
         this.setState({ firstValue: value });
       }
     }
   }
+
   filterSubmit(event, firstValue, secondValue) {
     event.preventDefault();
     const prMn = firstValue;
     const prMx = secondValue;
     const query = { prMn, prMx };
-    this.props.dispatch({ type: types.ABOUT_SEARCH.SET_PRICE_MN, payload: prMn });
-    this.props.dispatch({ type: types.ABOUT_SEARCH.SET_PRICE_MX, payload: prMx });
-    this.props.dispatch(searchVacancy(query, consts.PAGES.BROWSE_VACANCY));
+    this.props.searchVacancy(query, consts.PAGES.BROWSE_VACANCY);
+
   }
   render() {
     return (
@@ -70,9 +68,4 @@ function mapStateToProps(state) {
     SearchResults: state.vacancy.SearchResults,
   };
 }
-
-function mapDispatchToProps(dispatch) {
-  return { dispatch };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(PricePerHour);
+export default connect(mapStateToProps, { searchVacancy })(PricePerHour);

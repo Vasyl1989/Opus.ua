@@ -1,18 +1,25 @@
 import React from 'react';
-import { getAllVacancy, deleteVacancy, getVacancyById } from '../../actions/vacancyActions';
+import { deleteVacancy, getVacancyById , getAllUserVacancy } from '../../actions/vacancyActions';
 import { connect } from 'react-redux';
+import { getUser } from '../../actions/registrationActions';
 
 
 
 class ContextManage extends React.Component {
+constructor(props, context) {
+    super(props, context);
+  }
 
   componentDidMount() {
-    this.props.getAllVacancy();
+      this.props.getUser();
+      this.props.getAllUserVacancy(); 
   }
 
   onDelete(id) {
     this.props.deleteVacancy(id, this.props.vacancy.vacancies);
   }
+  
+
 
   handleGoToEditVacancy(e, id) {
     e.preventDefault();
@@ -63,9 +70,12 @@ class ContextManage extends React.Component {
     );
   }
 }
+
 function mapStateToProps(state) {
   return {
-    vacancy: state.vacancy
+    vacancy: state.vacancy,
+    user: state.registration,
   };
 }
-export default connect(mapStateToProps, { getAllVacancy, deleteVacancy, getVacancyById })(ContextManage);
+
+export default connect(mapStateToProps, { deleteVacancy, getVacancyById , getUser, getAllUserVacancy })(ContextManage);
