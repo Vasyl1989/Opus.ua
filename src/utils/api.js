@@ -16,13 +16,17 @@ export function sendRequest(method, url, data, params) {
         params: params || {},
         headers: getHeaders()
     }).then(response => {
-        if (response && (response.status === 200 || response.status === 201 || response.status===304)) {
-            const accessTokens = {
-                'access-token': response.headers['access-token'],
-                'client': response.headers.client,
-                'uid': response.headers.uid
-            };
-            if(accessTokens!==null){localStorage.setItem('access-tokens', JSON.stringify(accessTokens));}
+        if (response && (response.status === 200 || response.status === 201 || response.status === 304)) {
+            const token = response.headers['access-token'];
+            if (token) {
+                const accessTokens = {
+                    'access-token': response.headers['access-token'],
+                    'client': response.headers.client,
+                    'uid': response.headers.uid
+                };
+                localStorage.setItem('access-tokens', JSON.stringify(accessTokens));
+            }
+
             return response;
         } else {
             throw new Error(`wrong response code: ${response.status} (expedted 200 or 201).`);
