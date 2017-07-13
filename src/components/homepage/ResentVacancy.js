@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import { getAllVacancy, pagination } from '../../actions/vacancyActions';
+import { getAllVacancy,pagination } from '../../actions/vacancyActions';
 import { Link, browserHistory } from 'react-router';
 import picture from '../../styles/images/job-list-logo-01.png';
 
@@ -16,23 +16,16 @@ class ResentVacancy extends React.Component {
   }
 
   componentDidMount() {
-    const page = this.state.page;
-    const per = this.state.per;
-    const query = { page, per };
-    this.props.pagination(query);
-    this.setState({ page: this.state.page + 1 });
+    // this.props.getAllVacancy();
+    this.props.pagination(this.state.page,this.state.per);
   }
 
-  handleClick(event) {
-    const page = this.state.page;
-    const per = this.state.per;
-    const query = { page, per };
-    this.props.pagination(query);
-    this.setState({ page: this.state.page + 1 });
+  handleClick(e) {
+    e.preventDefault();
+    this.props.pagination(this.state.page+1,this.state.per);
   }
 
   spanColor({ job_type }) {
-    //debugger;
     if (job_type === "Повна зайнятість") {
       return ("full-time");
     } else if (job_type === "Часткова зайнятість") {
@@ -45,7 +38,7 @@ class ResentVacancy extends React.Component {
   }
 
   renderVacancies() {
-    const vacancies = this.props.paginationData;
+    const vacancies = this.props.vacancy.vacancies;
     return (
       <div>
         <ul className="job-list">
@@ -114,8 +107,8 @@ ResentVacancy.PropTypes = {
 function mapStateToProps(state) {
   return {
     vacancy: state.vacancy,
-    paginationData: state.vacancy.paginationData
+    // paginationData: state.vacancy.paginationData
   };
 }
 
-export default connect(mapStateToProps, { getAllVacancy, pagination })(ResentVacancy);
+export default connect(mapStateToProps, { getAllVacancy,pagination })(ResentVacancy);

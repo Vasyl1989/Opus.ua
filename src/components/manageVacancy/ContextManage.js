@@ -56,7 +56,6 @@ constructor(props, context) {
                 <th><i className="fa fa-file-text" />Назва вакансії</th>
                 <th><i className="fa fa-calendar"/>Дата створення оголошення</th>
                 <th><i className="fa fa-calendar"/>Оголошення активне до</th>
-                <th></th>
               </tr>
             </thead>
             <tbody>

@@ -2606,6 +2606,7 @@ screen and (max-height: 300px) {
 }
 
 .tabs-nav li {
+  padding-left: 40%;
   float: left;
   line-height: 45px;
   overflow: hidden;

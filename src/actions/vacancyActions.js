@@ -1,13 +1,12 @@
 import * as types from './actionTypes';
-import * as consts from '../constants/constants';
 import * as _ from 'lodash';
-import { sendRequest } from '../utils/api';
+import * as api from '../utils/api';
 import { browserHistory } from 'react-router';
 import { filtration } from './filterActions';
+import * as consts from '../constants/constants';
 
 export function getVacancyById(id, vacancies, forUpdate) {
   return dispatch => {
-
     if (forUpdate) {
       dispatch({ type: types.SHOULD_UPDATE });
     }
@@ -22,9 +21,8 @@ export function getVacancyById(id, vacancies, forUpdate) {
         return;
       }
     }
-    // api.getVacancy(id)
-    sendRequest('get', `/vacancies/${id}`, null, null)
-      .then(response => {
+    api.getVacancyById(id)
+      .then((response) => {
         dispatch({ type: types.GET_VACANCY_BY_ID, payload: response.data });
         if (forUpdate) {
           browserHistory.push("/add_vacancy");
@@ -38,8 +36,8 @@ export function getVacancyById(id, vacancies, forUpdate) {
 
 export function getAllVacancy() {
   return dispatch => {
-    sendRequest('get', '/vacancies', null, null)
-      .then(response => dispatch({ type: types.GET_ALL_VACANCIES, payload: response.data }))
+    api.getAllVacancy()
+      .then((response) => dispatch({ type: types.GET_ALL_VACANCIES, payload: response.data }))
       .catch((error) => console.log(error));
   };
 }
@@ -47,21 +45,18 @@ export function getAllVacancy() {
 export function getAllUserVacancy(){
  const id=localStorage.getItem('id');
   return dispatch => {
-    sendRequest('get', `/vacancies?user_id=${id}`, null)
-      .then(response => dispatch({ type: types.GET_ALL_USER_VACANCIES, payload: response.data }))
+    api.getAllUserVacancy(id)
+      .then((response) => dispatch({ type: types.GET_ALL_USER_VACANCIES, payload: response.data }))
       .catch((error) => console.log(error));
   };
 }
 
 export function sendVacancy(vacancy) {
-  return dispatch => {
-    const data = { vacancy };
-    sendRequest('post', consts.PATH, data)
-      .then((response) => {
-        if (response && response.status === 200 || response.status === 201) {
+  return dispatch => {  
+    api.sendVacancy(vacancy)
+      .then(() => {
           console.log('data send on server success');
           dispatch({ type: types.SHOULD_OPEN_CLOSE.SUCCESS });
-        }
       })
       .catch(function (error) {
         console.log(error);
@@ -72,8 +67,8 @@ export function sendVacancy(vacancy) {
 
 export function deleteVacancy(id, vacancies) {
   return dispatch => {
-    sendRequest('delete', `/vacancies/${id}`, null, null)
-      .then(response => {
+    api.deleteVacancy(id)
+      .then(( )=> {
         const rest = vacancies.filter(vacancy => vacancy.id !== id);
         dispatch({ type: types.DELETE_VACANCY, payload: rest });
       })
@@ -82,11 +77,10 @@ export function deleteVacancy(id, vacancies) {
 }
 
 
-export function editVacancy(vacancy, vacancies) {
-  const data = { vacancy };
+export function editVacancy(vacancy) {  
   return dispatch => {
-    sendRequest('put', `/vacancies/${vacancy.id}`, data, null)
-      .then(response => {
+    api.editVacancy(vacancy)
+      .then(() => {
         const rest = _.map(vacancy => vacancy.id === vacancy.id);
         dispatch({ type: types.EDIT_VACANCY, payload: rest });
       })
@@ -96,11 +90,10 @@ export function editVacancy(vacancy, vacancies) {
   };
 }
 
-export function searchVacancy(query, fromPage, parametr, id) {
+export function searchVacancy(query, fromPage, parametr) {
   return dispatch => {
-    sendRequest('get', '/vacancies', null, query)
-      .then(response => {
-        console.log("hello i am category id:", id);
+   api.searchVacancy(query)
+      .then((response) => {
         dispatch({ type: types.SEARCH, payload: response.data });
         if (fromPage !== consts.PAGES.BROWSE_VACANCY) {
           browserHistory.push("/browse_vacancy");
@@ -112,10 +105,10 @@ export function searchVacancy(query, fromPage, parametr, id) {
   };
 }
 
-export function pagination(query) {
+export function pagination(page,per) {
   return dispatch => {
-    sendRequest('get', '/vacancies', null, query)
-      .then(response => {
+    api.pagination(page,per)
+      .then((response) => {
         dispatch({ type: types.PAGINATION, payload: response.data });
       }).catch((error) => {
         console.log(error);
@@ -124,18 +117,15 @@ export function pagination(query) {
 }
 
 export function agreeToVacancy(users_vacancy) {
-  //debugger;
   return dispatch => {
     const formData = new FormData();
     for (const k in users_vacancy) {
       formData.append(`users_vacancy[${k}]`, users_vacancy[k]);
     }
-    sendRequest('post', '/users_vacancies', formData)
-      .then((response) => {
-        if (response && response.status === 200 || response.status === 201) {
+    api.agreeToVacancy(formData)
+      .then(() => {
           console.log('data send on server success');
-          dispatch({ type: types.SHOULD_OPEN_CLOSE.SUCCESS });
-        }
+          dispatch({ type: types.SHOULD_OPEN_CLOSE.SUCCESS });   
       })
       .catch(function (error) {
         console.log(error);

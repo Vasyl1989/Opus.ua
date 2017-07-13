@@ -18,9 +18,7 @@ export default function registrationReducer(state = initialState, action) {
 
     case types.SIGN_OUT:
       return {
-        ...state,
-        user: {},
-        logIn: false
+        state:undefined,
       };
 
     case types.GET_USER:
