@@ -24,8 +24,29 @@ class HeaderforRegistration extends React.Component {
     } else {
       return (<ul className="responsive float-right">
         <li ><Link to={"/registration"}><i className="fa fa-user" /> Зареєструватись</Link></li>
-        <li ><a href="/logout" onClick={this.logOut}><i className="fa fa-lock" />Увійти</a></li>
+        <li ><Link to={"/login"}><i className="fa fa-lock" />Увійти</Link></li>
       </ul>);
+    }
+  }
+
+  logFeathers() {
+    if (this.props.user.logIn === true) {
+      return (<ul>
+        <li>
+          <Link to={"/add_vacancy"}>Створити вакансію</Link>
+        </li>
+        <li>
+          <Link to={"/manage_vacancy"}>Редагувати вакансію</Link>
+        </li>
+      </ul>
+      );
+    } else {
+      return (<ul>
+        <li>
+          <Link to={"/add_vacancy"}>Створити вакансію</Link>
+        </li>
+      </ul>
+      );
     }
   }
 
@@ -60,14 +81,7 @@ class HeaderforRegistration extends React.Component {
                   </li>
                   <li>
                     <a href="#">Роботодавцю</a>
-                    <ul>
-                      <li>
-                        <Link to={"/add_vacancy"}>Створити вакансію</Link>
-                      </li>
-                      <li>
-                        <Link to={"/manage_vacancy"}>Редагувати вакансію</Link>
-                      </li>
-                    </ul>
+                    {this.logFeathers()}
                   </li>
                 </ul>
                 {this.logOutMenu()}

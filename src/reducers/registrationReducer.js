@@ -1,11 +1,12 @@
 import * as types from '../actions/actionTypes';
 
 let userData;
-
 const initialState = {
   user: {},
   logIn: false,
-  userVacancies: []
+  userVacancies: [],
+  searchText: "",
+  disabled: false,
 };
 
 export default function registrationReducer(state = initialState, action) {
@@ -14,14 +15,14 @@ export default function registrationReducer(state = initialState, action) {
       return {
         ...state,
         user: action.payload,
-        logIn: true
+        logIn: true,
+        searchText: "Searching...",
+        disabled: false,
       };
 
     case types.SIGN_OUT:
       return {
-        ...state,
-        user: {},
-        logIn: false
+        state: undefined,
       };
 
     case types.GET_USER:
@@ -31,7 +32,6 @@ export default function registrationReducer(state = initialState, action) {
         user: userData,
         logIn: !!userData
       };
-
     default: return state;
   }
 }

@@ -90,6 +90,17 @@ header.full-width #navigation ul.float-right {
   right: 35px;
 }
 
+#arar {
+  text-align: center;
+  padding: 40px;
+  font-size: 24px;
+}
+
+#ararar {
+  padding: 10%;
+  padding-left: 35%;
+}
+
 
 /* Alternative Header & Menu style*/
 
@@ -2606,6 +2617,7 @@ screen and (max-height: 300px) {
 }
 
 .tabs-nav li {
+  padding-left: 40%;
   float: left;
   line-height: 45px;
   overflow: hidden;

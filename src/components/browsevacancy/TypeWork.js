@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { searchVacancy } from '../../actions/vacancyActions';
 import * as consts from '../../constants/constants';
 
-
 function serializeArrayToQueryString(objectOfQueries) {
   const source = { ...objectOfQueries };
   for (let value in source) {
@@ -91,7 +90,7 @@ class TypeWork extends React.Component {
               value="Фріланс" />
             <label htmlFor="check-4">Фріланс </label>
           </li>
-        
+
         </ul>
       </div>
     )

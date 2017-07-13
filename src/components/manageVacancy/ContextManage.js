@@ -1,35 +1,42 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { deleteVacancy, getVacancyById , getAllUserVacancy } from '../../actions/vacancyActions';
 import { connect } from 'react-redux';
-import { getUser, getUserVacancies } from '../../actions/registrationActions';
-import { getAllVacancy, deleteVacancy, getVacancyById } from '../../actions/vacancyActions';
+import { getUser } from '../../actions/registrationActions';
+
+
 
 class ContextManage extends React.Component {
+constructor(props, context) {
+    super(props, context);
+  }
+
   componentDidMount() {
-    this.props.getUserVacancies();
-    this.props.getUser();
+      this.props.getUser();
+      this.props.getAllUserVacancy(); 
   }
 
   onDelete(id) {
     this.props.deleteVacancy(id, this.props.vacancy.vacancies);
   }
+  
+
 
   handleGoToEditVacancy(e, id) {
     e.preventDefault();
     this.props.getVacancyById(id, this.props.vacancy.vacancies, true);
   }
 
-  renderUserVacancies() {
-    const userVacancies = this.props.vacancy.vacancies;
-    return userVacancies.map((item, index) => {
+  renderVacancies() {
+    const vacancies = this.props.vacancy.vacancies;
+    return vacancies.map((item, index) => {
       return (
         <tr key={index}>
           <td className="title"><a href="#">{item.title}</a></td>
           <td>{item.created_at}</td>
           <td>{item.active_to_date}</td>
-          <td className="action">
-            <a href="" onClick={(e) => this.handleGoToEditVacancy(e, item.id)}><i className="fa fa-pencil" /> Edit</a>
-            <a href="#" className="delete" onClick={() => this.onDelete(item.id)}><i className="fa fa-remove" /> Delete</a>
+          <td className="action"> 
+            <a href="" onClick={(e) => this.handleGoToEditVacancy(e, item.id)}><i className="fa fa-pencil"/> Edit</a>
+            <a href="#" className="delete" onClick={() => this.onDelete(item.id)}><i className="fa fa-remove"/> Delete</a>
           </td>
         </tr>
       );
@@ -47,17 +54,16 @@ class ContextManage extends React.Component {
             <thead>
               <tr>
                 <th><i className="fa fa-file-text" />Назва вакансії</th>
-                <th><i className="fa fa-calendar" />Дата створення оголошення</th>
-                <th><i className="fa fa-calendar" />Оголошення активне до</th>
-                <th />
+                <th><i className="fa fa-calendar"/>Дата створення оголошення</th>
+                <th><i className="fa fa-calendar"/>Оголошення активне до</th>
               </tr>
             </thead>
             <tbody>
-              {this.renderUserVacancies()}
+              {this.renderVacancies()}
             </tbody>
           </table>
-          <div className="manage" />
-          <Link to={"/add_vacancy"} className="button">Додати нову вакансію</Link>
+          <div className="manage"/>
+          <a href="AddVacancy" className="button">Додати нову вакансію</a>
         </div>
       </div>
     );
@@ -71,4 +77,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { getAllVacancy, deleteVacancy, getVacancyById, getUser, getUserVacancies })(ContextManage);
+export default connect(mapStateToProps, { deleteVacancy, getVacancyById , getUser, getAllUserVacancy })(ContextManage);

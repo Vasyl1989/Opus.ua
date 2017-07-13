@@ -22,12 +22,8 @@ class Header extends React.Component {
   logOutMenu() {
     if (this.props.user.logIn === true) {
       const name = this.props.user.user.first_name;
-      const user = this.props.user.user;
-      console.log(user);
-      const userId = this.props.user.user.id;
-      localStorage.setItem('userId', JSON.stringify(userId));
       return (<ul className="responsive float-right">
-        <li ><a href=""><i className="fa fa-user" /> {name}</a></li>
+        <li ><a href="" onClick={(e)=>{e.preventDefault();}}><i className="fa fa-user" /> {name}</a></li>
         <li ><a href="" onClick={this.logOut}><i className="fa fa-lock" />Вийти</a></li>
       </ul>);
     } else {
@@ -35,6 +31,30 @@ class Header extends React.Component {
         <li ><Link to={"/registration"}><i className="fa fa-user" /> Зареєструватись</Link></li>
         <li ><Link to={"/login"}><i className="fa fa-lock" />Увійти</Link></li>
       </ul>);
+    }
+  }
+
+  logFeathers() {
+    if (this.props.user.logIn === true) {
+      return (
+        <ul>
+          <li>
+            <Link to={"/add_vacancy"}>Створити вакансію</Link>
+          </li>
+          <li>
+            <Link to={"/manage_vacancy"}>Редагувати вакансію</Link>
+          </li>
+        </ul>
+      );
+    } else {
+      return (
+        <ul>
+          <li>
+            <Link to={"/add_vacancy"}>Створити вакансію</Link>
+          </li>
+
+        </ul>
+      );
     }
   }
 
@@ -68,14 +88,7 @@ class Header extends React.Component {
                   </li>
                   <li>
                     <a href="#">Роботодавцю</a>
-                    <ul>
-                      <li>
-                        <Link to={"/add_vacancy"}>Створити вакансію</Link>
-                      </li>
-                      <li>
-                        <Link to={"/manage_vacancy"}>Редагувати вакансію</Link>
-                      </li>
-                    </ul>
+                     {this.logFeathers()}
                   </li>
                 </ul>
                 {this.logOutMenu()}
@@ -105,3 +118,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
+

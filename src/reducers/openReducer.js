@@ -3,8 +3,7 @@ import * as types from '../actions/actionTypes';
 const initialState = {
   isOpen: false,
   success: false,
-  error: false,
-
+  error: false
 };
 
 export default function openReducer(state = initialState, action) {
@@ -12,19 +11,19 @@ export default function openReducer(state = initialState, action) {
     case types.SHOULD_OPEN_CLOSE.MAIN:
       return {
         ...state,
-        isOpen: !state.isOpen,
+        isOpen: !state.isOpen
       };
 
     case types.SHOULD_OPEN_CLOSE.ERROR:
       return {
         ...state,
-        error: !state.error,
+        error: !state.error
       };
-      
+
     case types.SHOULD_OPEN_CLOSE.SUCCESS:
       return {
         ...state,
-        success: !state.success,
+        success: !state.success
       };
 
     default: return state;

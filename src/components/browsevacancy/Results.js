@@ -22,6 +22,10 @@ class Results extends React.Component {
     this.onSearchInput = this.onSearchInput.bind(this);
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   handleClick(event) {
     this.setState({
       currentPage: Number(event.target.id)
@@ -52,7 +56,7 @@ class Results extends React.Component {
   }
 
   renderVacancy() {
-    window.scrollTo(0, 0);
+
     const vacancies = this.props.SearchResults;
     //pagination
     // Logic for displaying vacancies
@@ -115,10 +119,8 @@ class Results extends React.Component {
     } else {
       return (
         <p>Вакансій не знайдено.</p>
-      )
-
+      );
     }
-
   }
 
   render() {
@@ -144,7 +146,6 @@ class Results extends React.Component {
         </div>
         <div className="five columns">
           <Widgets />
-
         </div>
       </div>
     );
@@ -169,7 +170,9 @@ function mapStateToProps(state) {
     filter: state.filter,
   };
 }
+
 function mapDispatchToProps(dispatch) {
-  return { dispatch }
+  return { dispatch };
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(Results);
