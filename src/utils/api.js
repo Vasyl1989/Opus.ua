@@ -85,6 +85,8 @@ export function signUp(user) {
 }
 
 export function searchVacancy(query) {
+    console.log('quer',query);
+    // debugger;
     return sendRequest('get', '/vacancies', null, query);
 }
 

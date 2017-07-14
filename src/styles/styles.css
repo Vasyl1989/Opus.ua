@@ -971,10 +971,18 @@ input .ico-02 {
   list-style: none;
 }
 
-.pagination li {
+/*.pagination li {
   float: left;
-}
+}*/
 
+.pagination .vqvq {
+  background-color: #ffb400;
+  height: 20px;
+  width: 20px;
+  padding: 10px;
+  margin: 2px;
+  color: white;
+}
 
 /* ---------------------------------- */
 
@@ -2415,6 +2423,8 @@ screen and (max-height: 300px) {
 
 
 /* ------------------------------------------------------------------- */
+
+
 
 
 /* Shortcodes

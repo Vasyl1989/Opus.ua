@@ -9,22 +9,21 @@ class ResentVacancy extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      page: 1,
-      per: 3
+      currentPage: 1,
+      vacancyPerPage: 6,
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
-    // this.props.getAllVacancy();
-    this.props.pagination(this.state.page, this.state.per);
-
+    window.scrollTo(0, 0);
+    this.props.getAllVacancy();
   }
 
-  handleClick(e) {
-    e.preventDefault();
-    this.props.pagination(this.state.page + 1, this.state.per);
-    this.setState({ page: this.state.page + 1 });
+  handleClick(event) {
+    this.setState({
+      currentPage: Number(event.target.id)
+    });
   }
 
   spanColor({ job_type }) {
@@ -41,11 +40,22 @@ class ResentVacancy extends React.Component {
 
   renderVacancies() {
     const vacancies = this.props.vacancy.vacancies;
+    //pagination
+    // Logic for displaying vacancies
+    const indexOfLastVacancy = this.state.currentPage * this.state.vacancyPerPage;
+    const indexOfFirstVacancy = indexOfLastVacancy - this.state.vacancyPerPage;
+    const currentVacancise = vacancies.slice(indexOfFirstVacancy, indexOfLastVacancy);
+
+    // Logic for displaying page numbers
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(vacancies.length / this.state.vacancyPerPage); i++) {
+      pageNumbers.push(i);
+    }
     return (
       <div>
         <ul className="job-list">
           {
-            vacancies.map((item, index) => {
+            currentVacancise.map((item, index) => {
               const job_type = item.job_type;
               return (<li className="highlighted" key={index} >
                 <Link to={"vacancy_detail/" + item.id}
@@ -74,6 +84,23 @@ class ResentVacancy extends React.Component {
             })
           }
         </ul>
+        <div className="pagination">
+          <ul >{
+            pageNumbers.map(number => {
+              if (vacancies.length > 5) {
+                return (
+                  <li className="vqvq"
+                    key={number}
+                    id={number}
+                    onClick={this.handleClick}
+                  >{number}
+                  </li>
+                );
+              } else {
+                //do nothing
+              }
+            })
+          }</ul></div>
       </div>
     );
   }
@@ -85,11 +112,6 @@ class ResentVacancy extends React.Component {
           <div className="padding-right">
             <h3 className="margin-bottom-25">Актуальні вакансії</h3>
             {this.props.vacancy.vacancies && this.renderVacancies()}
-            <button onClick={this.handleClick}>
-          <ul>
-            <li>Показати ще</li>
-          </ul>
-        </button>
             <div className="margin-bottom-55" />
           </div>
         </div>

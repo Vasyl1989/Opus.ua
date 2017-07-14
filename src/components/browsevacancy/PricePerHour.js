@@ -16,12 +16,10 @@ class PricePerHour extends React.Component {
       firstValue: this.props.filter.prMn,
       secondValue: this.props.filter.prMx,
     };
-
-    this.handleChange = this
-      .handleChange
-      .bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
   componentWillMount() {
+    window.scrollTo(0, 0);
     this.setState({ firstValue: this.state.minValue, secondValue: this.state.maxValue });
   }
 

@@ -7,6 +7,7 @@ import { closeSucces, closeError } from '../../actions/openActions';
 import { customStyles } from "../../constants/constants";
 
 
+
 class LoginForm extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -161,7 +162,7 @@ class LoginForm extends React.Component {
                   <h2 ref={subtitle => this.subtitle = subtitle}>
                     Ви успішно авторизувались
 									</h2>
-                  <button onClick={this.closeModal3}>close</button>
+                  <Link to={'/'}> <button onClick={this.closeModal3}>close</button></Link> 
                 </Modal>
               </form>
             </div>

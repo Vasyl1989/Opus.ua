@@ -32,7 +32,7 @@ class BrowseByCity extends React.Component {
     const checkedElement =this.props.filter.check;
     const job_type = serializeArrayToQueryString(addJobType(this.props.filter, type, checkedElement));
     const query = { city, prMn, prMx, title, job_type };
-    // // TODO save city to store
+     // TODO save city to store
     this.props.dispatch({ type: types.ABOUT_SEARCH.SET_CITY, payload: city });
     this.props.dispatch(searchVacancy(query, consts.PAGES.BROWSE_VACANCY));
   }

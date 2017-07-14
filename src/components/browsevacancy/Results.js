@@ -3,10 +3,7 @@ import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import picture from '../../styles/images/job-list-logo-01.png';
-import { searchVacancy } from '../../actions/vacancyActions';
 import Widgets from './Widgets';
-import { PAGES } from '../../constants/constants';
-import * as types from '../../actions/actionTypes';
 import BrowseByTitle from './BrowseByTitle';
 
 class Results extends React.Component {
@@ -15,32 +12,18 @@ class Results extends React.Component {
     this.state = {
       currentPage: 1,
       vacancyPerPage: 6,
-      title: this.props.filter.title,
     };
     this.handleClick = this.handleClick.bind(this);
-    this.inputChange = this.inputChange.bind(this);
-    this.onSearchInput = this.onSearchInput.bind(this);
   }
 
   componentDidMount() {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0);   
   }
 
   handleClick(event) {
     this.setState({
       currentPage: Number(event.target.id)
     });
-  }
-
-  inputChange(e) {
-    this.setState({ title: e.target.value });
-  }
-
-  onSearchInput(e, title) {
-    e.preventDefault();
-    const query = { title };
-    this.props.dispatch({ type: types.ABOUT_SEARCH.SET_TITLE, payload: title });
-    this.props.dispatch(searchVacancy(query, PAGES.BROWSE_VACANCY));
   }
 
   spanColor({ job_type }) {
@@ -56,6 +39,7 @@ class Results extends React.Component {
   }
 
   renderVacancy() {
+    window.scrollTo(0, 0);
     const vacancies = this.props.SearchResults;
     //pagination
     // Logic for displaying vacancies
@@ -103,15 +87,18 @@ class Results extends React.Component {
           <div className="pagination">
             <ul >{
               pageNumbers.map(number => {
-                return (
-                  <button key={number}>
-                    <li
+                if(vacancies.length>5){
+                return (                 
+                    <li className="vqvq"
                       key={number}
                       id={number}
-                      onClick={this.handleClick}>{number}
-                    </li>
-                  </button>
+                      onClick={this.handleClick}
+                      >{number}  
+                    </li>                
                 );
+                }else{
+                 //do nothing
+                }
               })
             }</ul></div>
         </div>

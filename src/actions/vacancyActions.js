@@ -83,21 +83,27 @@ export function editVacancy(vacancy) {
       .then(() => {
         const rest = _.map(vacancy => vacancy.id === vacancy.id);
         dispatch({ type: types.EDIT_VACANCY, payload: rest });
+        dispatch({ type: types.SHOULD_OPEN_CLOSE.SUCCESS });
       })
       .catch((error) => {
         console.log(error);
+        dispatch({ type: types.SHOULD_OPEN_CLOSE.ERROR });
       });
   };
 }
 
 export function searchVacancy(query, fromPage, parametr) {
+  console.log("query",query);
   return dispatch => {
    api.searchVacancy(query)
       .then((response) => {
+        console.log('response',response.data);
         dispatch({ type: types.SEARCH, payload: response.data });
+
         if (fromPage !== consts.PAGES.BROWSE_VACANCY) {
           browserHistory.push("/browse_vacancy");
         }
+
         if(parametr){
          dispatch(filtration(parametr));
         }

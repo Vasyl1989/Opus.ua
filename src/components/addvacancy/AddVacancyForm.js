@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
+import { Link } from 'react-router';
 
 import * as Actions from '../../actions/vacancyActions';
 import * as consts from '../../constants/constants';
@@ -344,7 +345,8 @@ class AddVacancyForm extends React.Component {
                 <h2 ref={subtitle => this.subtitle = subtitle}>
                   Вакансія надіслана успішно
                 </h2>
-                <button onClick={this.closeModal3}>close</button>
+                <Link to={'/'}><button onClick={this.closeModal3}>close</button></Link>
+                
 
               </Modal>
 
