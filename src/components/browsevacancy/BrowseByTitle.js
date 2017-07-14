@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { searchVacancy } from '../../actions/vacancyActions';
 import { PAGES } from '../../constants/constants';
 import * as types from '../../actions/actionTypes';
+import { serializeArrayToQueryString, addJobType } from './TypeWork';
 
 class BrowseByTitle extends React.Component {
   constructor(props, context) {
@@ -21,10 +22,14 @@ class BrowseByTitle extends React.Component {
   onSearchInput(e, title) {
     e.preventDefault();
     const city=this.props.filter.city;
-    const query = { title,city};
+    const prMn = this.props.filter.prMn;
+    const prMx = this.props.filter.prMx;
+    const type = this.props.type_work;
+    const checkedElement =this.props.filter.check;
+    const job_type = serializeArrayToQueryString(addJobType(this.props.filter, type, checkedElement));
+    const query = { title,city,prMn,prMx,job_type};
     this.props.dispatch({ type: types.ABOUT_SEARCH.SET_TITLE, payload: title });
     this.props.dispatch(searchVacancy(query, PAGES.BROWSE_VACANCY));
-    this.setState({ title: "" });
   }
 
   render() {

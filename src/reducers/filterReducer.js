@@ -6,6 +6,7 @@ const initialState = {
   job_type: [],
   prMn: '',
   prMx: '',
+  ckeck:'',
 };
 
 export default function filterReducer(state = initialState, action) {
@@ -14,13 +15,15 @@ export default function filterReducer(state = initialState, action) {
        console.log('payload',action.payload);
       return {
         ...state,
-        job_type: state.job_type.concat(action.payload),
+        job_type: state.job_type.concat(action.payload.job_type_target),
+        ckeck:action.payload.checkedElement,
       };
 
     case types.CHECK_OUT:
       return {
         ...state,
-        job_type: state.job_type.filter(type => type !== action.payload),
+        job_type: state.job_type.filter(type => type !== action.payload.job_type_target),
+        ckeck:action.payload.checkedElement,
       };
 
     case types.ABOUT_SEARCH.SET_CITY:

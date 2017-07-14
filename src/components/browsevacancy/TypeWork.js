@@ -5,7 +5,7 @@ import { searchVacancy } from '../../actions/vacancyActions';
 import * as consts from '../../constants/constants';
 
 
-function serializeArrayToQueryString(objectOfQueries) {
+export function serializeArrayToQueryString(objectOfQueries) {
   const source = { ...objectOfQueries };
   for (let value in source) {
     if (Array.isArray(source[value])) {
@@ -17,7 +17,7 @@ function serializeArrayToQueryString(objectOfQueries) {
   return source.job_type;
 }
 
-function addJobType(filter, type, isChecked) {
+export function addJobType(filter, type, isChecked) {
   const myFilter = { ...filter, job_type: [...filter.job_type] };
   if (isChecked === true) {
     myFilter.job_type.push(type);
@@ -46,7 +46,8 @@ class TypeWork extends React.Component {
     const city=this.props.filter.city;
     const prMx=this.props.filter.prMx;
     const prMn=this.props.filter.Mn;
-     const query = {job_type,city,prMn,prMx,};
+    const title=this.props.filter.title;
+     const query = {job_type,city,prMn,prMx,title};
     const parametr={job_type_target,checkedElement};
     console.log('jobType',job_type);
     this.props.dispatch(searchVacancy(query, consts.PAGES.BROWSE_VACANCY, parametr));

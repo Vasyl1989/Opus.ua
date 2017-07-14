@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as consts from '../../constants/constants';
 import { searchVacancy } from '../../actions/vacancyActions';
 import * as types from '../../actions/actionTypes';
+import { serializeArrayToQueryString, addJobType } from './TypeWork';
 
 class PricePerHour extends React.Component {
   constructor(props) {
@@ -43,7 +44,10 @@ class PricePerHour extends React.Component {
     const prMx = secondValue;
     const city=this.props.filter.city;
     const title=this.props.filter.title;
-    const query = { prMn, prMx ,city,title};
+    const type = this.props.type_work;
+    const checkedElement =this.props.filter.check;
+    const job_type = serializeArrayToQueryString(addJobType(this.props.filter, type, checkedElement));
+    const query = { prMn, prMx ,city,title,job_type};
     this.props.dispatch({type:types.ABOUT_SEARCH.SET_MN,payload:prMn});
     this.props.dispatch({type:types.ABOUT_SEARCH.SET_MX,payload:prMx});
     this.props.dispatch(searchVacancy(query, consts.PAGES.BROWSE_VACANCY));

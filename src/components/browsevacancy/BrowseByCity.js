@@ -4,6 +4,9 @@ import * as consts from '../../constants/constants';
 import * as types from '../../actions/actionTypes';
 import TextInput from '../common/TextInput';
 import { searchVacancy } from '../../actions/vacancyActions';
+import { serializeArrayToQueryString, addJobType } from './TypeWork';
+
+
 
 
 class BrowseByCity extends React.Component {
@@ -22,9 +25,13 @@ class BrowseByCity extends React.Component {
 
   onSearchInput(e, city) {
     e.preventDefault();
-    const prMn = this.props.prMn;
-    const prMx = this.props.prMx;
-    const query = { city,prMn,prMx };
+    const prMn = this.props.filter.prMn;
+    const prMx = this.props.filter.prMx;
+    const title = this.props.filter.title;
+    const type = this.props.type_work;
+    const checkedElement =this.props.filter.check;
+    const job_type = serializeArrayToQueryString(addJobType(this.props.filter, type, checkedElement));
+    const query = { city, prMn, prMx, title, job_type };
     // // TODO save city to store
     this.props.dispatch({ type: types.ABOUT_SEARCH.SET_CITY, payload: city });
     this.props.dispatch(searchVacancy(query, consts.PAGES.BROWSE_VACANCY));
