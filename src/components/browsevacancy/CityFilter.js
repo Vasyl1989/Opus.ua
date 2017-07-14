@@ -5,10 +5,8 @@ import * as consts from '../../constants/constants';
 import * as types from '../../actions/actionTypes';
 import TextInput from '../common/TextInput';
 import { searchVacancy } from '../../actions/vacancyActions';
-import TypeWork from './TypeWork';
-import PricePerHour from './PricePerHour';
 
-class Widgets extends React.Component {
+class CityFilter extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -17,16 +15,19 @@ class Widgets extends React.Component {
     this.inputChange = this.inputChange.bind(this);
     this.onSearchInput = this.onSearchInput.bind(this);
   }
+
   inputChange(e) {
-     this.setState({ city: e.target.value });
+    this.setState({ city: e.target.value });
   }
+
   onSearchInput(e, city) {
     e.preventDefault();
     const query = { city };
     // // TODO save city to store
-    this.props.dispatch({type: types.ABOUT_SEARCH.SET_CITY ,payload:city});
+    this.props.dispatch({ type: types.ABOUT_SEARCH.SET_CITY, payload: city });
     this.props.dispatch(searchVacancy(query, consts.PAGES.BROWSE_VACANCY));
   }
+
   render() {
     return (
       <div>
@@ -41,17 +42,17 @@ class Widgets extends React.Component {
           />
           <button className="button" onClick={(e) => { this.onSearchInput(e, this.state.city); }}>Пошук</button>
         </div>
-        <TypeWork />
-        <PricePerHour />
       </div>
     );
   }
 }
-Widgets.PropTypes = {
+
+CityFilter.PropTypes = {
   searchVacancy: PropTypes.func.isRequired,
   inputChange: PropTypes.func.isRequired,
   onSearchInput: PropTypes.func.isRequired,
-}
+};
+
 function mapStateToProps(state) {
   return {
     vacancy: state.vacancy,
@@ -59,7 +60,9 @@ function mapStateToProps(state) {
     filter: state.filter,
   };
 }
-function mapDispatchToProps(dispatch){
+
+function mapDispatchToProps(dispatch) {
   return { dispatch };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Widgets);
+
+export default connect(mapStateToProps, mapDispatchToProps)(CityFilter);

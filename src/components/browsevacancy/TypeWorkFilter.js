@@ -32,7 +32,7 @@ function addJobType(filter, type, isChecked) {
   return myFilter;
 }
 
-class TypeWork extends React.Component {
+class TypeWorkFilter extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.onCheck = this.onCheck.bind(this);
@@ -93,16 +93,16 @@ class TypeWork extends React.Component {
 
         </ul>
       </div>
-    )
+    );
   }
 }
 
-TypeWork.PropTypes = {
+TypeWorkFilter.PropTypes = {
   onCheck: PropTypes.func.isRequired,
   searchVacancy: PropTypes.func.isRequired,
   serializeArrayToQueryString: PropTypes.func.isRequired,
   addJobType: PropTypes.func.isRequired,
-}
+};
 
 function mapStateToProps(state) {
   return {
@@ -113,7 +113,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return { dispatch }
+  return { dispatch };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TypeWork);
+export default connect(mapStateToProps, mapDispatchToProps)(TypeWorkFilter);

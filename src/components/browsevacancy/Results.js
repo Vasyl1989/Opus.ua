@@ -4,22 +4,22 @@ import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import picture from '../../styles/images/job-list-logo-01.png';
 import { searchVacancy } from '../../actions/vacancyActions';
-import Widgets from './Widgets';
+import CityFilter from './CityFilter';
+import TitleFilter from './TitleFilter';
+import PriceFilter from './PriceFilter';
+import TypeWorkFilter from './TypeWorkFilter';
 import { PAGES } from '../../constants/constants';
 import * as types from '../../actions/actionTypes';
-
 
 class Results extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       currentPage: 1,
-      vacancyPerPage: 6,
-      title: this.props.filter.title,
+      vacancyPerPage: 6
     };
+
     this.handleClick = this.handleClick.bind(this);
-    this.inputChange = this.inputChange.bind(this);
-    this.onSearchInput = this.onSearchInput.bind(this);
   }
 
   componentDidMount() {
@@ -30,17 +30,6 @@ class Results extends React.Component {
     this.setState({
       currentPage: Number(event.target.id)
     });
-  }
-
-  inputChange(e) {
-    this.setState({ title: e.target.value });
-  }
-
-  onSearchInput(e, title) {
-    e.preventDefault();
-    const query = { title };
-    this.props.dispatch({ type: types.ABOUT_SEARCH.SET_TITLE, payload: title });
-    this.props.dispatch(searchVacancy(query, PAGES.BROWSE_VACANCY));
   }
 
   spanColor({ job_type }) {
@@ -56,7 +45,6 @@ class Results extends React.Component {
   }
 
   renderVacancy() {
-
     const vacancies = this.props.SearchResults;
     //pagination
     // Logic for displaying vacancies
@@ -69,10 +57,10 @@ class Results extends React.Component {
     for (let i = 1; i <= Math.ceil(vacancies.length / this.state.vacancyPerPage); i++) {
       pageNumbers.push(i);
     }
+
     if (vacancies.length > 0) {
       return (
         <div>
-
           <ul className="job-list full">
             {currentVacancise.map((item) => {
               const job_type = item.job_type;
@@ -128,24 +116,15 @@ class Results extends React.Component {
       <div className="container">
         <div className="eleven columns">
           <div className="padding-right">
-            <form className="list-search">
-              <button type="submit" onClick={(e) => { this.onSearchInput(e, this.state.title); }}><i className="fa fa-search" /></button>
-              <input
-                type="text"
-                placeholder="Вакансія..."
-                value={this.state.title}
-                onChange={this.inputChange}
-                autoComplete="on"
-                onKeyPress={(e) => { if (e.key == 'Enter') { this.onSearchInput(e, this.state.title); } }}
-              />
-              <div className="clearfix" />
-            </form>
+            <TitleFilter />
             {this.props.SearchResults && this.renderVacancy()}
             <div className="margin-bottom-55" />
           </div>
         </div>
         <div className="five columns">
-          <Widgets />
+          <CityFilter />
+          <TypeWorkFilter />
+          <PriceFilter />
         </div>
       </div>
     );

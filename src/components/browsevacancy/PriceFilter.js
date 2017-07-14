@@ -5,7 +5,7 @@ import * as types from '../../actions/actionTypes';
 import * as consts from '../../constants/constants';
 import { searchVacancy } from '../../actions/vacancyActions';
 
-class PricePerHour extends React.Component {
+class PriceFilter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -55,17 +55,20 @@ class PricePerHour extends React.Component {
         </section>
         <button type="submit" onClick={(event) => { this.filterSubmit(event, this.state.firstValue, this.state.secondValue); }}>Відфільтрувати</button>
       </div>
-    )
+    );
   }
 }
-PricePerHour.PropTypes = {
+
+PriceFilter.PropTypes = {
   handleChange: PropTypes.func.isRequired,
   filterSubmit: PropTypes.func.isRequired,
-}
+};
+
 function mapStateToProps(state) {
   return {
     vacancy: state.vacancy,
     SearchResults: state.vacancy.SearchResults,
   };
 }
-export default connect(mapStateToProps, { searchVacancy })(PricePerHour);
+
+export default connect(mapStateToProps, { searchVacancy })(PriceFilter);
