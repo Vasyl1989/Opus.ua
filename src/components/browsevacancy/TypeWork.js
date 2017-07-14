@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { searchVacancy } from '../../actions/vacancyActions';
 import * as consts from '../../constants/constants';
 
-function serializeArrayToQueryString(objectOfQueries) {
+export function serializeArrayToQueryString(objectOfQueries) {
   const source = { ...objectOfQueries };
   for (let value in source) {
     if (Array.isArray(source[value])) {
@@ -12,11 +12,11 @@ function serializeArrayToQueryString(objectOfQueries) {
       source[value] = target;
     }
   }
-  console.log('serializeArrayToQueryString', source);
-  return source;
+  console.log('serializeArrayToQueryString', source.job_type);
+  return source.job_type;
 }
 
-function addJobType(filter, type, isChecked) {
+export function addJobType(filter, type, isChecked) {
   const myFilter = { ...filter, job_type: [...filter.job_type] };
   if (isChecked === true) {
     myFilter.job_type.push(type);
@@ -32,20 +32,24 @@ function addJobType(filter, type, isChecked) {
   return myFilter;
 }
 
-class TypeWorkFilter extends React.Component {
+class TypeWork extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.onCheck = this.onCheck.bind(this);
   }
 
   onCheck(e) {
-    const job_type = e.target.value;
+    const job_type_target = e.target.value;
     const checkedElement = e.target.checked;
-    const query = {
-      job_type,
-      checkedElement,
-    };
-    this.props.dispatch(searchVacancy(serializeArrayToQueryString(addJobType(this.props.filter, job_type, checkedElement)), consts.PAGES.BROWSE_VACANCY, query));
+    const job_type = serializeArrayToQueryString(addJobType(this.props.filter, job_type_target, checkedElement));
+    const city = this.props.filter.city;
+    const prMx = this.props.filter.prMx;
+    const prMn = this.props.filter.Mn;
+    const title = this.props.filter.title;
+    const query = { job_type, city, prMn, prMx, title };
+    const parametr = { job_type_target, checkedElement };
+    console.log('jobType', job_type);
+    this.props.dispatch(searchVacancy(query, consts.PAGES.BROWSE_VACANCY, parametr));
   }
 
   render() {
@@ -59,8 +63,7 @@ class TypeWorkFilter extends React.Component {
               type="checkbox"
               name="check"
               onChange={this.onCheck}
-              value="Повна"
-            />
+              value="Повна" />
             <label htmlFor="check-1">Повна занятість </label>
           </li>
           <li>
@@ -90,14 +93,13 @@ class TypeWorkFilter extends React.Component {
               value="Фріланс" />
             <label htmlFor="check-4">Фріланс </label>
           </li>
-
         </ul>
       </div>
     );
   }
 }
 
-TypeWorkFilter.PropTypes = {
+TypeWork.PropTypes = {
   onCheck: PropTypes.func.isRequired,
   searchVacancy: PropTypes.func.isRequired,
   serializeArrayToQueryString: PropTypes.func.isRequired,
@@ -116,4 +118,5 @@ function mapDispatchToProps(dispatch) {
   return { dispatch };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TypeWorkFilter);
+export default connect(mapStateToProps, mapDispatchToProps)(TypeWork);
+

@@ -1,13 +1,12 @@
 import * as types from './actionTypes';
 
-export function filtration(query) {
+export function filtration(parametr) {
   return dispatch => {
-
-    if (query.checkedElement === true) {
-      dispatch({ type: types.CHECK, payload: query.job_type });
-    } else if (query.checkedElement === false) {
-      dispatch({ type: types.CHECK_OUT, payload: query.job_type });
+    if (parametr.checkedElement === true) {
+      dispatch({ type: types.CHECK, payload: parametr });
+    } else if (parametr.checkedElement === false) {
+      dispatch({ type: types.CHECK_OUT, payload: parametr });
     }
-
   };
 }
+

@@ -50,7 +50,6 @@ class AllCategory extends React.Component {
           </div>
         </div>
       </div>
-
     );
   }
 }

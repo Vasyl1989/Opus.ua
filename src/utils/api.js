@@ -23,6 +23,8 @@ function sendRequest(method, url, data, params) {
     });
 }
 
+
+
 function sendAuthRequest(method, url, data, params) {
     return instance({
         method: method,
@@ -48,8 +50,10 @@ function sendAuthRequest(method, url, data, params) {
     });
 }
 
+
+
 export function signOut() {
-    return sendAuthRequest('delete', '/auth/sign_out', null, null);
+    return sendAuthRequest("delete", "/auth/sign_out", null, null);
 }
 
 export function deleteVacancy(id) {
@@ -63,7 +67,7 @@ export function editVacancy(vacancy) {
 
 export function signIn(email, password) {
     const data = { email, password };
-    return sendAuthRequest('post', '/auth/sign_in', data, null);
+    return sendAuthRequest("post", "/auth/sign_in", data, null);
 }
 
 export function sendVacancy(vacancy) {
@@ -77,15 +81,17 @@ export function getAllVacancy() {
 
 export function signUp(user) {
     const data = { user };
-    return sendRequest('post', '/auth/sign_up', data, null);
+    return sendRequest("post", "/auth/sign_up", data, null);
 }
 
 export function searchVacancy(query) {
+    console.log('quer',query);
+    // debugger;
     return sendRequest('get', '/vacancies', null, query);
 }
 
-export function pagination(page, per) {
-    const query = { page, per };
+export function pagination(page,per) {
+    const query={page,per};
     return sendRequest('get', '/vacancies', null, query);
 }
 
@@ -94,7 +100,7 @@ export function agreeToVacancy(formData) {
 }
 
 export function getVacancyById(id) {
-    return sendRequest('get', `/vacancies/${id}`, null, null);
+    return sendRequest('get', `/vacancies/${id}`, null, null)
 }
 
 export function getAllUserVacancy(id) {

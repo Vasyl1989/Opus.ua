@@ -51,7 +51,6 @@ class HeaderforRegistration extends React.Component {
   }
 
   render() {
-
     return (
       <div>
         <header className="sticky-header">

@@ -1,16 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import Modal from 'react-modal';
-
-import * as Actions from '../../actions/vacancyActions';
-import * as consts from '../../constants/constants';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router';
+import { connect } from 'react-redux';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 import * as types from "../../actions/actionTypes";
+import * as consts from '../../constants/constants';
+import * as Actions from '../../actions/vacancyActions';
+import { customStyles2 } from "../../constants/constants";
 import { closeError, closeSucces } from "../../actions/openActions";
-import { customStyles } from "../../constants/constants";
-
 
 class AddVacancyForm extends React.Component {
   constructor(props, context) {
@@ -47,7 +46,6 @@ class AddVacancyForm extends React.Component {
   }
 
   //validation
-
   handleValidation() {
     let vacancy = this.state.vacancy;
     let errors = {};
@@ -106,7 +104,6 @@ class AddVacancyForm extends React.Component {
   }
 
   //modal window
-
   closeModal2() {
     this.props.dispatch(closeError());
   }
@@ -177,22 +174,19 @@ class AddVacancyForm extends React.Component {
 
             <form onSubmit={this.handleSubmit}>
               {/*------- Emaile------*/}
-
               <TextInput
                 type="email"
                 title="Електронна пошта"
                 name="email"
                 value={this.state.vacancy.email}
                 placeholder="mail@example.com"
-                onChange={this.handleInputChange}
-              />
+                onChange={this.handleInputChange} />
               <span className="errorMassage" style={{ color: "red" }}>
                 {this.state.errors["email"]}
               </span>
-
               <div className="clearfixform" />
-              {/*------- Title------*/}
 
+              {/*------- Title------*/}
               <TextInput
                 title="Назва вакансії"
                 type="text"
@@ -203,50 +197,45 @@ class AddVacancyForm extends React.Component {
               <span className="errorMassage" style={{ color: "red" }}>
                 {this.state.errors["title"]}
               </span>
-
               <div className="clearfixform" />
+
               {/*------- Job Pair------*/}
               <TextInput
                 title="Заробітня плата"
                 type="number"
                 name="price_per_hour"
                 value={this.state.vacancy.price_per_hour}
-                onChange={this.handleInputChange}
-              />
+                onChange={this.handleInputChange} />
               <span style={{ color: "red" }}>
                 {this.state.errors["price_per_hour"]}
               </span>
-
               <div className="clearfixform" />
-              {/*------- Location------*/}
 
+              {/*------- Location------*/}
               <TextInput
                 title="Місто"
                 type="text"
                 placeholder="Львів "
                 name="city"
                 value={this.state.vacancy.city}
-                onChange={this.handleInputChange}
-              />
+                onChange={this.handleInputChange} />
               <div className="clearfixform" />
-              {/*------- Job Type------*/}
 
+              {/*------- Job Type------*/}
               <SelectInput
                 title="Тип роботи"
                 onChange={this.handleInputChange}
                 name="job_type"
                 className="selectInput"
-                options={consts.JOB_TYPE}
-              />
-              {/*------- Choose Category------*/}
+                options={consts.JOB_TYPE} />
 
+              {/*------- Choose Category------*/}
               <SelectInput
                 title="Категорія"
                 name="category"
                 className="selectInput"
                 onChange={this.handleInputChange}
-                options={consts.CATEGORY}
-              />
+                options={consts.CATEGORY} />
 
               {/*------- Description------*/}
               <div className="form">
@@ -258,100 +247,87 @@ class AddVacancyForm extends React.Component {
                   id="summary"
                   value={this.state.vacancy.description}
                   onChange={this.handleInputChange}
-                  name="description"
-                />
-
+                  name="description" />
                 <span style={{ color: "red" }}>
                   {this.state.errors["description"]}
                 </span>
               </div>
               <div className="clearfixform" />
-              {/*------- TClosing Date------*/}
 
+              {/*------- TClosing Date------*/}
               <TextInput
                 title="Оголошення активне до:"
                 type="date"
                 placeholder="yyyy-mm-dd"
                 value={this.state.vacancy.active_to_date}
                 onChange={this.handleInputChange}
-                name="active_to_date"
-              />
+                name="active_to_date" />
               <span style={{ color: "red" }}>
                 {this.state.errors["active_to_date"]}
               </span>
               <div className="clearfixform" />
+
               {/*------- Company Details------*/}
               <div className="divider">
                 <h3>Додатково про компанію</h3>
               </div>
 
               {/*------- Company Name------*/}
-
               <TextInput
                 title="Компанія"
                 type="text"
                 placeholder="Назва компанії"
                 value={this.state.vacancy.company}
                 onChange={this.handleInputChange}
-                name="company"
-              />
+                name="company" />
               <span style={{ color: "red" }}>
                 {this.state.errors["company"]}
               </span>
               <div className="clearfixform" />
-              {/*------- Website------*/}
 
+              {/*------- Website------*/}
               <TextInput
                 title="Вебсайт"
                 type="text"
                 placeholder="http://"
                 onChange={this.handleInputChange}
                 value={this.state.vacancy.website}
-                name="website"
-              />
+                name="website" />
               <div className="clearfixform" />
-
               <div className="divider margin-top-0" />
               <button
                 className="button big margin-top-5"
                 type="submit"
-                id="vacancy"
-              >
+                id="vacancy">
                 Додати
               </button>
 
               <Modal
                 isOpen={this.props.error}
                 onRequestClose={this.closeModal2}
-                style={customStyles}
-                contentLabel="Example Modal"
-              >
-
+                style={customStyles2}
+                contentLabel="Example Modal">
                 <h2 ref={subtitle => this.subtitle = subtitle}>
                   Форма заповнена не вірно
                 </h2>
                 <button onClick={this.closeModal2}>close</button>
-
               </Modal>
 
               <Modal
                 isOpen={this.props.success}
                 onRequestClose={this.closeModal3}
-                style={customStyles}
-                contentLabel="Example Modal"
-              >
-
+                style={customStyles2}
+                contentLabel="Example Modal">
                 <h2 ref={subtitle => this.subtitle = subtitle}>
                   Вакансія надіслана успішно
                 </h2>
-                <button onClick={this.closeModal3}>close</button>
-
+                <Link to={'/'}>
+                  <button onClick={this.closeModal3}>close</button>
+                </Link>
               </Modal>
-
             </form>
           </div>
         </div>
-
       </div>
     );
   }

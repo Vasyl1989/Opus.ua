@@ -4,7 +4,6 @@ import Footer from '../common/Footer';
 import TitleBar from './TitleBar';
 import LoginForm from './LoginForm';
 
-
 const Registration = () => {
   return (
     <div>

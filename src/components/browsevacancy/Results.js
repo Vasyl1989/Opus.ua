@@ -1,24 +1,18 @@
 import React from 'react';
-import { PropTypes } from 'prop-types';
+import Widgets from './Widgets';
 import { connect } from 'react-redux';
+import { PropTypes } from 'prop-types';
+import BrowseByTitle from './BrowseByTitle';
 import { Link, browserHistory } from 'react-router';
 import picture from '../../styles/images/job-list-logo-01.png';
-import { searchVacancy } from '../../actions/vacancyActions';
-import CityFilter from './CityFilter';
-import TitleFilter from './TitleFilter';
-import PriceFilter from './PriceFilter';
-import TypeWorkFilter from './TypeWorkFilter';
-import { PAGES } from '../../constants/constants';
-import * as types from '../../actions/actionTypes';
 
 class Results extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       currentPage: 1,
-      vacancyPerPage: 6
+      vacancyPerPage: 6,
     };
-
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -45,6 +39,7 @@ class Results extends React.Component {
   }
 
   renderVacancy() {
+    window.scrollTo(0, 0);
     const vacancies = this.props.SearchResults;
     //pagination
     // Logic for displaying vacancies
@@ -57,7 +52,6 @@ class Results extends React.Component {
     for (let i = 1; i <= Math.ceil(vacancies.length / this.state.vacancyPerPage); i++) {
       pageNumbers.push(i);
     }
-
     if (vacancies.length > 0) {
       return (
         <div>
@@ -65,7 +59,7 @@ class Results extends React.Component {
             {currentVacancise.map((item) => {
               const job_type = item.job_type;
               return (<li className="highlighted" key={item.id} >
-                <Link to={"vacancy_detail/" + item.id}
+                <Link to={'vacancy_detail/' + item.id}
                   onClick={() => { browserHistory.push(item.id); }}>
                   <img src={picture} />
                   <div className="job-list-content">
@@ -93,13 +87,18 @@ class Results extends React.Component {
           <div className="pagination">
             <ul >{
               pageNumbers.map(number => {
-                return (
-
-                  <li className="vqvq"
-                    key={number}
-                    id={number}
-                    onClick={this.handleClick}>{number}</li>
-                );
+                if (vacancies.length > 5) {
+                  return (
+                    <li className="vqvq"
+                      key={number}
+                      id={number}
+                      onClick={this.handleClick}
+                    >{number}
+                    </li>
+                  );
+                } else {
+                  //do nothing
+                }
               })
             }</ul></div>
         </div>
@@ -116,15 +115,13 @@ class Results extends React.Component {
       <div className="container">
         <div className="eleven columns">
           <div className="padding-right">
-            <TitleFilter />
+            <BrowseByTitle />
             {this.props.SearchResults && this.renderVacancy()}
             <div className="margin-bottom-55" />
           </div>
         </div>
         <div className="five columns">
-          <CityFilter />
-          <TypeWorkFilter />
-          <PriceFilter />
+          <Widgets />
         </div>
       </div>
     );

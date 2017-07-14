@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
   filter,
   open,
   registration,
-  routing: routerReducer
+  routing: routerReducer,
 });
 
 export default rootReducer;

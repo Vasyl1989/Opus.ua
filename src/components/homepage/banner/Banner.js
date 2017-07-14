@@ -4,29 +4,32 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { searchVacancy } from '../../../actions/vacancyActions';
 import { PAGES } from '../../../constants/constants';
+import * as types from '../../../actions/actionTypes';
 
 
 class Banner extends React.Component {
   constructor(props, context) {
     super(props, context);
-    this.state = {
-      search: {
-        title: "",
-        city: "",
-      },
+    this.state = {    
+        title: this.props.filter.title,
+        city: this.props.filter.city,    
     };
     this.inputChange = this.inputChange.bind(this);
     this.searchSubmit = this.searchSubmit.bind(this);
     this.transition=this.transition.bind(this);
   }
   inputChange(e) {
-    const search = Object.assign({}, this.state.search)
-    search[e.target.name] = e.target.value;
-    this.setState({ search });
+     const target = e.target;
+    const value = target.value;
+    const name = target.name;
+    this.setState({ [name]: value });
   }
   searchSubmit(e, city, title) {
     e.preventDefault();
-    const query = { city, title };
+    const query = { city,title };
+    console.log('queryFromBanner',query);
+    this.props.dispatch({type:types.ABOUT_SEARCH.SET_CITY,payload:city});
+    this.props.dispatch({type:types.ABOUT_SEARCH.SET_TITLE,payload:title});
     this.props.dispatch(searchVacancy(query, PAGES.HOME_PAGE));
   }
   transition(e){
@@ -53,7 +56,7 @@ class Banner extends React.Component {
                       value={this.state.title}
                       onChange={this.inputChange}
                       autoComplete="on"
-                      onKeyPress={(e) => { if (e.key == 'Enter') { this.searchSubmit(e, this.state.search.city, this.state.search.title); } }}
+                      onKeyPress={(e) => { if (e.key == 'Enter') { this.searchSubmit(e, this.state.city, this.state.title); } }}
                     />
                   </div>
                   <div id="2">
@@ -65,10 +68,10 @@ class Banner extends React.Component {
                       value={this.state.city}
                       onChange={this.inputChange}
                       autoComplete="on"
-                      onKeyPress={(e) => { if (e.key == 'Enter') { this.searchSubmit(e, this.state.search.city, this.state.search.title); } }}
+                      onKeyPress={(e) => { if (e.key == 'Enter') { this.searchSubmit(e, this.state.city, this.state.title); } }}
                     />
                   </div>
-                  <a href="" onClick={(e) => { this.searchSubmit(e, this.state.search.city, this.state.search.title); }}><button><i className="fa fa-search" /></button></a>
+                  <a href="" onClick={(e) => { this.searchSubmit(e, this.state.city, this.state.title); }}><button><i className="fa fa-search" /></button></a>
 
                   <div className="browse-jobs">
                     <h3>Сортувати вакансії за

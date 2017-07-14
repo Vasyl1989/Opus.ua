@@ -1,11 +1,10 @@
 import React from "react";
-import { connect } from "react-redux";
-import { Link } from 'react-router';
-import { singIn, signOut } from '../../actions/registrationActions';
 import Modal from 'react-modal';
-import { closeSucces, closeError } from '../../actions/openActions';
+import { Link } from 'react-router';
+import { connect } from "react-redux";
 import { customStyles2 } from "../../constants/constants";
-
+import { closeSucces, closeError } from '../../actions/openActions';
+import { singIn, signOut } from '../../actions/registrationActions';
 
 class LoginForm extends React.Component {
   constructor(props, context) {
@@ -14,10 +13,7 @@ class LoginForm extends React.Component {
       email: "",
       password: "",
       errors: {},
-      searchText: "Searching...",
-      disabled: false,
     };
-
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.closeModal2 = this.closeModal2.bind(this);
@@ -36,7 +32,7 @@ class LoginForm extends React.Component {
     e.preventDefault();
     this.handleValidation();
     this.props.dispatch(singIn(this.state.email, this.state.password));
-    this.setState({ email: "", password: "" });
+    this.setState({ email: "", password: "", });
   }
 
   closeModal2() {
@@ -46,6 +42,7 @@ class LoginForm extends React.Component {
   closeModal3() {
     this.props.dispatch(closeSucces());
   }
+
 
   handleValidation() {
     let user = this.state;
@@ -73,7 +70,7 @@ class LoginForm extends React.Component {
   needRegistration() {
     if (this.props.user.logIn === true) {
       return (
-        <ul className="tabs-nav responsive" id="ararar">
+        <ul className="tabs-nav responsive">
           <li className="active"><a href="/logout" onClick={this.logOut}><i className="fa fa-lock" />Вийти</a></li>
         </ul>
       );
@@ -90,7 +87,7 @@ class LoginForm extends React.Component {
   needForm() {
     if (this.props.user.logIn === true) {
       return (
-        <p className="form-row form-row-wide" id="arar">Ви успішно увійшли на сайт.</p>
+        <p className="form-row form-row-wide">Ви успішно зайшли на сайт.</p>
       );
     } else {
       return (<div>
@@ -163,7 +160,7 @@ class LoginForm extends React.Component {
                   <h2 ref={subtitle => this.subtitle = subtitle}>
                     Ви успішно авторизувались
 									</h2>
-                  <button onClick={this.closeModal3}>close</button>
+                  <Link to={'/'}> <button onClick={this.closeModal3}>close</button></Link>
                 </Modal>
               </form>
             </div>

@@ -1,25 +1,26 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import * as types from '../../actions/actionTypes';
 import * as consts from '../../constants/constants';
 import { searchVacancy } from '../../actions/vacancyActions';
+import * as types from '../../actions/actionTypes';
+import { serializeArrayToQueryString, addJobType } from './TypeWork';
 
-class PriceFilter extends React.Component {
+class PricePerHour extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       minValue: 0,
       maxValue: 200,
       step: 25,
-      firstValue: null,
-      secondValue: null
+      firstValue: this.props.filter.prMn,
+      secondValue: this.props.filter.prMx,
     };
-    this.handleChange = this
-      .handleChange
-      .bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
+
   componentWillMount() {
+    window.scrollTo(0, 0);
     this.setState({ firstValue: this.state.minValue, secondValue: this.state.maxValue });
   }
 
@@ -40,10 +41,17 @@ class PriceFilter extends React.Component {
     event.preventDefault();
     const prMn = firstValue;
     const prMx = secondValue;
-    const query = { prMn, prMx };
-    this.props.searchVacancy(query, consts.PAGES.BROWSE_VACANCY);
-
+    const city = this.props.filter.city;
+    const title = this.props.filter.title;
+    const type = this.props.type_work;
+    const checkedElement = this.props.filter.check;
+    const job_type = serializeArrayToQueryString(addJobType(this.props.filter, type, checkedElement));
+    const query = { prMn, prMx, city, title, job_type };
+    this.props.dispatch({ type: types.ABOUT_SEARCH.SET_MN, payload: prMn });
+    this.props.dispatch({ type: types.ABOUT_SEARCH.SET_MX, payload: prMx });
+    this.props.dispatch(searchVacancy(query, consts.PAGES.BROWSE_VACANCY));
   }
+
   render() {
     return (
       <div className="widget">
@@ -59,16 +67,19 @@ class PriceFilter extends React.Component {
   }
 }
 
-PriceFilter.PropTypes = {
+PricePerHour.PropTypes = {
   handleChange: PropTypes.func.isRequired,
   filterSubmit: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    vacancy: state.vacancy,
-    SearchResults: state.vacancy.SearchResults,
+    filter: state.filter,
   };
 }
 
-export default connect(mapStateToProps, { searchVacancy })(PriceFilter);
+function mapDispatchToProps(dispatch) {
+  return { dispatch };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PricePerHour);

@@ -4,9 +4,7 @@ let userData;
 const initialState = {
   user: {},
   logIn: false,
-  userVacancies: [],
-  searchText: "",
-  disabled: false,
+  userVacancies:[],
 };
 
 export default function registrationReducer(state = initialState, action) {
@@ -15,14 +13,12 @@ export default function registrationReducer(state = initialState, action) {
       return {
         ...state,
         user: action.payload,
-        logIn: true,
-        searchText: "Searching...",
-        disabled: false,
+        logIn: true
       };
 
     case types.SIGN_OUT:
       return {
-        state: undefined,
+        state:undefined,
       };
 
     case types.GET_USER:
@@ -32,6 +28,9 @@ export default function registrationReducer(state = initialState, action) {
         user: userData,
         logIn: !!userData
       };
+
+     
+
     default: return state;
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import { getAllVacancy } from '../../actions/vacancyActions';
+import { getAllVacancy, pagination } from '../../actions/vacancyActions';
 import { Link, browserHistory } from 'react-router';
 import picture from '../../styles/images/job-list-logo-01.png';
 
@@ -10,12 +10,13 @@ class ResentVacancy extends React.Component {
     super(props, context);
     this.state = {
       currentPage: 1,
-      vacancyPerPage: 4,
+      vacancyPerPage: 6,
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     this.props.getAllVacancy();
   }
 
@@ -86,32 +87,31 @@ class ResentVacancy extends React.Component {
         <div className="pagination">
           <ul >{
             pageNumbers.map(number => {
-              return (
-                <li className="vqvq"
-                  key={number}
-                  id={number}
-                  onClick={this.handleClick}>{number}</li>
-              );
+              if (vacancies.length > 5) {
+                return (
+                  <li className="vqvq"
+                    key={number}
+                    id={number}
+                    onClick={this.handleClick}
+                  >{number}
+                  </li>
+                );
+              } else {
+                //do nothing
+              }
             })
-          }</ul>
-        </div>
+          }</ul></div>
       </div>
     );
   }
 
   render() {
-    // console.log('----------------------------', this.props.vacancy.vacancies.length);
     return (
       <div className="container">
         <div className="sixteen columns">
           <div className="padding-right">
             <h3 className="margin-bottom-25">Актуальні вакансії</h3>
             {this.props.vacancy.vacancies && this.renderVacancies()}
-            { /*<button onClick={this.handleClick}>
-              <ul>
-                <li>Показати ще</li>
-              </ul>
-            </button>*/}
             <div className="margin-bottom-55" />
           </div>
         </div>
@@ -133,4 +133,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { getAllVacancy })(ResentVacancy);
+export default connect(mapStateToProps, { getAllVacancy, pagination })(ResentVacancy);

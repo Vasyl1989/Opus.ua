@@ -1,25 +1,21 @@
 import React from 'react';
-import { deleteVacancy, getVacancyById , getAllUserVacancy } from '../../actions/vacancyActions';
+import { deleteVacancy, getVacancyById, getAllUserVacancy } from '../../actions/vacancyActions';
 import { connect } from 'react-redux';
 import { getUser } from '../../actions/registrationActions';
 
-
-
 class ContextManage extends React.Component {
-constructor(props, context) {
+  constructor(props, context) {
     super(props, context);
   }
 
   componentDidMount() {
-      this.props.getUser();
-      this.props.getAllUserVacancy(); 
+    this.props.getUser();
+    this.props.getAllUserVacancy();
   }
 
   onDelete(id) {
     this.props.deleteVacancy(id, this.props.vacancy.vacancies);
   }
-  
-
 
   handleGoToEditVacancy(e, id) {
     e.preventDefault();
@@ -34,9 +30,9 @@ constructor(props, context) {
           <td className="title"><a href="#">{item.title}</a></td>
           <td>{item.created_at}</td>
           <td>{item.active_to_date}</td>
-          <td className="action"> 
-            <a href="" onClick={(e) => this.handleGoToEditVacancy(e, item.id)}><i className="fa fa-pencil"/> Edit</a>
-            <a href="#" className="delete" onClick={() => this.onDelete(item.id)}><i className="fa fa-remove"/> Delete</a>
+          <td className="action">
+            <a href="" onClick={(e) => this.handleGoToEditVacancy(e, item.id)}><i className="fa fa-pencil" /> Edit</a>
+            <a href="#" className="delete" onClick={() => this.onDelete(item.id)}><i className="fa fa-remove" /> Delete</a>
           </td>
         </tr>
       );
@@ -54,15 +50,15 @@ constructor(props, context) {
             <thead>
               <tr>
                 <th><i className="fa fa-file-text" />Назва вакансії</th>
-                <th><i className="fa fa-calendar"/>Дата створення оголошення</th>
-                <th><i className="fa fa-calendar"/>Оголошення активне до</th>
+                <th><i className="fa fa-calendar" />Дата створення оголошення</th>
+                <th><i className="fa fa-calendar" />Оголошення активне до</th>
               </tr>
             </thead>
             <tbody>
               {this.renderVacancies()}
             </tbody>
           </table>
-          <div className="manage"/>
+          <div className="manage" />
           <a href="AddVacancy" className="button">Додати нову вакансію</a>
         </div>
       </div>
@@ -77,4 +73,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { deleteVacancy, getVacancyById , getUser, getAllUserVacancy })(ContextManage);
+export default connect(mapStateToProps, { deleteVacancy, getVacancyById, getUser, getAllUserVacancy })(ContextManage);

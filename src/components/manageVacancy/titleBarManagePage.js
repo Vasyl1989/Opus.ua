@@ -1,7 +1,6 @@
 import React from 'react';
 
 const TitleBarManagePage = () => {
-
     return (
         <div id="titlebar" className="single">
             <div className="container">
@@ -12,6 +11,6 @@ const TitleBarManagePage = () => {
             </div>
         </div>
     );
-}
+};
 
 export default TitleBarManagePage;
