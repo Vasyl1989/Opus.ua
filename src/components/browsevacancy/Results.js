@@ -7,7 +7,7 @@ import { searchVacancy } from '../../actions/vacancyActions';
 import Widgets from './Widgets';
 import { PAGES } from '../../constants/constants';
 import * as types from '../../actions/actionTypes';
-
+import BrowseByTitle from './BrowseByTitle';
 
 class Results extends React.Component {
   constructor(props, context) {
@@ -20,6 +20,10 @@ class Results extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.inputChange = this.inputChange.bind(this);
     this.onSearchInput = this.onSearchInput.bind(this);
+  }
+
+  componentDidMount() {
+    window.scrollTo(0, 0);
   }
 
   handleClick(event) {
@@ -52,7 +56,6 @@ class Results extends React.Component {
   }
 
   renderVacancy() {
-    window.scrollTo(0, 0);
     const vacancies = this.props.SearchResults;
     //pagination
     // Logic for displaying vacancies
@@ -68,7 +71,6 @@ class Results extends React.Component {
     if (vacancies.length > 0) {
       return (
         <div>
-
           <ul className="job-list full">
             {currentVacancise.map((item) => {
               const job_type = item.job_type;
@@ -106,7 +108,9 @@ class Results extends React.Component {
                     <li
                       key={number}
                       id={number}
-                      onClick={this.handleClick}>{number}</li></button>
+                      onClick={this.handleClick}>{number}
+                    </li>
+                  </button>
                 );
               })
             }</ul></div>
@@ -115,10 +119,8 @@ class Results extends React.Component {
     } else {
       return (
         <p>Вакансій не знайдено.</p>
-      )
-
+      );
     }
-
   }
 
   render() {
@@ -126,25 +128,13 @@ class Results extends React.Component {
       <div className="container">
         <div className="eleven columns">
           <div className="padding-right">
-            <form className="list-search">
-              <button type="submit" onClick={(e) => { this.onSearchInput(e, this.state.title); }}><i className="fa fa-search" /></button>
-              <input
-                type="text"
-                placeholder="Вакансія..."
-                value={this.state.title}
-                onChange={this.inputChange}
-                autoComplete="on"
-                onKeyPress={(e) => { if (e.key == 'Enter') { this.onSearchInput(e, this.state.title); } }}
-              />
-              <div className="clearfix" />
-            </form>
+            <BrowseByTitle/>  
             {this.props.SearchResults && this.renderVacancy()}
             <div className="margin-bottom-55" />
           </div>
         </div>
         <div className="five columns">
           <Widgets />
-
         </div>
       </div>
     );
@@ -170,6 +160,6 @@ function mapStateToProps(state) {
   };
 }
 function mapDispatchToProps(dispatch) {
-  return { dispatch }
+  return { dispatch };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Results);

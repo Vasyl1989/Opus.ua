@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import { getAllVacancy,pagination } from '../../actions/vacancyActions';
+import { getAllVacancy, pagination } from '../../actions/vacancyActions';
 import { Link, browserHistory } from 'react-router';
 import picture from '../../styles/images/job-list-logo-01.png';
 
@@ -17,12 +17,14 @@ class ResentVacancy extends React.Component {
 
   componentDidMount() {
     // this.props.getAllVacancy();
-    this.props.pagination(this.state.page,this.state.per);
+    this.props.pagination(this.state.page, this.state.per);
+
   }
 
   handleClick(e) {
     e.preventDefault();
-    this.props.pagination(this.state.page+1,this.state.per);
+    this.props.pagination(this.state.page + 1, this.state.per);
+    this.setState({ page: this.state.page + 1 });
   }
 
   spanColor({ job_type }) {
@@ -77,7 +79,6 @@ class ResentVacancy extends React.Component {
   }
 
   render() {
-    // console.log('----------------------------', this.props.vacancy.vacancies.length);
     return (
       <div className="container">
         <div className="sixteen columns">
@@ -85,10 +86,10 @@ class ResentVacancy extends React.Component {
             <h3 className="margin-bottom-25">Актуальні вакансії</h3>
             {this.props.vacancy.vacancies && this.renderVacancies()}
             <button onClick={this.handleClick}>
-              <ul>
-                <li>Показати ще</li>
-              </ul>
-            </button>
+          <ul>
+            <li>Показати ще</li>
+          </ul>
+        </button>
             <div className="margin-bottom-55" />
           </div>
         </div>
@@ -107,8 +108,7 @@ ResentVacancy.PropTypes = {
 function mapStateToProps(state) {
   return {
     vacancy: state.vacancy,
-    // paginationData: state.vacancy.paginationData
   };
 }
 
-export default connect(mapStateToProps, { getAllVacancy,pagination })(ResentVacancy);
+export default connect(mapStateToProps, { getAllVacancy, pagination })(ResentVacancy);

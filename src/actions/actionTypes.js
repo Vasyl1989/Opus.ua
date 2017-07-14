@@ -16,7 +16,8 @@ export const ABOUT_SEARCH = {
   SET_CITY: 'SET_CITY',
   SET_TITLE: 'SET_TITLE',
   SET_CATEGORY: 'SET_CATEGORY',
-  SET_PRISE: 'SET_PRISE'
+  SET_MX:'SET_MX',
+  SET_MN:'SET_MN',
 };
 
 export const SHOULD_OPEN_CLOSE = {

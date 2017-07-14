@@ -4,11 +4,14 @@ const initialState = {
   title: '',
   city: '',
   job_type: [],
+  prMn: '',
+  prMx: '',
 };
 
 export default function filterReducer(state = initialState, action) {
   switch (action.type) {
     case types.CHECK:
+       console.log('payload',action.payload);
       return {
         ...state,
         job_type: state.job_type.concat(action.payload),
@@ -31,6 +34,19 @@ export default function filterReducer(state = initialState, action) {
         ...state,
         title: action.payload,
       };
+
+    case types.ABOUT_SEARCH.SET_MN:
+      return {
+        ...state,
+        prMn: action.payload,
+      };
+
+    case types.ABOUT_SEARCH.SET_MX:
+      return {
+        ...state,
+        prMx: action.payload,
+      };
+
     default:
       return state;
   }

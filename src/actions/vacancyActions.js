@@ -98,7 +98,10 @@ export function searchVacancy(query, fromPage, parametr) {
         if (fromPage !== consts.PAGES.BROWSE_VACANCY) {
           browserHistory.push("/browse_vacancy");
         }
-        dispatch(filtration(parametr));
+        if(parametr){
+         dispatch(filtration(parametr));
+        }
+      
       }).catch((error) => {
         console.log(error);
       });

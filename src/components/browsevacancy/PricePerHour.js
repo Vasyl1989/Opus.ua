@@ -1,9 +1,9 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import * as types from '../../actions/actionTypes';
 import * as consts from '../../constants/constants';
 import { searchVacancy } from '../../actions/vacancyActions';
+import * as types from '../../actions/actionTypes';
 
 class PricePerHour extends React.Component {
   constructor(props) {
@@ -12,9 +12,10 @@ class PricePerHour extends React.Component {
       minValue: 0,
       maxValue: 200,
       step: 25,
-      firstValue: null,
-      secondValue: null
+      firstValue: this.props.filter.prMn,
+      secondValue: this.props.filter.prMx,
     };
+
     this.handleChange = this
       .handleChange
       .bind(this);
@@ -40,8 +41,12 @@ class PricePerHour extends React.Component {
     event.preventDefault();
     const prMn = firstValue;
     const prMx = secondValue;
-    const query = { prMn, prMx };
-    this.props.searchVacancy(query, consts.PAGES.BROWSE_VACANCY);
+    const city=this.props.filter.city;
+    const title=this.props.filter.title;
+    const query = { prMn, prMx ,city,title};
+    this.props.dispatch({type:types.ABOUT_SEARCH.SET_MN,payload:prMn});
+    this.props.dispatch({type:types.ABOUT_SEARCH.SET_MX,payload:prMx});
+    this.props.dispatch(searchVacancy(query, consts.PAGES.BROWSE_VACANCY));
 
   }
   render() {
@@ -55,17 +60,23 @@ class PricePerHour extends React.Component {
         </section>
         <button type="submit" onClick={(event) => { this.filterSubmit(event, this.state.firstValue, this.state.secondValue); }}>Відфільтрувати</button>
       </div>
-    )
+    );
   }
 }
+
 PricePerHour.PropTypes = {
   handleChange: PropTypes.func.isRequired,
   filterSubmit: PropTypes.func.isRequired,
-}
+};
+
 function mapStateToProps(state) {
   return {
-    vacancy: state.vacancy,
-    SearchResults: state.vacancy.SearchResults,
+    filter: state.filter,
   };
 }
-export default connect(mapStateToProps, { searchVacancy })(PricePerHour);
+
+function mapDispatchToProps(dispatch) {
+  return { dispatch };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PricePerHour);

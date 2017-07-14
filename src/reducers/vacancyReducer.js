@@ -61,11 +61,7 @@ export default function vacancyReduce(state = initialState, action) {
         SearchResults: action.payload,
       };
 
-    // case types.PAGINATION:
-    // return{
-    //   ...state,
-    //   paginationData: state.paginationData.concat(action.payload),
-    // };
+
     case types.PAGINATION:
       return {
         ...state,
