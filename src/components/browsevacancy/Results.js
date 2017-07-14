@@ -94,11 +94,11 @@ class Results extends React.Component {
             <ul >{
               pageNumbers.map(number => {
                 return (
-                  <button key={number}>
-                    <li
-                      key={number}
-                      id={number}
-                      onClick={this.handleClick}>{number}</li></button>
+
+                  <li className="vqvq"
+                    key={number}
+                    id={number}
+                    onClick={this.handleClick}>{number}</li>
                 );
               })
             }</ul></div>

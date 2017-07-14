@@ -973,17 +973,19 @@ input .ico-02 {
   margin: 30px;
 }
 
-.pagination button {
-  margin: 2px;
-}
-
 .pagination ul {
   margin-top: 20px;
   list-style: none;
 }
 
-.pagination li {
-  float: left;
+.pagination .vqvq {
+  float: center;
+  background-color: #ffb400;
+  height: 20px;
+  width: 20px;
+  padding: 10px;
+  margin: 2px;
+  color: white;
 }
 
 
