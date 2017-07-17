@@ -39,6 +39,7 @@ class TypeWork extends React.Component {
   }
 
   onCheck(e) {
+    const category = this.props.filter.category;
     const job_type_target = e.target.value;
     const checkedElement = e.target.checked;
     const job_type = serializeArrayToQueryString(addJobType(this.props.filter, job_type_target, checkedElement));
@@ -46,7 +47,7 @@ class TypeWork extends React.Component {
     const prMx = this.props.filter.prMx;
     const prMn = this.props.filter.Mn;
     const title = this.props.filter.title;
-    const query = { job_type, city, prMn, prMx, title };
+    const query = { category, job_type, city, prMn, prMx, title };
     const parametr = { job_type_target, checkedElement };
     console.log('jobType', job_type);
     this.props.dispatch(searchVacancy(query, consts.PAGES.BROWSE_VACANCY, parametr));

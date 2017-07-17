@@ -1,22 +1,37 @@
 import React from 'react';
-import { Link } from 'react-router';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
+import * as consts from '../../constants/constants';
+import * as types from '../../actions/actionTypes';
 import { searchVacancy } from '../../actions/vacancyActions';
 import { PAGES, categoriesConfig } from '../../constants/constants';
+import { serializeArrayToQueryString, addJobType } from '../browsevacancy/TypeWork';
 
 class AllCategory extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      category: this.props.filter.category,
+    };
     this.serchSubmit = this.serchSubmit.bind(this);
   }
 
   serchSubmit(e, { id }) {
     e.preventDefault();
     console.log(id);
+    this.setState({ category: e.currentTarget.dataset.name });
     const category = e.currentTarget.dataset.name;
-    const query = { category };
-    this.props.searchVacancy(query, PAGES.BROWSE_CATEGORIES, true, id);
+    const city = this.props.filter.city
+    const prMn = this.props.filter.prMn;
+    const prMx = this.props.filter.prMx;
+    const title = this.props.filter.title;
+    const type = this.props.type_work;
+    const checkedElement = this.props.filter.check;
+    const job_type = serializeArrayToQueryString(addJobType(this.props.filter, type, checkedElement));
+    const query = { category, city, prMn, prMx, title, job_type };
+    // TODO save city to store
+    this.props.dispatch({ type: types.ABOUT_SEARCH.SET_CATEGORY, payload: category });
+    this.props.dispatch(searchVacancy(query, consts.PAGES.BROWSE_CATEGORIES, true, id));
   }
 
   renderCategories() {
@@ -34,7 +49,6 @@ class AllCategory extends React.Component {
                   onClick={(e) => { this.serchSubmit(e, { id }); }}>
                   <i className={item.className} /> {item.title}
                 </a>
-
               </li>
             );
           })
@@ -56,12 +70,14 @@ class AllCategory extends React.Component {
   }
 }
 
-AllCategory.PropTypes = {
-  searchVacancy: PropTypes.func.isRequired,
-};
-
 function mapStateToProps(state) {
-  return { vacancy: state.vacancy };
+  return {
+    filter: state.filter,
+  };
 }
 
-export default connect(mapStateToProps, { searchVacancy })(AllCategory);
+function mapDispatchToProps(dispatch) {
+  return { dispatch };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllCategory);

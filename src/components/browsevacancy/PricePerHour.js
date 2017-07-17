@@ -39,6 +39,7 @@ class PricePerHour extends React.Component {
 
   filterSubmit(event, firstValue, secondValue) {
     event.preventDefault();
+    const category = this.props.filter.category;
     const prMn = firstValue;
     const prMx = secondValue;
     const city = this.props.filter.city;
@@ -46,7 +47,7 @@ class PricePerHour extends React.Component {
     const type = this.props.type_work;
     const checkedElement = this.props.filter.check;
     const job_type = serializeArrayToQueryString(addJobType(this.props.filter, type, checkedElement));
-    const query = { prMn, prMx, city, title, job_type };
+    const query = { category, prMn, prMx, city, title, job_type };
     this.props.dispatch({ type: types.ABOUT_SEARCH.SET_MN, payload: prMn });
     this.props.dispatch({ type: types.ABOUT_SEARCH.SET_MX, payload: prMx });
     this.props.dispatch(searchVacancy(query, consts.PAGES.BROWSE_VACANCY));

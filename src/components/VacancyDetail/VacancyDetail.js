@@ -3,26 +3,50 @@ import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import Header from '../common/Header';
 import Footer from '../common/Footer';
-import { getVacancyById, searchVacancy } from '../../actions/vacancyActions';
-import picture from '../../styles/images/company-logo.png';
+import * as consts from '../../constants/constants';
+import * as types from '../../actions/actionTypes';
 import { PAGES } from '../../constants/constants';
+import picture from '../../styles/images/company-logo.png';
+import { getVacancyById, searchVacancy } from '../../actions/vacancyActions';
+import { serializeArrayToQueryString, addJobType } from '../browsevacancy/TypeWork';
 import ApplyPopup from './ApplyPopup';
 
 class VacancyDetail extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      category: this.props.filter.category,
+    };
     this.serchSubmit = this.serchSubmit.bind(this);
   }
+
   componentDidMount() {
-    this.props.getVacancyById(this.props.params.id, this.props.vacancies);
+    this.props.dispatch(getVacancyById(this.props.params.id, this.props.vacancies));
     window.scrollTo(0, 0);
   }
+
   serchSubmit(e) {
     e.preventDefault();
+    this.setState({ category: e.currentTarget.dataset.name });
     const category = e.currentTarget.dataset.name;
-    const query = { category };
-    this.props.searchVacancy(query, PAGES.BROWSE_CATEGORIES);
+    const city = this.props.filter.city
+    const prMn = this.props.filter.prMn;
+    const prMx = this.props.filter.prMx;
+    const title = this.props.filter.title;
+    const type = this.props.type_work;
+    const checkedElement = this.props.filter.check;
+    const job_type = serializeArrayToQueryString(addJobType(this.props.filter, type, checkedElement));
+    const query = { category, city, prMn, prMx, title, job_type };
+    // TODO save city to store
+    this.props.dispatch({ type: types.ABOUT_SEARCH.SET_CATEGORY, payload: category });
+    this.props.dispatch(searchVacancy(query, consts.PAGES.BROWSE_CATEGORIES, true));
+
+
+    // const category = e.currentTarget.dataset.name;
+    // const query = { category };
+    // this.props.searchVacancy(query, PAGES.BROWSE_CATEGORIES);
   }
+
   spanColor({ job_type }) {
     if (job_type === "Повна зайнятість") {
       return ("full-time");
@@ -34,6 +58,7 @@ class VacancyDetail extends React.Component {
       return ("internship");
     }
   }
+
   render() {
     const vacancy = this.props.singleVacancy;
     const job_type = vacancy.job_type;
@@ -101,18 +126,25 @@ class VacancyDetail extends React.Component {
         </div>
         <Footer />
       </div>
-    )
+    );
   }
 }
+
 VacancyDetail.PropTypes = {
   searchVacancy: PropTypes.func.isRequired,
   getVacancyById: PropTypes.func.isRequired,
 };
+
 function mapStateToProps(state) {
   return {
     singleVacancy: state.vacancy.singleVacancy,
     vacancies: state.vacancy.vacancies,
+    filter: state.filter,
   };
 }
 
-export default connect(mapStateToProps, { getVacancyById, searchVacancy })(VacancyDetail);
+function mapDispatchToProps(dispatch) {
+  return { dispatch };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(VacancyDetail);
