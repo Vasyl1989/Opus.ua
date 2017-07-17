@@ -49,7 +49,6 @@ class AllCategory extends React.Component {
         <div className="container">
           <div className="sixteen columns">
             {this.renderCategories()}
-            <p>dvdfgrg</p>
           </div>
         </div>
       </div>
