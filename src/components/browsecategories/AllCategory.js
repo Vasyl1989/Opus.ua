@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { searchVacancy } from '../../actions/vacancyActions';
@@ -33,6 +34,7 @@ class AllCategory extends React.Component {
                   onClick={(e) => { this.serchSubmit(e, { id }); }}>
                   <i className={item.className} /> {item.title}
                 </a>
+
               </li>
             );
           })
@@ -47,6 +49,7 @@ class AllCategory extends React.Component {
         <div className="container">
           <div className="sixteen columns">
             {this.renderCategories()}
+            <p>dvdfgrg</p>
           </div>
         </div>
       </div>
