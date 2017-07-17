@@ -42,104 +42,73 @@ export const categoriesConfig = [
   {
     id: 1,
     title: 'Автоперевезення / Логістика',
-    className: 'ln  ln-icon-Globe'
+    className: 'ln  ln-icon-Globe',
+    displayHomePage: true
   },
   {
     id: 2,
     title: 'Будівництво',
-    className: 'ln ln-icon-Worker'
+    className: 'ln ln-icon-Worker',
+    displayHomePage: true
   },
   {
     id: 3,
     title: 'Виробництво',
-    className: 'ln  ln-icon-Factory'
+    className: 'ln  ln-icon-Factory',
+    displayHomePage: false
   },
   {
     id: 4,
     title: 'IТ',
-    className: 'ln ln-icon-Computer-2'
+    className: 'ln ln-icon-Computer-2',
+    displayHomePage: true
   },
   {
     id: 5,
     title: 'Краса та здоровя',
-    className: 'ln ln-icon-Gemini-2'
+    className: 'ln ln-icon-Gemini-2',
+    displayHomePage: false
   },
   {
     id: 6,
     title: 'Медицина',
-    className: 'ln  ln-icon-Medical-Sign'
+    className: 'ln  ln-icon-Medical-Sign',
+    displayHomePage: true
   },
   {
     id: 7,
     title: 'Навчання та репетиторство',
-    className: 'ln ln-icon-Student-Female'
+    className: 'ln ln-icon-Student-Female',
+    displayHomePage: true
   },
   {
     id: 8,
     title: 'Робочі спеціальності',
-    className: 'ln ln-icon-Gear-2'
+    className: 'ln ln-icon-Gear-2',
+    displayHomePage: false
   },
   {
     id: 9,
     title: 'Сільськогосподарські роботи',
-    className: 'ln  ln-icon-Farmer'
+    className: 'ln  ln-icon-Farmer',
+    displayHomePage: false
   },
   {
     id: 10,
     title: 'Сфера обслуговування',
-    className: 'ln  ln-icon-Plates'
+    className: 'ln  ln-icon-Plates',
+    displayHomePage: true
   },
   {
     id: 11,
     title: 'Телекомунікація',
-    className: 'ln  ln-icon-Laptop-3'
+    className: 'ln  ln-icon-Laptop-3',
+    displayHomePage: true
   },
   {
     id: 12,
     title: 'Управління персоналом',
-    className: 'ln  ln-icon-People-onCloud'
-  },
-];
-
-export const categoriesConfigHome = [
-  {
-    id: 1,
-    title: 'Управління персоналом',
-    className: 'ln  ln-icon-People-onCloud'
-  },
-  {
-    id: 2,
-    title: 'IТ',
-    className: 'ln ln-icon-Computer-2'
-  },
-  {
-    id: 3,
-    title: 'Будівництво',
-    className: 'ln ln-icon-Worker'
-  },
-  {
-    id: 4,
-    title: 'Навчання та репетиторство',
-    className: 'ln ln-icon-Student-Female'
-  },
-  {
-    id: 5,
-    title: 'Медицина',
-    className: 'ln  ln-icon-Medical-Sign'
-  },
-  {
-    id: 6,
-    title: 'Сфера обслуговування',
-    className: 'ln  ln-icon-Plates'
-  },
-  {
-    id: 7,
-    title: 'Автоперевезення / Логістика',
-    className: 'ln  ln-icon-Globe'
-  },
-  {
-    id: 8,
-    title: 'Телекомунікація',
-    className: 'ln  ln-icon-Laptop-3'
+    className: 'ln  ln-icon-People-onCloud',
+    displayHomePage: true
   },
 ];

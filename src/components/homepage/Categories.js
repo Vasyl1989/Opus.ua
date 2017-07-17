@@ -4,7 +4,7 @@ import { PropTypes } from 'prop-types';
 import * as consts from '../../constants/constants';
 import * as types from '../../actions/actionTypes';
 import { searchVacancy } from '../../actions/vacancyActions';
-import { PAGES, categoriesConfigHome } from '../../constants/constants';
+import { PAGES, categoriesConfig } from '../../constants/constants';
 import { serializeArrayToQueryString, addJobType } from '../browsevacancy/TypeWork';
 
 class Categories extends React.Component {
@@ -16,7 +16,7 @@ class Categories extends React.Component {
     this.serchSubmit = this.serchSubmit.bind(this);
   }
 
-  serchSubmit(e) {
+  serchSubmit(e, { id }) {
     e.preventDefault();
     this.setState({ category: e.currentTarget.dataset.name });
     const category = e.currentTarget.dataset.name;
@@ -30,28 +30,32 @@ class Categories extends React.Component {
     const query = { category, city, prMn, prMx, title, job_type };
     // TODO save city to store
     this.props.dispatch({ type: types.ABOUT_SEARCH.SET_CATEGORY, payload: category });
-    this.props.dispatch(searchVacancy(query, consts.PAGES.BROWSE_CATEGORIES, true));
+    this.props.dispatch(searchVacancy(query, consts.PAGES.BROWSE_CATEGORIES, true, id));
   }
 
   renderCategories() {
-    const aaa = categoriesConfigHome;
+    const aaa = categoriesConfig;
     return (
       <ul id="popular-categories">
         {
           aaa.map((item, index) => {
-            return (
-              <li key={index}>
-                <a href=""
-                  data-name={item.title}
-                  onClick={(e) => { this.serchSubmit(e); }}>
-                  <i className={item.className} /> {item.title}
-                </a>
-              </li>
-            );
+            const id = item.id;
+            if (item.displayHomePage === true) {
+              return (
+                <li key={index}>
+                  <a href=""
+                    data-name={item.title}
+                    onClick={(e) => { this.serchSubmit(e, { id }); }}>
+                    <i className={item.className} /> {item.title}
+                  </a>
+                </li>
+              );
+            }
           })
         }
       </ul>
     );
+
   }
 
   render() {

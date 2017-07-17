@@ -29,6 +29,34 @@ class VacancyDetail extends React.Component {
     e.preventDefault();
     this.setState({ category: e.currentTarget.dataset.name });
     const category = e.currentTarget.dataset.name;
+    console.log("AAAA", category);
+    var id;
+    if (category === "Автоперевезення / Логістика") {
+      id = 1;
+      console.log(id);
+    } else if (category === "Будівництво") {
+      id = 2;
+    } else if (category === "Виробництво") {
+      id = 3;
+    } else if (category === "IТ") {
+      id = 4;
+    } else if (category === "Краса та здоровя") {
+      id = 5;
+    } else if (category === "Медицина") {
+      id = 6;
+    } else if (category === "Навчання та репетиторство") {
+      id = 7;
+    } else if (category === "Робочі спеціальності") {
+      id = 8;
+    } else if (category === "Сільськогосподарські роботи") {
+      id = 9;
+    } else if (category === "Сфера обслуговування") {
+      id = 10;
+    } else if (category === "Телекомунікація") {
+      id = 11;
+    } else if (category === "Управління персоналом") {
+      id = 12;
+    }
     const city = this.props.filter.city
     const prMn = this.props.filter.prMn;
     const prMx = this.props.filter.prMx;
@@ -39,7 +67,7 @@ class VacancyDetail extends React.Component {
     const query = { category, city, prMn, prMx, title, job_type };
     // TODO save city to store
     this.props.dispatch({ type: types.ABOUT_SEARCH.SET_CATEGORY, payload: category });
-    this.props.dispatch(searchVacancy(query, consts.PAGES.BROWSE_CATEGORIES, true));
+    this.props.dispatch(searchVacancy(query, consts.PAGES.BROWSE_CATEGORIES, true, id));
 
 
     // const category = e.currentTarget.dataset.name;
@@ -69,7 +97,7 @@ class VacancyDetail extends React.Component {
         <div id="titlebar">
           <div className="container">
             <div className="ten columns">
-              <span><a href="" data-name={vacancy.category} onClick={(e) => { this.serchSubmit(e) }}>{vacancy.category}</a></span>
+              <span><a href="" data-name={vacancy.category} onClick={(e) => { this.serchSubmit(e); }}>{vacancy.category}</a></span>
               <h2>{vacancy.title}<span className={this.spanColor({ job_type })}>{vacancy.job_type}</span></h2>
             </div>
           </div>

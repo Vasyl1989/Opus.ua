@@ -87,7 +87,7 @@ export function editVacancy(vacancy) {
   };
 }
 
-export function searchVacancy(query, fromPage, parametr) {
+export function searchVacancy(query, fromPage, parametr, id) {
   console.log("query", query);
   return dispatch => {
     api.searchVacancy(query)
@@ -96,25 +96,38 @@ export function searchVacancy(query, fromPage, parametr) {
         dispatch({ type: types.SEARCH, payload: response.data });
 
         if (fromPage !== consts.PAGES.BROWSE_VACANCY) {
-          browserHistory.push("/browse_vacancy");
+          if (id) {
+            if (id === 1) {
+              browserHistory.push("/browse_vacancy/" + "Автоперевезення");
+            } else if (id === 2) {
+              browserHistory.push("/browse_vacancy/" + "Будівництво");
+            } else if (id === 3) {
+              browserHistory.push("/browse_vacancy/" + "Виробництво");
+            } else if (id === 4) {
+              browserHistory.push("/browse_vacancy/" + "IТ");
+            } else if (id === 5) {
+              browserHistory.push("/browse_vacancy/" + "Краса та здоровя");
+            } else if (id === 6) {
+              browserHistory.push("/browse_vacancy/" + "Медицина");
+            } else if (id === 7) {
+              browserHistory.push("/browse_vacancy/" + "Навчання та репетиторство");
+            } else if (id === 8) {
+              browserHistory.push("/browse_vacancy/" + "Робочі спеціальності");
+            } else if (id === 9) {
+              browserHistory.push("/browse_vacancy/" + "Сільськогосподарські роботи");
+            } else if (id === 10) {
+              browserHistory.push("/browse_vacancy/" + "Сфера обслуговування");
+            } else if (id === 11) {
+              browserHistory.push("/browse_vacancy/" + "Телекомунікація");
+            } else if (id === 12) {
+              browserHistory.push("/browse_vacancy/" + "Управління персоналом");
+            }
+          } else {
+            browserHistory.push("/browse_vacancy");
+          }
         }
         if (parametr) {
           dispatch(filtration(parametr));
-        }
-      }).catch((error) => {
-        console.log(error);
-      });
-  };
-}
-
-export function searchVacancyByCategory(query, fromPage, id) {
-  console.log(id);
-  return dispatch => {
-    api.searchVacancy(query)
-      .then((response) => {
-        dispatch({ type: types.SEARCH_BY_CATEGORY, payload: response.data });
-        if (fromPage !== consts.PAGES.BROWSE_VACANCY) {
-          browserHistory.push('/browse_vacancy/${id}');
         }
       }).catch((error) => {
         console.log(error);

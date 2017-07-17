@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import BrowseByTitle from './BrowseByTitle';
 import { Link, browserHistory } from 'react-router';
+import { searchVacancy, SearchResults } from '../../actions/vacancyActions';
 import picture from '../../styles/images/job-list-logo-01.png';
 
 class Results extends React.Component {
@@ -39,7 +40,6 @@ class Results extends React.Component {
   }
 
   renderVacancy() {
-    window.scrollTo(0, 0);
     const vacancies = this.props.SearchResults;
     //pagination
     // Logic for displaying vacancies
