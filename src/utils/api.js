@@ -85,8 +85,6 @@ export function signUp(user) {
 }
 
 export function searchVacancy(query) {
-    console.log('quer',query);
-    // debugger;
     return sendRequest('get', '/vacancies', null, query);
 }
 
@@ -100,7 +98,7 @@ export function agreeToVacancy(formData) {
 }
 
 export function getVacancyById(id) {
-    return sendRequest('get', `/vacancies/${id}`, null, null)
+    return sendRequest('get', `/vacancies/${id}`, null, null);
 }
 
 export function getAllUserVacancy(id) {

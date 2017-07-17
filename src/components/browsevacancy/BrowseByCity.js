@@ -25,13 +25,14 @@ class BrowseByCity extends React.Component {
 
   onSearchInput(e, city) {
     e.preventDefault();
+    const category=this.props.filter.category;
     const prMn = this.props.filter.prMn;
     const prMx = this.props.filter.prMx;
     const title = this.props.filter.title;
     const type = this.props.type_work;
     const checkedElement =this.props.filter.check;
     const job_type = serializeArrayToQueryString(addJobType(this.props.filter, type, checkedElement));
-    const query = { city, prMn, prMx, title, job_type };
+    const query = { city, prMn, prMx, title, job_type,category};
      // TODO save city to store
     this.props.dispatch({ type: types.ABOUT_SEARCH.SET_CITY, payload: city });
     this.props.dispatch(searchVacancy(query, consts.PAGES.BROWSE_VACANCY));

@@ -21,13 +21,14 @@ class BrowseByTitle extends React.Component {
 
   onSearchInput(e, title) {
     e.preventDefault();
+    const category=this.props.filter.category;
     const city=this.props.filter.city;
     const prMn = this.props.filter.prMn;
     const prMx = this.props.filter.prMx;
     const type = this.props.type_work;
     const checkedElement =this.props.filter.check;
     const job_type = serializeArrayToQueryString(addJobType(this.props.filter, type, checkedElement));
-    const query = { title,city,prMn,prMx,job_type};
+    const query = { title,city,prMn,prMx,job_type,category};
     this.props.dispatch({ type: types.ABOUT_SEARCH.SET_TITLE, payload: title });
     this.props.dispatch(searchVacancy(query, PAGES.BROWSE_VACANCY));
   }

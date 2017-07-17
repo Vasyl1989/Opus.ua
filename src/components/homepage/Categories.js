@@ -2,30 +2,49 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { searchVacancy } from '../../actions/vacancyActions';
-import { PAGES, categoriesConfigHome } from '../../constants/constants';
+import { PAGES, categoriesConfig } from '../../constants/constants';
+import * as types from '../../actions/actionTypes';
+import { serializeArrayToQueryString, addJobType } from '../browsevacancy/TypeWork';
 
 class Categories extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      category: this.props.filter.category,
+    };
+    this.serchSubmit = this.serchSubmit.bind(this);
   }
-  serchSubmit(e) {
+
+  serchSubmit(e,{id}) {
     e.preventDefault();
+    this.setState({ category: e.currentTarget.dataset.name });
     const category = e.currentTarget.dataset.name;
-    const query = { category };
-    this.props.searchVacancy(query, PAGES.HOME_PAGE, true);
+    const city = this.props.filter.city;
+    const prMn = this.props.filter.prMn;
+    const prMx = this.props.filter.prMx;
+    const title = this.props.filter.title;
+    const type = this.props.type_work;
+    const checkedElement = this.props.filter.check;
+    const job_type = serializeArrayToQueryString(addJobType(this.props.filter, type, checkedElement));
+    const query = { category, city, prMn, prMx, title, job_type };
+    this.props.dispatch({ type: types.ABOUT_SEARCH.SET_CATEGORY, payload: category });
+    this.props.dispatch(searchVacancy(query, PAGES.HOME_PAGE, true,id));
   }
 
   renderCategories() {
-    const aaa = categoriesConfigHome;
+    const categories = categoriesConfig;
+    const filterCategories=categories.filter((item)=>{return item.id<=8;});
     return (
       <ul id="popular-categories">
         {
-          aaa.map((item, index) => {
+          filterCategories.map((item, index) => {
+            const id = item.id;
             return (
               <li key={index}>
                 <a href=""
+                  id={id}
                   data-name={item.title}
-                  onClick={(e) => { this.serchSubmit(e); }}>
+                  onClick={(e) => { this.serchSubmit(e,{id}); }}>
                   <i className={item.className} /> {item.title}
                 </a>
               </li>
@@ -56,7 +75,13 @@ Categories.PropTypes = {
 };
 
 function mapStateToProps(state) {
-  return { vacancy: state.vacancy };
+  return {
+    filter: state.filter,
+  };
 }
 
-export default connect(mapStateToProps, { searchVacancy })(Categories);
+function mapDispatchToProps(dispatch) {
+  return { dispatch };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Categories);

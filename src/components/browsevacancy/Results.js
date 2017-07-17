@@ -5,6 +5,8 @@ import { Link, browserHistory } from 'react-router';
 import picture from '../../styles/images/job-list-logo-01.png';
 import Widgets from './Widgets';
 import BrowseByTitle from './BrowseByTitle';
+// import { searchVacancy } from '../../actions/vacancyActions';
+// import * as consts from '../../constants/constants';
 
 class Results extends React.Component {
   constructor(props, context) {
@@ -17,7 +19,12 @@ class Results extends React.Component {
   }
 
   componentDidMount() {
-    window.scrollTo(0, 0);   
+    window.scrollTo(0, 0); 
+    // const category=this.props.filter.category;
+    // console.log('filter in results ', this.props.params.id);
+    // const query={category};
+    // this.props.dispatch(searchVacancy(query,consts.PAGES.BROWSE_VACANCY)); 
+    
   }
 
   handleClick(event) {

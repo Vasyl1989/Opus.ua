@@ -13,7 +13,6 @@ export function serializeArrayToQueryString(objectOfQueries) {
       source[value] = target;
     }
   }
-  console.log('serializeArrayToQueryString', source.job_type);
   return source.job_type;
 }
 
@@ -29,7 +28,6 @@ export function addJobType(filter, type, isChecked) {
       }
     }
   }
-  console.log('myFilter', myFilter);
   return myFilter;
 }
 
@@ -43,13 +41,13 @@ class TypeWork extends React.Component {
     const job_type_target = e.target.value;
     const checkedElement = e.target.checked;
     const job_type=serializeArrayToQueryString(addJobType(this.props.filter, job_type_target, checkedElement));
+    const category=this.props.filter.category;
     const city=this.props.filter.city;
     const prMx=this.props.filter.prMx;
     const prMn=this.props.filter.Mn;
     const title=this.props.filter.title;
-     const query = {job_type,city,prMn,prMx,title};
+     const query = {job_type,city,prMn,prMx,title,category};
     const parametr={job_type_target,checkedElement};
-    console.log('jobType',job_type);
     this.props.dispatch(searchVacancy(query, consts.PAGES.BROWSE_VACANCY, parametr));
   }
 

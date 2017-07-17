@@ -17,6 +17,7 @@ export default (
     <Route path="vacancy_detail/:id" component={VacancyDetail} />
     <Route path="add_vacancy" component={AddVacancy} />
     <Route path="browse_vacancy" component={BrowseVacancy} />
+    <Route path="browse_vacancy/:id" component={BrowseVacancy} />
     <Route path="manage_vacancy" component={ManageVacancy} />
     <Route path="browse_categories" component={BrowseCategories} />
     <Route path="registration" component={Registration} />

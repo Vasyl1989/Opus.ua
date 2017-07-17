@@ -4,6 +4,7 @@ import * as api from '../utils/api';
 import { browserHistory } from 'react-router';
 import { filtration } from './filterActions';
 import * as consts from '../constants/constants';
+import { categoriesConfig } from '../constants/constants';
 
 export function getVacancyById(id, vacancies, forUpdate) {
   return dispatch => {
@@ -92,27 +93,29 @@ export function editVacancy(vacancy) {
   };
 }
 
-export function searchVacancy(query, fromPage, parametr) {
+export function searchVacancy(query, fromPage, parametr,id) {
   console.log("query",query);
   return dispatch => {
    api.searchVacancy(query)
       .then((response) => {
         console.log('response',response.data);
-        dispatch({ type: types.SEARCH, payload: response.data });
-
+        dispatch({ type: types.SEARCH, payload: response.data });    
         if (fromPage !== consts.PAGES.BROWSE_VACANCY) {
-          browserHistory.push("/browse_vacancy");
+          if(id){ 
+           browserHistory.push("/browse_vacancy/"+id);
+          }else{
+           browserHistory.push("/browse_vacancy");
+          }        
         }
-
         if(parametr){
          dispatch(filtration(parametr));
-        }
-      
+        }   
       }).catch((error) => {
         console.log(error);
       });
   };
 }
+
 
 export function pagination(page,per) {
   return dispatch => {
