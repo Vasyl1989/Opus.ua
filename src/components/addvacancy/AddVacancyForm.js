@@ -208,7 +208,7 @@ class AddVacancyForm extends React.Component {
               <div className="clearfixform" />
               {/*------- Job Pair------*/}
               <TextInput
-                title="Заробітня плата"
+                title="Заробітня плата грн/год"
                 type="number"
                 name="price_per_hour"
                 value={this.state.vacancy.price_per_hour}

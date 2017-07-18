@@ -20,18 +20,10 @@ class RegistrationForm extends React.Component {
       errors: {},
     };
 
-    this.handleInputChange = this
-      .handleInputChange
-      .bind(this);
-    this.handleSubmit = this
-      .handleSubmit
-      .bind(this);
-    this.closeModal2 = this
-      .closeModal2
-      .bind(this);
-    this.closeModal3 = this
-      .closeModal3
-      .bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.closeModal2 = this.closeModal2.bind(this);
+    this.closeModal3 = this.closeModal3.bind(this);
   }
 
   handleInputChange(e) {
@@ -77,12 +69,22 @@ class RegistrationForm extends React.Component {
       errors["password"] = "Це поле не може бути пустим,довжина більше 8 символів";
     }
     if (!user["password_confirmation"]) {
-      formIsValid = false;
+     formIsValid = false;
       errors["password_confirmation"] = "Паролі повинні співпадати";
     }
 
     this.setState({ errors: errors });
     return formIsValid;
+  }
+
+  passwordValid(){
+    const pass=this.state.user.password;
+    const confirm=this.state.user.password_confirmation;
+    if(pass!==confirm){
+      return(
+        <span>Паролі повинні співпадати</span>
+      );
+    }
   }
 
   render() {
@@ -155,6 +157,7 @@ class RegistrationForm extends React.Component {
                   </label>
                   <span className="errorMassage" style={{ color: "red" }}>
                     {this.state.errors["password_confirmation"]}
+                    {this.passwordValid()}
                   </span>
                 </p>
                 <p className="form-row">

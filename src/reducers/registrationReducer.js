@@ -9,7 +9,15 @@ const initialState = {
 
 export default function registrationReducer(state = initialState, action) {
   switch (action.type) {
+
     case types.SIGN_IN:
+      return {
+        ...state,
+        user: action.payload,
+        logIn: true
+      };
+
+    case types.SIGN_UP:
       return {
         ...state,
         user: action.payload,

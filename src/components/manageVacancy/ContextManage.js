@@ -2,7 +2,7 @@ import React from 'react';
 import { deleteVacancy, getVacancyById , getAllUserVacancy } from '../../actions/vacancyActions';
 import { connect } from 'react-redux';
 import { getUser } from '../../actions/registrationActions';
-
+import { Link } from 'react-router';
 
 
 class ContextManage extends React.Component {
@@ -63,7 +63,7 @@ constructor(props, context) {
             </tbody>
           </table>
           <div className="manage"/>
-          <a href="AddVacancy" className="button">Додати нову вакансію</a>
+          <Link to={"/add_vacancy"} className="button">Додати нову вакансію</Link>
         </div>
       </div>
     );

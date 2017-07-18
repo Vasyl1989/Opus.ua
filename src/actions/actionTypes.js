@@ -1,6 +1,6 @@
 export const CREATE_VACANCY = 'CREATE_VACANCY';
 export const GET_ALL_VACANCIES = 'GET_ALL_VACANCIES';
-export const GET_ALL_USER_VACANCIES='GET_ALL_USER_VACANCIES';
+export const GET_ALL_USER_VACANCIES = 'GET_ALL_USER_VACANCIES';
 export const DELETE_VACANCY = 'DELETE_VACANCY';
 export const SEARCH = 'SEARCH';
 export const EDIT_VACANCY = 'EDIT_VACANCY';
@@ -16,8 +16,8 @@ export const ABOUT_SEARCH = {
   SET_CITY: 'SET_CITY',
   SET_TITLE: 'SET_TITLE',
   SET_CATEGORY: 'SET_CATEGORY',
-  SET_MX:'SET_MX',
-  SET_MN:'SET_MN',
+  SET_MX: 'SET_MX',
+  SET_MN: 'SET_MN',
 };
 
 export const SHOULD_OPEN_CLOSE = {
@@ -29,6 +29,7 @@ export const SHOULD_OPEN_CLOSE = {
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_OUT = 'SIGN_OUT';
 export const GET_USER = 'GET_USER';
+export const SIGN_UP = 'SIGN_UP';
 
 
 

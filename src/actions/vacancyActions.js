@@ -101,8 +101,32 @@ export function searchVacancy(query, fromPage, parametr,id) {
         console.log('response',response.data);
         dispatch({ type: types.SEARCH, payload: response.data });    
         if (fromPage !== consts.PAGES.BROWSE_VACANCY) {
-          if(id){ 
-           browserHistory.push("/browse_vacancy/"+id);
+          if(id){
+          if (id === 1) {
+              browserHistory.push("/browse_vacancy/" + "Автоперевезення");
+            } else if (id === 2) {
+              browserHistory.push("/browse_vacancy/" + "Будівництво");
+            } else if (id === 3) {
+              browserHistory.push("/browse_vacancy/" + "Виробництво");
+            } else if (id === 4) {
+              browserHistory.push("/browse_vacancy/" + "IТ");
+            } else if (id === 5) {
+              browserHistory.push("/browse_vacancy/" + "Краса та здоровя");
+            } else if (id === 6) {
+              browserHistory.push("/browse_vacancy/" + "Медицина");
+            } else if (id === 7) {
+              browserHistory.push("/browse_vacancy/" + "Навчання та репетиторство");
+            } else if (id === 8) {
+              browserHistory.push("/browse_vacancy/" + "Робочі спеціальності");
+            } else if (id === 9) {
+              browserHistory.push("/browse_vacancy/" + "Сільськогосподарські роботи");
+            } else if (id === 10) {
+              browserHistory.push("/browse_vacancy/" + "Сфера обслуговування");
+            } else if (id === 11) {
+              browserHistory.push("/browse_vacancy/" + "Телекомунікація");
+            } else if (id === 12) {
+              browserHistory.push("/browse_vacancy/" + "Управління персоналом");
+            }         
           }else{
            browserHistory.push("/browse_vacancy");
           }        

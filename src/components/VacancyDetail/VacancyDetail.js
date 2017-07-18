@@ -28,6 +28,32 @@ class VacancyDetail extends React.Component {
     e.preventDefault();
     this.setState({ category: e.currentTarget.dataset.name });
     const category = e.currentTarget.dataset.name;
+    var id;
+    if (category === "Автоперевезення / Логістика") {
+      id = 1;
+    } else if (category === "Будівництво") {
+      id = 2;
+    } else if (category === "Виробництво") {
+      id = 3;
+    } else if (category === "IТ") {
+      id = 4;
+    } else if (category === "Краса та здоровя") {
+      id = 5;
+    } else if (category === "Медицина") {
+      id = 6;
+    } else if (category === "Навчання та репетиторство") {
+      id = 7;
+    } else if (category === "Робочі спеціальності") {
+      id = 8;
+    } else if (category === "Сільськогосподарські роботи") {
+      id = 9;
+    } else if (category === "Сфера обслуговування") {
+      id = 10;
+    } else if (category === "Телекомунікація") {
+      id = 11;
+    } else if (category === "Управління персоналом") {
+      id = 12;
+    }
     const city = this.props.filter.city
     const prMn = this.props.filter.prMn;
     const prMx = this.props.filter.prMx;
@@ -38,7 +64,7 @@ class VacancyDetail extends React.Component {
     const query = { category, city, prMn, prMx, title, job_type };
     // TODO save city to store
     this.props.dispatch({ type: types.ABOUT_SEARCH.SET_CATEGORY, payload: category });
-    this.props.dispatch(searchVacancy(query, consts.PAGES.BROWSE_CATEGORIES, true));
+    this.props.dispatch(searchVacancy(query, consts.PAGES.BROWSE_CATEGORIES, true, id));
   }
 
   spanColor({ job_type }) {
@@ -82,7 +108,10 @@ class VacancyDetail extends React.Component {
                 </div>
                 <div className="clearfix" />
               </div>
-              <p className="margin-reset">  {vacancy.description} </p>
+              <div className="margin-reset">
+                <p >  {vacancy.description} </p>
+              </div>
+
             </div>
           </div>
           <div className="five columns">

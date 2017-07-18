@@ -81,7 +81,7 @@ export function getAllVacancy() {
 
 export function signUp(user) {
     const data = { user };
-    return sendRequest("post", "/auth/sign_up", data, null);
+    return sendAuthRequest("post", "/auth/sign_up", data, null);
 }
 
 export function searchVacancy(query) {
