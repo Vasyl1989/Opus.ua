@@ -13,6 +13,11 @@ import { closeError, closeSucces } from "../../actions/openActions";
 import { customStyles } from "../../constants/constants";
 
 
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import 'react-datepicker/dist/react-datepicker.css';
+
+
 class AddVacancyForm extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -34,7 +39,7 @@ class AddVacancyForm extends React.Component {
           category: "",
           tags: "",
           description: "",
-          active_to_date: "",
+          active_to_date: moment(),
           company: "",
           website: ""
         },
@@ -45,6 +50,11 @@ class AddVacancyForm extends React.Component {
     this.closeModal2 = this.closeModal2.bind(this);
     this.closeModal3 = this.closeModal3.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(date) {
+    this.setState({ active_to_date: date });
   }
 
   //validation
@@ -147,8 +157,6 @@ class AddVacancyForm extends React.Component {
       });
       this.props.dispatch({ type: types.SHOULD_UPDATE });
     } else {
-      const user_id = localStorage.getItem('id');
-      console.log(user_id);
       this.props.dispatch(Actions.sendVacancy(this.state.vacancy));
       this.setState({
         vacancy: {
@@ -249,7 +257,8 @@ class AddVacancyForm extends React.Component {
                 options={consts.CATEGORY}
               />
 
-              {/*------- Description------*/}
+            {/*------- Description------*/}
+            
               <div className="form">
                 <h5>Опис</h5>
                 <textarea
@@ -261,27 +270,24 @@ class AddVacancyForm extends React.Component {
                   onChange={this.handleInputChange}
                   name="description"
                 />
-
                 <span style={{ color: "red" }}>
                   {this.state.errors["description"]}
                 </span>
               </div>
               <div className="clearfixform" />
+
               {/*------- TClosing Date------*/}
 
-              <TextInput
-                title="Оголошення активне до:"
-                type="date"
-                placeholder="yyyy-mm-dd"
-                value={this.state.vacancy.active_to_date}
-                onChange={this.handleInputChange}
-                name="active_to_date"
+              <div className="form">
+              <h5>Оголошення активне до:</h5>
+              <DatePicker
+                selected={this.state.active_to_date}
+                onChange={this.handleChange}
               />
-              <span style={{ color: "red" }}>
-                {this.state.errors["active_to_date"]}
-              </span>
-              <div className="clearfixform" />
-              {/*------- Company Details------*/}
+              </div>
+
+            {/*------- Company Details------*/}
+            
               <div className="divider">
                 <h3>Додатково про компанію</h3>
               </div>
@@ -311,7 +317,6 @@ class AddVacancyForm extends React.Component {
                 name="website"
               />
               <div className="clearfixform" />
-
               <div className="divider margin-top-0" />
               <button
                 className="button big margin-top-5"
@@ -320,40 +325,31 @@ class AddVacancyForm extends React.Component {
               >
                 Додати
               </button>
-
               <Modal
                 isOpen={this.props.error}
                 onRequestClose={this.closeModal2}
                 style={customStyles}
                 contentLabel="Example Modal"
               >
-
                 <h2 ref={subtitle => this.subtitle = subtitle}>
                   Форма заповнена не вірно
                 </h2>
                 <button onClick={this.closeModal2}>close</button>
-
               </Modal>
-
               <Modal
                 isOpen={this.props.success}
                 onRequestClose={this.closeModal3}
                 style={customStyles}
                 contentLabel="Example Modal"
               >
-
                 <h2 ref={subtitle => this.subtitle = subtitle}>
                   Вакансія надіслана успішно
                 </h2>
                 <Link to={'/'}><button onClick={this.closeModal3}>close</button></Link>
-                
-
               </Modal>
-
             </form>
           </div>
         </div>
-
       </div>
     );
   }

@@ -6,6 +6,7 @@ import { signUp } from '../../actions/registrationActions';
 import { closeSucces, closeError } from '../../actions/openActions';
 import { customStyles2 } from "../../constants/constants";
 
+
 class RegistrationForm extends React.Component {
   constructor(props, context) {
     super(props, context);

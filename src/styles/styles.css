@@ -987,6 +987,10 @@ input .ico-02 {
 
 /* ---------------------------------- */
 
+.react-datepicker-wrapper,
+.react-datepicker__input-container{
+  width: 100%;
+}
 
 /* Breadcrumbs
 ------------------------------------- */
