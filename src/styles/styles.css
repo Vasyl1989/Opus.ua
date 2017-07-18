@@ -960,6 +960,7 @@ input .ico-02 {
 .pagination {
   text-align: center;
   margin: 30px;
+  cursor: pointer;
 }
 
 .pagination button {
@@ -970,6 +971,7 @@ input .ico-02 {
   margin-top: 20px;
   list-style: none;
 }
+
 
 /*.pagination li {
   float: left;
@@ -983,6 +985,7 @@ input .ico-02 {
   margin: 2px;
   color: white;
 }
+
 
 /* ---------------------------------- */
 
@@ -2423,8 +2426,6 @@ screen and (max-height: 300px) {
 
 
 /* ------------------------------------------------------------------- */
-
-
 
 
 /* Shortcodes

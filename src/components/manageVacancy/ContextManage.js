@@ -1,7 +1,8 @@
 import React from 'react';
-import { deleteVacancy, getVacancyById, getAllUserVacancy } from '../../actions/vacancyActions';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { getUser } from '../../actions/registrationActions';
+import { deleteVacancy, getVacancyById, getAllUserVacancy } from '../../actions/vacancyActions';
 
 class ContextManage extends React.Component {
   constructor(props, context) {
@@ -42,7 +43,6 @@ class ContextManage extends React.Component {
   render() {
     return (
       <div className="container">
-
         {/*<!-- Table -->*/}
         <div className="sixteen columns">
           <p className="margin-bottom-25">Ваші оголошення показуються в таблиці нижче. Застарілі оголошення будуть автоматично видалені через 30 днів.</p>
@@ -59,7 +59,7 @@ class ContextManage extends React.Component {
             </tbody>
           </table>
           <div className="manage" />
-          <a href="AddVacancy" className="button">Додати нову вакансію</a>
+          <Link to={"/add_vacancy"} className="button">Додати нову вакансію</Link>
         </div>
       </div>
     );

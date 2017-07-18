@@ -29,7 +29,7 @@ class VacancyDetail extends React.Component {
     e.preventDefault();
     this.setState({ category: e.currentTarget.dataset.name });
     const category = e.currentTarget.dataset.name;
-    console.log("AAAA", category);
+
     var id;
     if (category === "Автоперевезення / Логістика") {
       id = 1;
