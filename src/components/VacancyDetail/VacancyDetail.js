@@ -31,7 +31,7 @@ class VacancyDetail extends React.Component {
     const category = e.currentTarget.dataset.name;
 
     var id;
-    if (category === "Автоперевезення / Логістика") {
+    if (category === "Автоперевезення") {
       id = 1;
       console.log(id);
     } else if (category === "Будівництво") {
@@ -68,8 +68,6 @@ class VacancyDetail extends React.Component {
     // TODO save city to store
     this.props.dispatch({ type: types.ABOUT_SEARCH.SET_CATEGORY, payload: category });
     this.props.dispatch(searchVacancy(query, consts.PAGES.BROWSE_CATEGORIES, true, id));
-
-
     // const category = e.currentTarget.dataset.name;
     // const query = { category };
     // this.props.searchVacancy(query, PAGES.BROWSE_CATEGORIES);
@@ -89,6 +87,20 @@ class VacancyDetail extends React.Component {
 
   render() {
     const vacancy = this.props.singleVacancy;
+    const description = vacancy.description;
+    var arrayDescription = description.split(',');
+    console.log(arrayDescription);
+    const aaa = arrayDescription.splice(",", <br />)
+
+    // const newDescription = arrayDescription.join("<br/>");
+    // console.log(arrayDescription);
+    // console.log(newDescription);
+
+    // const bbb = description.split(/(\r?\n|\r)/).join('\r\n');
+    // console.log(bbb);
+
+    // const ccc = arrayDescription.replace(/\n/g, "<br />");
+    // console.log(ccc);
     const job_type = vacancy.job_type;
     return (
       <div>
@@ -116,7 +128,8 @@ class VacancyDetail extends React.Component {
                 </div>
                 <div className="clearfix" />
               </div>
-              <p className="margin-reset">  {vacancy.description} </p>
+              <p className="margin-reset">  {arrayDescription} </p>
+
             </div>
           </div>
           <div className="five columns">

@@ -11,6 +11,11 @@ import * as Actions from '../../actions/vacancyActions';
 import { customStyles2 } from "../../constants/constants";
 import { closeError, closeSucces } from "../../actions/openActions";
 
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+
+import 'react-datepicker/dist/react-datepicker.css';
+
 class AddVacancyForm extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -32,9 +37,9 @@ class AddVacancyForm extends React.Component {
           category: "",
           tags: "",
           description: "",
-          active_to_date: "",
+          active_to_date: moment(),
           company: "",
-          website: ""
+          website: "",
         },
         errors: {},
       };
@@ -43,8 +48,16 @@ class AddVacancyForm extends React.Component {
     this.closeModal2 = this.closeModal2.bind(this);
     this.closeModal3 = this.closeModal3.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
+
+  handleChange(date) {
+    this.setState({
+      active_to_date: date
+    });
+    console.log(date);
+  }
   //validation
   handleValidation() {
     let vacancy = this.state.vacancy;
@@ -164,6 +177,8 @@ class AddVacancyForm extends React.Component {
     }
   }
 
+
+
   render() {
     return (
       <div className="container form-add-job">
@@ -255,9 +270,25 @@ class AddVacancyForm extends React.Component {
               <div className="clearfixform" />
 
               {/*------- TClosing Date------*/}
-              <TextInput
+              <h5>Оголошення активне до:</h5>
+              <DatePicker
+                placeholderText="DD/MM/YYYY"
+                dateFormat="DD/MM/YYYY"
+                selected={this.state.active_to_date}
+                onChange={this.handleChange}
+                name="active_to_date"
+              />
+              <span style={{ color: "red" }}>
+                {this.state.errors["active_to_date"]}
+              </span>
+              <div className="clearfixform" />
+
+              {/*<TextInput
                 title="Оголошення активне до:"
                 type="date"
+                format="DD/MM/YYYY"
+                onfocus="(this.type='date')"
+                onblur="(this.type='date')"
                 placeholder="yyyy-mm-dd"
                 value={this.state.vacancy.active_to_date}
                 onChange={this.handleInputChange}
@@ -265,7 +296,9 @@ class AddVacancyForm extends React.Component {
               <span style={{ color: "red" }}>
                 {this.state.errors["active_to_date"]}
               </span>
-              <div className="clearfixform" />
+            <div className="clearfixform" />*/}
+
+
 
               {/*------- Company Details------*/}
               <div className="divider">

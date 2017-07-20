@@ -39,6 +39,7 @@
     "react-bootstrap": "^0.31.1",
     "react-bootstrap-datetime": "0.0.9",
     "react-bootstrap-datetimerange-picker": "^0.1.3",
+    "react-datepicker": "^0.52.0",
     "react-dom": "^15.6.1",
     "react-modal": "^1.9.4",
     "react-popup": "^0.8.0",

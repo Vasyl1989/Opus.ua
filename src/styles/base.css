@@ -601,6 +601,11 @@ li p {
 /* #Forms
 ================================================== */
 
+.react-datepicker__input-container,
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
 .fake-input,
 input[type="text"],
 input[type='date'],

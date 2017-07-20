@@ -41,7 +41,7 @@ export const customStyles2 = {
 export const categoriesConfig = [
   {
     id: 1,
-    title: 'Автоперевезення / Логістика',
+    title: 'Автоперевезення',
     className: 'ln  ln-icon-Globe',
     displayHomePage: true
   },

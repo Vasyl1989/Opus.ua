@@ -85,6 +85,17 @@ class RegistrationForm extends React.Component {
     return formIsValid;
   }
 
+  passwordValid() {
+    const pass = this.state.user.password;
+    const confirm = this.state.user.password_confirmation;
+    if (pass !== confirm) {
+      return (
+        <span>Паролі повинні співпадати</span>
+      );
+    }
+  }
+
+
   render() {
     return (
       <div className="container">
@@ -155,6 +166,7 @@ class RegistrationForm extends React.Component {
                   </label>
                   <span className="errorMassage" style={{ color: "red" }}>
                     {this.state.errors["password_confirmation"]}
+                    {this.passwordValid()}
                   </span>
                 </p>
                 <p className="form-row">
