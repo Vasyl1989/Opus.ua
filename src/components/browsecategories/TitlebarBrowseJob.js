@@ -17,6 +17,7 @@ class TitlebarBrowseJob extends React.Component {
             <Link to="/add_vacancy" className="button" >Розмістити вакансію</Link>
           </div>
         </div>
+
       </div>
     );
   }
