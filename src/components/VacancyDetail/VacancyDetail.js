@@ -87,20 +87,20 @@ class VacancyDetail extends React.Component {
 
   render() {
     const vacancy = this.props.singleVacancy;
-    const description = vacancy.description;
-    var arrayDescription = description.split(',');
-    console.log(arrayDescription);
-    const aaa = arrayDescription.splice(",", <br />)
-
-    // const newDescription = arrayDescription.join("<br/>");
+    // const description = vacancy.description;
+    // var arrayDescription = description.split(',');
     // console.log(arrayDescription);
-    // console.log(newDescription);
+    // const aaa = arrayDescription.splice(",", <br />)
 
-    // const bbb = description.split(/(\r?\n|\r)/).join('\r\n');
-    // console.log(bbb);
+    // // const newDescription = arrayDescription.join("<br/>");
+    // // console.log(arrayDescription);
+    // // console.log(newDescription);
 
-    // const ccc = arrayDescription.replace(/\n/g, "<br />");
-    // console.log(ccc);
+    // // const bbb = description.split(/(\r?\n|\r)/).join('\r\n');
+    // // console.log(bbb);
+
+    // // const ccc = arrayDescription.replace(/\n/g, "<br />");
+    // // console.log(ccc);
     const job_type = vacancy.job_type;
     return (
       <div>
