@@ -165,7 +165,7 @@ header.transparent .sf-with-ul::after {
 }
 
 #banner.with-transparent-header {
-  max-height: 710px;
+  max-height: 810px;
   background-attachment: fixed;
 }
 
@@ -665,7 +665,7 @@ ul li ul a.sf-with-ul:after {
 ---------------------------------------------------------------------- */
 
 #banner {
-  max-height: 640px;
+  height: 780px;
   width: 100%;
   display: inline-block;
   position: relative;
@@ -698,7 +698,7 @@ ul li ul a.sf-with-ul:after {
 
 @media only screen and (min-width: 1367px) {
   .search-container {
-    padding: 190px 0;
+    padding: 280px 0;
   }
 }
 
@@ -832,7 +832,7 @@ input .ico-02 {
 #titlebar {
   background-color: #f6f6f6;
   position: relative;
-  padding: 70px;
+  padding: 35px;
   margin-bottom: 50px;
 }
 
@@ -848,7 +848,7 @@ input .ico-02 {
 }
 
 #titlebar.single {
-  padding: 70px 0;
+  padding: 35px 0;
 }
 
 #titlebar.resume {
@@ -7237,7 +7237,7 @@ div.sceditor-group:first-child {
 ---------------------------------------------------------------------- */
 
 #titlebar.single.submit-page {
-  padding: 65px 0;
+  padding: 35px 0;
 }
 
 #titlebar.single.submit-page h2,

@@ -128,7 +128,7 @@ class VacancyDetail extends React.Component {
                 </div>
                 <div className="clearfix" />
               </div>
-              <p className="margin-reset">  {arrayDescription} </p>
+              <p className="margin-reset">  {vacancy.description} </p>
 
             </div>
           </div>

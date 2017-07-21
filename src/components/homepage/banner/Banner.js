@@ -10,37 +10,37 @@ import * as types from '../../../actions/actionTypes';
 class Banner extends React.Component {
   constructor(props, context) {
     super(props, context);
-    this.state = {    
-        title: this.props.filter.title,
-        city: this.props.filter.city,    
+    this.state = {
+      title: this.props.filter.title,
+      city: this.props.filter.city,
     };
     this.inputChange = this.inputChange.bind(this);
     this.searchSubmit = this.searchSubmit.bind(this);
-    this.transition=this.transition.bind(this);
+    this.transition = this.transition.bind(this);
   }
   inputChange(e) {
-     const target = e.target;
+    const target = e.target;
     const value = target.value;
     const name = target.name;
     this.setState({ [name]: value });
   }
   searchSubmit(e, city, title) {
     e.preventDefault();
-    const query = { city,title };
-    console.log('queryFromBanner',query);
-    this.props.dispatch({type:types.ABOUT_SEARCH.SET_CITY,payload:city});
-    this.props.dispatch({type:types.ABOUT_SEARCH.SET_TITLE,payload:title});
+    const query = { city, title };
+    console.log('queryFromBanner', query);
+    this.props.dispatch({ type: types.ABOUT_SEARCH.SET_CITY, payload: city });
+    this.props.dispatch({ type: types.ABOUT_SEARCH.SET_TITLE, payload: title });
     this.props.dispatch(searchVacancy(query, PAGES.HOME_PAGE));
   }
-  transition(e){
-      e.preventDefault();
-      browserHistory.push('/browse_categories');
+  transition(e) {
+    e.preventDefault();
+    browserHistory.push('/browse_categories');
   }
   render() {
     return (
       <div>
         <div id="wrapper">
-          <div id="banner" className="with-transparent-header parallax background " data-img-width="2000" data-img-height="1330" data-diff="300">
+          <div id="banner">
             <div className="container">
               <div className="sixteen columns">
                 <div className="search-container">
@@ -75,7 +75,7 @@ class Banner extends React.Component {
 
                   <div className="browse-jobs">
                     <h3>Сортувати вакансії за
-                        <a href=" " onClick={(e) => {this.transition(e); }}> категорією</a></h3>
+                        <a href=" " onClick={(e) => { this.transition(e); }}> категорією</a></h3>
                   </div>
 
                   <div className="announce">
