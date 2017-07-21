@@ -665,7 +665,7 @@ ul li ul a.sf-with-ul:after {
 ---------------------------------------------------------------------- */
 
 #banner {
-  height: 780px;
+  height: 740px;
   width: 100%;
   display: inline-block;
   position: relative;
@@ -832,7 +832,7 @@ input .ico-02 {
 #titlebar {
   background-color: #f6f6f6;
   position: relative;
-  padding: 35px;
+  padding: 30px;
   margin-bottom: 50px;
 }
 
@@ -7237,7 +7237,7 @@ div.sceditor-group:first-child {
 ---------------------------------------------------------------------- */
 
 #titlebar.single.submit-page {
-  padding: 35px 0;
+  padding: 30px 0;
 }
 
 #titlebar.single.submit-page h2,

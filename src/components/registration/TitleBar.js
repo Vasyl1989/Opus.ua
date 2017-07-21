@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 const TitleBar = () => {
   return (
-    <div id="titlebar" className="single">
+    <div id="titlebar">
       <div className="container">
         <div className="sixteen columns">
           <h2>Мій акаунт</h2>
