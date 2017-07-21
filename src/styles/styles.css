@@ -832,8 +832,8 @@ input .ico-02 {
 #titlebar {
   background-color: #f6f6f6;
   position: relative;
-  padding: 30px;
-  margin-bottom: 50px;
+  padding: 25px;
+  margin-bottom: 25px;
 }
 
 #titlebar span a,
